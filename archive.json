@@ -1,7 +1,7 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-03-01T00:20:16.987839+00:00",
-  "repo": "panva/jose-hpke-pq-pqt",
+  "timestamp": "2026-03-03T00:19:14.594702+00:00",
+  "repo": "panva/draft-jose-hpke-pq-pqt",
   "labels": [
     {
       "name": "bug",
@@ -55,7 +55,7 @@
       "number": 1,
       "id": "PR_kwDORIZDwc7CS-24",
       "title": "more updates (hybrid disambiguation, KE sections descriptions, ML-KEM-512 omission rationale)",
-      "url": "https://github.com/panva/jose-hpke-pq-pqt/pull/1",
+      "url": "https://github.com/panva/draft-jose-hpke-pq-pqt/pull/1",
       "state": "MERGED",
       "author": "panva",
       "authorAssociation": "OWNER",
@@ -64,10 +64,10 @@
       "body": "- Clarified \"hybrid\" terminology disambiguation in the Introduction\r\n- Added descriptive text to Key Encryption algorithm sections\r\n- Expanded Security Considerations with ML-KEM-512 omission rationale\r\n",
       "createdAt": "2026-02-08T13:27:57Z",
       "updatedAt": "2026-02-08T13:57:23Z",
-      "baseRepository": "panva/jose-hpke-pq-pqt",
+      "baseRepository": "panva/draft-jose-hpke-pq-pqt",
       "baseRefName": "main",
       "baseRefOid": "4680e76effd2bc6efbe350501cc7d62a16fd0086",
-      "headRepository": "panva/jose-hpke-pq-pqt",
+      "headRepository": "panva/draft-jose-hpke-pq-pqt",
       "headRefName": "dont-mess-with-hybrid",
       "headRefOid": "7426a2b6ad66a4b1870f0988ace03c5d30bbe94a",
       "closedAt": "2026-02-08T13:56:27Z",
