@@ -51,7 +51,7 @@ function encryptContent(cipherName, cek, plaintext, aad) {
   return { iv, ciphertext: encrypted, tag };
 }
 
-for (const { alg, kem, kdf, aead } of algorithms) {
+for (const { alg, kem, kdf, aead } of algorithms.filter(a => a.jose)) {
   const isKeyEncryption = alg.endsWith("-KE");
 
   // Load the JWK

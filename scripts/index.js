@@ -53,7 +53,7 @@ if (
 }
 
 // Build enriched algorithm entries with CipherSuite metadata
-const entries = algorithms.map(({ alg, kem, kdf, aead }) => {
+const entries = algorithms.filter(a => a.jose).map(({ alg, kem, kdf, aead }) => {
   const suite = new CipherSuite(kem, kdf, aead);
   const isKE = alg.endsWith("-KE");
   const baseAlg = isKE ? alg.slice(0, -3) : alg;

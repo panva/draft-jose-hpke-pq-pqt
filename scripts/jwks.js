@@ -21,7 +21,7 @@ function jwkThumbprint(jwk) {
 }
 
 const kty = "AKP";
-for (const { alg, kem, kdf, aead } of algorithms) {
+for (const { alg, kem, kdf, aead } of algorithms.filter(a => a.jose)) {
   const suite = new CipherSuite(kem, kdf, aead);
   const ikm = new Uint8Array(suite.KEM.Nsk);
   const algBytes = new TextEncoder().encode(alg);
