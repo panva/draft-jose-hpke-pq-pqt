@@ -2,13 +2,11 @@ import { CipherSuite } from "hpke";
 import { algorithms } from "./algorithms.js";
 
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
-import { join, dirname } from "node:path";
-import { fileURLToPath } from "node:url";
+import { join } from "node:path";
 import { createCipheriv, randomBytes } from "node:crypto";
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const jwksDir = join(__dirname, "..", "examples", "jwks");
-const outDir = join(__dirname, "..", "examples", "jwe");
+const jwksDir = join(process.cwd(), "examples", "jwks");
+const outDir = join(process.cwd(), "examples", "jwe");
 mkdirSync(outDir, { recursive: true });
 
 function base64url(buf) {
@@ -18,6 +16,8 @@ function base64url(buf) {
 function base64urlDecode(str) {
   return new Uint8Array(Buffer.from(str, "base64url"));
 }
+
+const examplesDir = join(process.cwd(), "examples");
 
 const plaintext =
   "You can trust us to stick with you through thick and thin–to the bitter end. And you can trust us to keep any secret of yours–closer than you keep it yourself. But you cannot trust us to let you face trouble alone, and go off without a word. We are your friends, Frodo.";
@@ -51,7 +51,9 @@ function encryptContent(cipherName, cek, plaintext, aad) {
   return { iv, ciphertext: encrypted, tag };
 }
 
-for (const { alg, kem, kdf, aead } of algorithms) {
+const vectors = [];
+
+for (const { alg, kem, kdf, aead } of algorithms.filter(a => a.jose)) {
   const isKeyEncryption = alg.endsWith("-KE");
 
   // Load the JWK
@@ -60,6 +62,8 @@ for (const { alg, kem, kdf, aead } of algorithms) {
   // Create the HPKE cipher suite and deserialize the public key
   const suite = new CipherSuite(kem, kdf, aead);
   const publicKey = await suite.DeserializePublicKey(base64urlDecode(jwk.pub));
+
+  let flattenedJwe, compactJwe;
 
   if (isKeyEncryption) {
     // === Key Encryption Mode ===
@@ -72,7 +76,6 @@ for (const { alg, kem, kdf, aead } of algorithms) {
         cipherName = "aes-128-gcm";
         break;
       case 0x0002: // AES-256-GCM
-      case 0x0003: // ChaCha20Poly1305 does not have a jwe "enc"
         enc = "A256GCM";
         cekSize = 32;
         cipherName = "aes-256-gcm";
@@ -119,7 +122,7 @@ for (const { alg, kem, kdf, aead } of algorithms) {
         tag,
       } = encryptContent(cipherName, cek, plaintext, contentAad);
 
-      const flattenedJwe = {
+      flattenedJwe = {
         protected: protectedHeaderB64,
         aad: aadB64,
         iv: base64url(iv),
@@ -160,7 +163,7 @@ for (const { alg, kem, kdf, aead } of algorithms) {
         tag,
       } = encryptContent(cipherName, cek, plaintext, contentAad);
 
-      const compact = [
+      compactJwe = [
         protectedHeaderB64,
         base64url(compactEncryptedKey),
         base64url(iv),
@@ -169,7 +172,7 @@ for (const { alg, kem, kdf, aead } of algorithms) {
       ].join(".");
 
       const filename = join(outDir, `${alg}-compact.txt`);
-      writeFileSync(filename, compact + "\n");
+      writeFileSync(filename, compactJwe + "\n");
     }
   } else {
     // === Integrated Encryption Mode ===
@@ -193,7 +196,7 @@ for (const { alg, kem, kdf, aead } of algorithms) {
         { aad: hpkeAad },
       );
 
-      const flattenedJwe = {
+      flattenedJwe = {
         protected: protectedHeaderB64,
         aad: aadB64,
         encrypted_key: base64url(encapsulatedSecret),
@@ -222,7 +225,7 @@ for (const { alg, kem, kdf, aead } of algorithms) {
 
       // Compact: protected.encrypted_key.iv.ciphertext.tag
       // For integrated encryption: IV and tag are empty
-      const compact = [
+      compactJwe = [
         protectedHeaderB64,
         base64url(encapsulatedSecret),
         "",
@@ -231,7 +234,14 @@ for (const { alg, kem, kdf, aead } of algorithms) {
       ].join(".");
 
       const filename = join(outDir, `${alg}-compact.txt`);
-      writeFileSync(filename, compact + "\n");
+      writeFileSync(filename, compactJwe + "\n");
     }
   }
+
+  vectors.push({ alg, jwk, flattened: flattenedJwe, compact: compactJwe });
 }
+
+writeFileSync(
+  join(examplesDir, "jose-vectors.json"),
+  JSON.stringify(vectors, null, 2) + "\n",
+);
