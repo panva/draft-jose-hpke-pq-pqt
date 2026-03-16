@@ -47,8 +47,10 @@ jobs:
       uses: ./.github/actions/assert-content
 
     - name: "Build Drafts"
+      id: build
       uses: martinthomson/i-d-template@v1
       with:
+        make: releases
         token: ${{ github.token }}
 
     - name: "Upload to Datatracker"
@@ -61,6 +63,7 @@ jobs:
 
     - name: "Archive Submitted Drafts"
       uses: actions/upload-artifact@v4
+      if: always() && steps.build.outcome == 'success'
       with:
         name: published
         path: "versioned/draft-*-[0-9][0-9].*"
