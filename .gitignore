@@ -21,5 +21,5 @@ archive.json
 draft-skokan-jose-hpke-pq-pqt.xml
 package-lock.json
 report.xml
-!requirements.txt
 !examples/jwe/*.txt
+!requirements.txt
