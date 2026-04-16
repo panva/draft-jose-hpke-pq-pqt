@@ -3,18 +3,19 @@ function hexId(id) {
 }
 
 function cellValues(entry) {
-  const { alg, suite } = entry;
+  const { alg, suite, coseValue } = entry;
   return {
-    alg,
+    name: alg,
+    value: `TBD (Assumed: ${coseValue})`,
     kem: `${suite.KEM.name} (${hexId(suite.KEM.id)})`,
     kdf: `${suite.KDF.name} (${hexId(suite.KDF.id)})`,
     aead: `${suite.AEAD.name} (${hexId(suite.AEAD.id)})`,
   };
 }
 
-export default function buildTable(rows) {
-  const headers = ['"alg" value', "HPKE KEM", "HPKE KDF", "HPKE AEAD"];
-  const keys = ["alg", "kem", "kdf", "aead"];
+export default function buildCoseTable(rows) {
+  const headers = ["Name", "Value", "HPKE KEM", "HPKE KDF", "HPKE AEAD"];
+  const keys = ["name", "value", "kem", "kdf", "aead"];
   const data = rows.map(cellValues);
 
   // Compute column widths from headers and all data rows
