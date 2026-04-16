@@ -107,7 +107,7 @@ Table of Contents
    protection against attacks by cryptographically relevant quantum
    computers.
 
-   The term “PQ/T hybrid” is used here consistent with
+   The term "PQ/T hybrid" is used here consistent with
    [I-D.ietf-hpke-pq] to denote a combination of post-quantum and
    traditional algorithms, and should not be confused with HPKE's use of
    "hybrid" to describe the combination of asymmetric and symmetric
