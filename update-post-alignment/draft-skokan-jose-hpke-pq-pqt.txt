@@ -261,12 +261,13 @@ Table of Contents
 5.1.  Security Strength
 
    Ciphersuites based on ML-KEM-768 target NIST post-quantum security
-   Level 3; those based on ML-KEM-1024 target Level 5.  In the PQ/T
-   hybrid ciphersuites, the traditional component provides an additional
-   classical security floor: P-256 and X25519 offer approximately
-   128-bit classical security, while P-384 offers approximately 192-bit
-   classical security.  The -KE variants share the same cryptographic
-   properties as their integrated encryption counterparts.
+   Category 3; those based on ML-KEM-1024 target Category 5 (see
+   Section 4.A.5 of [NIST-PQC-CFP]).  In the PQ/T hybrid ciphersuites,
+   the traditional component provides an additional classical security
+   floor: P-256 and X25519 offer approximately 128-bit classical
+   security, while P-384 offers approximately 192-bit classical
+   security.  The -KE variants share the same cryptographic properties
+   as their integrated encryption counterparts.
 
    All ciphersuites use SHAKE256 as the KDF, aligning with the hash
    family used internally by ML-KEM, and AES-256-GCM as the AEAD.
@@ -491,6 +492,14 @@ Table of Contents
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
 7.2.  Informative References
+
+   [NIST-PQC-CFP]
+              National Institute of Standards and Technology,
+              "Submission Requirements and Evaluation Criteria for the
+              Post-Quantum Cryptography Standardization Process",
+              December 2016, <https://csrc.nist.gov/CSRC/media/Projects/
+              Post-Quantum-Cryptography/documents/call-for-proposals-
+              final-dec-2016.pdf>.
 
    [RFC7518]  Jones, M., "JSON Web Algorithms (JWA)", RFC 7518,
               DOI 10.17487/RFC7518, May 2015,

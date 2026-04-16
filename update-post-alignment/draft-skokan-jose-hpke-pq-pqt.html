@@ -1504,8 +1504,9 @@ relevant quantum computer becomes available.<a href="#section-5-3" class="pilcro
         <h3 id="name-security-strength">
 <a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-security-strength" class="section-name selfRef">Security Strength</a>
         </h3>
-<p id="section-5.1-1">Ciphersuites based on ML-KEM-768 target NIST post-quantum security Level 3;
-those based on ML-KEM-1024 target Level 5. In the PQ/T hybrid ciphersuites,
+<p id="section-5.1-1">Ciphersuites based on ML-KEM-768 target NIST post-quantum security
+Category 3; those based on ML-KEM-1024 target Category 5 (see Section
+4.A.5 of <span>[<a href="#NIST-PQC-CFP" class="cite xref">NIST-PQC-CFP</a>]</span>). In the PQ/T hybrid ciphersuites,
 the traditional component provides an additional classical security floor:
 P-256 and X25519 offer approximately 128-bit classical security, while P-384
 offers approximately 192-bit classical security. The -KE variants share the
@@ -1878,6 +1879,10 @@ for COSE-specific needs that do not apply to JOSE.<a href="#section-6.1-2" class
 <a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
         </h3>
 <dl class="references">
+<dt id="NIST-PQC-CFP">[NIST-PQC-CFP]</dt>
+        <dd>
+<span class="refAuthor">National Institute of Standards and Technology</span>, <span class="refTitle">"Submission Requirements and Evaluation Criteria for the Post-Quantum Cryptography Standardization Process"</span>, <time datetime="2016-12" class="refDate">December 2016</time>, <span>&lt;<a href="https://csrc.nist.gov/CSRC/media/Projects/Post-Quantum-Cryptography/documents/call-for-proposals-final-dec-2016.pdf">https://csrc.nist.gov/CSRC/media/Projects/Post-Quantum-Cryptography/documents/call-for-proposals-final-dec-2016.pdf</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC7518">[RFC7518]</dt>
       <dd>
 <span class="refAuthor">Jones, M.</span>, <span class="refTitle">"JSON Web Algorithms (JWA)"</span>, <span class="seriesInfo">RFC 7518</span>, <span class="seriesInfo">DOI 10.17487/RFC7518</span>, <time datetime="2015-05" class="refDate">May 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7518">https://www.rfc-editor.org/rfc/rfc7518</a>&gt;</span>. </dd>
