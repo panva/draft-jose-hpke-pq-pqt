@@ -1,0 +1,2468 @@
+<!DOCTYPE html>
+<html lang="en" class="Internet-Draft">
+<head>
+<meta charset="utf-8">
+<meta content="Common,Latin" name="scripts">
+<meta content="initial-scale=1.0" name="viewport">
+<title>JOSE HPKE PQ &amp; PQ/T Algorithm Registrations</title>
+<meta content="Filip Skokan" name="author">
+<meta content="Brian Campbell" name="author">
+<meta content="Hannes Tschofenig" name="author">
+<meta content="Tirumaleswar Reddy" name="author">
+<meta content="
+       This document registers Post-Quantum (PQ) and Post-Quantum/Traditional (PQ/T)
+hybrid algorithm identifiers for use with JSON Object Signing and Encryption
+(JOSE), building on the Hybrid Public Key Encryption (HPKE) framework. 
+    " name="description">
+<meta content="xml2rfc 3.32.0" name="generator">
+<meta content="JOSE" name="keyword">
+<meta content="HPKE" name="keyword">
+<meta content="post-quantum" name="keyword">
+<meta content="hybrid" name="keyword">
+<meta content="ML-KEM" name="keyword">
+<meta content="PQ" name="keyword">
+<meta content="PQ/T" name="keyword">
+<meta content="JWE" name="keyword">
+<meta content="CRQC" name="keyword">
+<meta content="draft-skokan-jose-hpke-pq-pqt-latest" name="ietf.draft">
+<!-- Generator version information:
+  xml2rfc 3.32.0
+    Python 3.12.12
+    ConfigArgParse 1.7
+    google-i18n-address 3.1.1
+    intervaltree 3.2.1
+    Jinja2 3.1.6
+    lxml 6.0.2
+    platformdirs 4.9.4
+    pycountry 24.6.1
+    PyYAML 6.0.3
+    requests 2.32.5
+    wcwidth 0.6.0
+-->
+<link href="draft-skokan-jose-hpke-pq-pqt.xml" rel="alternate" type="application/rfc+xml">
+<link href="#copyright" rel="license">
+<style type="text/css">@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-cyrillic.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-cyrillic.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Lora SemiBold'), local('Lora-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-semibold-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Oxygen Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Oxygen Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+}
+
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-cyrillic.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-greek.woff2') format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-cyrillic.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-greek.woff2') format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  color-scheme: light dark;
+  --background-color: #fff;
+  --text-color: #222;
+  --title-color: #191919;
+  --link-color: #2a6496;
+  --highlight-color: #f9f9f9;
+  --line-color: #eee;
+  --pilcrow-weak: #ddd;
+  --pilcrow-strong: #bbb;
+  --small-font-size: 14.5px;
+  --font-mono: 'Oxygen Mono', monospace;
+  --font-title: "Sofia Sans Semi Condensed", sans-serif;
+  scrollbar-color: #bbb #eee;
+}
+body {
+  max-width: 600px;
+  margin: 75px auto;
+  padding: 0 5px;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  font: 16px/22px "Lora", serif;
+  scroll-behavior: smooth;
+}
+
+.ears {
+  display: none;
+}
+
+/* headings */
+section {
+  clear: both;
+}
+.section-number {
+  padding-right: 0.5em;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-title);
+  font-weight: 680;
+  margin: 0.8em 0 0.3em;
+  font-size-adjust: 0.5;
+  color: var(--title-color);
+}
+h1#title {
+  font-size: 32px;
+  line-height: 40px;
+  clear: both;
+}
+h1#title, h1#rfcnum {
+  margin: 1.5em 0 0.2em;
+}
+h1#rfcnum + h1#title {
+  margin: 0.2em 0;
+}
+
+h1, h2, h3 {
+  font-size: 22px;
+  line-height: 27px;
+}
+h4, h5, h6 {
+  font-size: 20px;
+  line-height: 24px;
+}
+
+/* general structure */
+.author {
+  padding-bottom: 0.3em;
+  vertical-align: top;
+}
+#abstract+p {
+  font-size: 18px;
+  line-height: 24px;
+}
+#abstract+p code, #abstract+p samp, #abstract+p tt {
+  font-size: 16px;
+  line-height: 0;
+}
+
+p {
+  padding: 0;
+  margin: 0.5em 0;
+  text-align: left;
+}
+div {
+  margin: 0;
+}
+.alignRight.art-text {
+  background-color: var(--highlight-color);
+  border: 1px solid var(--line-color);
+  border-radius: 3px;
+  padding: 0.5em 1em 0;
+  margin-bottom: 0.5em;
+}
+.alignRight.art-text pre {
+  padding: 0;
+  width: auto;
+}
+.alignRight {
+  margin: 1em 0;
+}
+.alignRight > *:first-child {
+  border: none;
+  margin: 0;
+  float: right;
+  clear: both;
+}
+.alignRight > *:nth-child(2) {
+  clear: both;
+  display: block;
+  border: none;
+}
+svg {
+  display: block;
+}
+/* font-family isn't space-separated, but =~ will have to do */
+svg[font-family~="monospace" i], svg [font-family~="monospace" i] {
+  font-family: var(--font-mono);
+}
+.alignCenter.art-text {
+  background-color: var(--highlight-color);
+  border: 1px solid var(--line-color);
+  border-radius: 3px;
+  padding: 0.5em 1em 0;
+  margin-bottom: 0.5em;
+}
+.alignCenter.art-text pre {
+  padding: 0;
+  width: auto;
+}
+.alignCenter {
+  margin: 1em 0;
+}
+.alignCenter > *:first-child {
+  border: none;
+  /* this isn't optimal, but it's an existence proof.  PrinceXML doesn't
+     support flexbox yet.
+  */
+  display: table;
+  margin: 0 auto;
+}
+
+/* lists */
+ol, ul {
+  padding: 0;
+  margin: 0 0 0.5em 2em;
+  & :is(ol, ul) {
+    margin-left: 1em;
+  }
+}
+li {
+  margin: 0 0 0.25em 0;
+}
+ul.empty, .ulEmpty {
+  list-style-type: none;
+  & li {
+    margin-top: 0.5em;
+  }
+}
+:is(ul, ol).compact, .ulCompact, .olCompact {
+  margin: 0 0 0 2em;
+  & li {
+    margin: 0;
+    & :first-child { margin-top: 0; }
+    & :last-child { margin-bottom: 0; }
+  }
+}
+
+/* definition lists */
+dl {
+  clear: left;
+  --indent: 3ch;
+  /* --indent: attr(indent ch); not supported in any browser, but we can dream */
+  &.olPercent {
+    --indent: 5ch;
+    & > dt {
+      min-width: calc(var(--indent) - 2ch);
+    }
+  }
+  &.olPercent > dt {
+    float: none;
+  }
+
+  dl > dd > & {
+    margin-top: 0.5em;
+    margin-bottom: 0;
+  }
+}
+dl:not(.dlNewline) > dt {
+  float: left;
+  margin-right: 2ch;
+  min-width: 8ch;
+}
+dl > dd {
+  margin-bottom: .8em;
+  margin-left: var(--indent) !important; /* stupid element overrides */
+  min-height: 2ex;
+}
+:is(dl.compact, .dlCompact) > dd {
+  margin-bottom: 0;
+  & > :is(:first-child, .break:first-child + *) {
+    margin-top: 0;
+  }
+  & > :is(:last-child) {
+    margin-bottom: 0;
+  }
+}
+:is(dd, span).break {
+  display: none;
+}
+
+/* links */
+a, a[href].selfRef:hover {
+  text-decoration: none;
+}
+a[href] {
+  color: var(--link-color);
+}
+a[href].selfRef, .iref + a[href].internal {
+  color: var(--text-color);
+}
+a[href]:hover {
+  text-decoration: underline;
+}
+a[href].selfRef:hover {
+  background-color: var(--highlight-color);
+}
+a.xref:is(.cite, .auto), :is(#status-of-memo, #copyright) a {
+  white-space: nowrap;
+}
+
+/* Figures */
+tt, code, pre {
+  background-color: var(--highlight-color);
+  font: 14px/22px var(--font-mono);
+}
+tt, code {
+  /* changing the font for inline elements leads to different ascender
+     and descender heights; as we want to retain baseline alignment,
+     remove leading to avoid altering the final height of lines
+     note: this fails if these blocks take an entire line,
+     a different solution would be great */
+  line-height: 0;
+}
+:is(h1, h2, h3, h4, h5, h6) :is(tt, code) {
+  font-size: 84%;
+}
+pre {
+  border: 1px solid var(--line-color);
+  font-size: 13.5px;
+  line-height: 16px;
+  letter-spacing: -0.2px;
+  margin: 5px;
+  padding: 5px;
+}
+img {
+  max-width: 100%;
+}
+figure {
+  margin: 0.5em 0;
+  padding: 0;
+}
+figure blockquote {
+  margin: 0.8em 0.4em 0.4em;
+}
+figcaption, caption {
+  font-style: italic;
+  margin: 0.5em 1.5em;
+  text-align: left;
+  caption-side: bottom;
+}
+@media screen {
+  /* Auto-collapse boilerplate. */
+  :is(#status-of-memo, #copyright) p {
+    margin: -2px 0;
+    max-height: 0;
+    transition: max-height 2s ease, margin 0.5s ease 0.5s;
+    overflow: hidden;
+  }
+  :is(#status-of-memo, #copyright):hover p,
+  :is(#status-of-memo, #copyright) h2:target ~ p {
+    margin: 0.5em 0;
+    max-height: 500px;
+    overflow: auto;
+  }
+  pre, svg {
+    display: inline-block;
+    /* In the horizontal direction, sometimes people make over-sized figures.
+       Scrollbars for those is therefore necessary: auto adds them as necessary..
+       In the vertical direction, the line-height can combine with the font
+       asender/descender height to produce scrollbars: hidden avoids that. */
+    overflow: auto hidden;
+  }
+  pre {
+    max-width: 100%;
+    width: calc(100% - 22px - 1em);
+  }
+  svg {
+    max-width: calc(100% - 22px - 1em);
+  }
+  figure pre {
+    display: block;
+    width: calc(100% - 25px);
+  }
+  :is(pre, svg) + .pilcrow {
+    display: inline-block;
+    vertical-align: text-bottom;
+    padding-bottom: 8px;
+  }
+}
+
+/* aside, blockquote */
+aside, blockquote {
+  margin-left: 0;
+  padding: 0 2em;
+  font-style: italic;
+}
+blockquote {
+  margin: 1em 0;
+  border-left: 2px var(--pilcrow-strong) solid;
+}
+cite {
+  display: block;
+  text-align: right;
+  font-style: italic;
+}
+
+/* tables */
+table {
+  width: auto;
+  max-width: 100%;
+  margin: 0 0 1em;
+  border-collapse: collapse;
+}
+table.right {
+  margin-left: auto;
+}
+table.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+table.left {
+  margin-right: auto;
+}
+table .text-left {
+  text-align: left;
+}
+table .text-center {
+  text-align: center;
+}
+table .text-right {
+  text-align: right;
+}
+
+thead, tbody {
+  border: 1px solid var(--line-color);
+}
+th, td {
+  text-align: left;
+  vertical-align: top;
+  padding: 5px 10px;
+}
+th {
+  background-color: var(--line-color);
+}
+:is(tr:nth-child(2n), thead+tbody > tr:nth-child(2n+1)) > td {
+  background-color: var(--background-color);
+}
+:is(tr:nth-child(2n+1), thead+tbody > tr:nth-child(2n)) > td {
+  background-color: var(--highlight-color);
+}
+table caption {
+  margin: 0;
+  padding: 3px 0 3px 1em;
+}
+table p {
+  margin: 0;
+}
+
+/* pilcrow */
+a.pilcrow {
+  margin-left: 3px;
+  opacity: 0.2;
+  user-select: none;
+  &[href] {
+    color: var(--pilcrow-weak);
+    &:hover { text-decoration: none; }
+  }
+}
+@media not print {
+  :hover > a.pilcrow, a.pilcrow:focus {
+    opacity: 1;
+  }
+  a.pilcrow[href]:hover {
+    color: var(--pilcrow-strong);
+    background-color: transparent;
+  }
+}
+@media print {
+  a.pilcrow {
+    display: none;
+  }
+}
+
+/* misc */
+hr {
+  border: 0;
+  border-top: 1px solid var(--line-color);
+}
+.bcp14 {
+  font-variant: small-caps;
+  font-weight: 600;
+  font-size: var(--small-font-size);
+}
+.role {
+  font-variant: all-small-caps;
+}
+sub, sup {
+  line-height: 1;
+  font-size: 80%;
+}
+
+/* info block */
+#identifiers {
+  margin: 0;
+  font-size: var(--small-font-size);
+  line-height: 18px;
+  --identifier-width: 15ch;
+  & dt {
+    width: var(--identifier-width);
+    min-width: var(--identifier-width);
+    clear: left;
+    float: left;
+    text-align: right;
+    margin-right: 1ch;
+  }
+  & dd {
+    margin: 0;
+    margin-left: calc(1em + var(--identifier-width)) !important;
+    min-width: 5em;
+  }
+  & .authors {
+    & .author {
+      display: inline-block;
+      margin-right: 1.5em;
+    }
+    & .org {
+      font-style: italic;
+    }
+  }
+}
+
+/* The prepared/rendered info at the very bottom of the page */
+.docInfo {
+  color: #999;
+  font-size: 0.9em;
+  font-style: italic;
+  margin-top: 2em;
+}
+.docInfo .prepared {
+  float: right;
+}
+
+/* table of contents */
+#toc {
+  padding: 0.75em 0 2em 0;
+  margin-bottom: 1em;
+
+  & nav {
+    & ul {
+      margin: 0 0.5em 0 0;
+      padding: 0;
+      list-style: none;
+    }
+    & li {
+      line-height: 1.3em;
+      margin: 2px 0;
+      padding-left: 1.2em;
+      text-indent: -1.2em;
+    }
+  }
+  & a.xref {
+    white-space: normal;
+  }
+}
+
+.references {
+  & > dt {
+    text-align: right;
+    font-weight: bold;
+    min-width: 10ch;
+    margin-right: 1.5ch;
+    &:target::before {
+      content: "⇒";
+      margin: 0 10px 0 -25px;
+    }
+  }
+  & > dd {
+    margin-left: 12ch !important;
+    overflow: visible;
+    & .refInstance {
+      margin-bottom: 0.8em;
+    }
+    & .ascii {
+      margin-bottom: 0.25em;
+    }
+  }
+}
+
+#rfc\.index\.index + ul {
+  margin-left: 0;
+}
+
+/* authors */
+address.vcard {
+  font-style: normal;
+  max-width: 20em;
+  margin: 1em auto 1em 0;
+
+  & .nameRole {
+    font-weight: 700;
+    margin-left: 0;
+  }
+  & .label {
+    margin: 0.5em 0;
+  }
+  & .type {
+    display: none;
+  }
+  & .alternative-contact {
+    margin: 0.5em 0 0.25em 0;
+  }
+  & .non-ascii {
+    margin: 0 0 0 2em;
+  }
+  & div.left {
+    text-align: left;
+  }
+  & div.right {
+    text-align: right;
+  }
+}
+
+hr.addr {
+  border-top: 1px dashed;
+  margin: 0;
+  color: #ddd;
+  max-width: calc(100% - 16px);
+}
+@media (min-width: 500px) {
+  #authors-addresses > section {
+    column-count: 2;
+    column-gap: 20px;
+  }
+  #authors-addresses > section > h2 {
+    column-span: all;
+  }
+  /* hack for break-inside: avoid-column */
+  #authors-addresses address {
+    display: inline-block;
+    break-inside: avoid-column;
+  }
+}
+
+/* Comments */
+.rfcEditorRemove p:first-of-type {
+  font-style: italic;
+}
+.cref {
+  background-color: rgba(249, 232, 105, 0.3);
+  padding: 2px 4px;
+}
+.crefSource {
+  font-style: italic;
+}
+
+@media screen {
+  #toc nav {
+    font-family: var(--font-title);
+    font-weight: 360;
+    & > ul { margin-bottom: 2em; }
+    & ul {
+      margin: 0 0 0 4px;
+      & :is(p, li) {
+        margin: 2px 0;
+      }
+    }
+  }
+  #toc a.toplink {
+    float: right;
+  }
+}
+@media not screen {
+  #toc a.toplink {
+    display: none;
+  }
+}
+
+
+/* TOC layout for smaller screens */
+@media screen and (max-width: 929px) {
+  #toc {
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    padding: 1px 0 0 0;
+    margin: 0;
+    border-bottom: 1px solid #ccc;
+    opacity: 0.6;
+  }
+  #toc h2 {
+    margin: 0;
+    padding: 2px 0 2px 6px;
+    padding-right: 1em;
+    font-size: 18px;
+    line-height: 24px;
+    min-width: 190px;
+    text-align: right;
+    background-color: #444;
+    color: white;
+    cursor: pointer;
+    &::before { /* css hamburger */
+      float: right;
+      position: relative;
+      width: 1em;
+      height: 1px;
+      left: -164px;
+      margin: 8px 0 0 0;
+      background: white none repeat scroll 0 0;
+      box-shadow: 0 4px 0 0 white, 0 8px 0 0 white;
+      content: "";
+    }
+  }
+  #toc nav {
+    display: none;
+    background-color: var(--background-color);
+    padding: 0.5em 1em 1em;
+    overflow: auto;
+    overscroll-behavior: contain;
+    height: calc(100vh - 48px);
+    border-left: 1px solid #ddd;
+  }
+  #toc.active {
+    opacity: 1;
+    & nav { display: block; }
+  }
+  /* Make the collapsed ToC header render white on gray also when it's a link */
+  #toc h2 a,
+  #toc h2 a:is(:link, :focus, :hover),
+  #toc a.toplink,
+  #toc a.toplink:hover {
+    color: white;
+    background-color: #444;
+    text-decoration: none;
+  }
+  #toc a.toplink {
+    margin: 2px 0.5em 0;
+  }
+}
+
+/* TOC layout for wide screens */
+@media screen and (min-width: 930px) {
+  body {
+    padding-right: 360px;
+    padding-right: calc(min(180px + 20%, 500px));
+  }
+  #toc {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    right: calc(50vw - 480px);
+    width: 312px;
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+  }
+  #toc h2 {
+    margin: 0;
+    padding: 0.25em 1em 1em 0;
+  }
+  #toc nav {
+    display: block;
+    height: calc(90vh - 84px);
+    bottom: 0;
+    padding: 0.5em 0 2em;
+    overflow: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+  }
+  img { /* future proofing */
+    max-width: 100%;
+    height: auto;
+  }
+  #toc a.toplink {
+    margin: 8px 0.5em 0;
+  }
+}
+
+/* pagination */
+@media print {
+  body {
+    width: 100%;
+  }
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+  #n-copyright-notice {
+    border-bottom: none;
+  }
+  #toc, #n-introduction {
+    page-break-before: always;
+  }
+  #toc {
+    border-top: none;
+    padding-top: 0;
+  }
+  figure, pre, .vcard {
+    page-break-inside: avoid;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+  }
+  :is(h2, h3, h4, h5, h6)+*, dd {
+    page-break-before: avoid;
+  }
+  pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-size: 10pt;
+  }
+  table {
+    border: 1px solid #ddd;
+  }
+  td {
+    border-top: 1px solid #ddd;
+  }
+}
+
+@page :first {
+  padding-top: 0;
+  @top-left {
+    content: normal;
+    border: none;
+  }
+  @top-center {
+    content: normal;
+    border: none;
+  }
+  @top-right {
+    content: normal;
+    border: none;
+  }
+}
+
+@page {
+  size: A4;
+  margin-bottom: 45mm;
+  padding-top: 20px;
+}
+
+/* Dark mode. */
+@media (prefers-color-scheme: dark) {
+:root {
+  --background-color: #121212;
+  --text-color: #f0f0f0;
+  --title-color: #fff;
+  --link-color: #4da4f0;
+  --highlight-color: #282828;
+  --line-color: #444;
+  --pilcrow-weak: #444;
+  --pilcrow-strong: #666;
+  scrollbar-color: #777 #333;
+}
+}
+
+/* SVG Trick: a prefix match works because only black and white are allowed */
+svg :is([stroke="black"], [stroke^="#000"]) {
+  stroke: var(--text-color);
+}
+svg :is([stroke="white"], [stroke^="#fff"]) {
+  stroke: var(--background-color);
+}
+svg :is([fill="black"], [fill^="#000"], :not([fill])) {
+  fill: var(--text-color);
+}
+svg :is([fill="white"], [fill^="#fff"]) {
+  fill: var(--background-color);
+}
+</style>
+
+</head>
+<body class="xml2rfc">
+<table class="ears">
+<thead><tr>
+<td class="left">Internet-Draft</td>
+<td class="center">JOSE HPKE PQ</td>
+<td class="right">April 2026</td>
+</tr></thead>
+<tfoot><tr>
+<td class="left">Skokan, et al.</td>
+<td class="center">Expires 18 October 2026</td>
+<td class="right">[Page]</td>
+</tr></tfoot>
+</table>
+<div id="external-metadata" class="document-information"></div>
+<div id="internal-metadata" class="document-information">
+<dl id="identifiers">
+<dt class="label-workgroup">Workgroup:</dt>
+<dd class="workgroup">Javascript Object Signing and Encryption</dd>
+<dt class="label-internet-draft">Internet-Draft:</dt>
+<dd class="internet-draft">draft-skokan-jose-hpke-pq-pqt-latest</dd>
+<dt class="label-published">Published:</dt>
+<dd class="published">
+<time datetime="2026-04-16" class="published">16 April 2026</time>
+    </dd>
+<dt class="label-intended-status">Intended Status:</dt>
+<dd class="intended-status">Standards Track</dd>
+<dt class="label-expires">Expires:</dt>
+<dd class="expires"><time datetime="2026-10-18">18 October 2026</time></dd>
+<dt class="label-authors">Authors:</dt>
+<dd class="authors">
+<div class="author">
+      <div class="author-name">F. Skokan</div>
+<div class="org">Okta</div>
+</div>
+<div class="author">
+      <div class="author-name">B. Campbell</div>
+<div class="org">Ping Identity</div>
+</div>
+<div class="author">
+      <div class="author-name">H. Tschofenig</div>
+</div>
+<div class="author">
+      <div class="author-name">T. Reddy</div>
+<div class="org">Nokia</div>
+</div>
+</dd>
+</dl>
+</div>
+<h1 id="title">JOSE HPKE PQ &amp; PQ/T Algorithm Registrations</h1>
+<section id="section-abstract">
+      <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
+<p id="section-abstract-1">This document registers Post-Quantum (PQ) and Post-Quantum/Traditional (PQ/T)
+hybrid algorithm identifiers for use with JSON Object Signing and Encryption
+(JOSE), building on the Hybrid Public Key Encryption (HPKE) framework.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+</section>
+<section class="note rfcEditorRemove" id="section-note.1">
+      <h2 id="name-about-this-document">
+<a href="#name-about-this-document" class="section-name selfRef">About This Document</a>
+      </h2>
+<p id="section-note.1-1">This note is to be removed before publishing as an RFC.<a href="#section-note.1-1" class="pilcrow">¶</a></p>
+<p id="section-note.1-2">
+        The latest revision of this draft can be found at <span><a href="https://panva.github.io/jose-hpke-pq-pqt/draft-skokan-jose-hpke-pq-pqt.html">https://panva.github.io/jose-hpke-pq-pqt/draft-skokan-jose-hpke-pq-pqt.html</a></span>.
+        Status information for this document may be found at <span><a href="https://datatracker.ietf.org/doc/draft-skokan-jose-hpke-pq-pqt/">https://datatracker.ietf.org/doc/draft-skokan-jose-hpke-pq-pqt/</a></span>.<a href="#section-note.1-2" class="pilcrow">¶</a></p>
+<p id="section-note.1-3">
+        Discussion of this document takes place on the
+        Javascript Object Signing and Encryption Working Group mailing list (<span><a href="mailto:jose@ietf.org">mailto:jose@ietf.org</a></span>),
+        which is archived at <span><a href="https://mailarchive.ietf.org/arch/browse/jose/">https://mailarchive.ietf.org/arch/browse/jose/</a></span>.
+        Subscribe at <span><a href="https://www.ietf.org/mailman/listinfo/jose/">https://www.ietf.org/mailman/listinfo/jose/</a></span>.<a href="#section-note.1-3" class="pilcrow">¶</a></p>
+<p id="section-note.1-4">Source for this draft and an issue tracker can be found at
+        <span><a href="https://github.com/panva/jose-hpke-pq-pqt">https://github.com/panva/jose-hpke-pq-pqt</a></span>.<a href="#section-note.1-4" class="pilcrow">¶</a></p>
+</section>
+<div id="status-of-memo">
+<section id="section-boilerplate.1">
+        <h2 id="name-status-of-this-memo">
+<a href="#name-status-of-this-memo" class="section-name selfRef">Status of This Memo</a>
+        </h2>
+<p id="section-boilerplate.1-1">
+        This Internet-Draft is submitted in full conformance with the
+        provisions of BCP 78 and BCP 79.<a href="#section-boilerplate.1-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-2">
+        Internet-Drafts are working documents of the Internet Engineering Task
+        Force (IETF). Note that other groups may also distribute working
+        documents as Internet-Drafts. The list of current Internet-Drafts is
+        at <span><a href="https://datatracker.ietf.org/drafts/current/">https://datatracker.ietf.org/drafts/current/</a></span>.<a href="#section-boilerplate.1-2" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-3">
+        Internet-Drafts are draft documents valid for a maximum of six months
+        and may be updated, replaced, or obsoleted by other documents at any
+        time. It is inappropriate to use Internet-Drafts as reference
+        material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-4">
+        This Internet-Draft will expire on 18 October 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="copyright">
+<section id="section-boilerplate.2">
+        <h2 id="name-copyright-notice">
+<a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
+        </h2>
+<p id="section-boilerplate.2-1">
+            Copyright (c) 2026 IETF Trust and the persons identified as the
+            document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.2-2">
+            This document is subject to BCP 78 and the IETF Trust's Legal
+            Provisions Relating to IETF Documents
+            (<span><a href="https://trustee.ietf.org/license-info">https://trustee.ietf.org/license-info</a></span>) in effect on the date of
+            publication of this document. Please review these documents
+            carefully, as they describe your rights and restrictions with
+            respect to this document. Code Components extracted from this
+            document must include Revised BSD License text as described in
+            Section 4.e of the Trust Legal Provisions and are provided without
+            warranty as described in the Revised BSD License.<a href="#section-boilerplate.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="toc">
+<section id="section-toc.1">
+        <a href="#" onclick="scroll(0,0)" class="toplink">▲</a><h2 id="name-table-of-contents">
+<a href="#name-table-of-contents" class="section-name selfRef">Table of Contents</a>
+        </h2>
+<nav class="toc"><ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1">
+            <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="auto internal xref">1</a>.  <a href="#name-introduction" class="internal xref">Introduction</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
+            <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-conventions-and-definitions" class="internal xref">Conventions and Definitions</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
+            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-algorithm-identifiers" class="internal xref">Algorithm Identifiers</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
+                <p id="section-toc.1-1.3.2.1.1" class="keepWithNext"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-pq-t-hybrid-integrated-encr" class="internal xref">PQ/T Hybrid Integrated Encryption Algorithms</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
+                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-pure-pq-integrated-encrypti" class="internal xref">Pure PQ Integrated Encryption Algorithms</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3">
+                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.  <a href="#name-pq-t-hybrid-key-encryption-" class="internal xref">PQ/T Hybrid Key Encryption Algorithms</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.4">
+                <p id="section-toc.1-1.3.2.4.1"><a href="#section-3.4" class="auto internal xref">3.4</a>.  <a href="#name-pure-pq-key-encryption-algo" class="internal xref">Pure PQ Key Encryption Algorithms</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
+            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-json-web-key-representation" class="internal xref">JSON Web Key Representation</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1">
+                <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="auto internal xref">5.1</a>.  <a href="#name-security-strength" class="internal xref">Security Strength</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1">
+                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-json-web-signature-and-encr" class="internal xref">JSON Web Signature and Encryption Algorithms Registry</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-references" class="internal xref">References</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.1">
+                <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="auto internal xref">7.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.2">
+                <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="auto internal xref">7.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
+            <p id="section-toc.1-1.8.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-test-vectors" class="internal xref">Test Vectors</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
+            <p id="section-toc.1-1.9.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
+            <p id="section-toc.1-1.10.1"><a href="#appendix-C" class="auto internal xref"></a><a href="#name-document-history" class="internal xref">Document History</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
+            <p id="section-toc.1-1.11.1"><a href="#appendix-D" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+</li>
+        </ul>
+</nav>
+</section>
+</div>
+<div id="introduction">
+<section id="section-1">
+      <h2 id="name-introduction">
+<a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
+      </h2>
+<p id="section-1-1"><span>[<a href="#I-D.ietf-jose-hpke-encrypt" class="cite xref">I-D.ietf-jose-hpke-encrypt</a>]</span> defines how to use Hybrid Public Key Encryption
+(HPKE) with JSON Web Encryption (JWE) using traditional Key Encapsulation Mechanisms
+(KEM) based on Elliptic-curve Diffie-Hellman (ECDH).<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-2">This document extends the set of registered HPKE algorithms to include Post-Quantum
+(PQ) and Post-Quantum/Traditional (PQ/T) hybrid KEMs, as defined in
+<span>[<a href="#I-D.ietf-hpke-pq" class="cite xref">I-D.ietf-hpke-pq</a>]</span>. These algorithms provide protection against attacks by
+cryptographically relevant quantum computers.<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-3">The term “PQ/T hybrid” is used here consistent with <span>[<a href="#I-D.ietf-hpke-pq" class="cite xref">I-D.ietf-hpke-pq</a>]</span> to denote a
+combination of post-quantum and traditional algorithms, and should not be confused
+with HPKE's use of "hybrid" to describe the combination of asymmetric and symmetric
+encryption.<a href="#section-1-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="conventions-and-definitions">
+<section id="section-2">
+      <h2 id="name-conventions-and-definitions">
+<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-conventions-and-definitions" class="section-name selfRef">Conventions and Definitions</a>
+      </h2>
+<p id="section-2-1">The key words "<span class="bcp14">MUST</span>", "<span class="bcp14">MUST NOT</span>", "<span class="bcp14">REQUIRED</span>", "<span class="bcp14">SHALL</span>", "<span class="bcp14">SHALL NOT</span>", "<span class="bcp14">SHOULD</span>", "<span class="bcp14">SHOULD NOT</span>", "<span class="bcp14">RECOMMENDED</span>", "<span class="bcp14">NOT RECOMMENDED</span>",
+"<span class="bcp14">MAY</span>", and "<span class="bcp14">OPTIONAL</span>" in this document are to be interpreted as
+described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they
+appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="algorithm-identifiers">
+<section id="section-3">
+      <h2 id="name-algorithm-identifiers">
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-algorithm-identifiers" class="section-name selfRef">Algorithm Identifiers</a>
+      </h2>
+<p id="section-3-1">This section defines the algorithm identifiers for PQ and PQ/T HPKE-based
+encryption in JOSE. Each algorithm is defined by a combination of an HPKE KEM,
+a Key Derivation Function (KDF), and an Authenticated Encryption with
+Associated Data (AEAD) algorithm.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-2">All algorithms defined in this section follow the same operational model as
+those in <span>[<a href="#I-D.ietf-jose-hpke-encrypt" class="cite xref">I-D.ietf-jose-hpke-encrypt</a>]</span>, supporting both integrated encryption
+as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-jose-hpke-encrypt-16#section-5" class="relref">Section 5</a> of [<a href="#I-D.ietf-jose-hpke-encrypt" class="cite xref">I-D.ietf-jose-hpke-encrypt</a>]</span> and key encryption
+as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-jose-hpke-encrypt-16#section-6" class="relref">Section 6</a> of [<a href="#I-D.ietf-jose-hpke-encrypt" class="cite xref">I-D.ietf-jose-hpke-encrypt</a>]</span>.<a href="#section-3-2" class="pilcrow">¶</a></p>
+<p id="section-3-3">Test vectors for all algorithms defined in this section are provided in
+<a href="#test-vectors" class="auto internal xref">Appendix A</a>.<a href="#section-3-3" class="pilcrow">¶</a></p>
+<div id="pqt-hybrid-integrated-encryption-algorithms">
+<section id="section-3.1">
+        <h3 id="name-pq-t-hybrid-integrated-encr">
+<a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-pq-t-hybrid-integrated-encr" class="section-name selfRef">PQ/T Hybrid Integrated Encryption Algorithms</a>
+        </h3>
+<p id="section-3.1-1">The following table lists the algorithm identifiers for PQ/T hybrid integrated
+encryption, where HPKE directly encrypts the plaintext without a separate
+Content Encryption Key:<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+<span id="name-pq-t-hybrid-integrated-encry"></span><div id="pqt-hybrid-integrated-table">
+<table class="center" id="table-1">
+          <caption>
+<a href="#table-1" class="selfRef">Table 1</a>:
+<a href="#name-pq-t-hybrid-integrated-encry" class="selfRef">PQ/T Hybrid Integrated Encryption Algorithms</a>
+          </caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">"alg" value</th>
+              <th class="text-left" rowspan="1" colspan="1">HPKE KEM</th>
+              <th class="text-left" rowspan="1" colspan="1">HPKE KDF</th>
+              <th class="text-left" rowspan="1" colspan="1">HPKE AEAD</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">HPKE-8</td>
+              <td class="text-left" rowspan="1" colspan="1">MLKEM768-P256 (<code>0x0050</code>)</td>
+              <td class="text-left" rowspan="1" colspan="1">SHAKE256 (<code>0x0011</code>)</td>
+              <td class="text-left" rowspan="1" colspan="1">AES-256-GCM (<code>0x0002</code>)</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">HPKE-10</td>
+              <td class="text-left" rowspan="1" colspan="1">MLKEM768-X25519 (<code>0x647a</code>)</td>
+              <td class="text-left" rowspan="1" colspan="1">SHAKE256 (<code>0x0011</code>)</td>
+              <td class="text-left" rowspan="1" colspan="1">AES-256-GCM (<code>0x0002</code>)</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">HPKE-12</td>
+              <td class="text-left" rowspan="1" colspan="1">MLKEM1024-P384 (<code>0x0051</code>)</td>
+              <td class="text-left" rowspan="1" colspan="1">SHAKE256 (<code>0x0011</code>)</td>
+              <td class="text-left" rowspan="1" colspan="1">AES-256-GCM (<code>0x0002</code>)</td>
+            </tr>
+          </tbody>
+        </table>
+</div>
+<p id="section-3.1-3">These algorithms combine ML-KEM with a traditional elliptic curve algorithm in a PQ/T
+hybrid KEM construction, with the goal that compromise of either the post-quantum or
+the traditional component alone does not undermine the security of the resulting encryption.<a href="#section-3.1-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="pure-pq-integrated-encryption-algorithms">
+<section id="section-3.2">
+        <h3 id="name-pure-pq-integrated-encrypti">
+<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-pure-pq-integrated-encrypti" class="section-name selfRef">Pure PQ Integrated Encryption Algorithms</a>
+        </h3>
+<p id="section-3.2-1">The following table lists the algorithm identifiers for pure post-quantum
+integrated encryption:<a href="#section-3.2-1" class="pilcrow">¶</a></p>
+<span id="name-pure-pq-integrated-encryptio"></span><div id="pure-pq-integrated-table">
+<table class="center" id="table-2">
+          <caption>
+<a href="#table-2" class="selfRef">Table 2</a>:
+<a href="#name-pure-pq-integrated-encryptio" class="selfRef">Pure PQ Integrated Encryption Algorithms</a>
+          </caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">"alg" value</th>
+              <th class="text-left" rowspan="1" colspan="1">HPKE KEM</th>
+              <th class="text-left" rowspan="1" colspan="1">HPKE KDF</th>
+              <th class="text-left" rowspan="1" colspan="1">HPKE AEAD</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">HPKE-15</td>
+              <td class="text-left" rowspan="1" colspan="1">ML-KEM-768 (<code>0x0041</code>)</td>
+              <td class="text-left" rowspan="1" colspan="1">SHAKE256 (<code>0x0011</code>)</td>
+              <td class="text-left" rowspan="1" colspan="1">AES-256-GCM (<code>0x0002</code>)</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">HPKE-17</td>
+              <td class="text-left" rowspan="1" colspan="1">ML-KEM-1024 (<code>0x0042</code>)</td>
+              <td class="text-left" rowspan="1" colspan="1">SHAKE256 (<code>0x0011</code>)</td>
+              <td class="text-left" rowspan="1" colspan="1">AES-256-GCM (<code>0x0002</code>)</td>
+            </tr>
+          </tbody>
+        </table>
+</div>
+<p id="section-3.2-3">These algorithms provide pure post-quantum security using ML-KEM without a
+traditional algorithm component.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="pqt-hybrid-key-encryption-algorithms">
+<section id="section-3.3">
+        <h3 id="name-pq-t-hybrid-key-encryption-">
+<a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-pq-t-hybrid-key-encryption-" class="section-name selfRef">PQ/T Hybrid Key Encryption Algorithms</a>
+        </h3>
+<p id="section-3.3-1">The following table lists the algorithm identifiers for PQ/T hybrid key
+encryption, where HPKE encrypts the Content Encryption Key:<a href="#section-3.3-1" class="pilcrow">¶</a></p>
+<span id="name-pq-t-hybrid-key-encryption-a"></span><div id="pqt-hybrid-key-encryption-table">
+<table class="center" id="table-3">
+          <caption>
+<a href="#table-3" class="selfRef">Table 3</a>:
+<a href="#name-pq-t-hybrid-key-encryption-a" class="selfRef">PQ/T Hybrid Key Encryption Algorithms</a>
+          </caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">"alg" value</th>
+              <th class="text-left" rowspan="1" colspan="1">HPKE KEM</th>
+              <th class="text-left" rowspan="1" colspan="1">HPKE KDF</th>
+              <th class="text-left" rowspan="1" colspan="1">HPKE AEAD</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">HPKE-8-KE</td>
+              <td class="text-left" rowspan="1" colspan="1">MLKEM768-P256 (<code>0x0050</code>)</td>
+              <td class="text-left" rowspan="1" colspan="1">SHAKE256 (<code>0x0011</code>)</td>
+              <td class="text-left" rowspan="1" colspan="1">AES-256-GCM (<code>0x0002</code>)</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">HPKE-10-KE</td>
+              <td class="text-left" rowspan="1" colspan="1">MLKEM768-X25519 (<code>0x647a</code>)</td>
+              <td class="text-left" rowspan="1" colspan="1">SHAKE256 (<code>0x0011</code>)</td>
+              <td class="text-left" rowspan="1" colspan="1">AES-256-GCM (<code>0x0002</code>)</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">HPKE-12-KE</td>
+              <td class="text-left" rowspan="1" colspan="1">MLKEM1024-P384 (<code>0x0051</code>)</td>
+              <td class="text-left" rowspan="1" colspan="1">SHAKE256 (<code>0x0011</code>)</td>
+              <td class="text-left" rowspan="1" colspan="1">AES-256-GCM (<code>0x0002</code>)</td>
+            </tr>
+          </tbody>
+        </table>
+</div>
+<p id="section-3.3-3">These are the key encryption counterparts of the PQ/T hybrid integrated
+encryption algorithms defined in <a href="#pqt-hybrid-integrated-table" class="auto internal xref">Table 1</a>.<a href="#section-3.3-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="pure-pq-key-encryption-algorithms">
+<section id="section-3.4">
+        <h3 id="name-pure-pq-key-encryption-algo">
+<a href="#section-3.4" class="section-number selfRef">3.4. </a><a href="#name-pure-pq-key-encryption-algo" class="section-name selfRef">Pure PQ Key Encryption Algorithms</a>
+        </h3>
+<p id="section-3.4-1">The following table lists the algorithm identifiers for pure post-quantum key
+encryption:<a href="#section-3.4-1" class="pilcrow">¶</a></p>
+<span id="name-pure-pq-key-encryption-algor"></span><div id="pure-pq-key-encryption-table">
+<table class="center" id="table-4">
+          <caption>
+<a href="#table-4" class="selfRef">Table 4</a>:
+<a href="#name-pure-pq-key-encryption-algor" class="selfRef">Pure PQ Key Encryption Algorithms</a>
+          </caption>
+<thead>
+            <tr>
+              <th class="text-left" rowspan="1" colspan="1">"alg" value</th>
+              <th class="text-left" rowspan="1" colspan="1">HPKE KEM</th>
+              <th class="text-left" rowspan="1" colspan="1">HPKE KDF</th>
+              <th class="text-left" rowspan="1" colspan="1">HPKE AEAD</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">HPKE-15-KE</td>
+              <td class="text-left" rowspan="1" colspan="1">ML-KEM-768 (<code>0x0041</code>)</td>
+              <td class="text-left" rowspan="1" colspan="1">SHAKE256 (<code>0x0011</code>)</td>
+              <td class="text-left" rowspan="1" colspan="1">AES-256-GCM (<code>0x0002</code>)</td>
+            </tr>
+            <tr>
+              <td class="text-left" rowspan="1" colspan="1">HPKE-17-KE</td>
+              <td class="text-left" rowspan="1" colspan="1">ML-KEM-1024 (<code>0x0042</code>)</td>
+              <td class="text-left" rowspan="1" colspan="1">SHAKE256 (<code>0x0011</code>)</td>
+              <td class="text-left" rowspan="1" colspan="1">AES-256-GCM (<code>0x0002</code>)</td>
+            </tr>
+          </tbody>
+        </table>
+</div>
+<p id="section-3.4-3">These are the key encryption counterparts of the pure PQ integrated
+encryption algorithms defined in <a href="#pure-pq-integrated-table" class="auto internal xref">Table 2</a>.<a href="#section-3.4-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="json-web-key-representation">
+<section id="section-4">
+      <h2 id="name-json-web-key-representation">
+<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-json-web-key-representation" class="section-name selfRef">JSON Web Key Representation</a>
+      </h2>
+<p id="section-4-1">Keys for the algorithms defined in this document use the "AKP" (Algorithm
+Key Pair) key type defined in <span>[<a href="#I-D.ietf-cose-dilithium" class="cite xref">I-D.ietf-cose-dilithium</a>]</span>.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-2">For the algorithms in this document, the "pub" parameter contains the
+base64url encoding of HPKE's SerializePublicKey() output for the
+corresponding KEM, and the "priv" parameter contains the base64url encoding
+of HPKE's SerializePrivateKey() output.<a href="#section-4-2" class="pilcrow">¶</a></p>
+<p id="section-4-3">Examples of JWKs for each algorithm are provided in <a href="#test-vectors" class="auto internal xref">Appendix A</a>.<a href="#section-4-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="security-considerations">
+<section id="section-5">
+      <h2 id="name-security-considerations">
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+      </h2>
+<p id="section-5-1">The security considerations of <span>[<a href="#I-D.ietf-jose-hpke-encrypt" class="cite xref">I-D.ietf-jose-hpke-encrypt</a>]</span> and
+<span>[<a href="#I-D.ietf-hpke-pq" class="cite xref">I-D.ietf-hpke-pq</a>]</span> apply to this document.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-2">This document does not register algorithms using ML-KEM-512. As noted
+in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-hpke-pq-04#section-3" class="relref">Section 3</a> of [<a href="#I-D.ietf-hpke-pq" class="cite xref">I-D.ietf-hpke-pq</a>]</span>, given the relative novelty of
+ML-KEM, there is concern that new cryptanalysis might reduce the
+security level of ML-KEM-512. Use of ML-KEM-768 or ML-KEM-1024 acts
+as a hedge against such cryptanalysis at a modest performance penalty.<a href="#section-5-2" class="pilcrow">¶</a></p>
+<p id="section-5-3">When the Key Encryption algorithms defined in
+<a href="#pqt-hybrid-key-encryption-table" class="auto internal xref">Table 3</a> or <a href="#pure-pq-key-encryption-table" class="auto internal xref">Table 4</a>
+are used in a General JWE JSON Serialization with multiple recipients,
+all recipients <span class="bcp14">MUST</span> use a quantum-resistant Key Management algorithm.
+Including a recipient that uses a quantum-susceptible algorithm would
+allow an adversary performing a Harvest Now, Decrypt Later (HNDL)
+attack to recover the Content Encryption Key once a cryptographically
+relevant quantum computer becomes available.<a href="#section-5-3" class="pilcrow">¶</a></p>
+<div id="security-strength">
+<section id="section-5.1">
+        <h3 id="name-security-strength">
+<a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-security-strength" class="section-name selfRef">Security Strength</a>
+        </h3>
+<p id="section-5.1-1">Ciphersuites based on ML-KEM-768 target NIST post-quantum security Level 3;
+those based on ML-KEM-1024 target Level 5. In the PQ/T hybrid ciphersuites,
+the traditional component provides an additional classical security floor:
+P-256 and X25519 offer approximately 128-bit classical security, while P-384
+offers approximately 192-bit classical security. The -KE variants share the
+same cryptographic properties as their integrated encryption counterparts.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
+<p id="section-5.1-2">All ciphersuites use SHAKE256 as the KDF, aligning with the hash family used
+internally by ML-KEM, and AES-256-GCM as the AEAD.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="iana-considerations">
+<section id="section-6">
+      <h2 id="name-iana-considerations">
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
+      </h2>
+<div id="json-web-signature-and-encryption-algorithms-registry">
+<section id="section-6.1">
+        <h3 id="name-json-web-signature-and-encr">
+<a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-json-web-signature-and-encr" class="section-name selfRef">JSON Web Signature and Encryption Algorithms Registry</a>
+        </h3>
+<p id="section-6.1-1">This document requests registration of the following values in the
+IANA "JSON Web Signature and Encryption Algorithms" registry
+established by <span>[<a href="#RFC7518" class="cite xref">RFC7518</a>]</span>:<a href="#section-6.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.1-2">Note: The Algorithm Name numbering has intentional gaps so that a
+given identifier (e.g. HPKE-10) always denotes the same HPKE KEM,
+KDF, and AEAD combination regardless of whether it is used in JOSE
+or COSE. The gaps correspond to algorithms registered only in COSE
+for COSE-specific needs that do not apply to JOSE.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
+<div id="hpke-8">
+<section id="section-6.1.1">
+          <h4 id="name-hpke-8">
+<a href="#section-6.1.1" class="section-number selfRef">6.1.1. </a><a href="#name-hpke-8" class="section-name selfRef">HPKE-8</a>
+          </h4>
+<ul class="normal">
+<li class="normal" id="section-6.1.1-1.1">
+              <p id="section-6.1.1-1.1.1">Algorithm Name: HPKE-8<a href="#section-6.1.1-1.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.1-1.2">
+              <p id="section-6.1.1-1.2.1">Algorithm Description: Integrated Encryption with HPKE using MLKEM768-P256 KEM, SHAKE256 KDF, and AES-256-GCM AEAD<a href="#section-6.1.1-1.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.1-1.3">
+              <p id="section-6.1.1-1.3.1">Algorithm Usage Location(s): "alg"<a href="#section-6.1.1-1.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.1-1.4">
+              <p id="section-6.1.1-1.4.1">JOSE Implementation Requirements: Optional<a href="#section-6.1.1-1.4.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.1-1.5">
+              <p id="section-6.1.1-1.5.1">Change Controller: IETF<a href="#section-6.1.1-1.5.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.1-1.6">
+              <p id="section-6.1.1-1.6.1">Specification Document(s): <a href="#pqt-hybrid-integrated-table" class="auto internal xref">Table 1</a> of this document<a href="#section-6.1.1-1.6.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.1-1.7">
+              <p id="section-6.1.1-1.7.1">Algorithm Analysis Document(s): <span>[<a href="#I-D.ietf-hpke-pq" class="cite xref">I-D.ietf-hpke-pq</a>]</span><a href="#section-6.1.1-1.7.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+</section>
+</div>
+<div id="hpke-8-ke">
+<section id="section-6.1.2">
+          <h4 id="name-hpke-8-ke">
+<a href="#section-6.1.2" class="section-number selfRef">6.1.2. </a><a href="#name-hpke-8-ke" class="section-name selfRef">HPKE-8-KE</a>
+          </h4>
+<ul class="normal">
+<li class="normal" id="section-6.1.2-1.1">
+              <p id="section-6.1.2-1.1.1">Algorithm Name: HPKE-8-KE<a href="#section-6.1.2-1.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.2-1.2">
+              <p id="section-6.1.2-1.2.1">Algorithm Description: Key Encryption with HPKE using MLKEM768-P256 KEM, SHAKE256 KDF, and AES-256-GCM AEAD<a href="#section-6.1.2-1.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.2-1.3">
+              <p id="section-6.1.2-1.3.1">Algorithm Usage Location(s): "alg"<a href="#section-6.1.2-1.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.2-1.4">
+              <p id="section-6.1.2-1.4.1">JOSE Implementation Requirements: Optional<a href="#section-6.1.2-1.4.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.2-1.5">
+              <p id="section-6.1.2-1.5.1">Change Controller: IETF<a href="#section-6.1.2-1.5.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.2-1.6">
+              <p id="section-6.1.2-1.6.1">Specification Document(s): <a href="#pqt-hybrid-key-encryption-table" class="auto internal xref">Table 3</a> of this document<a href="#section-6.1.2-1.6.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.2-1.7">
+              <p id="section-6.1.2-1.7.1">Algorithm Analysis Document(s): <span>[<a href="#I-D.ietf-hpke-pq" class="cite xref">I-D.ietf-hpke-pq</a>]</span><a href="#section-6.1.2-1.7.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+</section>
+</div>
+<div id="hpke-10">
+<section id="section-6.1.3">
+          <h4 id="name-hpke-10">
+<a href="#section-6.1.3" class="section-number selfRef">6.1.3. </a><a href="#name-hpke-10" class="section-name selfRef">HPKE-10</a>
+          </h4>
+<ul class="normal">
+<li class="normal" id="section-6.1.3-1.1">
+              <p id="section-6.1.3-1.1.1">Algorithm Name: HPKE-10<a href="#section-6.1.3-1.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.3-1.2">
+              <p id="section-6.1.3-1.2.1">Algorithm Description: Integrated Encryption with HPKE using MLKEM768-X25519 KEM, SHAKE256 KDF, and AES-256-GCM AEAD<a href="#section-6.1.3-1.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.3-1.3">
+              <p id="section-6.1.3-1.3.1">Algorithm Usage Location(s): "alg"<a href="#section-6.1.3-1.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.3-1.4">
+              <p id="section-6.1.3-1.4.1">JOSE Implementation Requirements: Optional<a href="#section-6.1.3-1.4.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.3-1.5">
+              <p id="section-6.1.3-1.5.1">Change Controller: IETF<a href="#section-6.1.3-1.5.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.3-1.6">
+              <p id="section-6.1.3-1.6.1">Specification Document(s): <a href="#pqt-hybrid-integrated-table" class="auto internal xref">Table 1</a> of this document<a href="#section-6.1.3-1.6.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.3-1.7">
+              <p id="section-6.1.3-1.7.1">Algorithm Analysis Document(s): <span>[<a href="#I-D.ietf-hpke-pq" class="cite xref">I-D.ietf-hpke-pq</a>]</span><a href="#section-6.1.3-1.7.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+</section>
+</div>
+<div id="hpke-10-ke">
+<section id="section-6.1.4">
+          <h4 id="name-hpke-10-ke">
+<a href="#section-6.1.4" class="section-number selfRef">6.1.4. </a><a href="#name-hpke-10-ke" class="section-name selfRef">HPKE-10-KE</a>
+          </h4>
+<ul class="normal">
+<li class="normal" id="section-6.1.4-1.1">
+              <p id="section-6.1.4-1.1.1">Algorithm Name: HPKE-10-KE<a href="#section-6.1.4-1.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.4-1.2">
+              <p id="section-6.1.4-1.2.1">Algorithm Description: Key Encryption with HPKE using MLKEM768-X25519 KEM, SHAKE256 KDF, and AES-256-GCM AEAD<a href="#section-6.1.4-1.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.4-1.3">
+              <p id="section-6.1.4-1.3.1">Algorithm Usage Location(s): "alg"<a href="#section-6.1.4-1.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.4-1.4">
+              <p id="section-6.1.4-1.4.1">JOSE Implementation Requirements: Optional<a href="#section-6.1.4-1.4.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.4-1.5">
+              <p id="section-6.1.4-1.5.1">Change Controller: IETF<a href="#section-6.1.4-1.5.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.4-1.6">
+              <p id="section-6.1.4-1.6.1">Specification Document(s): <a href="#pqt-hybrid-key-encryption-table" class="auto internal xref">Table 3</a> of this document<a href="#section-6.1.4-1.6.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.4-1.7">
+              <p id="section-6.1.4-1.7.1">Algorithm Analysis Document(s): <span>[<a href="#I-D.ietf-hpke-pq" class="cite xref">I-D.ietf-hpke-pq</a>]</span><a href="#section-6.1.4-1.7.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+</section>
+</div>
+<div id="hpke-12">
+<section id="section-6.1.5">
+          <h4 id="name-hpke-12">
+<a href="#section-6.1.5" class="section-number selfRef">6.1.5. </a><a href="#name-hpke-12" class="section-name selfRef">HPKE-12</a>
+          </h4>
+<ul class="normal">
+<li class="normal" id="section-6.1.5-1.1">
+              <p id="section-6.1.5-1.1.1">Algorithm Name: HPKE-12<a href="#section-6.1.5-1.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.5-1.2">
+              <p id="section-6.1.5-1.2.1">Algorithm Description: Integrated Encryption with HPKE using MLKEM1024-P384 KEM, SHAKE256 KDF, and AES-256-GCM AEAD<a href="#section-6.1.5-1.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.5-1.3">
+              <p id="section-6.1.5-1.3.1">Algorithm Usage Location(s): "alg"<a href="#section-6.1.5-1.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.5-1.4">
+              <p id="section-6.1.5-1.4.1">JOSE Implementation Requirements: Optional<a href="#section-6.1.5-1.4.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.5-1.5">
+              <p id="section-6.1.5-1.5.1">Change Controller: IETF<a href="#section-6.1.5-1.5.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.5-1.6">
+              <p id="section-6.1.5-1.6.1">Specification Document(s): <a href="#pqt-hybrid-integrated-table" class="auto internal xref">Table 1</a> of this document<a href="#section-6.1.5-1.6.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.5-1.7">
+              <p id="section-6.1.5-1.7.1">Algorithm Analysis Document(s): <span>[<a href="#I-D.ietf-hpke-pq" class="cite xref">I-D.ietf-hpke-pq</a>]</span><a href="#section-6.1.5-1.7.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+</section>
+</div>
+<div id="hpke-12-ke">
+<section id="section-6.1.6">
+          <h4 id="name-hpke-12-ke">
+<a href="#section-6.1.6" class="section-number selfRef">6.1.6. </a><a href="#name-hpke-12-ke" class="section-name selfRef">HPKE-12-KE</a>
+          </h4>
+<ul class="normal">
+<li class="normal" id="section-6.1.6-1.1">
+              <p id="section-6.1.6-1.1.1">Algorithm Name: HPKE-12-KE<a href="#section-6.1.6-1.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.6-1.2">
+              <p id="section-6.1.6-1.2.1">Algorithm Description: Key Encryption with HPKE using MLKEM1024-P384 KEM, SHAKE256 KDF, and AES-256-GCM AEAD<a href="#section-6.1.6-1.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.6-1.3">
+              <p id="section-6.1.6-1.3.1">Algorithm Usage Location(s): "alg"<a href="#section-6.1.6-1.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.6-1.4">
+              <p id="section-6.1.6-1.4.1">JOSE Implementation Requirements: Optional<a href="#section-6.1.6-1.4.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.6-1.5">
+              <p id="section-6.1.6-1.5.1">Change Controller: IETF<a href="#section-6.1.6-1.5.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.6-1.6">
+              <p id="section-6.1.6-1.6.1">Specification Document(s): <a href="#pqt-hybrid-key-encryption-table" class="auto internal xref">Table 3</a> of this document<a href="#section-6.1.6-1.6.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.6-1.7">
+              <p id="section-6.1.6-1.7.1">Algorithm Analysis Document(s): <span>[<a href="#I-D.ietf-hpke-pq" class="cite xref">I-D.ietf-hpke-pq</a>]</span><a href="#section-6.1.6-1.7.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+</section>
+</div>
+<div id="hpke-15">
+<section id="section-6.1.7">
+          <h4 id="name-hpke-15">
+<a href="#section-6.1.7" class="section-number selfRef">6.1.7. </a><a href="#name-hpke-15" class="section-name selfRef">HPKE-15</a>
+          </h4>
+<ul class="normal">
+<li class="normal" id="section-6.1.7-1.1">
+              <p id="section-6.1.7-1.1.1">Algorithm Name: HPKE-15<a href="#section-6.1.7-1.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.7-1.2">
+              <p id="section-6.1.7-1.2.1">Algorithm Description: Integrated Encryption with HPKE using ML-KEM-768 KEM, SHAKE256 KDF, and AES-256-GCM AEAD<a href="#section-6.1.7-1.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.7-1.3">
+              <p id="section-6.1.7-1.3.1">Algorithm Usage Location(s): "alg"<a href="#section-6.1.7-1.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.7-1.4">
+              <p id="section-6.1.7-1.4.1">JOSE Implementation Requirements: Optional<a href="#section-6.1.7-1.4.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.7-1.5">
+              <p id="section-6.1.7-1.5.1">Change Controller: IETF<a href="#section-6.1.7-1.5.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.7-1.6">
+              <p id="section-6.1.7-1.6.1">Specification Document(s): <a href="#pure-pq-integrated-table" class="auto internal xref">Table 2</a> of this document<a href="#section-6.1.7-1.6.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.7-1.7">
+              <p id="section-6.1.7-1.7.1">Algorithm Analysis Document(s): <span>[<a href="#I-D.ietf-hpke-pq" class="cite xref">I-D.ietf-hpke-pq</a>]</span><a href="#section-6.1.7-1.7.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+</section>
+</div>
+<div id="hpke-15-ke">
+<section id="section-6.1.8">
+          <h4 id="name-hpke-15-ke">
+<a href="#section-6.1.8" class="section-number selfRef">6.1.8. </a><a href="#name-hpke-15-ke" class="section-name selfRef">HPKE-15-KE</a>
+          </h4>
+<ul class="normal">
+<li class="normal" id="section-6.1.8-1.1">
+              <p id="section-6.1.8-1.1.1">Algorithm Name: HPKE-15-KE<a href="#section-6.1.8-1.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.8-1.2">
+              <p id="section-6.1.8-1.2.1">Algorithm Description: Key Encryption with HPKE using ML-KEM-768 KEM, SHAKE256 KDF, and AES-256-GCM AEAD<a href="#section-6.1.8-1.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.8-1.3">
+              <p id="section-6.1.8-1.3.1">Algorithm Usage Location(s): "alg"<a href="#section-6.1.8-1.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.8-1.4">
+              <p id="section-6.1.8-1.4.1">JOSE Implementation Requirements: Optional<a href="#section-6.1.8-1.4.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.8-1.5">
+              <p id="section-6.1.8-1.5.1">Change Controller: IETF<a href="#section-6.1.8-1.5.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.8-1.6">
+              <p id="section-6.1.8-1.6.1">Specification Document(s): <a href="#pure-pq-key-encryption-table" class="auto internal xref">Table 4</a> of this document<a href="#section-6.1.8-1.6.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.8-1.7">
+              <p id="section-6.1.8-1.7.1">Algorithm Analysis Document(s): <span>[<a href="#I-D.ietf-hpke-pq" class="cite xref">I-D.ietf-hpke-pq</a>]</span><a href="#section-6.1.8-1.7.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+</section>
+</div>
+<div id="hpke-17">
+<section id="section-6.1.9">
+          <h4 id="name-hpke-17">
+<a href="#section-6.1.9" class="section-number selfRef">6.1.9. </a><a href="#name-hpke-17" class="section-name selfRef">HPKE-17</a>
+          </h4>
+<ul class="normal">
+<li class="normal" id="section-6.1.9-1.1">
+              <p id="section-6.1.9-1.1.1">Algorithm Name: HPKE-17<a href="#section-6.1.9-1.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.9-1.2">
+              <p id="section-6.1.9-1.2.1">Algorithm Description: Integrated Encryption with HPKE using ML-KEM-1024 KEM, SHAKE256 KDF, and AES-256-GCM AEAD<a href="#section-6.1.9-1.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.9-1.3">
+              <p id="section-6.1.9-1.3.1">Algorithm Usage Location(s): "alg"<a href="#section-6.1.9-1.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.9-1.4">
+              <p id="section-6.1.9-1.4.1">JOSE Implementation Requirements: Optional<a href="#section-6.1.9-1.4.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.9-1.5">
+              <p id="section-6.1.9-1.5.1">Change Controller: IETF<a href="#section-6.1.9-1.5.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.9-1.6">
+              <p id="section-6.1.9-1.6.1">Specification Document(s): <a href="#pure-pq-integrated-table" class="auto internal xref">Table 2</a> of this document<a href="#section-6.1.9-1.6.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.9-1.7">
+              <p id="section-6.1.9-1.7.1">Algorithm Analysis Document(s): <span>[<a href="#I-D.ietf-hpke-pq" class="cite xref">I-D.ietf-hpke-pq</a>]</span><a href="#section-6.1.9-1.7.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+</section>
+</div>
+<div id="hpke-17-ke">
+<section id="section-6.1.10">
+          <h4 id="name-hpke-17-ke">
+<a href="#section-6.1.10" class="section-number selfRef">6.1.10. </a><a href="#name-hpke-17-ke" class="section-name selfRef">HPKE-17-KE</a>
+          </h4>
+<ul class="normal">
+<li class="normal" id="section-6.1.10-1.1">
+              <p id="section-6.1.10-1.1.1">Algorithm Name: HPKE-17-KE<a href="#section-6.1.10-1.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.10-1.2">
+              <p id="section-6.1.10-1.2.1">Algorithm Description: Key Encryption with HPKE using ML-KEM-1024 KEM, SHAKE256 KDF, and AES-256-GCM AEAD<a href="#section-6.1.10-1.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.10-1.3">
+              <p id="section-6.1.10-1.3.1">Algorithm Usage Location(s): "alg"<a href="#section-6.1.10-1.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.10-1.4">
+              <p id="section-6.1.10-1.4.1">JOSE Implementation Requirements: Optional<a href="#section-6.1.10-1.4.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.10-1.5">
+              <p id="section-6.1.10-1.5.1">Change Controller: IETF<a href="#section-6.1.10-1.5.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.10-1.6">
+              <p id="section-6.1.10-1.6.1">Specification Document(s): <a href="#pure-pq-key-encryption-table" class="auto internal xref">Table 4</a> of this document<a href="#section-6.1.10-1.6.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.1.10-1.7">
+              <p id="section-6.1.10-1.7.1">Algorithm Analysis Document(s): <span>[<a href="#I-D.ietf-hpke-pq" class="cite xref">I-D.ietf-hpke-pq</a>]</span><a href="#section-6.1.10-1.7.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+</section>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="sec-combined-references">
+<section id="section-7">
+      <h2 id="name-references">
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-references" class="section-name selfRef">References</a>
+      </h2>
+<div id="sec-normative-references">
+<section id="section-7.1">
+        <h3 id="name-normative-references">
+<a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+        </h3>
+<dl class="references">
+<dt id="I-D.ietf-cose-dilithium">[I-D.ietf-cose-dilithium]</dt>
+        <dd>
+<span class="refAuthor">Prorock, M.</span> and <span class="refAuthor">O. Steele</span>, <span class="refTitle">"ML-DSA for JOSE and COSE"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-cose-dilithium-11</span>, <time datetime="2025-11-15" class="refDate">15 November 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-cose-dilithium-11">https://datatracker.ietf.org/doc/html/draft-ietf-cose-dilithium-11</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.ietf-hpke-pq">[I-D.ietf-hpke-pq]</dt>
+        <dd>
+<span class="refAuthor">Barnes, R.</span> and <span class="refAuthor">D. Connolly</span>, <span class="refTitle">"Post-Quantum and Post-Quantum/Traditional Hybrid Algorithms for HPKE"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-hpke-pq-04</span>, <time datetime="2026-03-02" class="refDate">2 March 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-hpke-pq-04">https://datatracker.ietf.org/doc/html/draft-ietf-hpke-pq-04</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.ietf-jose-hpke-encrypt">[I-D.ietf-jose-hpke-encrypt]</dt>
+        <dd>
+<span class="refAuthor">Reddy.K, T.</span>, <span class="refAuthor">Tschofenig, H.</span>, <span class="refAuthor">Banerjee, A.</span>, <span class="refAuthor">Steele, O.</span>, and <span class="refAuthor">M. B. Jones</span>, <span class="refTitle">"Use of Hybrid Public Key Encryption (HPKE) with JSON Web Encryption (JWE)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-jose-hpke-encrypt-16</span>, <time datetime="2026-02-16" class="refDate">16 February 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-jose-hpke-encrypt-16">https://datatracker.ietf.org/doc/html/draft-ietf-jose-hpke-encrypt-16</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC2119">[RFC2119]</dt>
+        <dd>
+<span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8174">[RFC8174]</dt>
+      <dd>
+<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+</dl>
+</section>
+</div>
+<div id="sec-informative-references">
+<section id="section-7.2">
+        <h3 id="name-informative-references">
+<a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
+        </h3>
+<dl class="references">
+<dt id="RFC7518">[RFC7518]</dt>
+      <dd>
+<span class="refAuthor">Jones, M.</span>, <span class="refTitle">"JSON Web Algorithms (JWA)"</span>, <span class="seriesInfo">RFC 7518</span>, <span class="seriesInfo">DOI 10.17487/RFC7518</span>, <time datetime="2015-05" class="refDate">May 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7518">https://www.rfc-editor.org/rfc/rfc7518</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+</dl>
+</section>
+</div>
+</section>
+</div>
+<div id="test-vectors">
+<section id="appendix-A">
+      <h2 id="name-test-vectors">
+<a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-test-vectors" class="section-name selfRef">Test Vectors</a>
+      </h2>
+<p id="appendix-A-1">This appendix provides test vectors for each algorithm defined in this document.
+For each algorithm, a private JWK, a Flattened JWE JSON Serialization example with
+Additional Authenticated Data, and a JWE Compact Serialization example are provided.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+<div id="hpke-8-1">
+<section id="appendix-A.1">
+        <h3 id="name-hpke-8-2">
+<a href="#appendix-A.1" class="section-number selfRef">A.1. </a><a href="#name-hpke-8-2" class="section-name selfRef">HPKE-8</a>
+        </h3>
+<span id="name-hpke-8-private-jwk"></span><figure id="figure-1">
+          <div class="lang-json sourcecode" id="appendix-A.1-1.1">
+<pre>
+{
+  "kty": "AKP",
+  "alg": "HPKE-8",
+  "kid": "DmOWQi-VwrjZWjO6mQQWdv3CJ_v9k_PH3vS7S0xoah8",
+  "pub": "6XRnIatC1KtI7DZlj8ISDxZvtsFeBOPKQETMRRYb45dR0kw6TDSb8UMXHHWhUBdbEBof5gvIJacZG4exGku4JsysQcc9AVR6Ydih7kaPNQgCiiKw9QACNCMWx2p171RVCpGSFoOwaejNGZeNJKS4jqulOWFQHGtbWhl64HZzlkZMxhqdA-EecEOLhzCkbCMMtXxb-cxUVkOxQpKkO5ofmEaKH7tjyNZyVsxqgUZFn6K8jOq9g6GCOEG4awGB6AZC72yNXLDBnVCy_7OMn2bAeos8AvhHkbsL0hsFFjsnWcG_IYvNPzUAcyGZlpsqjXJIh4AUxTi6iFeJFOE08nNM3KQEYlxkMAulVas2E4KU_TGeoEJeZjA5TPWVAQiPFFQ4nNRh1kotf4OHtHQVpaMzAypItIXAU8LI_gl4rdFKTfYu18MKnygjEnO9Z7e2cYwj_hqx-AQdA6ulQBcNR4DFSCOTLnMB22GMXGVOMDCmiaxZvchp9iEKNJG4TkZQmoKwR9pbEbahmsm1WvUbR6kEqNYOE0MMsRWNM3RBNltm0Iqo8RKMlpRq5RceWRRdjRkKdChyhuJ2ebBI05iRsuE6AwWEbCV6dQqNZ0gqdeU5imECjFWLNqYvs0BaxDgmoSdg4rFlq3UrZ3gLD4UTT4kM97HO5iedxoox__octTEEImMTf8uJI2M0nKTIpbWBHlofTfulcqVXjFYpr9GvuKM_mElaoJwn3MQYrFNLcwY-fzy9fqvGFtF-62fHcpcL7SVUu9KW7igiAHQfwXmCnMQzsxwLowVk8mFjDYgV2iIoNIeuwZdc8-I0A1CLiqOQNwCLObgSMVeo-WUvzmocsFOUtSUS1chNNwpjMCGKuHxOYOcvKLxH7mvPp6czIovPsqQUZdloA5Wqt8U1sDRZfrhRlUi4IVoTmevBpaEYK_Jze3cIMOkRKdO5Y1tB4TIcAHE8oNUarUEYx1YDUinIolRBBDyBAmR7rbV4iGenGHwgeTIZ0cpppFEDbkAX4AaG4YKGdGWrgWhhiDoPX2mda_BLOSilnlhmM2BhqGZBkKK2E1B5fgER-_AMYeVl9HEoKCFHm6KApgnLVnYMQjEv7kC6tsqxs-pOcnSs2EpGKMMk4gdIlcFNxsVU6sXINHADvNmtNyQgjRFKhmNPtYchXHWz_tgccWNkm1DD6qMATOoZcscAu8BBpKUwUIkIUICwKpay5KUsFjKpC9HPqSONVMVu7GYysVC8UDTMetWoXlSiDetoiolwFGGpIscf1ic_rUhbD3pyxVI8DqCsdFg2NcSvIJRoJBO12KHKRIYnc8ObgCzJBULNZ1Rmc5tCbmcW_mmhg0OiA7EJjwi_eoY82_g0eiyAr0K4DmBy8yqWDZV45KfAnYQBQZvK8zlj0npGqVWusxzP1mw_Dbhnp-Z6SyIrHNI9unG7DbeDhcnBD2QBp2t6cNgvUoCLzPReQPYy_bwVEwcrPSO4SjUG8mhuybiU5NWdgIRD95gD1ApNRoZeJIhfP7yM1vt1ZCxfV0xEvUSb25DOebimyplEvv7nxam2hbnlRQme00B5wPt9pETxPSQE4ZUd6u60U9e6F3C-Fqjwfg_xYMk3oOcZQ-P5NrsNxK3ho7xmtpSKVahpf_2P_o2Vz8YFc7t2S7jAx9bRLQQpbA",
+  "priv": "c1il1CJwUdajeAm8PMZMq4mw2PH9Z2vThLkHU2MQ10A"
+}
+</pre>
+</div>
+<figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
+<a href="#name-hpke-8-private-jwk" class="selfRef">HPKE-8 Private JWK</a>
+          </figcaption></figure>
+<span id="name-hpke-8-flattened-jwe-json-s"></span><figure id="figure-2">
+          <div class="lang-json sourcecode" id="appendix-A.1-2.1">
+<pre>
+{
+  "protected": "eyJhbGciOiJIUEtFLTgiLCJraWQiOiJEbU9XUWktVndyalpXak82bVFRV2R2M0NKX3Y5a19QSDN2UzdTMHhvYWg4In0",
+  "aad": "VGhlIEZlbGxvd3NoaXAgb2YgdGhlIFJpbmc",
+  "encrypted_key": "K5PFRGzlpLoziVMblaopc0mgggCOXWHi529gqfcFSB5DkaY_PJoeT-yvHAhrn5BekkNeiH8FaL9JVgWctrQCFWDqfMtZkuY2Bb_8NBMLvCHMBLUgZCAD7apE77TnPdwRh39U0kzZlwSjD-4LPiMgHv59z2e3CYvY-qkGBVLPwSXHsxP94PMjgfU3LHLEKMOhjONaQ_TUqjCxQgm1xgwct2xE1cvj7v4Az9w62lGBVLW51bs3TAlKP2KEkkoOYtuIj6C7rR_0tUpqFO4evL-Ao4yPGwWw_FZXu_n29p4IxmVtJ4JKUkM3ByIP0_L6J74kxGKcklTiFzNH96nD5u1ivRpplsyHQdKKLqqo9cPLoV2OmpdyqZyQyIfoIUu5hS04sCGNFdLDWbnSyXQ4-X__sfT1rCqolMRwMBqQ1hD7_ht09IvfT2m-7zYvCDRxYC-QerULwNdiC5_6RhUiaTAZHYxczU-TPeU3YbZUVbvnAWn7jLRZCegMM2VDjVa6LYrkroqNKX98lSYH9zjKcGTaMFWiAYYpk9S4UojUllyO_wYbg3_UoLjhm2ixFhJbmXQGIc_btsd-7yIPb3Q6rCrju8MeXBLVbNWKFvTiWHHdQxqDuj3OncpVkt_lBBdDEfqkLjdEHnuGzx6WrBMB9Yp00MTImOl4pG1uMBUWTifV8iUjmik439Sn4wblZTgBe4urCEFmfRwvb3KPjkdZtXq3CotYrpftFAHY5bz8-HkLVSccauraZrNg5GLO-Efm0QXZYGXj6cfleUWIh7_Ie_QM6Wn5TCZFfayhRy1XBISiOYEccjwWQyoxg1Wn_qHXbDf5EhJD3fqlcmgFgGbfClA6wVopxUt1SglEEzSMTi-62S4HGTIOVqjoGpDeHiU9tlvD9_MT12Tq2k_miqPln7qGzhEAk6cL3InMtte2mf889W2euPvB_IjHb3uGrs_qQ1qv6SVvoxu6aHjA5O4hufXyiTut0fWQJ80YVYyR9Y4IX53qw_7Ubo_vKZM1gJOVBW1O152WmTlGB3dKrHjw9c6dbj9WTzi-sBnDwWdGBbSzdjMTTZ0K8KzweTeV0FKIXSY1A655aOOO3AngoZjId_kUTV8g48l4NM3cvz6pr8_iRVW0Xe2KTx_ci-LT50Xfh0NVRgq_-yqY79t6NiB81lbuOQFdIi9TxiKpBuf2icMa3EI98TWw2J9dZzg59L3nMzhGpETFPhKkIjIC5U_mI-E9BX_geWGOGejQWGqzjMY1GUNEx7Wwsy53n5lVDoBLexqNUQuGCyDqrEF_22Xr2yq8xt7c9K5laNGQc-UA6xnPpMMCTYca08mIaQXEBUlT5sXbktHnz_0_Om2qiQCIjbmKfyWj2bSFk9kYUWV1L7Xn5fLv0a5xew5Wiwj700mwvQbbrqc8oLkXrKmDvT-J_Tw2rziCn2cSNjNlrq2SuO-zOxoEQ_Ue4-QAmhhf2GeA2vHA_hpBnVrfNaeiNXW_GReUMud9wit9QM3vVPCVHW0WjpggHC1_CKAwJwWmqUhRmCHNZA",
+  "ciphertext": "rbjfFDr4kYIRgZxu-CB2n-uEQRVhZvw3z4ZidWjbRoe9s8usyT5SeRLifvxD2zbSkqJBmzMGTH5LbidQzGm2RaDqG6AQJaPIZcYaHZjBqPupEnTtzkN-lNtXJlvo6C9CrYhJ3L7u_L3ZrKcKYq1n07nvQyjHe2TnrHuCIthLbPjdZLGteTJ38BiI847F59NaFf8QELXXdNgHvSax3Hx58a0F31n_FdcL62hPAU0an79gJEAzVJhnU2-4KI75QsbHmLxcgNmOEx54_b_ARcAvvUkupJBF4ZLsmxYHrNEC65TBEdytHp_EdnR6yLg6EJdRbqxfKc5oWGNm6_JQL3Tn3J2F9T3N9t41WYPTH2LL7F7R-lmolsyps3Tyo4dpNpCsuA"
+}
+</pre>
+</div>
+<figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
+<a href="#name-hpke-8-flattened-jwe-json-s" class="selfRef">HPKE-8 Flattened JWE JSON Serialization</a>
+          </figcaption></figure>
+<span id="name-hpke-8-jwe-compact-serializ"></span><figure id="figure-3">
+          <div class="alignLeft art-text artwork" id="appendix-A.1-3.1">
+<pre>
+eyJhbGciOiJIUEtFLTgiLCJraWQiOiJEbU9XUWktVndyalpXak82bVFRV2R2M0NKX3Y5a19QSDN2UzdTMHhvYWg4In0.C-G-kWovP4qw3G88qojAFcCZ76z_yBeYC7qbmhk3EJzVjZN8KVyed9UIIuByTrMWS7mnNUVkXz-9uzTLwViWb59zx_A7QwvCimuKeusSQKCgbaPkTyHNXQOQR5_StxA1qlBUQoB37EQy8R_V1ZwCBdNDGb1QTbIvhPpxhP-GINUIAMSGjlyUX-O8HyCVqhZ4tqayf-MxLjFz2zZGLm4DP291Q6t4iMEkUAhXo7hq8cXo_i9T9EVeeYOoWAEU3X00HUZRXdbUphzv9-WVQifHQH_R_D0AEHkrpC4DRyPxmYlBQ7OqiJlLg2-eabVxuPXAcCytRLBm0WqDXWMxNt9nwZhD77mHFZBGrMgZTowFDL38PKFMdmD6S265NgFsUyogA_ff4Iyht1u0AMv_WWINYtQnFR6JROs9Dg_jSZ0YIistV7mFwlZQNJnXAhTj_o7cnhvRsWRQUov4KGmkIOPop-m8Gfe9hGFBCQIzGUjacBf_-OyOz3vZPoaGRblvGp5MKId0dPKrtqmrDEq1rTmp_aXACe4STK1KoPDfLtDu7PJjqzsLr-YfDq9BH5tqt7E5rsmaDqtY6zexln9325M2bI5BFWFR0O4DO7hViXok5ENYa6bC4XwLWiAYyOQ3m1PKx_xQvBLFVz7mwX2svRGPPYTQD-6158fgwB83hwmp-SOH_V5VuDy8nGAxPOmQjdAwYItZJBfoYp3PDR-sf1FgREDBI5ctWCHKwBPoml95pHGUGM8nTIHq05WpWHK50Mxbg3DXZhir40aaoslx89O0jY8P7l4JHaXMY273bJ6JV_IL2liBo4wX1zAoxf52M8qyD4zG2aEt6ofzKdAND0hFts5zwPNoL8SyPPVpMUVglHzDN9q11HEXy5j0XIiDCwmkwjoCxYGuhYPCyqRVr2pty7FIRsmfsOfTJmYs0zjvSGIqmVmeDq6JXMN1J19EDHRgd30FgRNVO9FKt5j1DMsPgOVPlrVElmCb0e8hO1GrEu2WWAfgTTvPUX-FkTyzurPyU79oaatvq3tLcAnI-_8oQDPl1ZCWCm5KE88PKUm8_xqMHkC4v_yTAI0QtZgiyrBBX6KaUvxJAuozlT9V2E0TuHZY3XsS5Tt-kNvZDG8NbhuQpT1smCWcG-NB0asecUdJLgUWd9_H_6NGC70fOpvDMa9_W4-JkYDlqZJYoDuadTlf_CmWAFx3CL8hwTkvhZABtq_8wYtxZYCZAUtd8APWOdOaKo3HEVQZeHPVUT_XK0Ls4vYFZRczlDp21Koc4yzOEQ9pU_ke-inHsUhPGAanHMfbQPoWOR6RoTwivnm6KHquSZlp8bgE3LsJul5q4LaRMS1Rz_afh0QZHrd79BeWG6rp88XpDeH6gosdnfOJ0Lo6KMjNXFTLSusB4W3FEDUg0MxU-QSj8Mw5MFxKf-Taix3MvTX18XqZEq3Cc9uy2JUEvD4FIFniZYxDIQHOWRejU7F_hmvo7JsRAl7l5nSQA2YPhszAS3vv03yZINLKx6SMftSk9255DM422g-qKq_JNQ..tsP705kdQUxF_tMNv5GgAyV0awOfM8SPwseEEgYm8u3Y8sCS2bQaLvgZqBp7Aj8UTl92J166EJW7xC4wm3lDcy68fFFzdj2_7ZpKUNnKyxwSTP4g5TEzlTEG3iBVNrdzQjsATd5vLW9W3mOefl_kSwe1GRukvX9yaef4k9IcR9c67hkLjL04_PaHFycvFySC-1ua19SmiOSbi_Zxfz9DTBtLg7wGwDK3GwUkrWBo4T81VCGvEML5ztqsszFELWkumbeiMIYcdnMWziM0a7aa_riNUCIpRuGB9g13XJfw0MR8TBuyEEDCD7coBZGNrMSWJPYbbxwvcYY6XheYlX8bVw8t9zpYd80f8ekJBA-ChJAgFNy87fELDgz2Tuypa2L1sQ.
+</pre>
+</div>
+<figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
+<a href="#name-hpke-8-jwe-compact-serializ" class="selfRef">HPKE-8 JWE Compact Serialization</a>
+          </figcaption></figure>
+</section>
+</div>
+<div id="hpke-8-ke-1">
+<section id="appendix-A.2">
+        <h3 id="name-hpke-8-ke-2">
+<a href="#appendix-A.2" class="section-number selfRef">A.2. </a><a href="#name-hpke-8-ke-2" class="section-name selfRef">HPKE-8-KE</a>
+        </h3>
+<span id="name-hpke-8-ke-private-jwk"></span><figure id="figure-4">
+          <div class="lang-json sourcecode" id="appendix-A.2-1.1">
+<pre>
+{
+  "kty": "AKP",
+  "alg": "HPKE-8-KE",
+  "kid": "clBPky-tElQGRa8AQ1MYfMPvfqmhOs_5lIejOuqAdps",
+  "pub": "pxQRXrRJLke8BMBXa1FT74gM9fq71fEwRPRndVsmsYAMU6llEnJaeKAagjxk44yl9Psn7YBn3tVXXLVrqIxyWhGsP2pmH4Y2eogBaRMGBfQy-TM_RzdFE-hKLHqHPmqP_PZES2s6O9tBkvk7D6fKZKiBDSKrvWgrKCIo1DccgfHEayxCtex1w1ZjVweIZWtVA3V_JdijzobGiSU0dzqyjVBBCQVcWiSFLLuX6rFtiPpsa3SlavpKHaRTIZx_5ocCO1LBAKq4jwew4jxnhRujX4VcaOE2MQQ3FUmT6UgMpWSfymJNBOqwN3uU3EO_ktgMPwdfrRVihSgirkiV7BhSW9uN95OTigiJIiedxPV6asK27cCcPhN0lJQOynlah8BjySYKwdMRHyxVVhGDmnJ36veTEDoboBhq5iAkcqwed7O-KwC09XcVciegq-tYI2NWMOkBdXE_W2qvvPIkJpOYtKAztpUcxhBBPitRGQcdz-wD4nik2DFk82sfDNpC_lV_XWYR3KVwiBix2tCB3tw-j9loE3AaxGefsyl0PPQsFGu2i5qutBlUclRUhMUkiGcyEnx5S0xNYzyuM-lAa3WpNzlEc_SoqmKvobZp0pi-ExYnpIQJ7nPJFNXJ9ig3kvpNCxnKlEwsP5w91SbOcLOBQ5dIq-moh4kK9ZCry_JkAmmAxhu9kGCughacCPaUqgZrigO9bQHHw0giX2EB5hA-r6VxzMwYJcox9SxD0tJVsAMhCUGhGuS5wodrPhay-ss78AMZiXm3D3mDe-sA0VVRLaN3HgmZw-kud8su7bKh9zYec4iHaygQq2ySGoeOKoGesVK77fiLlWaYLNtqEmywBblQlkZbOIUmcVmsTwd1yZG-rPIka_eJ9gAE4Te4XgExooaJI4LAdaif1stG-lEZF8RmNlmvm4wdAMZQAqPPLiOwkVAhshMUfavMeViGedgk57y3JNpgqQuX-sEI5NmNMFW47wR3AesCpuuq_Skqj8EdeWWaIwh-L8iDYCc7N-tLhNwgJOpnI2pH-CpgVShigKi6brIjB4QEV-JtRzKFZ_ZF0wM9GYTNsBM7dXlxPUUVjLCyWFWYScRdwHypH_deyvaEjny-0DgpOuR5pxBWtFGEsoAQJBmPZFumwYB5dZkyBRJrQPUENMNw0eZ_1yql1oFIdTQCQgEln9BFfCPB6MCX8kZknPovhJmq74BALPWaINeZhniI48FGf8tz8VdJ11Mu7qxrNiUHNApTMcke3Aw2qKl-NtFeR8Ou6fqQH0d2ShV-GvCcuxjKfUdNU1y5zYhlu6ZZwvkZ39jKl-t7Eyw6rAEnUfWA2hEXXMaDqBVRYvqwhiM0nboODhWUJUW8OEpBp9eI3eel7tRFViiZQ7KsZmUBVyVfGJQvh7DM51VAvUUSi_xPQzsz--yWJ3DFmYWF6eMQk7FdUXu7HmFxMfuNNGHMypx8S9RqfCiI9OfOeqwVSaa2MAd-b2cgDAo8qVeCGcMVU9FRwrUscVeltcJI42sZiaoXFPUlyAKncyajZ6gZhFNexIDWiSCp4L54nM948L-KcoFnZwHsueAjiJwE9dcy6kUtyQ6v0_OxWb8OuM04u96GtOld8wVIcB7QE2fd7g9XTCdShgpdmMgNnGKrJM0A2Rbtmnn-gdxGbyArJA",
+  "priv": "biUK5NqJzXzWEAN0F2zzkrEr9Rp_QX55is_j7VYuHCQ"
+}
+</pre>
+</div>
+<figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
+<a href="#name-hpke-8-ke-private-jwk" class="selfRef">HPKE-8-KE Private JWK</a>
+          </figcaption></figure>
+<span id="name-hpke-8-ke-flattened-jwe-jso"></span><figure id="figure-5">
+          <div class="lang-json sourcecode" id="appendix-A.2-2.1">
+<pre>
+{
+  "protected": "eyJhbGciOiJIUEtFLTgtS0UiLCJraWQiOiJjbEJQa3ktdEVsUUdSYThBUTFNWWZNUHZmcW1oT3NfNWxJZWpPdXFBZHBzIiwiZW5jIjoiQTI1NkdDTSIsImVrIjoiVmVpRmRWWkZZSEMtcXNqb0FjVklhSW9GTEFkYkdwVGNUT0RHRV83U3BNNmRTekVTZ1FUMGtzQk45S3lxYmxUbGFGZDlnNjEwcGZweTJ6eVZ4Z2xNbkVOLWhLSGhKSHhnbHJQcVROQWtDMzFNcUw0TnpEdzFVRkE4eGt4S1dIX0JNUVhZUUluMWdQSzVPOTFkWFFmbzlKa1ZhOVRiTmE5ZUpZMG9Za1ZibzhJSVBRTlMxY1VvN3FUSUJMenNaSkZ6SU5QbG5nMzFuTUJLNE5Lcm9QMHFxVjJJdFl5em51S3dKcEN3amUwMzZRd0FCcDdpWE1rQjJVRnZmQjBwa3UtdWxYbmZpQlV4OXctVnRLM21VTHRTeUJMeExSVEpZUHBsTjRKdlVVVGJObWcyb0NuRW9JODhrT2h5aUp6WTdmckpMY2xjWmpqVTFWUHJVTGNvM3ZDNDJQMFdLZ2xzc2hRWDd0Mmh3OXhidTgyRkpnNnNJWHN1VjNlbklpWUVobmxHUm5ocGFmd3V5T3Y3LUlRbEZHNHp3TUJzSW9vVDEzbWpQRWJXaVZ5bDRwYnpmR3V4bU1UbHV1VG5qZnNvaERNMjN5R09Iemg3MWoyMFVibWFRMjlVN3FnVGR0WkJjcXBFbFJ4OV83dHNfZ3FYeUpmaVNGZ1ByOS1KakxjLWZxVE16TFZtZzg5MGdMLTdOaGlidDNKa094eVpSNjcwMWZVb19WTmJ3czN5NlRHRlBGbUJGM2JWa1B4aHYzWXRldVpLbTFScnBYSDExdjJ0R3E5TjRCZ1B5UG04WnE0ZXNheXUwMUhfakNpLXpKSVBNd2VnTHhQU2lqeHdOVW1BTHl6by04VWdCOWdtWk9DTVN6ck04WHMtcFFqUmlZUEkwakdSazdxQjVmeFBMaENWNVZIalJicDZVVUxmdmJONHE4VDdNZzhIaDM1U1E5WlhhLWpXd0w0eW0xREM1RmV5MWpkVHVyRTc1WURWQ1lBRGQ5WU1paHVCRWV3dkYwOGZxTEw5bnpiZUxOaUJLeDhRU3lBc3NoY3J3TDM3ZjB6dXVldXEtYXFRS0JuUnl4RTdDNi1DTURGYS03dExieDJOTXRrei1ya3pYbUVXeU9KOW9QaUhXb3B5SEp6MFJaVDdhSTRMVkVuRV9wS2xyZHJ6QWRsNzRsTzZmVEN3NXppYXhuWllhdGtOT3IxRlNWLW1wdGRLdF82aVdnRHlZSVBWcmYtQXA1VVdiQlVwMlZMclJMLXhHTXoweWZYNEx1dEljekc0cEhSSXRIYXpYMXZjMW1kNDFReFVTZ283Z3VxWFliMXJ3RzEzYjZZZmRMRVd2OVlJcmhzTzFDajBGcERqNHVfeUROeFh0X0tmMlNEaUR3cmxSRlVxTDR5S0tadEU5UTEwQm1MUUlYWWFqczZKY2U1YnlfeThZVHJpaURxdFJrZFd6SGdNSzZlWEJKc3NuUEhZVU1qUi1jeGtyem9JV2g1TDkwRm1HU1gzZmx1RTd3OTJDeEtCVVM5U1pXLWNhNDd3Z3FpZ1RlZUl4bkNSckFiMHNSVmliUWVwZVhVQjIxUlZfQ2NwWlp1Z2w5RXJraEl1VllHMTJyTjZBZlF6a2Y3LWp0TjBWZkF2ZWcyN3pmVWs3b3AzQkNEMFNCYllyejZ3VjVDUkNoNTlaTENIckJZdTE2MnRqSHVjdXNIRUZPVGhBWDE3UlRXYlRreXVPcjkyNlItcnlyNTFPODl3WU94SC1xWkRIeEN3bVRjcEtHQ2cxbGlDNVlvcFJaTmhSM0loSEh4TXBMVWFzSUlHdkJnLUlyZ19nVkEzWHEtbHB4MzhiQ1FnaFNKN281M3poRFA3a3g3NHFDeHpKUnpLMjktRGdWMEIwRUIwQWYxWmpudXUwVGhVZzBVOTh4NWJ2UVNrZUpjckNRc2VQTklFSnZVeTYyd1M3RFY0NzU3aVVtblRwd1RaYmpLa3VUeG1ZMkN1NldHaEg1WjRwUjNlblRvc0ViOTJ1ZGl0a2d3YWNnMC1WTS15VGpyN0Y4czUzOFJqVUEifQ",
+  "aad": "VGhlIEZlbGxvd3NoaXAgb2YgdGhlIFJpbmc",
+  "iv": "dx8BacDNmW4rwUC3",
+  "ciphertext": "_oKlgbrS93DKtywMDAynmp7FDnmlgrACOvHfxJazA3t2eYjlFzFMkC_34ww6pkFfhxvShYmQEPllKa9Lt6MBPV5yFF69BVc_XcThu_AKTNOiTQNtiijEjLxtzsGimIFOW6NhrAB93rZB0kCQQbqAqyH1XEk0c7D0vC275s8FuyfPeH_CeKQJz55DMfMdxY5J6-GSSgnS-QhzQ7RdftU-dZrrsWr5MRDgJv_2g1iweJ0l8SEHS3jOj9bskcFCBIsbaR1AJTAMO_aWH-m1yj6gHqGi5L40moFFInZ8uS-jZLatwI9Swx6SG0QwogE0qcnd2caaHwFeuIgUbgkaYGB3y0IvBI9r3BmiuVbKTvyTheeZ",
+  "tag": "1X5xb-yU2p6CGBdJOQEqag",
+  "encrypted_key": "onBoAK_e6BbgM4Z5bFNJ5mw9heKqYBXnd3R4uploiA9sVbf1DChSJFNhJTD5H1ic"
+}
+</pre>
+</div>
+<figcaption><a href="#figure-5" class="selfRef">Figure 5</a>:
+<a href="#name-hpke-8-ke-flattened-jwe-jso" class="selfRef">HPKE-8-KE Flattened JWE JSON Serialization</a>
+          </figcaption></figure>
+<span id="name-hpke-8-ke-jwe-compact-seria"></span><figure id="figure-6">
+          <div class="alignLeft art-text artwork" id="appendix-A.2-3.1">
+<pre>
+eyJhbGciOiJIUEtFLTgtS0UiLCJraWQiOiJjbEJQa3ktdEVsUUdSYThBUTFNWWZNUHZmcW1oT3NfNWxJZWpPdXFBZHBzIiwiZW5jIjoiQTI1NkdDTSIsImVrIjoicXQ3c1ViWU1OemZ5bVY3SWRDRGo3UHZmeWs0U0txRDFQYUZ2ZDZ3bVprWlBVU2V0Y3lRV29FMVJoUzRqWTF6ZHI1S3ZYaUM1MlVzMmNGVEVQZWo0WDRMRUFWcWpnVmxnYzZ5bzN6QWtiRTJBa19YUFY4NG80TDJVQTNYVEx2dmpxVld5alhaU0FlTmx2QWtndVJtNFlUZDc5SUVsMTBsSlJ6VXZzZlNGbDhoNGJlVklvN2NWU3RjaUZ0U3BCTVFRZ3hlalhFYnlPbGxmMVVYc1BmOTMyTzdtcUd1MEx0MXI0VE5HM1NTLUhWOFB6b2ZHTGZpb3Exb0E4V1NFcFk5YkFLUkV0T3ZCR2VCaFJVMEJJNFRfazhpWHJiUkpQc3ZNN2V6SVdOU2tKbEYyZjB1b3p3ZUx1dmZ3WE5hWmY1OHFYb3V6WmJ1ODBaSGVBSlh2bGFPNlB3UWR0UnEwaWRWODU0MHQ1M0hrYllHelZBeWNMUjd1M3IzZk5ickRSdTY4TGFMNGNPNkVWZnZkbER5NjZITUc1LXctbDJ5Q0RvTjJZeXVZTFVIcEVzNXU1RVFPc1ZhbjhEVDN3QUVUQURFcWN0WWZ4T3Rhb01GSzBYRmF5WGZ2WlFReHAtejVKUFM4WGhLbG9nTXpxcEFVWVU2dzE5N01FYUJsU3Z5UDNFQjRlWF9aR2RaaDVzU3BLeWsyUUR6NUM5dlNwMDdTTUVnQldZcnZ1ZS1QNTRPdTc2b1ZTOFhndWRtSjZ3U2YycnNNT0x4X1VSNTRoVlJ3NUtIb052NFl4NXNPRGtSdWNGVG5RekREc1FydVg5M2pZdEJpNGpfX3Q3MXFLZVBWTGtwalFrQU5zaUM2WGt2M2t5YjB2Q044bkZoYWxsdmZtcGMwU2FHQ0s1WWlPOGkzOWI4NEo4LU1YTzZNY0RmaU1uUnc2c2FMUVg3Y1lfZjhUaTdZdnVveXRxbmU0STA1SVJpZ0tJVXBwYmhLdWxUaWNWenhveDBGcWN2MGZxZFpDckZrU1dZMW9DbmF3UGpMZE5aektOTzFBMnA0MjRaaDhUUDRLNXFzZUVYdjZxaXQ3Rk4yQmhHQ1NrVkM3NW03N25zOUxYU2JXeUJlOTdmYnlienhycXJBa2lhb3c4V1dScjdZZEk0N1o5TUlKejlwUHlBX2ZteHYzRjhaWjh2QmhxbS01MExVTXVLREJDcHJZMTJIZzAyaGkxajVkRmxFSXhCVElMaFlVRXRHOGp5N0lEbXFUeEJMX0dYNUViR2N5NlM5ckxMVXVockloQnBrVXp0eTZVdWJid08yRUZDTTVXYm5HUExLVldOS2h2UlBJMWZ5Z0w0RjdMYnJJb19velJkeUtEWnFZbW43MnViVTFKVmJRcGgzYnduNEFMTHdRYWZaVjdpRHdRUThabzNsWEZoZDJsNXhxamdOcExMWXk1Ml9rWjJUeExtY080VVBHMzMxQlpBUEw2QkFGYlN4cGZNXzdMUDJrT0MyRmJiYlFEeXlIRzdPQlBnQ1hXbGVpQkkzcUNpT1BNTDRzWVJ5T1BpSGMtYkhLNUwzUldEVkNHSWlLV2Q1WnVMa19HNmJWQWdnQkV0ckhDN1pTRzZpS0dyRWhyQVAzWUNacmQzWmtRbXltZ3ZfSWg5anFWUUtqTGVPYWpZVHIzcTdHXzJrUDhmdDBfTVJPTFZ1X2VCQmhhLWcyM1pQTFZHT2NkSnZpNFBtY1Q2TmFsV3NjY1Fael9RNkJYSGI1VUU0eDIxS0tXeFFDMmhoUFE4c1duRGxVeWlFZEZKXzZTQ1RFenFrc3hzbHhPbGhXZl9POTZrRkhLSHlCNVNHMDU5b284MkVOc0ZNRW5qRDFIWUxZcUFFdGpEaWVWckZQRHloTWZKVlVsRDdmZUJKOHJOSi1vdWVxNWNxMnFsVnNhM1lnU0lFSFZZaDZiNXltLWczaVdydnhIanpmWkx5VUVuX2x1bFNORFBORDZTRG5iWnRrRUxmY2ZRNDFTbE9EQi1yVkszTmZRMjU0MXJ6cV9RMm1qdTU5X3RRRXcifQ.39sxJHBnwYSMyUuygq0tWo74PIRh5PpHZNCB7b5dxBz9Z1-c83OoZu0J6fgBh1r4.5lZyVicSR5ySqcTS.dVC8qyTRsJAg6FnbiFzmgRW6aEPMcs9UNvC67fROfgLH9e3SDvGVacOg5qqgmT-t6h2fdad1M-O8sjNAMZLB5_yOLyjz9gR5QSW6rEK-Nic-zF7vzr6E_FE89pgmn0vJuoSuxVDN3ODSompY_ONcW-9lXkNhcR66GAIyEN3sjcjwza6lpQB_ptL3NXYLkW3LxMQU3vrZw9JHRDG9-EyGTRc_1bdoJT-I1Sww9XYSH0D_ssPinPgALTp5vuowrQaHzCQmZ3mkP1B784r9qFVAoiPBRRDnmD2ZfP038pW8ny6sDT5fD50b8jKle1rmVE8ZaezlGz4RSR0ExPqj0w9mZolnZCrGjyiky3t4zHJblY4P.ntqNOU7UOTVeVaWyhHPlqA
+</pre>
+</div>
+<figcaption><a href="#figure-6" class="selfRef">Figure 6</a>:
+<a href="#name-hpke-8-ke-jwe-compact-seria" class="selfRef">HPKE-8-KE JWE Compact Serialization</a>
+          </figcaption></figure>
+</section>
+</div>
+<div id="hpke-10-1">
+<section id="appendix-A.3">
+        <h3 id="name-hpke-10-2">
+<a href="#appendix-A.3" class="section-number selfRef">A.3. </a><a href="#name-hpke-10-2" class="section-name selfRef">HPKE-10</a>
+        </h3>
+<span id="name-hpke-10-private-jwk"></span><figure id="figure-7">
+          <div class="lang-json sourcecode" id="appendix-A.3-1.1">
+<pre>
+{
+  "kty": "AKP",
+  "alg": "HPKE-10",
+  "kid": "a6S3CFflyR--3T_COOiiWl-QogGvjJdBHlYjUvSgY_U",
+  "pub": "xklAICae0qgkKfVvsRSeBudZynYNfEZpzrkcuncC-6JezFhrj2sfxxECQKy6DtFIgdEEpKqdWsa1dTaqdhGfZhoUL4wO8RN5GAJhUUFJcVgmxTaDUWi96ZwOPICAIfgUphuy1hxxWESiw1uSjPkcd3tjeDOdONMC3dAg8sR1cWxrv4OKRKipQHqAJdxnT3NxF2AYShYT2tmy6SBKoKBkewWyE2R7CughGVG3KjEau8S-EJIWRcxMxsim92AJMLhgYXOPZTrLgrAPrnFrggIgKAnD3HpgJZtUriOcf0p3m6N_g6NdyRKuoTDIKkjDvNQE1_dVf2Qa98Fy41m-E9Zi7Em7tlIwMuKpKJt8MJbGZ8BhtoQ0UkiLc2FSwdJeNosem2kJfet4LdxXBjpgkNvNtBa_39ACiIq5DHI9E9iaKrwIFAGq27sOjNKM6mSNTxpzxrs25lOupXV8oDkTP9qOd_ObuvYoWyGqYkWFeQkrDqMnI-YYvrm6gNOdgaA2L8wSeZLLkSG0z5U__lWHJXW-tttSjyczVQpEsqcHzsgIYIqod3yzpdlekqo-9aanlkCOt8WSH7jBCvcQ1zrJOEss2LzOKUeX0zG7tTgGf1hrMaweTrlAZYtDoiCtJqAgUPQtm7gFx_uUzRGLyKthvpEnVKUQ6mBYJoa8c6GGRZQTWUMDA6fHhbNmPIEIekqFqezGJdtXuHHF9-QFaCyi1ddPcZLDmqI-50AcpIV5U9hTWtqegqfGBhvJZsK2YUJABDNm1zmPILibzhCby2DNEkUriEOosNeofKKfCrXCJuR8_7ueGbpnpueTp5mUdOkoDkyPAQp2t7qOrNVyBelub8UjqDwpKREi2LuE9hOqNNIFWzpvFly81PrPxboi2WSPYOJweAUGR-K1BAJSKbWS6tGx-ehepjYCvbNhJ-N1_dlVlBIoTtmWDttjUNlDz2hxY8TNcnymsei3tPG74gadWosHKXai0DiexVIGzLMjeGwRI2CkxSe-sskaF9hx9DIiD8lEpjZlyZlgbVxpghdjS0khX5Eb7JF61cdrqOyJ2ATHSSRnoDPOLozDsNevIuCiXsO_i5wfxfdbSvmveqSD4qViUTEm8XErc4Y_OuU2iiATb2wetOWKR1YUE7A9wZpfKMQSDtRzXovO34wWUjOm4kZAMKdXr3nE4NMHYdjJ_oAP-SxcibSC2OuqfEliFat-qgsZB8mxOvp7maKy1BlCotUneLMclfXPnhJbUUofsSyag-tFvyo-0uiM-JbFhLvOPgkOqauN52aJaksY9ktpbjMF32Ed6BohCaR9qeZ_loE_jIJCH4RUhjNxx3wlaEmtlwSZPByS2ix9l_pvGKIKBgeWext1dSB-MZYRLFyzIeOOONQVMpSaNMKz4ietseBfNuKk3uOwDkOlMOUy2dMQ7ruHleOv5gSs6JO70oqMiDEJGfxx84d2ytJ2ASk5GSc820fHwGsaHRA3dUspLWoqVeq7EKcsxKATdAdxbXB4Uosl-TWcZ0p36Kg6kql6oYk_tCN4BJhu0O3zQac4MKj5_8wjrW_KbAj9DJgzv3MiafR2X9-FRLC7_0DssrAwTlMIxRr-olVTpOIF26zl9mShTY3ZEA",
+  "priv": "uCM4b1UrxQIuPvS-wIq9I4-kehldr520pg0W7jE0laU"
+}
+</pre>
+</div>
+<figcaption><a href="#figure-7" class="selfRef">Figure 7</a>:
+<a href="#name-hpke-10-private-jwk" class="selfRef">HPKE-10 Private JWK</a>
+          </figcaption></figure>
+<span id="name-hpke-10-flattened-jwe-json-"></span><figure id="figure-8">
+          <div class="lang-json sourcecode" id="appendix-A.3-2.1">
+<pre>
+{
+  "protected": "eyJhbGciOiJIUEtFLTEwIiwia2lkIjoiYTZTM0NGZmx5Ui0tM1RfQ09PaWlXbC1Rb2dHdmpKZEJIbFlqVXZTZ1lfVSJ9",
+  "aad": "VGhlIEZlbGxvd3NoaXAgb2YgdGhlIFJpbmc",
+  "encrypted_key": "iqhcYPynGyBi8ZduoEo664f9Ipm2H3I9kEfrsKeE9PJYzj8bSlBqpYdwap5LDV0uuzAsClTcdTimwi-2rc3nOOvDPm5Cu8bLKAs7Scu73OtfErPEx41GsKEnmJ8d6ZJAT1KobHI0mcPeD-vLB6kyNdQMLNDBh6oz8-WeY252OYduip0DqkmSdfWhQhoHkZgnX_57RSMwkVbnoB8bnsqgfUTO8d9qJjjXIPqKYVAOsdmjUd0QlkJo7sKnjoeKGfSbnZoP8rwbtIz95TfFrKZCzqT4RFhJ5CU2NCE7ht0D1o1yTw8DHNHow8FETnRdvEFGgOViqw9f8XHOLJtmabsP9NfMEsImZ90NeOyhPj4v_A_SQrx4Wu-vccPQkYHMVtWmv0I4Ho_77FL_w5f7VpilB7Y6E0xEkzKbn4OOpnYLSi3LRRhl94lbcraEjRkU_93x-PE9lDWZw9QNIDtxf3Gegkyttkpzp1EC3SjlMS_oVvbW_2oRs1_fhSTVjfIQQDHjv4RYTBvRvFe374lybz358eY78ONxI9uU6vHMzJ0F0EGs8yw_LohhsJ8TN1XDLOJU0Mi3L-7dk9Shr9gyZFflStfhKcVPmDWM_UsaXO9lbr2MYcalXG_09-vMtkSupOwGuIe-b5pCSV_D4zx84148OgJ3F0kH0OgCyrTjuRSYlxYycC_klCGTH3yeMHP5UW77Rp_VDHLiqVt4VBQyui1bBSEFLtf6Z_RGSaypedaDGYLGkNjiOagiDbt7gWhXjJnecGxX6NU9r-I6Bx88VFHDaRiO3R2Tx6OLSFHufz8I4MeXyKHbU_HZUJ6dCc61yBuSAmcb6xIoXs-QU_XPha_CVnFWoJQMp8REq9aa4vHgOubBy70Yr4TVQJ2BB5o4sPDUhCnxYw1G6uYn3z0E_Vued0UQIAGaKi5v0pUscl-21MHEDbtuKnuQnCZaVurtBw4v5hJYUuL3gEHDqOYjZsTAXZKhl45FEafa1suBB80IiGlqInHwMe8o7s_TtywBDkdPsaci-dAQkwb-wdITOk8aHm8LmN1YRtrfFAt5lCVPdotAYxSCgGaIxqCZlrpL85vQN0OBPYQv5n4IhHMAiKIdtqvbyPQSb-b2L6KMOLUvqd5bbxUrjvEbX7qagwE6EHn8mawrhGSMvhUxLKRfXbVtcWHfGVrma6IvGe2cjJfqWX_Uq2v_Lq6LDY_7fHDIXIIC8VVZOOiHRquzVnxMLGCJ6YCuyGHgQdZGsN1NXl0FOAaMnvDgO1MMgp2wrC0AqOrf75Uhrgb8r2jA7O9VruoerfzVul9GpRRRG-dw3HB-N949Lx0c5FFyaMKlwygJz5bkXdixv2QiIRbYLHgPNZ-DZ6y0mnV91GlTb1Q7qLOdbHcb_3GZpldIb22BEh-mxRuwcWY6O_eblt0vqajARlFzc-g-IJvt2aR4sY1hK-7eMwqV6dOSLTIwKUncAeux19iC7M8Kky-Uivkv-v71SxgoEg",
+  "ciphertext": "Lrb_aflt8XKXHNXj0T1QAAPgru28MGAPI6LHLYo1Huiacof9InBvH4Ru0FGsl_MxuGvUoN3JRy2etC86XYRr7wl7H8CkQCuHPhcQaHi-IYNyrMfUdzEURPNLcJ-IJk7JXvzNuJ2kyI8Rsagd7WdOu8cyLVW42qYGemhXVss-ivzdsgFjBQ3LePhXvg7NvvYZcZRXG6NMNhg8aod2AxcMaapsPGk0HP3jyUc34F8FXPqN3wLhuhsD6MiueEqeUDZ2-JNv2KPZgo6An3muAOI_g9p9H6ZlWhpHCy0j6iNdEcAnxT8SpTfywdm9hixX2LM0Fl4z1n_Lv3A7uJPNAclNMe20h17uexh7Zk2fMkwvzkCs5nRIGHYSYb-eli1TEyRbBw"
+}
+</pre>
+</div>
+<figcaption><a href="#figure-8" class="selfRef">Figure 8</a>:
+<a href="#name-hpke-10-flattened-jwe-json-" class="selfRef">HPKE-10 Flattened JWE JSON Serialization</a>
+          </figcaption></figure>
+<span id="name-hpke-10-jwe-compact-seriali"></span><figure id="figure-9">
+          <div class="alignLeft art-text artwork" id="appendix-A.3-3.1">
+<pre>
+eyJhbGciOiJIUEtFLTEwIiwia2lkIjoiYTZTM0NGZmx5Ui0tM1RfQ09PaWlXbC1Rb2dHdmpKZEJIbFlqVXZTZ1lfVSJ9.nIvt5BvymyaU3X0OOyCYwFOI6KAa-qxSonQQrxL95zJrq5ltfhFqFwzmI4csot-Ehr-HYo2wda6kZA7C7I1aWBWiMSqsDmdOK0cucH4BkV0hXhVjvlElinEZdaHxlvMJyfxKASFFFLPSOFXaNVPo5Qu7Hgqo4Kk_ALAPWKO2vHVMU4hTI09OritYRLpVnOw-mWcCUn_2ZJd8ibEBZlimuU2aKmI3QU1jTdPzF0PtVIv-IltN9R3z5rZCIxpfUqJQCI0BhoJB-9W9AqOPqKWqZFgw9GLIV05CyQk88Fsl-DzVQ6MPrA93ligSGk9etKFcMR8AFs58GRKPZ7RedX5e6h9OuQpBPPm3S33Jgz6aQT4z-6QYtSVxRCowJoP1L3uS1svl7K7tH2HvD-EC8cAQZK6NE-W5_Y10kmSO7HeQkMAoF09bGMTp7l3Npm4RKUdepQzwy5W0KDwYKdFqRl3L2ia_SV2zgUMPJhO25tzkyXtnh7_RHxKqnbi5sCRte8NyVbZEg77Lxs-6iBTBX9wnnif1YAGIfuC8J2KdMyi09F1dEi0TtwMwnIpQQn9L5GyBLiPjlLTjTvbN3rJrty5KG5wiaHxOTS49rPe5-LeKI3gq_2vh3-UVQf0OnVD8RQgk6A1AufYgzDcAsYIxLgv1rN5S5qG7en8jlW1rs21ZtpbxQO_sH3nR6ypmAjdpD_IcIpNe42v40jbmxKMvMYKQ3v1fff57MqwV3asXq1Lm9IbHprwmLLyjdut8_LjVvfYMj0vSg-PbLMMynm--yMc0u9PMTNceJJBw5zQO5cS5P6jG1rJbPkf2bom19BGQoU9b-SBfuviV5RpI9x_-fQ-G-qNkVltBhxwTK3meKPCfCTzfpZg2okxVYT1DOzzV4rYy_q98V_2G9RbjBnGD1JdSwT6hENuBGTa0HmnIXtSTynJ0wPbXhVeei-pATpeIxhj5X8v-G9QsO5oR5esnTKecOFMuW8QboIkkVIDCfKbZKqnB3Ykr7XQz6R5_fRyNgxey2wAU783_y7Y9ZIMSMiPCM7UZMsRmkAEPSuSXzWAIxLn_DHN7ZOTitkAy-1eLDXHRMpXmvTyolhnZOqmiebjlofJg7EuuQRQXQj_mT_60O4S9A2isLbe8AwgtQIRyapjD7gdHc0PSonjXXFNFgqw2NhuB1WgZv1oXjg05GwuVL_s-mEk_qu30E_Z1fnukH8ytxxfXL_bqwzuQHVYChBcvQydCrsBHY0_mwFwrbkUD2UtOKilj1b8HyVHJbZmREdcmSZh-F4-mQxSZJMSW5sFhJm9zcaFinJWjFZ4-zdcBSC90zu43LgA_jtVa31FKOb22i_rd3h1MhtWxLBNyq72buqKadZZdu3hvHKy4VWJDJ2jNbGRaC9y1zIU0kSH_TTS0F0YwgZiFSt9NIXAKbT-Am3jKk_urlOu1_8cPaOoNPLgji5GpCX_9YBkJsfM7pUCg0cxfAGUJ_n8zUmu4vAWLHg..5u5pjvuq8PEMoIwyyrT9vvSCHEyU84oBZgr6q8EKWK8V2TxvkuB0koIQC0IAPi3_ShjXtYcl1sZ8igB9idMOJAy_rQy-nMJUhHzCTBdGjKyJUY99ieU8BK15fLrEuL9KyFCOyzBJEsAlXV6EH0ujSiFyOOGB3-P-nltGAzYAU0scs5CIwGh3_xyaBNr8-nC3jRigRUm8UCxib_42AFU5ocQQVOz1pC6oFz_XdzO3XeAtqD-k11ekOFt-dy-UfnA7MVVKN52HQTKQ-qhEtjLnqqPoffXmvMdV_35vkSLrGvEwwI15DWH-p9Yq2Wikt2ldfKVDtNQVlpWl_bJsyikdRltVK1vhA7mYsqZU3PsQdz__XV8cAW75QTW4XEfm8Au-hw.
+</pre>
+</div>
+<figcaption><a href="#figure-9" class="selfRef">Figure 9</a>:
+<a href="#name-hpke-10-jwe-compact-seriali" class="selfRef">HPKE-10 JWE Compact Serialization</a>
+          </figcaption></figure>
+</section>
+</div>
+<div id="hpke-10-ke-1">
+<section id="appendix-A.4">
+        <h3 id="name-hpke-10-ke-2">
+<a href="#appendix-A.4" class="section-number selfRef">A.4. </a><a href="#name-hpke-10-ke-2" class="section-name selfRef">HPKE-10-KE</a>
+        </h3>
+<span id="name-hpke-10-ke-private-jwk"></span><figure id="figure-10">
+          <div class="lang-json sourcecode" id="appendix-A.4-1.1">
+<pre>
+{
+  "kty": "AKP",
+  "alg": "HPKE-10-KE",
+  "kid": "Xm6lJa_lUA0szEe-830gP_eXOVMebXlypAKquOzYaI4",
+  "pub": "7BGc3VNf0-Qtnkh39mc9TKQQdNZ2CKPOI0kfuMxepdoEhpCMDbiFCFGQAbKlsxY4-9aepuB_3zdrdFO1NIbOnMy9WTC4tQloATJhdZpsC0gDzhku0fgjH_d7HSgwFVQlTWKJoimHYWCC-0trP7LK3hd0ugpYYcMEaJditNQG9LsaSuOAJww4s0LD74cpsfEEYpKjSedpxXprMXBC21SRd9OV3QGbK-TOCxHM_TQ9HCUzZmh8CpFMa0CsmVRgAFVCaQuEuRMKkJpXT7cKaTqlGKySDDhQYJtxu7GjmxS1kbGl7aG2kmmgxLBDCkobm5ElnSciFIyXPLlpuva6ZgqUedmJKcpea_RI3JoLTSGFJVOCOUVGQGhF75Vj-qCPNpkxQOoWIuxWNzhMHshB9MxoQgpfNpfGHpMMYNlqiZnGX4ydIax0xZmuhbGtAKqSD-G6v8OC6IaPv7vA89hJurESDgBnSTWCjXAXUirGG6QKyDANwFwteupljIuACwiFs2NQ-pq8mXOiFcnIQJaI5pAoMTNJgemcORLHpBY-1Aqgc0gmvKeP1xuI8ThupGoABVNJHFtc-pnMWqq6_HxVLAkSnEO_6mRsnSl3niILCqlLfPPI3DgCw9OLXERwP6udNERGNty6bhi4UjwbfhE1dDZMQ7zMLwnQSVw6sfWQjdC6XzZZKdamMlRlKqpnsDKUGis2Bzs8VjsxDDOdJCu3n3UxBJZwP0eR1PSkKghSJVmuGmml8JociFAxARgWKdpyDQGdHpNVjSorX8WPZZa1BMy2RtMiDoykWFiHKrMoTgpWncB4aEBLR8lTXRKckKdCRgFllsoKx4SIjuSGxSKheYl7-7GAC2V4kCVCBUetyiFUVomBeBHLmkNf8zkDfMa8-iuv0vRw61wkB3hHdaBQx_htHrUuKlIfQkyyBNWkxnCq5eJjS2emO7qvJcSZWQRWJdwrYPMm1Dok9BCVxvImElsSqTWlHEmAHmVJ1uQ2MvAK2MEktKfKnCdWnJCcVHWtPEQ-svJJn3lOL4GpIDqIznauVZYyOBNVBznHpOkIXIUtLFwg4uFMrNrFybKBjfq26OR__-AdIbGASUArIaVVJCCWQQIcZ3wCugiIx0SacAKV3HU3TVqCgGDIJIy_rce-1mshNHKeSimgZ9UyL_hzMzkGTFmK5TWROddjUWHPFSZ8FtiO5MY54Ty-KfpaSHjJDNLH3iq2MxsipZY4xBSp8OxEKciXnDgzRLAPscAgXjtutdJKSgga9qKZM0BkzOKI--Ztf5kXsDQoM9KtNts0lMKsEDCqMMZS_7KqsvcC5jmku_x3y9bKBzBoK5eE6Re5X5kANNoUBKmXTWjDNPPNJpAr8lnFWqm4EemlECwYxGBWmjCFPKa8VPNV6dnEfPdb-QHHFuYrMqVjStSvOunJNAk5QmQq07M2esrJl9U1EDEXKYiUXjmoM1oj8vEGQeazWcQm8wIC9aTDH6FYasZ1CnWGJkukE9R9QVRzMLzN8GaZ-aYm-ekbGidpa2GgYfo28bpiYJ7TorXxIzD7dccmDg_zPILaV1-ya9d2JLdz_4rZZQ42f67fHMmE93JkGCO5fInubiEUsxGRfENaU7KlDJzQJg",
+  "priv": "Qaa29navsF7XGQ2OMq6X9N1eB1WTrW1v-NSiOctY7YM"
+}
+</pre>
+</div>
+<figcaption><a href="#figure-10" class="selfRef">Figure 10</a>:
+<a href="#name-hpke-10-ke-private-jwk" class="selfRef">HPKE-10-KE Private JWK</a>
+          </figcaption></figure>
+<span id="name-hpke-10-ke-flattened-jwe-js"></span><figure id="figure-11">
+          <div class="lang-json sourcecode" id="appendix-A.4-2.1">
+<pre>
+{
+  "protected": "eyJhbGciOiJIUEtFLTEwLUtFIiwia2lkIjoiWG02bEphX2xVQTBzekVlLTgzMGdQX2VYT1ZNZWJYbHlwQUtxdU96WWFJNCIsImVuYyI6IkEyNTZHQ00iLCJlayI6InUxTUQxNUpEU3FVVS1BSUd4T2c4c3RDcXNyUXNxUVEwWmU3MExoaTFjd3k5dHBDTE5BT3ZOUTdBWXlFcV9rUmU4X2dPeGU2VDRmZ29WSUlEMzhVbmtiUk9BM1F2cVZjTzdERDB6TmFnb1FJX2ptR0thdFlucWIzYnJJT3ZnelEyaUFGMktqZVF3Q29CdFNqdXJQX2pvSjhtMXc5NllpQ2ROT1p0ZUNUa3c1ZXg0Q0lyWDdLcHRJMFJoS05sWE9HdEpEWFI3VU9NZTdwYk1VR0U4NHdOWkt3Vkk2MHEzbDBBWVVaZW5aNTYwdmJmZmtkZGo3bDYyTmx2U05FeVJnSGRCc3V2QTlOWUcwMmJmMFk2aGRHY3ZNMEdKT3dXRW9Ja0FDLUtMeEE0R25iVTBIajg3a2theUpMcmF5c3kzcS1naFRRRjFiQUFZUThQUy1zUnhKNE5wYXhCSlR4Z3dwbVBKMGdpU3oycW9EeUZiWmU1OFlwLTFMQ3gzVTkxUWxreDRwQy1KeTh3aVc2QmpzQWU0NF9kYmRiV3N3WGk5RE9TVzlqb1VJb2xpdF96OGFTMUNCVE5fUXlRcmZWNTdOazRzbGFIOVRTbnNRaFZYM3Ita2M0bnN5WFc4R2Q0cllsNnE1aXhaLVIwWGR2ZE9HNDBzZmIwVkNFeUNCd21LRDZNOVRESFdvLW9hUjZsQUp5T18wbE9mZXZoMEV1aklpQnRmWjBMT0JITlI1am1yTUhJbkoyOTZWdk5rVGt5RGFjbWtmckVFb24xcnNDVUlLZy1yT1dKeWotLW1qbnZsRDhNbWJ4a19IeW1xcTZzbHQ2dXpLNjJ6bGthblZtNVh3NkJOQXJ0bUItZlVHVEhiNHVRLVc0eWFrMGh2cjBsSXRXMV9uWVRiQWFSa21PMmNHQnhKRTc4U3pXOTJHZG1WdHMyUmZ5Q3V4QUk2TlJsbVI3cWx2cDBocUx2QTQtX0xYSy1aM1JLNHM4bjNUNkQ4RlpTcEpERlFkMkx2d2Y0eExyeHVHNWJIbmJZemU4SkJ4bU9oWklmVWlTeVRWVzJ4LXRSNEJ3RzNXbUZzS1lGOGt0am16RUlqWXF2dF9nVnFaUkZaLWhGY2FwRGhRUldUbFJ0Y1p1OHltYmpuM0h2VnBVRUpWQ1dDZ1Z3NGtBNkNvSGhhUGJ5eTNiaDFFdWI1alRxSlhONkFsNjhnRHZWdnJsbmFGZTFiOWR0dUtoSnlPcGczWnN4aWlnUWNidzhzSHU3YVNfLV9NczZHNE4zVlRMamZjbWRqaWJSUjR2Q2VkLTJzM29vTnE5cjc0cUI0QVlacjRuZUo0d1dLWTJIdXBDS19EZmZyUHdibU5fX2hoS3ZXWDNWeVg3clVVY1AyRHJOOW00TFJLOTQxdzA5TWpkamV1SzktcXExZWtOdWxUVE02UmpTcVBfamtZSDVGWTFfY21Xb1NWRE1wb3Y1X04zMHkzUzVONjNGS0FHOTdmLTkxOElXdU9MNG5kcVdLQ2VIVkE3cWNlTHAxclVFdDZERDFKYVY0bTJ4TzZkdjRwSmhtdjZPRWJpcTV2eENRNnlfZVpRZG1GNTVweFExNmtOWVh4RGpJN1BOUHB3bjRFcVJqTV9kTEQydU9WakpTRy15d2NwRU9FdWFLRUkxcVh4RzVOZmUtZTRTUElTaFI5aTBHY19FUVB5TkhfTHhpSWk3S3Vrb3F6cGRJUWg1TXd3dGN6OXpYMGJ0NHVnTFF0ZGNxQ2pPQlBmZ2ZWNkR2Z25VMlMzUV9PRWtncVJicGdFSkZBd0JsWXpMRlVuaGRXS19yOVdmbzZXckpXSU44aTVkeExvWi1IX3NtYjlXdTdWM0U0T3BtMDRrZEFmMXdFNGdxc0ZUODBIT2kyUkVxSEc4LUYwdnIySk5JckZvb3F4TGtJajRLWUR4OC04a1Rma20wdnAzTUxwcU43SWNZc01yLWFyMkZ0X0wwb0FSek1mdFVVRFNJZyJ9",
+  "aad": "VGhlIEZlbGxvd3NoaXAgb2YgdGhlIFJpbmc",
+  "iv": "tn8ZNOmdolbChDfE",
+  "ciphertext": "gr1x6lE01pRld8ksAvxpKjbUNabXKlLYZAV54PbXCvZk-b4pnsAQQ2r0HDvVFfaFGNGwjZL0JidhUMhqKUBlBuQRvUIDBmt_bZE6FebCyNsBSnP0pr51SUJHUcmNXAR74ncAniJyW7CpxXHLOHDZ9NNUiGSV3Xv6A_W7K9eJz5BVsOI5tNBJiGShSf3Q-Eh7RMR2rolgDY2yv0utVjYPMi-EItnPqKZn7LehfsrtUBDPC2nyflIdi7xXKRmiWRT1ZY4u9YeztoE2dZ390e933jGBsQxgTyd8dE3VVcLQHFIbhwVbbzKGilOEI1gitPMUsLw6VofskXbxXHfQciDWbmPWwzB_cou0k1i_avoy3mF1",
+  "tag": "MTb3Mmx1nTo-3j1S-u9Ieg",
+  "encrypted_key": "TY1U1WH9UHLFRGLkmC8z7CQ8J2KJjuKi4p0KzrMmHHtikaA3obikhIxsjdZEGtMp"
+}
+</pre>
+</div>
+<figcaption><a href="#figure-11" class="selfRef">Figure 11</a>:
+<a href="#name-hpke-10-ke-flattened-jwe-js" class="selfRef">HPKE-10-KE Flattened JWE JSON Serialization</a>
+          </figcaption></figure>
+<span id="name-hpke-10-ke-jwe-compact-seri"></span><figure id="figure-12">
+          <div class="alignLeft art-text artwork" id="appendix-A.4-3.1">
+<pre>
+eyJhbGciOiJIUEtFLTEwLUtFIiwia2lkIjoiWG02bEphX2xVQTBzekVlLTgzMGdQX2VYT1ZNZWJYbHlwQUtxdU96WWFJNCIsImVuYyI6IkEyNTZHQ00iLCJlayI6Ilh6X2doclItYUphaEVucUFzVjJpSG9WakFHaDd6cVc0VFZNMVNZcHc2XzJYTGwybDNRdzk0aXRma29yQ0VLNEJvQmxBc3d5dkd5MGRXV1NTcDN1QVh3SjhyS2Nva1BkRXlRVGtWWVZPM0g2d3JVSnk5VndoNS1aVWZPczdRWmQ1RlhDVGc4ZEtXME5RRXNLVklCVFllRkRuYzFkSi01T2ZjNXhibGhLVXhmVDAwY3R4MWRoVU5qcV9ieWthMFlkOGZ2OTRaclNmR2dqd0tQMFBXNVhYc0pHRGdtc01jelF2VWNWYWJub3pBR0NFNHJxQms0cGRfVlVYZWFENncxN0NGdzJSUndTR2E5eWJlVHEwc1FZZ3VzN1J4UHJNSWdHUFhUWGFtWndBZzUwLTBCV1FzS1FocU5OUm1xTm9iY1JrMUZYaTZSVFlUTXZhYkhLTFZET054cnBWSDA4MHl3R1ZjZEN0WDZpZmczUGI4WVlZQ1ZySjNSSXEzOE5na01tS1ZZeDFjczlicGM4ekIxOXFCNU90elp1eWp3STRoSjZZOGliQUpHQzZEQ3ZsUmlWVTNRdFFiaF9VWklxRWNud2g2SFF3TXdFMzBOdWdqdVhxRy14RjRxTkJRdkFuM2RDa2w2Vk9QQWRlNXIyZGFBQ3VUR3RteHBqTlprTWxudk9POUZYa0VHT1IyTE5KTnBTbWw2WkpfYmhQeWRsNkotbEJ5SEh2aTVQVkZhb0x2UjlWcExlT0YyMThsS2dUUnBreWQ2OEpZaS1GdG1YeWVZcGpnQ2hXX3B2aWZlR2JISkd5akpZY050UXpEOUZTdnRQckxwdkpiWi1zUXJXc043VXVqb2tUdS1GMDg5R1lyS0Vvckc0c3VPb195RUN1ZC1Vck1CYVVxSkN6Tnp3OFR2OG1POEFwbWNYbnhORjFkVWYwanQtaFBwOTFpU3U5WWJ5dnNwWGZPOG03ZGtEbUgyaHYwRmtSVUtHanoxeFJXTUhZTVZkclR0WmJ1RnBYTWV1LUtzRTkyMDEzSTBOSUFteEpTaVU4OXZKRjRyZGNPRlFBbEpNdHQyVEgzOGoxalZKVjY3QWMyczh2X3JlYTN4cExaM2ZIZTVGLUFod1V1Z1FFYjBLQkcwenZ6eWpjamJ6RFRXM016RTF6ckk5REl1RzhSbVpOV1pnS2FqaTFjbHN5UVlkMkdQajYtZFlhc1VQN3B0aU80OFlaRU9EbERVSVllTDh3ZDZPQmNiU1JONlRrOFBWZnFjMU5GaERMT2lyTTdST1Q0cnd6NEpTd1ZZb3FITkZ2UkV6b05tX1lPSk4wMVdKRkR0dnpiZUhsNVg2Q3dEekZ0THBJVFdLdkI0YnJwMkJZMGN6QnBZXzQ4eGdnOXNjQlZDRXZXY19mdUxqMUpjS19Mc29Yc0FJUkxSdm1wcExKR0J6MERwQXhmamFtMmJxbjROMUFDODRQS3lWbUJYUUdabFdVWEhLbkQxamIzbHk0S2ZVSTZ0Z1VSWXEzLUNDRE9jLXRqcHlWWTJINEY4T0YzUmpJemJmUEh2blhrX0xPUFJqMEJjbk0wQ3Z0Yk16TW9JbFdUTEpUT0t6a0w1Ung4S3ZzVGY4a0M2M3hWLUo0NzU4dUtLc3g0QlFpTnNoYmktRzlFczR6aVVFRUViS0Y4MDRpWVoyWXVWY2o0TkFRT29Wa1BQN3g2YWxUNWFudVpBZUFlUGx4d2NCNEpFUWdpM3ZpU1l0emF6NzhfVHZudlJOcllhdkpJdXIyVnc1MHlPLUpxSllVUXNmaEVlVXlLLU04ZXhpcEVCNmVpanhZX29TeHFHR0ZYQVkybVJNdGc2cU4yVTNKZ0haMER1czEwUk8tcXltZlpma2ZVNzBTa1FjU1FnR0pabHNTUzh4VGUtN3hEU3lCQmlxb2JpQ3lNNEY0WmVCV18yb1J4U0czNnNCYmR6d3R4bVZTSUx2a0Q3YkstWE1RYlhRVWZzN0ZaZyJ9.56om2cEeubrBAXQXlpb2v30cx-kf7Lj2Le1Qussw9l5fey7EirIY9z9OJYGn80SA.GAj5QimGYbO-WjHG.ztWCC_2LSWdRlgOVGfSx-gSodUnBAM2XkAMwv-A6WVEPD_8MvR0VsO75vMYawkEWiex_3xTZ3g2MvRluTrd0AUKPAZe0LhydO4rjgTxTKQr6xUT5zedWstXD45vjUl2WOsW1EoQTVPdCQ7iF-1H56t7ZrlmbTYv4Ysx9yLKOdaOAKlm8o7v0xWqV3UFmJyBY3AvtxlFemW71zTyN_631Njai3kqZKpAr-W3d6n3K-kRsHaBijaHuaHZs6j3hWKssR0EnuQptpboCY7PjfX4oRmoD0DOJWAGz0_DFIOXL7ruSKm7ORdL8KCAlfuJI9zk3VSirDjkIwHJmGDtgqCpVqlAMo39XuOLnFZiB6m4KCwa1.qs9ufQ4-NoDAKXh2SVCigQ
+</pre>
+</div>
+<figcaption><a href="#figure-12" class="selfRef">Figure 12</a>:
+<a href="#name-hpke-10-ke-jwe-compact-seri" class="selfRef">HPKE-10-KE JWE Compact Serialization</a>
+          </figcaption></figure>
+</section>
+</div>
+<div id="hpke-12-1">
+<section id="appendix-A.5">
+        <h3 id="name-hpke-12-2">
+<a href="#appendix-A.5" class="section-number selfRef">A.5. </a><a href="#name-hpke-12-2" class="section-name selfRef">HPKE-12</a>
+        </h3>
+<span id="name-hpke-12-private-jwk"></span><figure id="figure-13">
+          <div class="lang-json sourcecode" id="appendix-A.5-1.1">
+<pre>
+{
+  "kty": "AKP",
+  "alg": "HPKE-12",
+  "kid": "9hyupt1l9mp8RxMj0gWDx4uZFh-Ltznar1iPyKSOjAI",
+  "pub": "T5e9TgLP4Bh4gVFU_cyS4_iimjOLAvFmPGemydw7nRVhhEu3oncfGINoOfi-fTJIQCvGKOzCPbVarggmVCJkZuFkchMhCeaFA6G-RWAZriFRc5A0XuuE3pJLXHnNj5WfTrOMiboZpVeDfjx1NvTItrI2NKhEhCiJrFZOz1xVy-aOtsMx7pJYR_Gp1ReG2byJ9LCgqeyPyTeGXCdgGBQg2gLFguqGlqmRNGCEkGE6uhUpbehBn9k3CmJtMmMZ_QklIgMebBy1fjWzjnSRXhu0v9A_G3GJQbGDGxuj_Uoj_Ma5BEWOu9ZIKpewyEyMVTqkDwzHGtoAWRKAfVmcImdrRWsvJja0H1hN_uiL-PUY_ZyyVOobGfVXdUgkJbFx7_K68xoCIhKmHgAlzSC878o24UUrIXopgrmL7fJppwhH0-URz_wqtOGlz2tDMUm85CkRzcdTMHqMpmhIYbCSm2dFwNZTZCpfboE0cXRRLHI7C6YFMXFZTGmo-ZpOJ-FT0RMnw2hWnMS7ObuDxvrCSPRdEACseAaCvDN4wRAt1YGN26gVvAo7wIyqT5jDLfiZ05jCmhMQwjNzsYgQGgOwAGHNlIig0lAAaQuFlpUjpEBzsXEc1skNrXuOPyhn7sysibu75LNvc_hsXRgOF3aIKLl7OQBIe9i7Z0pjT-EHCUGLR4CulIscQCc5UKIDb2dC1OAfFfHETWAfhsUKXBmsQKECZ8Rr7GasO2oON3pBJONbXHVVS_Ybngle3di_THMO9YOmNtt1ByI75egWLvOjD4Q2XTdjBnh9o9qa9WQTUqB1YeNzv7yrDtBAFIQecORT89G-pvhnkOcfzWeMrakW80hGfxNCE_UsgcG4f_csFZlophaQ8UGu1sJ5DgeFFNOQ2-AMgHk52LK1pIdQs-ONrndBGzrEEvEEYokRD3UQbwec_eYn_djLGco4VAYdedodBnUbezqYZIugd5xVRsfEB7QRgDcXeByH7tixrxUvckIHIJyngJWKFRUlLCyX8owV-3B6K7VkvkoTFlWbOzqtViGicWw5ApwfNBgVu_hlOAY8bURbWsGLc4wtQ2ZI4_GNfKgTMULH01CMPrst5mNfYvgJsNVqlkNIoCIDzvhZjSjGCHtJOQYQzDx2TpV7eYpiocM943ANKfuz3ICDApETaWYeWFdgn6wS98dDfQFzSwgq6vEGT9mQLhNOGZWdGlJvrVMeExmXsrdim9hsigIrSotrziU8wyKsx8JMl2DMXAiA1UeGJoMWPDAwM9ocVhHF8-p1AjeuGoI3ieqVPuKBufiEO3cwZtwSwRtCR_ZnGDfMioVtVMNPcfUGA_FxyyymKDmQBUoYbwqhTId7zDlK0CgyJuNn2oEa4EYxmmRgkbxo7tl-3QVfXvikqtdjdeRWuye_h5tMgEh9o2O0QmcskTK-R3KTt2HKwRuZe2eBjLudxVx8Dppu2vIodYJ7YIDAoHZQ9haev0du5cCbfpReqjtEbqRYBIhoeRa4lppjcFp4C7N0nFnIAVBGPRnINkCQkWImdiqWMtkPw-w7BmzIXVFAt2FpGWlWkLC--mmk9ctxW-bPU5ctWxgy53A3qUAq7iei8kRCujQnCYpNawRgHPhEOExmybupAQwYS8mXLaRT41cgT9zPxHMtJ9MjugQaayObZhDNWGWRM1oT_qKOb9ChrHNYcsTJShMnPRKEuqrIaHhPflyRzGcMTELK30OqDjzCBue_5GAcNJOd_NkY5Mlb5GkNZFuNvSdNZuWASHCuFrEdl5EEg4FPkuG1OwCfyDEl36Iqe0s72NGrpzClC_inu3iN7uBiewrA5MuaQgArAmeTKzTJ6xlh0acUIFljdSI6fjVIPnQxd0ZgpSi4a-eRNNh7XVx6_FCBUpMx_upRo_dbkum5sykUyFp9lBsU-lG2asWmAECCPOF_vYNxjfZdx8qMORUAlFejtIA7Y1l59Twj_sUpgRt1MqifqHqC1hl6r-TO4nkEpGNIsMlGoZssYXqF8VKqy2xYtOO7z-ekQ4lXuXbGU0p0ispKA6g27jiD_i3cOqthr3qfhE9US8S9vX3Se3fFV1vtqXrmzKf3iHcEGzWdhwMZNnPxSXIbXrgVV7IIfgrDUd-LRuiCU17Y-pOdgA8CRx8uZt9MAuQH-Llt1DZ-Uj9VqTqHXi75vaOmfh9DG19qrZyV2p-IqT_B7fpqd6apRjdO0yN5aybNY-Zq",
+  "priv": "HqetV1Ap1ngNbKSzJfWFZKTK_8QjORJ4iWF6NW0GdV0"
+}
+</pre>
+</div>
+<figcaption><a href="#figure-13" class="selfRef">Figure 13</a>:
+<a href="#name-hpke-12-private-jwk" class="selfRef">HPKE-12 Private JWK</a>
+          </figcaption></figure>
+<span id="name-hpke-12-flattened-jwe-json-"></span><figure id="figure-14">
+          <div class="lang-json sourcecode" id="appendix-A.5-2.1">
+<pre>
+{
+  "protected": "eyJhbGciOiJIUEtFLTEyIiwia2lkIjoiOWh5dXB0MWw5bXA4UnhNajBnV0R4NHVaRmgtTHR6bmFyMWlQeUtTT2pBSSJ9",
+  "aad": "VGhlIEZlbGxvd3NoaXAgb2YgdGhlIFJpbmc",
+  "encrypted_key": "yNPgK1ACQFQeHFN9YsZNFKX7qcSo6xxR0a57WaW79dcKR2lMJu3ZfqTa0Ky9l1yLB5YGD56HKR-Pm4NfU1DmHZwqE2PlI0S1P5lnY7wE8jAeIqvWDMewISJVssVXjRR-29284dSdurQxTjjZBnIxOgLFeDFG6gdbHVxTn9EPQQuyFPMpMsLTAATy0TeebJihWUt_cU0Qy-8XCxrlf_gxfIT0XRxkXBxp8lH3YAZ1nQ1np9iVsSfFuFLH5AeZUDe5Lvil07gD0iGusVdVhTYkoV_ToxmIHB94rk9a32O-yiN8MD3OV2q35navICxSLnqTGc5KSbUhE5f4fGfS8GaP6seZWLd1lYxHXoy5A2CjhONkdUguHEniRjG_AoDKaari0VBtL_sxl32Sa1ehQm90MezxzjnFYGsiEHz2_DLt5Eq6gpbaRO2toaf9yBFVQKfrpAQRb3hmWi4Do9C_bU5wlJUYr6dw5B13I3KlLxqjuGbXQb7ExA2N5_n2YGJ5xEnuYImvyK7yoo23GxS-miJlTt9_t-HKrWe6dtZK34IQPCaFNCZVxiYT-VBhhSQRIFyqFph8qxs0DMuMUMHG3DGmp-QgJyA5Rw_xTXUDHZwHaiMjEYJwyEf1ppw1Ru2ySznlLWje3rnc0Zv0iRq4LXquj26oIxdHdnBTgHkz0MYW2nuqUE73XGK_uOFWSp3IMByoNcBua-zmkB7tr5YMZThQtzt_SuP9MR-lmmPMf4MeEScjs875ARmWAWaPAHolo9iDE5JyVG7mQgtFJciM8-13i24j4proyS25cEGtQO4igHp-jgTiPf8dvhc_OC-OJZxL4fyAIjWnE6-srdERw54BZbSp6Yv3MwhafinBpQjJByz-NGFZFHLrDSC2MpYvmf9BmBn4SGBhQPqOm1Tijze3I_aqIsTdXdGUrcj6GkxVrq8-jSkIb08K1jHWRP3cK4uQrCPfMgB15IPaaAh--h6d_yygM1Ki2YWwsWC5EOs20UzL64Jg7ur8Eqr_C8ApRgJT-dDGPBsHEF2UhwlFEi5sK5Sb5meO1LaTX7OljDNqwS7tTavJTSYHDbo4Dt-pQ8SCqCbBeHpXw6xtHVoDf5CTqpItTTak0FkzJ8sam8deAlsHU384GNMUDR1Hx6kJz0NAjaoGRYKiYHwtyTkAxwFXDbNmMTkaFGeWFOcto6nyxNyvkiRYrVyoedTR9QTl2pSSCYs7AaiCYqyhCOe2ZXTeILJz_PZtTz5f8UJadoZ2OJTfNPCzvV-VWxbCsGIbJ4IHprsTyK1ajBh3J5YI2MT2DU9XMPLPJPcrmVwRLZtNEReFRUExzWEZ7E17DZZV9WpZ6_fiL9C6SsZvR7CTBH3lnLtWJFrqRoPSZlvvTYSGzTC3Ka4GEeAKKL4KrA8unRb3X0EMLirpX5BlQWS3aaZ2pC896JEHZu1IIWRiDuQfwlKBIOajz1jugYK6LPhjoLklRXhXlIVyUN8IVyBdfio_8Rk6KD7T5TsX8V8Q6SdZma1r5_WI_HYztFB26apq9bCWUeKT66ESazb1odMllt1Ov4pbGLc2BbZCFf2l30BPYZU3g1GH6PKjyDx90ngcKLi-X2x7g6-OwlXukkCNsqUpc-20xz6rVylfKDuzz3n8LvkavXGXQQ7ubPLg75wH3z3x0TvaOdvdoFF-wM-EjOpaI-8zuosdQ6TXPDWCkGaA8oJiT5zuZT_K434Ij8SIo6QZVe2gygUC6fUHGkCQzAa7S86B1sGjp6RE_47OYkdyaa5kmx5bJQY0pFGpTRfvV-bppMyevAQHNnqXkb5PbxyPpm-lm682iCCtyVt8EFP_0YPNdkaMHc5HaEdDHpXfpJcZvhoLhfMwlJQ1f98joiygoTAm9aXHept01NH_lDdslAtpwHn0vXJtOJjG-8PG0kTk7uW21FWh71tQD0EM6zVX6hSLSa7YCGUS9Lu5v--g0bDrbPZf78t9WFX584WpJUkEcjJOR_xFVXmDP_fXkqFfAx3iifQrEp41zzs0OzWIPCa6yDaISUE7motp8xgyAN2F6MaKy7MVLnedEp74O-2zpbLR4sG6rtnlr6juXXQny8cEZHgEbzK4Oe6rz-ES-lsJ_XOXy1Fu1vZoM9dXG_77FM_iwz6KkJQ7EmSy8-OikpA1lv8GxxnjqMCzbgHuEvpFvuacP6-FpswSKOlgDYzl5QLG1dS0H3nrpFXFTx1jqW54",
+  "ciphertext": "qN9Qol-MgnwaNXeOinTnFrRa3FuGk0n61CizSo9Zmz-8v10lIzwAlpxFEUXVIL58omw6qhb2c8sRRMoUFYdb8UYGg1Il79BbWJBBIu9wKJlibj7IR8rnUINr_hnOdtXiCA5s3z4elEWplQEYQCSs6hsGzsBcy8wx9SbDjVqfBmZuBxOcaZLTdLZEdm7tNfqThHXSpTkW91hgbavgKCb4UdnMhYG8VbfqZ7XORzbfpWASIBz2xCNI88GpSDGRL0jm8NOdiy0Z6l2MFXQ-OO68EsExrv7AO4EujucoXtmTyrOYi4f-ZMAGjXwM0ngkzQesrowS84pj6TJXqiz1C8t2ZWCYcRNTnidFyRLpm4p9ocRtkYcWOAoAGW-gVVhXMg9jhg"
+}
+</pre>
+</div>
+<figcaption><a href="#figure-14" class="selfRef">Figure 14</a>:
+<a href="#name-hpke-12-flattened-jwe-json-" class="selfRef">HPKE-12 Flattened JWE JSON Serialization</a>
+          </figcaption></figure>
+<span id="name-hpke-12-jwe-compact-seriali"></span><figure id="figure-15">
+          <div class="alignLeft art-text artwork" id="appendix-A.5-3.1">
+<pre>
+eyJhbGciOiJIUEtFLTEyIiwia2lkIjoiOWh5dXB0MWw5bXA4UnhNajBnV0R4NHVaRmgtTHR6bmFyMWlQeUtTT2pBSSJ9.8fSsuacm5JwnRmk2NajCikM0dobFBDXGgM1gbge0TyC_v1BaiZyhQPrrd2WELYmQioNrU3dZ3LBpLqf_a2dWS367M6Wx-8qWAt0Cmg7F2mI5VeNT8xLuRYCybo9YhdKwO6BSnFh7OZYWtpVzZ4fRqGuX91-JLrGI5qB8mIBMONSSOQZ6Usn0E426xeejP3AVXGknZTQjPJz4Yl82-cKND4yRssFafhnssoZvU-q5KqG7IPipkEn3bs9JBeEUUs5pRx874ku9ZBLfXn1asFqBSXtdq4dU2HaPwp0bLPulUUBWagozRj7sph9JTaH2jx3bIUwi8mVqL6K0KhH4YiE4KPcVWcfMu3NaOu_08V_LCzJbkN_4BtxWFvUoUfPHDMHu75kBDeja19Lr-KII8ldi6Ak7ST3lEi9uG1cL_W-tUlWfG8eVPRY_PbPiuZ-wE8dE9hb2nK0Gv74DaaR4kz-0h_vshdSSj2gs7DLtmHfY-GZbUZw5v52Fvf2uNfGLh82cfGiaZndyXtUnAE1corvdA1sdr_HJ6dvq1d2TUl5AjbO2fLBsKF83_XTERpQxhSlPGCmS50NfCHr7w-_bAgxO_mDa1F1oJoS-ERoYSXpjBVFBlkO-zRxDFtcamUZbTTW7-8x5H6idHi0qfaaKqlWp8V6W_gmwgQbWy9gRDElmbcomd2vnG-RfuPVbeCXXT09pXlXKYdIwZzyNSgxSdpsc-ZJbGfK-GDAFgjAvv29chQhh4dZh3RbUQNoDkEdg3Jus4goi86z0ZoOi_e8jvjrr2h50oAMwoDX_aW_KadUwrejxWVZN8QCTMZXXcjSeBSHx5YX-xeFLK88xRP5MuL6PFd0i4ZgDCIFJu5kT4zMqnX80C366d__PMP8V0h2-BY29CivBLx0eYrv2nvJIqgYD9BIjlJPonHcyhgrX2E68__J3Q1o8DURbZVYp41TduXPbonUd8XD30HRnOo2ppWknVrxgbP_6mCvFhhL3rosh8h32J8oe-vD_O671rRxfkQf3cg0bPNK5eb-sm_WVEr1jxw1lt1Ixa-Y4RkdRAFR1bzMd3r9H7D4ac4ANgDVKVU6kb0O-IrPaqPSMc_Kv8Ak2klzio03zFLlG3F1Ep5fFApSW08Cz6-2EkEQXl2ZoydCJkKaDcOjdq0NUSLPLsVpE1lFAqoqVdIScqYp5ucyjFt_-73xqkQfVlBmfBQg2kYoGtvJCIpm7cU8GyF7cbD51WgbLToElUmeCs3FCHgBi_fNSy3YHFtHUA6IQS6d8NkTPFotDadYFhzYu_47zNoyxaCC3noQMAXsVOvB-ED96wQl5q0r1LntePll7QXyhc6OR-V-rIUUyNLaSnG5BZL77Yf6zkcsYz2b865F1vRokB0vVDoLWyHBMRWmFHzZAWpkZnf1IazxpvQS9f0yaitu-b3Ap0NyBz3GJr0v_nsxoR7qs_2sw8kvqKh6Hg8EXB5-JP_YAE_sxA_rbIJZe--ody3mbQtyrLpI-VhmVOu98cbIu1lMjH_tTNfdvLAArAqDPdGCVR3quzGr7fKpzRHT_KGeoVdgoTO7e0B42AB3oxKaMy49doMMF25b-jvfhB85P7-9BvB3IDDMDpH-epjiSKsfobC7zkEXWI5PBzD-xoykbtGdGOxwCGneP-r0mScmkXVR1Yfk30n3O5T5dRp7_XHY-LZejhtGuYwLQdess54T2-nxw8gefcBAKR5qYAgOC4rnF9TtlPwWrtbjWAe0GKNOI0VBZGeI0-rgQZb-tauwU8G_yv8qwqFRQcohl3zOeTiSTxP8H_6F73C7Uxd3ZynIRg_gyh9NV0ePLOlbNWH8Tctkdr4NxxqNxMDY_G3qmkk5qLwiqeBXgAi2OmVPZGS8djzR-zUP7UT94DLyfLYKbMXqqI2guKHQvY8WnYeh3bQAGQnL-xJJIfG089NTC4WoovuNYlz-V7TZk-B63D_y_Hptd82r4jEFLQdDlz5I-dZEiMRpr2L4LlBdrwnrLBxizbkN67gWHmxiLw-opUwvOMhzf-_hqtLCl6uIzsFcutE6L8caudFO2SPCezp-_BUSrlD7SSx-CM4lwyo1DZ3wEM3FZsIxWpAXWtDhBAGHUBb7flPhIBZqeGau4GwJVzyA3wCblgaOVASGuhyp1KnXotnkZ2cAf_ChTlm55ygBnZpcThoj7tLn5VPfXMUmJ4tZwKDH93WxigPqlu84twoqO..rrVLzTalpqk8wFIDupq7eq9jz-jU0Um0X_FkO45gEmQYkjx4ES07w6Pk42m1m6f1rjqQTNs7_mhgIRMUKUbiqKRkkGABAiKjzv2BYstSdvrwpaO9_ei2ZT1rOQEp-5lh64BUFYUwjLKg-C3B54X6Ey78qi4jvfXqIRQJKJ-LTMMjBMdptH5FApCugjscy8DDaFEEAlsc3OTZjfXMpbJHeDF6cNoIMzXlVGsqc3WovV7Oxpgzqw91blCJQajmBvONytMY93TjwFTS3W941O1SXs5gsVdHIeGrlYNHMCGdTmXuAoGXrSxF7iQ-Z7693VfM6OmZUybp7qR8z65cYpkrv4W4KVSVrEwHiXXNh01iT7m9h6K9eIMVP0IJNnb6RAa08w.
+</pre>
+</div>
+<figcaption><a href="#figure-15" class="selfRef">Figure 15</a>:
+<a href="#name-hpke-12-jwe-compact-seriali" class="selfRef">HPKE-12 JWE Compact Serialization</a>
+          </figcaption></figure>
+</section>
+</div>
+<div id="hpke-12-ke-1">
+<section id="appendix-A.6">
+        <h3 id="name-hpke-12-ke-2">
+<a href="#appendix-A.6" class="section-number selfRef">A.6. </a><a href="#name-hpke-12-ke-2" class="section-name selfRef">HPKE-12-KE</a>
+        </h3>
+<span id="name-hpke-12-ke-private-jwk"></span><figure id="figure-16">
+          <div class="lang-json sourcecode" id="appendix-A.6-1.1">
+<pre>
+{
+  "kty": "AKP",
+  "alg": "HPKE-12-KE",
+  "kid": "BsXA57jAXzbAJAOhd53PswMI15Hkgk4DZ5Q_FMN_E-M",
+  "pub": "8gl3omYa2xs2taMSZ7wKMRm1AZVTxfgNoLQnCoEX83tgYOtAG8hxDHxSXrcjDvYbcciEXIaEFDOebVZ22raDEttnFBYYkGHO49Vx1eS2u-HPn_uC0kaVzkiUBKOF13wLr_qtVaIJWGCYO4Kr88pg6_e2JGVCuplK_5s-HAKYQscucJwJmKg9ImAYNflPhhtXs2NH3QqkAVIPHxBYr5GjVhVFjeazH6wIKhu17btHecdwuXSi8xYM3pKuI2SsSaJt74ie_Ic8zHROgSkgUhFdV6B-XwKuMuCUoFMjxVdsKFcdfdvBa1tzbMS4XUec8FSbQ5am0JRvYlR4MbiXv0dO6lumQgZBw0yBYBmni7FrNPMoBexobbF9i1MdIVOI6LpK_2QjD7l4HseO-RIhuKPG41mWPcmwEBQxR3FjY1uZLMiH_cVGVGxcD3Iye3AUlaNDTIU6HjQU-gFVgPVOpPSp7jw26TY-o-BldOVu6cRSgnYLROdZrWE0x-MPwJJ4UDpWu_CvjNs2TVxbSMoXeGmyWDqq18YCTPcRQjUGGgpahhgjh5d7iTNIoeh4TDAJB3cP38pW6VJerfDKT8d14asQ8mlbgal-kLMVpLqF5jS_p4pd8Yaas4iNWaGKIImtGfPFpFyuqPJLMDGNHRyGZHJTZ3RdjksC7ONQ6kp-A_JozJTAwdUzVWiLbnTFdhqSlWKcI_k2HFN_2qWlNHYPM0x5LSVuxrwxBQJ7x7EwfWLKvdAazFM6flc6oWS_wIR_f5oh1RzKSMyZtikHNTvHJUFb8JVVa7hg8WeCaaCbJpvOd4UwAuXOjrN_fsjGbqbC4GBXmzyy5eUecHRNIMO7JAeDXHExoiSE9RRKzeFUT9YIbAAJMoUeBfk7ixAgKMWsLsm-63hUlcNsL4qWJalLETYvQoGjj-AnFUIybPgo8WW7C4wDkDhq1pwLFuFCySJniIRXrUR8HYtcJKRXVgJfxsgzuIcNemWQtcanaUSpq0tYlLS4TcMRcSAPtyZlTvqCqgI5E8CSIcYIKBxA1YSMeCc2htEGt2AQ1hYGE6RkSqxNQ0Sg5Dc2sVZW2MKvCTc82OcJphiBTEFHUswKCOpWTCaS16CYS9UHn-c5vRJGmlLNyWVWdme0qLgE6NoxbayMwwtgOICHFkESrDTE0TlpnhEbN9UZhFhQMpIRtmqWddigBtpJFQKKmcXHospN12apeJVLPFdKYBA7YXOZibStuhVljIwF2aYlAHpTLGuqkBsWuDMMj8FDgSVi6BQr-9fMtkOXvncbR1Vi68NEmoRWt-YKnjs1JEw8QVwC6WCDygqZKlG_tOSFAgljsLkf-WZZ-JN8nRGDXPmzLcTLmxS8hZaXkqcSHVJij6bCVoK9olcSccac83YZd7E1SexjwWzLR1pTzjVZZ_rPK8I4asZxWEGIHAXMtjJlEGWA8UV7tBdK0tc84DDA52kRhUUBmcjAU3uU1csQMTlr3zwccyMfmqsCtNoGESG-zQRRi1zAuDpnofGnpqjG_piD8WC85ykco_JqzJMK1KFR90dYThmf1HFwEDtfvDNPSyLOiSd4dwRw0hUB0XHHLGNwKkcocyI7pBIBl0xJO8RjuQuxacYyh3ND1BJP4mQQwnqt9PYomxOhs_OK_HIVwZssf2eKEHvJk5Am10O_N4KbsoebXAZg34tK6NSaKWvFAbkSkWmuYWm1fnp1bBM1Qxs94rETZnXMlVRho9IIQbIPvpFTQ1QXvbzPFDs4JCZKY0F32IC7f1O8oqvBmAgjtNqaLRFs6dHKzOJDsDTLjQMMmOYTUYI4HHBV_vRI3GZY3EcWxAWn8wcLY3hBNPshkGrJBIfIR-ZgvLwq1kFj3YEKUdIPGoXGm_RoFYO0jWtFe9KM_8Y3IZxA0WU0WRhhv1azGGMnnkqZLxNJFcWZfsMVQcKdiflYXld2Alp971bK5zMTyKSJGEanfvLPKmkDWXlyiWnF07TAfks5fBXNnxCb00uT4wKWZ8vBtce0DkE_b8dYLMlbqSCae4Yb3HkE0kCwnqPMKHNzK2C0QjuaBAWAyxotOTs3bdgV5f8oTOwaRHkaCZqKw2Z8mtME_n9odztcVrqHyDHY26wUSZDVWbrpymabfcph3uMuDUWSRPnaNi2FtfPrTdhRfwZ4vSFA40wNAzC_ozZn8x70Negu4AGZSOXcx_1lBDH8tYyzuvwskNfttxTlG8dZAwzE",
+  "priv": "0P1ur4tTdzfRWIfl8Y85Wlv5FC3byzBUzEuqMuXjdh8"
+}
+</pre>
+</div>
+<figcaption><a href="#figure-16" class="selfRef">Figure 16</a>:
+<a href="#name-hpke-12-ke-private-jwk" class="selfRef">HPKE-12-KE Private JWK</a>
+          </figcaption></figure>
+<span id="name-hpke-12-ke-flattened-jwe-js"></span><figure id="figure-17">
+          <div class="lang-json sourcecode" id="appendix-A.6-2.1">
+<pre>
+{
+  "protected": "eyJhbGciOiJIUEtFLTEyLUtFIiwia2lkIjoiQnNYQTU3akFYemJBSkFPaGQ1M1Bzd01JMTVIa2drNERaNVFfRk1OX0UtTSIsImVuYyI6IkEyNTZHQ00iLCJlayI6ImJKVlhOS0NaLUNTbWtvUGlGOFFRNjk0OS1sQjJuV0tBa25Kci1KM2tiaGt4dEV4dTNPOVRHbm10cFhnSzZ0cnRLZy13TDQxOTRvTC01QjRQemtrSl9vazE2UmNYRUtZM1QtYlVycUZJU1BUakNhVUdSaVpPdFJqWV9aenlmWExsYTRmOUF1SUJXZFNoZlU2czZ5R0ZHODg4Z3ZFYnJvSkxWYVhzampobWRscmhVVFpKUEVhMlppcERQVUViOUFLNHEwbXBHaWlYV2RsYVo4YWExN3ZFQzlYRHRvdEtuS1dKOFYyNGJTVkhJTE1ROWM3b3pqVzliRTJYTkhrMFNoM2w2dk1xQU5yVHRhbElBWmQ0SmZWZXgtREJncXJzUDRBSkFYYVo4YnRjMUNOOXR0TTNvU2UwQWMyNVk1ZDZzOFJCbEF3emV6ZHNrcEJ2RGoyaG9xVTdUbjJBNTdLRnE4X0VNeS1nTjhfV0JnT3JxYjg1NmJYQ0o5c3RfYVBlWXY5eHN0MmpkMmlWUE5jUHNLVUVrWWVRZ0NzcDBKOEFtaktUaE1TcjVIcVEtV0FEMVl6SjhxTGtjcnN1Skg3cFp4aWhvRmpVUmFvaEVRMC03ZGhscWJUZWx0UjFVM3FkSzZCUEE3eWQ1cENZelJubGlfVTV1SEpiRHVaakZlLUxEMHp3MFJva09lN2lCM2NTY2J4Ujd2YnhXbTBqZGhhWkQzdUpSUEQ2QWtWb3A3SmVEZl9iVkdiaGlVRkNpdkRrTDdCZk5BWFZjOFBjVHJIRzVqX1JqMjhlOGd3MV9ZZlEzUW9vdUNmU01OdUtNUDBiT0RrWlA4NjVfUloxZjcwTU9sb3NBV2dDYmE4Q2s1XzFBcXJUN3gzUUd5WEQ0TW1zanRKU3U5Z0FYYmw4Q3NKc1BEcWdIdnBQa3Fjc21kNTlvYW10SjhiVnkwM2dYTi1LRVJ6UGJ1eEJ6X0xvMnJXeGxDV0ZqbDhlWUtPMGZwWDVHNzVfenFmWWFUWDM2SkVMOC1xRnRialByQ3BEU2JGU1FEWDQ3bnNQUl84UC1yZ0RadDhGRGlfTHNEQllRNGxKdC1WN2VGQ1hPQlAxTkJoNzY5QmNkRFJnSWpNZnBlczM3dTNTdEpoZ1k3RDA3VGl0VUppQkFKa0hsSm1EYk02aF9TRlJQS1RMUDA0NEFqVFRYNFkxUDZmTjdDOHVsTFY1a05WYnI5OGIyVTdhT25HdktWY2FOWTI5a3A4cnh0emF5RFk0WnBSSlU5OXd1R3Y1bG9MLUl3Yl9rZ1EyQzdKS0FIMVNuSERQSzFaRGJUVkNueXM1TENGT2VuZnJ6RmtPWEZqcnRXNTlIZ2xuRUl3N1VScG5rcFVtSUlYQWRMZHhsZkZYUVcxY09EczRfZ3Rkc0s0SmlGbHNyakhtVFFsdi0wSmIxUW1HWWlhTzh5YjM4S0NBa3JOekVMRFgteno5dThKbU41U2N4UlJ6MnVzRm82SGlMekFxRFJTZllUVlJ2amNwTzhaQXQxT3FWR0ZqSzdBV09zNEFzVVQ2M1RtNk5vamNubjhvQV8xWlF5YV90aGlEYi0zSmh3ajVUQkg1OUVYdWpncS1ESmxIYjlLQ1ZaLU1NdzJFYW0wdmFzX0lBbnpkcFdPSHNPcmV1MWtPcmFVQmRnQTBSV2YxRFdJVWdhRVh5RmlCVlQ3LW0xbFAtWEkyT3pvUHdpYW1JQkh3Szhnck5nMUNZY3dyY09YeUFrQWNGTUw5TFByLWE1a052YUgyX28xX2FVUjFaQUNId0dHOFhLNWV3NDNhNTFJaU9fdWxMN3FWblNyUTNsRm0tdzlWSGNuaDdtM0RtN1pjUDhyeHYwRGkyQWRXSGZpQ09OTUZrSWs5ZWhaWnFydVpxZ1J5d2ZaUWRWb3FROFJUWnFDYl8yMFNDVkEyejY1b3hwSkJkV2ZITVRPMmx5d2w3UXAxTzl4T3c5RHhPeUtRX0s0Z1pTVDk1WFNFZzE2ZEE0OUladUV6eU1GVEJseFJLTkg5UEx4cS1oZUtqbWFTNFRtVGtEOGVHNjN1VE1iM2p6c2x0ak9NdUZNVDdmSTg2TlBxbVljaS04ZWVGZWtUYW9YTkVRQXB4M1RCMzFGOU9jeHJHMWhXQ2NzT1NaenlBVDJoTlluMHJvZ21BVGEtOVZmTlFXeXY1dmttenJkZUZoSU9RRjhSMmRqR1lpbV9mR1M3cEk2UXBIVlNWdWp1N0ZDbWxTd19UUjgybkxmNGgyc2FleE5jZnNNdDQ4dUlrcl9SUmRIZEFPUDdmQjZucEFocllOdE96RUN2NHlFTXhJbVc0Sm9jaUVHcEEtV3RwaUhheVpRQ3h3OGtNLS1fQnoxOV9KUmNUSVpKaW1fdUE3anRCcHBjcUk5UnRoVzVFa3VEdEFVUUdUeTJOYmhWb3hBalFId1JqNU94REhnRHFSdEZHalpkQ0dqU0RHaW96NDJuNzdRZ0oxTkFURy05RHU5VTd4WHJpVlNLNjh3OVJJd1BDR2dyVldJVTAwUkRGbDNneEY1M044WllHbmpBS2lmTU9SY1Fkbnh4Vmdkb3pSbm1TRms5ZGdiSlpJUXFaSDItUmpFTmRhcTZKNjY5QzdiWmlKcjhHLXR0V0x6Qi1KSDNBeUc4cVRuaF9jZ05JaFlkS2ZZczY2eFJsQVd3a3RidlZicjZacHZSVG5jUWtOd3FkT0VSaGozeTJscVNPeFRxRGFWVnJ0dWlRNms1X2JCbGVUX0U5UzZ0OE1obkpPUllIdk1ndlJCaFRRNEVHcmJZaFZTbXZrVmY2Q1R6ODRKVGNaMG00UUpaNjlIOUw2T2FGNk9HOWdJdXFZX1BPS3ZlRjVWNU9Ga3lsT0NVYmEwak5WeHNqXzBoSmdXSkVyTUxrd2dpRGphMWl5RndaNjRVMWgxVWJzMlh6N3NYMU9zcXV3bFRVR3ZTcHY3SyJ9",
+  "aad": "VGhlIEZlbGxvd3NoaXAgb2YgdGhlIFJpbmc",
+  "iv": "TMRj4TxKqDgaMzbq",
+  "ciphertext": "R3GfxfM9JPnUKZO-MFUqNOz4NPBBzrxC2get8s7GRBguBrP7_buabP2BITbULF4t9QjOItWXhpwUzckKPBXxK5j9iidF7HVDDQPFoLXM4ZfmsmtRYSulxKea-zYvtFDjLNW-ys4oXSjyUPcfAvACeI5_ARxTsxSdA1dpfk8QhrEb7ylIs_hOu5yRz22Q82XQFe-HuypSNKDVCeuQ_1DW5iCiXTQfWvJZ5GyOdwc5CHIiCcvl4O1X3LpEUzTnpLtTk9FxBdV_d-hWMfkhALdKcmGlaPQfsvOryqfhDvX3N8woaVwWPFGo7ExVZiw1L0s6aQACXz-Ac6hcF7hRk-W-DiVHU1CVw6YFXs_WAgsR_SIo",
+  "tag": "eJMIlZv1SpRAcRnKA7Ks0Q",
+  "encrypted_key": "O8IHsaXEQTRDJD4vUlfix7WER1NPVhhRF_8fNx2-NG3os-f7rm5HgKpabJHG49vz"
+}
+</pre>
+</div>
+<figcaption><a href="#figure-17" class="selfRef">Figure 17</a>:
+<a href="#name-hpke-12-ke-flattened-jwe-js" class="selfRef">HPKE-12-KE Flattened JWE JSON Serialization</a>
+          </figcaption></figure>
+<span id="name-hpke-12-ke-jwe-compact-seri"></span><figure id="figure-18">
+          <div class="alignLeft art-text artwork" id="appendix-A.6-3.1">
+<pre>
+eyJhbGciOiJIUEtFLTEyLUtFIiwia2lkIjoiQnNYQTU3akFYemJBSkFPaGQ1M1Bzd01JMTVIa2drNERaNVFfRk1OX0UtTSIsImVuYyI6IkEyNTZHQ00iLCJlayI6ImpTTXkxaUFVbDd2RDY0SEtEWGRKZlVoZDBqUklsaHRzRi1UdmItRFZfdVpIYkxaSmlqUHlEUm5zNXlseU0tOUZmSXg0T0JmalZ2azlnb1dXTkl1cHE4dUxZTVlYU3pEOGhsbThHcGNfc3JnUWhzMmdEV2VYSURkaDNNTmN4OEJ5UVVaaFJBcnNva1B3ZTdDR2xnUHNhakdxRnR0WHBRbEIzYVdEVnlCU2JuS2ZaSVJJaDJCNHZ2TnZ5V0JuaHVCZjJObDJNekpmWnl2UEQ5OTg2UFRDa0lZU1ZsQnRtWDE2UXNlZEJ4S0tmM1FMSEdFazBLWDNJMndYQ0xXUGJXdGdWaENBdVQtMXBVSHp2YVU2dzdfNVZGMXA0cFB0RWxtb3V6UW9qYzZQYjcydUEwVWJYVVVKb3hwR3cxZ2Z5d3l4SEZNZzQxTzBJLW1CMzZkU1F4YWIyVHotZzFaQ0k3N3ZLdkkyZHN5OFM2SFR2Q0ZwSl9NcFhoVXNyS2ZBcmpRd01qV0xFQk02RjctWVJyWXJWX1dCd3pBUmgyYWlhRXBJMTNlWENobFY5VVp3Nm5LT1Z0dTgzelRnbGRvRi1YZmR2Y0poejl0ak1BOTJCWC1faGwxY21tc3FvVlczeGszU0VrR3QzRGpIZnoybm1ZR1Z5enpYanV6NFphTUpRMmZ6QU9lZ2lFRFhvY2pPaVJDcTBrRVhjR0hvMTZ4WmNIU3F2NTlRemgwSG52NVNUSXJiMk5MRllXYlY3SW5iblJnc240TGtHdTNJYTRaWi1kVFpWbldjR2ZWam5mT1QwLTMxdFRuU0xVaUY1eXRvVDJRSXZRMWM0QzM4R0t5V2NtM2Y4S21QR3hXeXV4eXpjcjdzal9XcnJNN3BnOUp1elVmazl0N3BrMXR6eVFHeV83UWs2SGhqUFk2VnJZXzAtekNyMTkwcVpoUzhKdU9oeGFFRXhra01KaEJkU2hqVV9XSFhVMEJDM0VVSlhEQmFYMzJRMDkzUEI1Q19ncDEwcDdweVBzSHlScG1telMtRG5TdWFtbjB6c1JkVHByZUphU05BaGowNTRna29mSkx0bjM2WWZIdV9QVnhhb1JPajc4RERfdVQzcjJfSkVlR29BSUNwVFBubXItZGR4TWUtODRSZVRxZ29TLU9nTk5hYWdrZ19ZaEZOT1pXTHZ5TnhQaXBBYmhoWVlqaDJXdWl2Z3lnclpycy1UWTFJZDFKckVfVjVTbjdvY2VPa2xfeENDY0hZekRwZEpHTmFNUkZKTG9UQTVzMUxJM2kybkxzSXFzNWthZ2luRy1qMzNCUm5KWVhnUWduTmhja2EzXzE3ekZvQm1VM1FoVklfck5ST1FxVE5MZ3Z2WHEyTGpYbDBZX3BpeDNLaFRTN2t1bXRYTS1mR09sVEx1bzdtOVhNcFpjVmVWYzlKVHpOTDZVaUNmc1JlTEpqVDhBTUVDNEwxVXlCSGlXLWRYSmgxd3kwa1ZrWndQNnhkMDNuWjlkZENNMnltdm5yYWpfQmxLNHZ5ZWlEa2J4d3dNQ1NHWXFITndmdmNvcFNxSmJ3RHN0eXdtcVVaZGRYTjVScUJzOVBkdGd1ZGhTTXBJalpiTTdiUjgtOU5VM0tHMUpyeFI1MWZQeEVKN2NidnVZZ3JJTEU4NFFpdUhNbkpoOTBmSWVDV052azRWRHoxMktrZDI3LThjOGNoVWR4ZFUtNWk3VUlkU3FudkJzVmRoRkQ3NllobFFIMlpBTW1TZndoZVJXQ1lEdGVhRE5PT3BYRUhZVzc4U3c0ZDJfWnFhWElQdmhpQUpYaHVvRk9CWGVBMXJVOURSYXFMYnpFYlpfaHJRcUNJY3duWHNDV1A4UmNpbGxOcGZFaFAxRDQwRFVyQXFFelM1akh2bE1DVERqaTREX2doYXo3VTI5WWd3SWtTbGJxRnU1dFJza1ZubldmWkRUaWZQWmM5UUVpZVIyb3FtREhXalBUUGNxM21QQlNsbm1rdkk3VG9PQmd5YjlFd19XMDhVU3N3OGR1VVBFX2k4TkVxcnNoaXViZXVJY216UUVoYUxoVjFiTUZVTUFIOVMtSy1xYWJwX21MQWFQTy1ZNko3LTVqZk83NmFYU1V3TjZHUjl4elkzUGRYbXBjM2gwUExkTGdKZGZIMkxZQ3RHZW9uOWREZ2RYU2RqZWdxdFZEM21ORGJ6elY2cmVzbjV0OU9abTVDNGo4RldYc1NCRjVOS1U1VHBRMHRoYzFUNUZBZmR5cms1VzV1bV92dFR1TlB6X1FZTTlQSHNMSWxFYm9nQVNJWVNwTF9laEl6QkpreXBLcWltdmE2VXB0YlptUVEyd1c3T0kta1RvdmF1eHVaWUt6Z040TDRjSC0zRER3SjQtS2ZGOWM5VF9iVlp1dkczNGFjdU1DTTBzd2FETjBLNmdkSy1aM3c1R2FFeURZSDNmcmdyS2E3ejFIMzQ4UnVHUEhELTRRMmFibDJwUFctMF9PSFUxdFdoOVFnWEJyMjkzbXdUeVRfZmtnbHFBRVRxaTZLaGR2R2x0R1pLQk90bHZWOUpXRmY1MllKTzJnUV9NWjRjRS1pcGVuZGg5S0xlejhJOGtFdGRDazhUdDhtWHZpdzRVVmlNVW9fcDBjQXM3NFJLMmpjRm1mNU5tSFlHZWoxdTdUNEloWlFYMGpUenFHR0JBRDRVQjgtSXQtRzNPTnFtYWViQ3prM0xTUXRCNVNTWGxMdXVacURaZllwNmNDR09oMnNPVWgyRTdtVFZ6S1I1ekdMb2dtQnNhZ0VKSlN2SHluN25zRGltenBLRFhIQWFZUUx0ZldUZXNuYU5sRXlBMFNadVZWeGQ2WDYwRmE0N0hBc2ZJb1VOR3JZVkxDMVVfX2d2UjJXLWIzOE9PaU9uTmI0cGtuMHM1M3RFRjI5T2dMQ1ZhRkF1MWZpVDhYamNvb1Y2eWtRMVN2eSJ9.O0We-tgIzSWhXim0oWNelf-lxBd5giHiJAiS0Ia5YmpRloYWeLeFo5MNhVZpVKj_.u-jfBpNu0IetOEEx.CK_DMOaY64rBj0J-zU9jiXDcgEEt4BtXflXHv9WHs2oftAPXNRAkaV-sQgHlzp4wPlGSkT1hz9Hu5XA4jjm2StMOYrVou1ckk6Yy_E9-wNxJcPauL5-6IJ-5a-oiUxlytJz7TcdNZD-PUMnfOFwDDFRu5IOwweKtlItZQJruKQTSvqMvKAu_96FlPXPQZgHOVcmgUsXNhihnB0bNNtc4NUAEkE7d826yWJQmIGzEqb4M0PNcI6R97V0oDDTtSo2ma5LaJMcoEu2_nS9LhptsgwTXLT0ZZeCYDRxPOa9L9Q3bt14jBT35IIiL5b_Cyc4jRQYpDL2Vj0Zhi5CIw3dQtKGqBUdTeVTicqJI2snpULry.s9ujdNIp9AdLejt68W97eA
+</pre>
+</div>
+<figcaption><a href="#figure-18" class="selfRef">Figure 18</a>:
+<a href="#name-hpke-12-ke-jwe-compact-seri" class="selfRef">HPKE-12-KE JWE Compact Serialization</a>
+          </figcaption></figure>
+</section>
+</div>
+<div id="hpke-15-1">
+<section id="appendix-A.7">
+        <h3 id="name-hpke-15-2">
+<a href="#appendix-A.7" class="section-number selfRef">A.7. </a><a href="#name-hpke-15-2" class="section-name selfRef">HPKE-15</a>
+        </h3>
+<span id="name-hpke-15-private-jwk"></span><figure id="figure-19">
+          <div class="lang-json sourcecode" id="appendix-A.7-1.1">
+<pre>
+{
+  "kty": "AKP",
+  "alg": "HPKE-15",
+  "kid": "ILaQb0155iTL1oJ76kloi0ACx4b23aof9rGUUe_kEVo",
+  "pub": "D9XMcvWI73wcKcRvV2poFRCxnALFXuU-0KdhbAML3-IyCud4RbE_5yURPow0iXxZfsrJ79t_CtSDocxrSkldtpczDZUDlMo-TOKHReDPq7JjkiaH-0ARkbskNSt5OxpvyQC2aQkDxJijEJOYP5s3aJKRm3bOfJhUaLqL9-XMA7dpnMfPPLcfuTa4R7Qqp4Wq-AB13FTMBTQBW7xcJtp8APpyx7ZKuykaCCpGPKsiFZUKOadXp-g8jJFv9akJ2MODA4bEp6iijwGENdAeXTdvP6J2PISEumeAW3ycu-ll-PikIsIMtulywjO6_weukfZmFYwKnEcVo_oVs7TMWCsQJKgDldw7NMWdzlZ49_xT7xJa1gIJTknA6XEZrtzCaWpKG6G-pTV1FCWCJByhSkYb_yeN5sCFPRKo48djidu9P9OvMsV43DIC8JpdEDVE68eM4qWAWvJBwQReaFo-XcgexlRisFYlioy5YsqHhNdYHHe-2XIDVQhm5npvrvq-7Tt-iHVDm8lZESM1cPHM3gHF99BdQDDJzykf0SICq3uDbRxohzlOV-HNkLaEFiy6NqpNqjqHTjqNP-iDL3Bzb0m5A2Kc3rVEXaaxCCW_W5At8lNGBBR5fnNHbVsM4KZO3hO7_XxYABqdHuCes0xSx5VXnuvFN0KYethlcYWQYhSfl9sMdaBWfhNt77dtMwB7v_QWNgiFT6ZNt3K7bSlTJPSo2JifJdMdAWa3MVgd6hF6hDqsXMo-B0XIi7V-MqCbVpBbdlwVGeHKc8W7k-xaWKA9IcJDeYLDnWHP9iO2YfMxlAWNxjMAetiPciC19WsYg5Ing7SmMWwWefl-zUcr3sIjGOguqdNt2Nofujtd1XAviIpItedXBpClQOKuAHFpX1WbPrgclpqYyqLPZXS20xgTRSuWJqKVziZwLHibXrkKkiornkiTCpNTQQuxCvMajhCIVwNHYZYJD4pDpFnMjgUW_3CcJwMZwVZLgnGs14xlAlU9cXC0tRaMpGejw1Ge8ZLLa5S8iawauKkG4UuW2TGGrnhQblxXEqTO7uRlF_Imf-GEynV_jwiXotplHmFivXBRzSyytLCcGRmfZTaD9rmjBOcs7jFyiroI6TCarPSwkFpIfUcISDufRhl4H-hpp9cVNDQKILyh9XCjMiiqXSwe48ilxwsS-npLX8ckDENVT7SVVhnNk4hx39U1T4WRRyGGFaIA00WzXBYiyPW86nurJVUq8qMwgjFe1kUl6NaJLny7ged1AjRfFBc_3ZOhS_vO3MZ_hkFdh4nIK1cTBxgixBq99canZrtizJG7TZu2-TeYIOIqdPypRTjBBvkR_kZGPQTEf3aaQfxpzKORq5UtVfplJGjPXkEYtAI0-VFU1dSN4xplRDEkM_IJ7eAcLvtHXUqkN_tLuNgLehoNTEY6zEuiYuwt5_EfWZxyUjOkoegcHVmpmsB_TgMfsBEXEUmq5tuvCtvF0QkEB1OGz8WVi8ppFDN1NtyBJGnCGcRPMKGfrFAZttWu8QEDMlZP2rGnZqNr8uxvgwmvAMJ7iBcLkpCd_QN4nSv5Te-XQbKvyvI",
+  "priv": "B7Vr1XYSETK0l9LiFjuLoXj8kOp4q4YxHblOTubFSDV-xlYBGhieoi6FZiCJ-DyfwhKgHjCstndj6KlfBBZlSw"
+}
+</pre>
+</div>
+<figcaption><a href="#figure-19" class="selfRef">Figure 19</a>:
+<a href="#name-hpke-15-private-jwk" class="selfRef">HPKE-15 Private JWK</a>
+          </figcaption></figure>
+<span id="name-hpke-15-flattened-jwe-json-"></span><figure id="figure-20">
+          <div class="lang-json sourcecode" id="appendix-A.7-2.1">
+<pre>
+{
+  "protected": "eyJhbGciOiJIUEtFLTE1Iiwia2lkIjoiSUxhUWIwMTU1aVRMMW9KNzZrbG9pMEFDeDRiMjNhb2Y5ckdVVWVfa0VWbyJ9",
+  "aad": "VGhlIEZlbGxvd3NoaXAgb2YgdGhlIFJpbmc",
+  "encrypted_key": "0hrQmFN-xzo7XcKXiUuabv5NohHO5jb4xNW_G2RPUnglDSa-uqNXnOaJCQxpwxt22F707xlRm7Wp7uIZq8oqe7a-Jw4nU6tpQA2w5ieviUUeQczz7oiyTVu3oTeTdBlJtGL4xuNGgwNk19W3sGYQLsyhCzyGoUqclz7xHz-oavRDwzxesbTb8uJ3pIppC0sNcZLvki2h4ipZl8rF0EVXqBnEzdsPXytbXbs9982ICRBK5Mq7pLbbxA_ZYuC8G7INiaH2IqIJ6RsRdSAsiL16CLCn11MGfxjGCF6HmjEvI6wR9WoNnxYIeupqhgCqdihbLlPZ0nDG9oVcL_z26O5XpjZJbHq27yv-QYvN3PCNley7AQsB5uq7GEnCuDXS1M77QbVKsccnW8OOv2y00cQW52iAJsuhCUW1fW5GBc0Xiy8B-CElKni7qWtmpVg-7x3A65xwJxcePnM2uikKVtAmgLQWX6NIflj6xERo5pqvsBnYvNOgK40u6AIsblu253u4Io1c1gvX83zy4xmW-aMPLSs3VPo-TGWMeM24rFae_1cfDSbJwWysbPl9ORJDN6ZWNnpfef-cH8TK1NHNYkhSGn7gKpl5NQK6c1hj9W50oP21qSvIjVfH4mJysQN3teicOvizh9Erf_MTOF9he7wQHNNCQI7xryh5WBQKYOtOW88J2Sewgo6U6VAm0Y8jhj4P_r8nB0J1rzeDXS-2iVz_aw1C0cPFFPc513cJF4kYaD0YPZSQrP_Dnox1mTA3YtMykZJ2OenBEmzKQG4504alrS6lWONH08rTOVDp6Wk6WSbW3YXNVBtFX--pSlBSPDvwyYe9YoTdrTMEaEOs3UfZuJEG850xIFJHJMb--8Mo8Lp5O73AZ__7ctEqd4CZsxZmlK2wgvHTC22nF5e10Hp32AsctfMWKJsR3lpDXNTcC7f_f5Q9ky9guBfCEhn18ndkflt_PS64un6O855Q6NrpaUn4HnGg4knsBesjnav5VT9UbNXCvnAlcewDOqYHg4-L8KU_W4rjazK3S5Aqekfn7yyUpKVNWRpun9zN5TReVQspDL-fe85uGlWvbbCUMH4yhEFOwRfwAvhZ8YOxt8-NcGSkIgAYEYdyS0Od2-cCTbqcWzsRrnPN_GILCAN6jbytT7a25UNfMbHtaONE2F4I2PgwE1bo3lymxCKs31vlPs0onRFgsQQrgwE9OCJQ_JFlyiBj0Arh1sEEuBjRydHIvKiRSJdpXTGr7AwBNi0R0yECGJ2rTf4t2YbBGvvum9T2HMmh2Q_79hYjIX0NHL3FjODl2Fn_OMTCtfnEBuOuuszGtwNIE4HyGy86LK0ndPAVoMnkc3swCrB1FIwkUCdWOrS7Lf0ccomi6JnCjCzSHwXgEYUXEOtDf_LR2oFFKKV4EM-ZoIrQeux1BXUjP13-M_oboWt7QFiLN7UZLmKBMEM",
+  "ciphertext": "CrTLOEzvxol94FxNCneclAZjgZr3eyaBllnD4DjJbPJ474AHPx-8o4LanaAnt6X21fxlj7lsSKpbPGGZQQcl08eRsVffGrYve352tXlA_-AASPYjPzlG9hzS0tuaq2nnOiX6V3I-SObkHayIvPpO6CvafTjXnVNbj2p77AiUBJ4bY2hUjmrAzHE8NxInhP-8V0YN6BB1eq27E1-b15ztZpq1OInuq99tLrbC7uAHviRPb2aOyxAADoZs8qP8HbjnjQxYY5FjN7han5tZMKAlaK2zkd3ipJNS0ZjIzW8P5ATybE_k1vjnWdERcEtJFBWCu-P2s526akh7z2mwAcyvodTP5lBUu_dRbEzrbNDisDXv4aSsXVOMy9lKEwJ39q2sLA"
+}
+</pre>
+</div>
+<figcaption><a href="#figure-20" class="selfRef">Figure 20</a>:
+<a href="#name-hpke-15-flattened-jwe-json-" class="selfRef">HPKE-15 Flattened JWE JSON Serialization</a>
+          </figcaption></figure>
+<span id="name-hpke-15-jwe-compact-seriali"></span><figure id="figure-21">
+          <div class="alignLeft art-text artwork" id="appendix-A.7-3.1">
+<pre>
+eyJhbGciOiJIUEtFLTE1Iiwia2lkIjoiSUxhUWIwMTU1aVRMMW9KNzZrbG9pMEFDeDRiMjNhb2Y5ckdVVWVfa0VWbyJ9.AH9rvKxPHcm2aTqf1QlVOSJdw_u3WXvYh7Ech_Y6UMNYUv_SSzPsksAdsU0XozaMY7IvOi-gZzFu2aEzy0pWPZJIeDFUE-7J_3N9OkwzIEQs8J6cnQF9Iw8xSXfhOXDz6HyuJrEcEcWT_VuY0NPGc74cC6snrHLXdbB6ho-PzkMHarpdW_Of9QTkQiJISheO_oDb02ZLO4jR7HM19JVfLHZWZMagB1PYkfLwDTd4TnUBx2yENhR16NZN55ZkwxIQaMV5xNHSTQjqi5sZ30M1sng-a_8BOe6J7rnYvjCPwx1n6V5bUkVNNCVYjLl9avlsOJO8bkjujDDP2qOpJ5D9jUnkmgJYAhhedVd493rFANMfyeKjHpu-cuKpzL58k_LtmYrwf0ueWBu6EhxK1Ix1wxDk6atElKLDDtMyFsPwVcwQtt3G2Xb4yHfeqqKQd2s7QzUy_2ORWb3lyIF_GSG9abY4MBXxXJzVmAwS_Z6cnfVK0MYzWoP-q1chLmf-rGf0jirOgTiRGSXYME2c8ZBW9RDXgKtwxRLaYngyq62auvDFlAgLmMCfUqtxtlUt4sK6-oXz6Bw6J6VFM0Jn42gzhwFdtwTkRJTqUgE-I2olCCTwB257aYWYJgPMUSChz04y8gnv-ODPlslyNdIVhNE17GQcQ0lu0037UUFlpHg_RhQNr41jeQNRd9TLqueG9w1-8jF1Al2Wj_8AKZYf5suoyTpzb0twG-SQoJmzxYakj_y6NZaUWw2QGIbu-lRejcHOssdOfM2IGoEOBvskLcY3l2mD993Lig1xrm74C4PnS61qiqql4ZZczQf00WXFdRPX_yP0JAx_89p38wYgh4yc8MNj5tc4GlS17xYYvJRIECfHUPaCRid_56VwcBd9Ok-vDwabZE8c2NU5nFhvFaGEXwn9Dn8diy3EcPfmuWwesWHnWlqK-Wsp1oTwFT-535QC-21PK_k-e81i9gQjuLCr5wWEu6ALpfjurgVkQoflv1OVnTB4q-qJ7VYZz8OzGqALuFPvx0bOIO4NBIXndzJPqIev2SamVDgAEBUMyFzQGfEZLGFNFvb-uD00DLSGuvaz-vd1LiU9m0v4VxgEr1lIz-9bXYIa0aeRYBnoZ3tO-R3fo_6g5WMsk3XVg-aA9efSM3lk8q8nQzz8MRzq8yLW2J725MHoFql508a6Kp-WBTTr743vmPxTgERJLm14ZyNn0J10f09f0vU0Gruh4oEMqf757Joe-DgHSUN5TGcwe9eSz0B0gTXwIAPisaw5NHytvwPrvu3paQOn4_78ral3kBI3MwUK0xmcXMRmZcHAYhmwlBAF5EJqBzGidxn6Xp4V_lH0wsxo4G8ncUCqb6bcCHjMxsqc_fx-HNAG3f7PfpwO_uqYeBpfL4L2FdguisZTYqa28uPG485lbiPYzd8JcKMo8SqYO3DPC2Mmj35bv3c..fpSIKmrQE7EPRE65GGs5-YHIP1FvK59pLmG01GkwUlhiitedTGBY0ZRyRA3IwxAvUx3aH6mOsEXcXE4mBBbvq68B7duVpITbm7Faul08AQj1_yBA_R26KN2K72jj_FUBUWbpyeSO9wUl2HLFOmcA8f-H3Qeshw4pjJVJWXlWO4RN2jAZ_EVpwSr3a6QBxNxV5jnHfSAewop__EJTS9c3JJLrs1DRRQj2CB4UCY6_qJdDlSIIDpadZrEW9Wvz_lYAM-9j4b-Z7URVntmc64NSmLsVxs0R8UaQn9x-E74QwqGBa24mxmqosRBm0TaEvNcXEsr9Y35-nMfF9M7BUuBcdI-Ti67Wz77rBjSEuvzdc_sSOdunP7Mibn_djil0zcv6TQ.
+</pre>
+</div>
+<figcaption><a href="#figure-21" class="selfRef">Figure 21</a>:
+<a href="#name-hpke-15-jwe-compact-seriali" class="selfRef">HPKE-15 JWE Compact Serialization</a>
+          </figcaption></figure>
+</section>
+</div>
+<div id="hpke-15-ke-1">
+<section id="appendix-A.8">
+        <h3 id="name-hpke-15-ke-2">
+<a href="#appendix-A.8" class="section-number selfRef">A.8. </a><a href="#name-hpke-15-ke-2" class="section-name selfRef">HPKE-15-KE</a>
+        </h3>
+<span id="name-hpke-15-ke-private-jwk"></span><figure id="figure-22">
+          <div class="lang-json sourcecode" id="appendix-A.8-1.1">
+<pre>
+{
+  "kty": "AKP",
+  "alg": "HPKE-15-KE",
+  "kid": "s-qvuLGpghJytMUHOq88VHqd0ftodro7AcRctCwSyvU",
+  "pub": "SgPDujmLDnk_V7p8RTU4BDQCPUSD7MSU1tSlOLicLskkSPezUGCd46ClQ5RyNkgbmJxeOUmjbCgYaMywPKxlKTE63fiPahIybAbDB3sbs9TLw_dV1DMntNg7KusWAly8DjV0rjElR3kYdkcJ1RY2ggsDfvMrPzlkD4PEwiKGdEIx_QN8MWM-MZbF32WKG_aMowAYqOVbiXiSSqlMDkuP9kVlyQWKx5cFu1pq7pNQ8IgcBDs8c8wUn0wrJXPP6NQEvYEXkVY9RvmDQ8koeIK_BOMkMeoSXth0cgIm-IknPTfEHzpyWoQenhthUNRe2IXCsHAHiIS0V6uHw_XBZVNwm_BeaKUKY-yxnvm6N1MPbRCL_dV7cqggFQQoYMbL1_fOamyoKki5iXx5AcZhSdWiZkRbuSI9uMh3x9ejDxUK7vsn7lEVplMmO9CHMWeVd-sV4wtkxNauFMlVG3ZcLwp8_sMp5Vau8WDHx_CQPXFWEScTwUOOebXJkdRRrmUOZWNsChGMK0yj86QKdukpGQai5tSUBYs2cLqHz3HLwuh7NCKZXZTOtXuipOSMHjZCgoYoTpFLGQxK4CIiXnjKWIpycajIDNNOq1ktbVfGMwy1ITiB7aVieoKE4lcLbaSovreF_eQTX-YW-8OS7BhHgBk1R9oawkBAh4U0L1igaCZ9N5q3iHy6itRebggep1qcC1mWSNKbqltCiXSuPnUQTNaT4TU2xvUB5qCPaDYcSOdUqaCADlSwR6KcNHEpZIkRh5jNyPUhOPAVfeh5b6KE3DeTBfKWCWpEjmsaE2eZrfGkvtNMe7YWdUaYzvU2zSkV-oF1ypQsdJjDFcIoRRICVPFHT1tNYLV2N6EAOVEQZjy6iTrIUsFK2FAKxhW_D1BaysCnkxamjOGABHBKlTSaqSM5W2UB8qYN1mcqH4XESwAZn1ibYJrDpRg6a0wx29itIJUVA2mIHuKeunM1Ykin6kOFC-t0-Um8psQNqjIbAgRGL4mTjyGGSKwkJEANTeYmRnKCWnxa2nZtiiBm7UJG--RVo8gKs8YU0dgz1Kox-giXReBbKZqWMkqnuhvPjVB0bMxkNvSGpecDavWt5fUHpiKDgPEE8jIFhRZc-9HCrPs0T0BnD-Sid-o6IExUWiu_LtdRVgGfnCajevBCw-tczKkX6nReGyab0dtoYLkN2Ga1PNHJHUjAfZBNqXGw5UiNUZePv2t4D3mAPNaXqNeTNlyfxVWz_LTNELAQlEmrVUyP6xtvR1uViflUT4YB6pQZLaIiNAGyJFCKDbYXzXwDI0Wj3PWMSKoB_gc9KIijdrjOWQuOlqVQSfEXqJLBPOQeTQUeFlEASDm6rEZTducDg0NIJGORc7gnwdtn_hVAPBYmoKsq4cCttLkSGbJnMSdEQ4ZFY9ikbQRRLLUQNCSvuNHBRKGzTHqL3kFtYGajvTqCEBy8ZaGiRrc0qXM3zDMGqwOlkQJEBssB-itYsnQ8oFYU09AoEohKjQKefrXG-UtceVSbv4rKVLGzt1lw0fiWNyqR14baRItLeqzJGgBn0gZCd1dEQ-ajLVvGiJl3cVkOVK0",
+  "priv": "drhM6C0CIg--oO-QTfJ_W-yL3b0yab6EOU09Hf2io5gtNqrgAN8E4ib1HMJlQ4FHBqcvyFDL-Ovtesbpm5lmMw"
+}
+</pre>
+</div>
+<figcaption><a href="#figure-22" class="selfRef">Figure 22</a>:
+<a href="#name-hpke-15-ke-private-jwk" class="selfRef">HPKE-15-KE Private JWK</a>
+          </figcaption></figure>
+<span id="name-hpke-15-ke-flattened-jwe-js"></span><figure id="figure-23">
+          <div class="lang-json sourcecode" id="appendix-A.8-2.1">
+<pre>
+{
+  "protected": "eyJhbGciOiJIUEtFLTE1LUtFIiwia2lkIjoicy1xdnVMR3BnaEp5dE1VSE9xODhWSHFkMGZ0b2RybzdBY1JjdEN3U3l2VSIsImVuYyI6IkEyNTZHQ00iLCJlayI6Im0zbkdjTndvQmQxRElXdHZzNFFsVjUxRmVLVnhiS2tQbnFfSzQwRHZ6R2ZUTXR3RWFhOHVDQmhKUktPQlJKVmRqOF9FZFp5V1JwQS1VaHM5bUNfdXpCYmd2TWwzaEhHZU5ESG15SWs3U3VvRklYV1drZndleFpQcjduVmZ3TXRfQzZLOE5Kb2daaUl2cDRxS3pkaGViUHFPUGRPNlBjcGtPZmhZVHVhc0ZoVGNkYW5NbF9UaENZT0xDYzZLWmhhQVVzZnpUMzVCdHNSZ1BiV3pFR3BZY0ZCUVA5aDFjOU9aV1R1T2RaMlVnbFY1MkxBbjVIZ1kxemRVU2g1NEVjeU1KMEJzOXFEM2ZpS09pMV9yaEl0dW5lVVZTS1JkNkFmczEtTS03cjhMUzZ6VFpUdFc2LVZlR0JRLV9qSFpMbU9Ga0pHUGhWLVRERnRXc1FRQS1rYnBDQkpfbXRsM2VGZ01mV3JtZGVpa0NMSTJJYU9VN3RzMEtwaVhSaGk4eEtRNW5yLWNGT24xbk1kTVd6Q081a0dTcGJ6R1E4TjI0azVpZWhmWDJINHlWZEtlWjllZDRJdUdwWHhrUzZqTXN3X3FLV2JCM2p5cjZ3R3FhclItMFhOQzB1TDJqYktyMHNNNzBWVzNta3paSHo0aVFSaUxheFROcXZNWDVyNDBtcEhST0pfOV9zM3M0bEJlWXlwRnpmMFpiUE1UR2FSaHVOeU5FamZ2REFST1pVc2M3ZjJYRXBZWjRmUHRRakhRRkMyWHlHU19UVWVodDZmVzZXRzMzM3pVQXNRbmpTUHZGTHdneXBFbkQ5anpTeVQ2d0d3NWpqQVBnUEtSeVJGbGljRGpWcjhvS2JsZ1lrM0tHRGl2SVU5M09KTjJEZUNPdHVRaVBYbmRtMXk5LWZwUkdvN1Nzcjh1eWI1WG5hUXd3QlZvYkwtV1VSVVhBenpOZ19GWjM1eDZOZDJ3aFVueWplM25rak50VkZlamhtNmQ3RVJVTm9LZ19GUDUySV9ma0RMS2p0WVlOQzdzVE5XU3V2NUFUVlRTeDNPd2JIM3R4R1pxZG5lWFRZWkM5WGIyd25VQUxuc2FXclZRZFdrOTJKR0pVcDRqTFR5U2hYeldHY0xERjZYWGJQVFZpVUEycmY4cWZ5amppbDJIQkNWZjFsa0ZOUEw1UE5seVRvVDhQSDJpZ0E0WWdkOEljeTVOUzgtbmYzMDE3LURjNXY5N05mcWRsZGdxellhM25WMkVDNHZJSU5SbzYtYkVNMTlPSHZqdTdXMDlzaEpLT09qTFJHQTE0Vm9qY0wxZVVwbnlydHM1WjUzQjgwcDBDX1NCSm44MUFiN0lTTWRtaEgyNEY4aEc2cjJoQ2xreFcyOEVzNHRkZEExRXBzWW5odnFGRk0xZjh3SjhUS1ZWck5najZvc2pkRV9uNmlMZWJpVzNHOEduR2l1UUxkbUM1aGtGMWtZd0hHeDBmbWJwVjV4WUg3dWNSLWk3MHRIYWJQRXVOeXdWcjIxRG5mSktmdHZ2TkFyN0wtWVRLTkpTSHo0bng4VkpObVNYUXJBSXprdU5pb0dQb3JtNmN4cjg1a2doVHg4WWZZTUNPMlFMSUcyd2NBdUliTHI1bjJlMEoyalZGVVc5b0NvZDFsYWVrMnZxc1B5VUNoZWNHNTlhOTRMTnZUVkpjODVhRk50S1hCMGtDbGF0bF9qTDdjQ0xJWHdRY1lJbENwbjJVUm1oMFRBdWk1S3poNldrTW1fMkg0d1lRRmJRMDVzd2EwNzByVEVqbmVYbnY0RWR5dFFIcXRxOEJmUHNHQUtUeG5adDU3bjRPNzR4T0M0OFliN0lId0J1ZGNxMHE4MkdrVHZBSEVTSW5kMjJoRFFMc05vY2VPQWpjSVhGdWtwZXJwZ0hrTUZFbGVGMkpaWmxUVXJVMm40In0",
+  "aad": "VGhlIEZlbGxvd3NoaXAgb2YgdGhlIFJpbmc",
+  "iv": "dJRPOg53vCly2rMR",
+  "ciphertext": "P2vBKFHlrr5b-qnIfMdnypXh9iOvqXE6-2bOWf_eW3Jo9RRpqnx7X1N8xIdbNuPRf_84_lGwu-jVW_ByusB_8eMzhBrAVqi2yWWCPiO4Bl4CpoKANpOz9J8SURmzgzZfXfDHDP8H3yf_byHvNd2KDd152DzSVXFtktatv7qDKD6OyACiwmNy43CLnlTW_k__9QGrtTi-XYeBFSDNmTn796-WkeVFbDW0AvZ-j_eNLOcBnUkKhX5pLVRNz7zrdOQRXJHPkZNO7aKwghkxzyakZ_qiq9-5THMz2xUExeUDfX2l0USa859NHmTaJtbSiI-drVM89P-qtk_DqaFpq0vLagj2s4LZ9zVtWBWzZXqSJcfp",
+  "tag": "x1Ueji4GiEc_kGVfl8MyKw",
+  "encrypted_key": "UqvvhXl0Z7UVEczL41I3pq-ueDjBkGhWlxyuSvSXa_mz4Ri94J3GkXKdeTRjTkyl"
+}
+</pre>
+</div>
+<figcaption><a href="#figure-23" class="selfRef">Figure 23</a>:
+<a href="#name-hpke-15-ke-flattened-jwe-js" class="selfRef">HPKE-15-KE Flattened JWE JSON Serialization</a>
+          </figcaption></figure>
+<span id="name-hpke-15-ke-jwe-compact-seri"></span><figure id="figure-24">
+          <div class="alignLeft art-text artwork" id="appendix-A.8-3.1">
+<pre>
+eyJhbGciOiJIUEtFLTE1LUtFIiwia2lkIjoicy1xdnVMR3BnaEp5dE1VSE9xODhWSHFkMGZ0b2RybzdBY1JjdEN3U3l2VSIsImVuYyI6IkEyNTZHQ00iLCJlayI6IlBoNmhlczBBRXdFb1l2WThtWmVZc28tdVVSNGtEUW91azhBS0RXSVVoVjBzQTFlUWhGSlE4cWFFU2JHV1NVbzR2WThKSkxWd0MzUnFhOXJvZzJhWDRabzFoZEtnVnBQcG9zNjJWNjc0MkRUNDY3UEhiVnJzcEt6ZjNmT0kySHhHaDFGX09LX0NnRTAyV3d0VnUtMlFkZV9IZFlOQ2tGdElyd0lZaDRFcFVSLXJmU0NIcEg4N1kyUjVpajE4ODZRSjQ3ZEJROUprU1Q2bmQ2eFVQSVplYzJETVBTQlFJaFdXLUx6TTUtQV9kaVFoeDZRUUFSd2Q3di00amNlajdQbXJ3bFZFN2NPNldpRGc0ZURydWg1bUZjWTlZbkVIRG52S0RQWm9OWDkyb0I3eW13VVU3MjR5WXg2RWVxdW4zS210ekM0V3ZQUkYtWUN0NlJxTlJvZFdZbVplUzN5bVZTcFlLQ2VzNXhxVFhoTC1CdVFhanU2d1A3MU51ajFyOThxcXFsTkNwenRCc0NZb2FFZjNoTzNyQ25BXzlwSXhLaHA5dTFrTy03MGczTnAxRkluYjZFMU5PaHJNRzRuZVhqdmpHbGNvaW9zaEtWZXNiYkdRZE9icGtINTlzUy1YTldGMWI0RERTTEpFa01aSHctZHQ0MzE0MFpiUy04NFRnSVhoemkyRzNPQ2ZMZ1M0VnA2dHJIcTAwT2poZU44T24xOU1PNy1uWFdQSjlQdExLdHV6emEzYWUxeGE1bVU2VUpKZmplUVE5akptUXJKNzBVSlU1QWlpb3dCX3Jvd2cwY0NtQzZLbTBRcVZrRkZWdTRLeVhWN0tJZUNpenc2aHpfb1FibU05blNWQ3BjX1NoU0hYYTk3MjVYRXhveDE4bG5LZ2tPY1dscFA4blhTOTl4enFhbnFTYmZCOF9UT2oyZjR1TTM4UHYzSzFlR1ZPVmtoREhPVUxIelhfWkFzTVUyTHVjOG5mMGZraEpJeGM2bk45MnhEZGU0ZllrcEJSSTNGa3lzQk5XM1RodEh4UTZPUlBmbzdBVlFVQmJwUG1LUTFzQkVqZ1JzdG5MWlFZY0ZDbDNSaTVtTl9oU051bmpzMGZuZUJwaUo1MVJxSWc2eXhMRFBWNmpnWjNLV1pwdExNT2FoU2ZfT3Z2eGxHWWJUdDM2NmRiMUhXeTIwbThsM0FaZk5KUXFrNnBqdTJMelh4bjNNTjN0Vk9Ba211LXNON1hqY3hlMDdSWWdqYUZwY2UxV0tWeTB6M3RWczNuYTZCT05nSXdvLV95N1k1b1g5azRQY2h3akZWcWR1WFlmYTAyWHVIc3lQbjNpcjE3d1pBLW5ZVnROcmlqdGJYa3BtQkMtdzFTU0dwazgxaWlXZWlJZkNEaWVQZVJsdE1pR2V5dEFKVHNsT05Sd1NRZUxhNmxEVGlZNGptWGk0SFkwSW41aDBZeUl5Z3VSUnN2SkRGSElpbWUwYzBxS001azdEVm11czlZREZXWGd2ZG1HbEtfSnhEcXE5UDhkNTZTSHRUU3NXUE1XMGhKVUFqV2ZKOF92Tm0yVXFpTGs0NExRWjJjSFVHTldqb3lCcEY1dU5RNldJTW5qM1hfUDhNWnF0VXN1aW9abFNQNnNpRFdoU0Nfa3ZlamFFdEdUZURCU09PeXd5WWtSUTVSUHpabERUZW9vbERqcEIxTGxVUlVsakhLMXNEUGtLR0lDVUFfdlRoMXAxNlJFVmIwZ0NjV3BRNU01WWFGYzJvYll0N0JKOFZBRk9Rck8yVnhUVlpBRm8zNWJ4VTJWS3BCSDJYTHZYQ01RbjAyeWVFOEVZSmtUMWlNSjBZbWhTQ0F1Y0owT1JMRmFxWGFNcG1MRjlEYUdyZkItSTM4ZWFfa0RTdkdzMHlVMWNucGVjbzh5VFNlNElyNzlnb01zV2xBZWVnIn0.6PARSehpcOLkQC1I-zPFLCCVmf6VTFyKwv00qG_1czD7RdAOpStkPKYMiCllZ5tb.wUVPBR3UswzieD2T.9zLoYiFpZSqJ2H3zt__MNYdJjlvX0YAuljzhB3zYYAkuRKJVsVvPOj36hgiY5xTmFqbxeubXnAY5VP1i1FZZWPhmzSxkNWZ5NLEH1joedrOP_BOcPovEddC3LyWpM66nBiwWIaR3lHJiottPRZ5WRJO3TAD_R76UE6TmI3TASqkL70nV1PYjvS1tbXDRw6BnX8OliqVDcDysZZ1qz8bgWJpYquIW11flBzo79GRawneXK73rwEfI8T_rY6onXLdHgytZheYnWtds7R5Vp1WnR45YYS93FFikNvjiHxxbURcjVUY1ZHhwdiZhQWOOyVQ5VGNlrzA0IYKyh7WYZiwh3twAxWEWWD1-z1EmlYkIzl7N.RyhGuoAuQ0JE7Gukl8e7xg
+</pre>
+</div>
+<figcaption><a href="#figure-24" class="selfRef">Figure 24</a>:
+<a href="#name-hpke-15-ke-jwe-compact-seri" class="selfRef">HPKE-15-KE JWE Compact Serialization</a>
+          </figcaption></figure>
+</section>
+</div>
+<div id="hpke-17-1">
+<section id="appendix-A.9">
+        <h3 id="name-hpke-17-2">
+<a href="#appendix-A.9" class="section-number selfRef">A.9. </a><a href="#name-hpke-17-2" class="section-name selfRef">HPKE-17</a>
+        </h3>
+<span id="name-hpke-17-private-jwk"></span><figure id="figure-25">
+          <div class="lang-json sourcecode" id="appendix-A.9-1.1">
+<pre>
+{
+  "kty": "AKP",
+  "alg": "HPKE-17",
+  "kid": "fLQ0Nlxp-G5Fy4TSkKJN7ype-4St2w8W-brZhABCRGA",
+  "pub": "KXVPUarEeVSJ7wXKyANSYsSFz1RZVDSMHGaZDJG6cPfEw6BR7XchFOcRMAuwkFVh8VEdjjNRKqaNilHOeBtey1SKqaxhKvs0C5IJqoKK4wQFXLMEOaamSGV1nKxbMCEvLyx1qngNEYDAKyEonipWh1k-fuVV9ScLGWjG82ahMQJH_6KB2neFI3SOjWdGxoFq0riFIRwBlmU_W2F2xDfKlavO3wteTLxaGDh1q3RCruAU4Zkru4cin1m4XPXHLKCXEXt_mFAQHzBsUWmO0lKD2npBZyE1E7xAqXqQT6fO88GArQaYIil28IGS6PwCmiwhTrZVXcgGKXaKj5gHiQNGUNC64po1RtUmOdR-MbZdn1sKqFln19ubGOPOX9M-41K2QpRP-QOYBDtAqAPPvOYwpPB7nwGU1yiG8rqVBHfKGMzL3qNTOFKWxSU3NDvCpIKdujO_A-aCO_FxLBFXiTQaFOoNyyxDzSjGqyNqYnnN2HmbRtOO2uGAVcR8H8OtvFuEdiaWTNgBI4ABSVhkCDtS0Zwv51ogbNLOCsIkugM0vkVwbVNo_UMw6UG1egstQQLNE8U1V3WDcmM6ViZjnGRrN4XKlbC2XISpmCSZh-o0IEYCvkeNLHhhyCzGKuksY6aa1ixzeFG4LSs2-qOA2wu83due4PFttKBngcwEUOZIxJYQFHFUS_s-k0SXAWeXhDpLMRZ57nYfxhpxkkmkn_YfouYP5yqJrvl4l0y6M_ErXfsOVkYDGvhhAgcv9pmxfpxRdza-5Wc0p4dCa2S5D8g1BNJrPPZ3sYBWRzk1DsIW-XCAWXfIMhYr-LSwBXZ9BaAw7WU8-kt5TmpHbVnFi_bIOBQjErCopaWbekDA0Hh9MeqK5TFzoIwEInRHBYmQecWERyaWnSdqpuqajEdBAMsqdiYilEUNbwHJyMHB5NR1d0oNhZPIqruRUWmEnSU_KjKrufqf_iyUa2dsbVk5Xltd9mPHJNEmlOhZhUyjSnlXmVXPjyrNMboqWIYjQ-EaTRGHooYIA9SXsRSQk3x4swCrtjGPTIHPfaLB64ZT0pIzcVhrruTG0ZozYqtCuAfPzyTHFGK84zw-0FEQx3pPTsd8xFzHqQePc7KsP7l5YVkM9UdwGWtbdeZJYgmJXvEfzvmPuQLDOQc-JvUbmfNUOEtTehVsSSvLFTAQstB82RsKvjOGzfmteWYTJaJGinF3kCGnOzduA_yUJyphvgC6NdzKkHnElAUC8DLJjFq5fDoTcdG-w_Zf3-VJ3grEM7lj0lIdt0yUY5IB_eIVPBaAnuu1-zrBRwKf_Rc5LLULLKN3uJYnC_N6mAU3REGouYqQAtJH3owgqOwuxJddGVCguiNgoyOw-xdYOoRU9Py7K0Cq8ihtX0k-XhhTftix5qIzHradrvOLEks0MEBc73wMklk2ZFkovQYV7IQTabCxftiFFMnGUkcUuDQz6UqhdgygwZVwWYiOkfBkhbGHZ7B-AKSAK5YVdTxxMqGibtJzdRvLX6o8sCU_snFn_rsujMs2iCes6xidvDhz6kW9U6LBqDuXOABXTTG1ZHoQk5E1szmng7bIfMyoPwUcL3elI2gn8KQPLyxbUtuKZgM_YUQl3ySf8VyJhlwymOxaB5eNBqbMiyYMjfW1zUJHM3gjrAmoq0rCjhxtVlo0UhatgDaeFEF2UZMQiPFEPThoYWh7CrI19rU6CeTFnhEPRdgAE1S0y7o0d6KyeTB5YyuVcAJeRjEoV_CQS9QazqdEc7M37lLOUnu6a9yW4NKolyd1MFlnsyDLCiZnZCNwUZmJkdZTEJOYzSkgoZFlrmIlVotOutFeQLkamuAN5QchDPNNA8HMWwGxnIg_g1KCSUGytKSyg-E3CqlYGRCa-5eiuZq8pVx6p9lM0gEWnCxk4nRHh9UIB4spOcp6HLpQPvw6AHABWpsh2Da2vRhKkLswjhKFpJJVBNllw8GNdUhrs7AqDMUwcpJLZPsvXSiaj8AD0cdXjSO2mImOkcpNGeoy7fg8PsKbWJNcyzE0aTVyRgOBvoOPtlAHiHfahxELjOnVEERT4rGZdWwTBW5uT5sdy-Hjt2VwshY",
+  "priv": "ZHQcxC28BvR3FwG0K2ou_K6z3eXI_LcwJ4-0NQbFfj7yLGqUT7-87SZf0NIgcTQfQ3BCHUhCKs4mRlIHT3JvKQ"
+}
+</pre>
+</div>
+<figcaption><a href="#figure-25" class="selfRef">Figure 25</a>:
+<a href="#name-hpke-17-private-jwk" class="selfRef">HPKE-17 Private JWK</a>
+          </figcaption></figure>
+<span id="name-hpke-17-flattened-jwe-json-"></span><figure id="figure-26">
+          <div class="lang-json sourcecode" id="appendix-A.9-2.1">
+<pre>
+{
+  "protected": "eyJhbGciOiJIUEtFLTE3Iiwia2lkIjoiZkxRME5seHAtRzVGeTRUU2tLSk43eXBlLTRTdDJ3OFctYnJaaEFCQ1JHQSJ9",
+  "aad": "VGhlIEZlbGxvd3NoaXAgb2YgdGhlIFJpbmc",
+  "encrypted_key": "Vrg84RMJ3C2xMOWgAOQD5XJs_zaTdBJSUnR5dCypaMN5V_rXUqkU-bq8AjqhPQ1CSXHt7hIagwZ29y9sASeo0d2eJYsIbwWUi7bEF632OqMORCyfd2aV51ZDKn2ntmZ8qSE_6NiE3sw4RC_kHroETLHVMIo7K9-va_K9xPLETIqHHKuUHRHgxaUA3mhheZ4Wymq6LdipaM5z36aPu5Y85GNQ8j9Y8T5q328g5Kpa8Ep6AOpDc7JeBTAat4MKOOPDqVkpT-5SZ9lSf0rkg7IcqEEm_mT7UHj6uSVRFXIY2oRPo6jEuj0rRfdzm3GruHo1SiXl1pPU15hqze30x-hTpvrh62CSdgfGs5VZ-piRSJrFZGPp7UqLKA1u7D7rrI1nMBgF6WeWH1Yi76pWE60a_sKs8AVCuUZBPU-Cq8aCLf9ZxM4vb-zlPuE1dfQ-lVUyrYviVGc_R7EgVDCGlvY64z8eNFwrajs57yAChpjtJY16Qz5GCes0cHtj7-thz6uwmAfyfufhZt-fIFQjxgoBlt6HVfw8ifHg5KJDA9H258AJPFHLIPx3LXcB6sDjRllMGITwnIvcwFjDjHtHdOA3beizli1LG2UxrZTR2MvyFwlO7zZh0vAqWzqmvaSWHshb5NQxETkwg49BZYxKThaF-7xg8PFngCMVVQe-VlBhdf8M_yL1knbehvdK40irCohAELDZwKb6gWk6HgchHR_7ZL0eNUugA8-E5imwqXg2HnglYJaNAz9OEvq0RtisOfl1eA50iz1B0WCc85NMMIdkla12IGc1oFzMs-NJqMTaQRaBym16qpqw_H9Fqg76ULhawK4q4iheayVzLEvXfYM2FMLeE7zJT2tl2zMGIGl6RLtZo39daNpM8Oc55vPIb7Kx-X0OKqyo_iQNnoFkIDRwdx5RMoTXFeTPvmaKFpimou1a4L4GMBlzQK9aaFEOLj-EaFFXrh-PyncpTzAPyzet0r8KwvVRgHp5Krkq_I4SRm_Lx-vgYnZZSrHdRbPNXHMTB-_W92Adb7-v8eFphPwJTXmXwBzaAsHauBGDcmok4O4VKxbDr8rGRsk3wO0SBIhx_RHjk1bj49isnEPU1nb6gcBSC6f6TGvQVgcHlHbPvGSuhJpK-a9q1A3owMNrLJLKl17h7kNB1dJ-wIwn2F58H30HcTyrASYfLAxlMp-fjJ5QvacL6tvTGtwn4B4HRKarLup9L29R6RIntK8UyBrD3oTdkpnSe1ST8bfSh5piS_XjE8sGFfFCvnDgFjqYqvdiVI8MqoLWIxEM3pYAm_RzzpD3NDVbzI0Yop570GTMRCnHCNB7joXHnWhJyS7WJDsEFJ97Y0e0_L6Dfh5V3pmbwlKKkg76bspz9hW_YGpnWcRaaXSis7H0Pxmo6_amm5i8-oiKwGdap-Y6toz_N8odwA_yRwHQgKXuuj_hWuejIUwKhfeLteRxu5Jewa1ZdTVhxpvXbOCeBG80400seJkjjb9BX2LLwPQKkW_E9dPaO3TiFDluoIZ66YlDGaTF3LtgnNBB5EZMKGDn_9BnJQQ3W_THd6WfHT4sHmQ4lWJESCdNHaWuYGXScGTX1GsUHTF6GDeO61HLyCWvwv22sbhYEPB1YriJEL1-dvL_s9btwsUDBt1QCZ3L5AkmB0IGGeHi2NF7Q9W3YxkWvXud-XlUnA9cZ_Sj5Y2x9ODCBYXqm1F_vigKdcwdWqxqRiVQuxop9T3wXLrmpXmw_jlRbjEh2TNm-wWlFGV8_To4W3KeyEi_EZ-Dfttbqv_RMWa6XKFGTfHB-2gnuwI1_xjfLiOgPBNbM6KNrNAg9GEHf7ANN46EHo7JDgnsWDcipJRCl2luOV23nkL_CC6hW-KZ7hgWN9IfGNgOFFZpJ-Md22VtGJdId_RED0dedUVxmjrEQALqCRQXwyg2qNez7yjC2mdGLmIoIhC4_DEM0sm9HsEhOopaC8Amo1sHoEgWuCzN78w63BA-cE1T-yIvp6H5I_pqq8Su_FRwW4i7GdUdopqJqDcFnbXhe3sXib4nhrUUvEJHn1NKEofPi88yZvWi8Cq2olRqZB1Yf5TbR_AJX-JBd0c",
+  "ciphertext": "3AT1gfMIL_AeJhNQe14_0DoN3CspZnC0yjEWQ0eh_Em6OgbFrY1g8-8guVvU-Hm7M7k5vQWT3imECM6b3z68y-CPJ3NZXBv_uBLNg-_szORWrCaozApXYq83cKEbQd9A0ttyhhtkccmPPn4U_0nV8TgjxV_nNopUmOgyQVB4qgv-Cgjxi0wLZCyMKmzzA0EFC3W83NRsV71O22OKjkPJOVLaE5Oin7w6XiE7uhs9XC0N5Z4XmB_VxFxKH71xJRqz45Kd4ZLSDJrPd8Hzzrlna7_IKgqeYlwPh6M3CX7BrgIGZMiHbOiBrNuBWt1rtptXWphSpZnLOKrAhaOlMo-wOVtEv95byS5Eh_c2vO2Y3iioCB73l17wJLoAnh9GHjqAuw"
+}
+</pre>
+</div>
+<figcaption><a href="#figure-26" class="selfRef">Figure 26</a>:
+<a href="#name-hpke-17-flattened-jwe-json-" class="selfRef">HPKE-17 Flattened JWE JSON Serialization</a>
+          </figcaption></figure>
+<span id="name-hpke-17-jwe-compact-seriali"></span><figure id="figure-27">
+          <div class="alignLeft art-text artwork" id="appendix-A.9-3.1">
+<pre>
+eyJhbGciOiJIUEtFLTE3Iiwia2lkIjoiZkxRME5seHAtRzVGeTRUU2tLSk43eXBlLTRTdDJ3OFctYnJaaEFCQ1JHQSJ9.t6LZQuSlAJwVg-biABoHOsj3GFsYlL2Krtm5RA7JXZvxzwqm4hvPZothqoz_wCq0dPNHsRBBYe6uCkhPUCcOp0oIFUKy1kE3dDD3hA8kYSRlGWa_vRcXKLtqhX5GXMSp7yaU2d8mK8a57FxYJRfx6UnOQtkzly73iRZIrDzSYDov6VyWfqcNUtJg6CbVTqTyjAVWKigvclMYF1OXXd8uVRK9wROcB6jxRCZaS8AILaOK8vPvlydmJ1RlvFauimhk1plvt9kG1wajS6uPDD6VRC3hdZx5CqQNPwSYV3nUMxT7F2M4l1Q2CVGKs3FTaUVsGoUIgmAqYpbSYsb96-ScuHdZ7FonNKQSS67fp_kQeMv9vnp8bNDWzEtLmylYm1z6P9gzVP1ADllPxEOpB_bSkSB9lc5dCWvGSUugjuqzQgnflYR42L68HSO-Fk2uR7mPXrydhteWoynn7GcTxN-v2Ovcnv3aogkKOHIbUz_zIWkiVBaQMnnx4neQXmJrCd8qubUmNQp_5fowbbcg0yh-6Y1XsuNylse6z-T3fWonwjOQ_DsaW_UW-Vll2fPTzM_0YJFjWxwwu6cMGSEFof_3IxnBzbgJuUOjftTPCdLMB-vdtZUwF597vSi_OMTVULoOjokq-8XgZOb_uqpAyoC3lA2LnNhNvJ05WeJSQpln0c2qgFKiRE6VhUNlIXqiImljsksHsDfmyFa-N7x58f-PAA2_67Af9_Ia30fgnUzNqNKzu-wzRrbcfdxS9wEgDfRCgUlRAq0QzZIqlHXzX5_ZXeOETqbAMxG4RdPzPK5rDyqt2QNlNQHs-7OOPwxgJMF4sr2WaARDxUCLRuQip-98UtZTetc2Z9oc1R69JtQMb-Y9SephaW4i_dBc2BLgUgGUBD4BEbSA-rE8ddlWgzHm7vgmfId9Jpi1NV2AxX4yoDT7zLt22H8KbWBKAGABZiSKxFKs0n3d_CMZwWlObbjbVscAVPoy6b_pjxqVlbRgNq8rw9YV1YYltYqew5FnedhLllbj4i1IxQlpJAtt8IrBDSHUYufNy_XMtVxHfiM2SNYA8uhLIFnTPFD5rfOZTzRJrGeyw_EDdHFnQueHlg_EQT9c2-ApfRM299m0gc4Rf5_p813u3ttqbCYVngC75rT4kyye4GffHnUcE3tn4Xie8VxWPXrltfFUf5roL8HpJ24VdYA7MKGnG4cHw_suig-bzEf7UTIAWCcpEwFIUoa9jn6X1KpZtGacuE44lSgCSJRx5zLBeU4mjYADMKOsLK2DTVOBN_LgiA0lA7RFlCk7L5dX5WT5F4Je-1QalM80bgemQ80ZA6sWDPN_EwKqYNfZHxhinduwcjQHzAEd62DIHLloOrKKqXweFGY6oDRAh5xtACYEJp9vfPEbZWZIyj_4yqY1209SIu1huZc2spu8dfsnhiv3RE8FtonXPKxsN6uBavJ9C7aYvXGxP4rQjmzM9caxqKi_o-QnfqAOt6YGXH7e30DojEFlR5bk6drqb3CwlmvvVGG5I4CiRz_GM7c2tQy8Nz0AYTeZ-zsy--FG8iKnFTsOWnd1WAa3PFwb9ChGskC2vsTByXphpwepjYTGCjbVDkIXNAPEZMcZQoR9DfsCnESTboxJKO_x7XSDin16abpzn9PD4gkBTndq3eJ6iT7EAJWV0hafTbLPfQ7pfsW9SbSIBjZb37LPE5wYDTyKyOR9gTXmixWSmQ8H0ZifNvqbD3i2-FXS8etHQwkv9JYjyxPTl3zrShWIXA4Z0Ig6NLPkMLNxma4LmAZ8hBKwgN290WUZuh6uxXoEUpCqJf1EvCEx0R-Z-V_C4UGo2-3N70nA0o6Ex3merREtC6rXX_SdjTdH8TLhVJ57E5CDp3b1lHGQMx8h1sJxiI9xWm22T-vkXm89L7IERUeUP9LctsOEaw_A6rxtOwQhdedwlOs8iuVpu-IrkvcRTeJjSqy0iP1GwViB69UABCBUOxfQm__nupwpbX7rIVkrtx3OOBO-jZSzvNYpplEvTllIifngKl0tvkMXtNkff8HdXd4vhm5O-vYN77VLWhSkP9_G7ukc67Nik3AmMu-TB9nsKHc.._MIcgEit6YnwALef4JWe87mLQh3WBmYcEJT5qTfLB1tl8XOc0DAVtkS2s8xBoSB-gNWWM6nFeg0Tk9KIQ6Xs_-TpROUaK0_4jNNUBUOMAiP9kKUB-rLUJdfyeHr0YM_OeFzNkFnG7MzMWnXkDQR6exo8p7x_eEKWgorKzMKQjsn42N3Dee1Gf_iY-QSEqDBnZLMVzg1EUKwOZ_mPoKjJsR9PZOJcIfpToVmG286FeM3ZIt1EB1TGr-aJzqF3oyEaps7ZxuiTuAyqjMwOVwT0uaTEnCphbveO0D6ttNmiM5fi3G530dpkp5G0BFvaybCNFzDYmX5BntnmqlwV1ZCTIdMIUoUUbNmr4VBPAuwzwtNfe24D4bvQGK4k3wKQcsWirg.
+</pre>
+</div>
+<figcaption><a href="#figure-27" class="selfRef">Figure 27</a>:
+<a href="#name-hpke-17-jwe-compact-seriali" class="selfRef">HPKE-17 JWE Compact Serialization</a>
+          </figcaption></figure>
+</section>
+</div>
+<div id="hpke-17-ke-1">
+<section id="appendix-A.10">
+        <h3 id="name-hpke-17-ke-2">
+<a href="#appendix-A.10" class="section-number selfRef">A.10. </a><a href="#name-hpke-17-ke-2" class="section-name selfRef">HPKE-17-KE</a>
+        </h3>
+<span id="name-hpke-17-ke-private-jwk"></span><figure id="figure-28">
+          <div class="lang-json sourcecode" id="appendix-A.10-1.1">
+<pre>
+{
+  "kty": "AKP",
+  "alg": "HPKE-17-KE",
+  "kid": "4LvlkRxJTt5gY3p1ZEmmjIR6oWYY_tdF_irypfnA_Jc",
+  "pub": "54S61_YIjBHHmBxFhUQR3_V-RUSlT9NuJzNhGdaxZ4FD3aN-L-UnHKcuyCWSrQjAhfZAXieVN6cuwqIp8Rt0V0Erg-QZuynOrxUCJvJuafqEjFCQWccPP4dfPfVeEZe1BrhEtQS-JzN93hVzVXkBqul5v5ULOAvOLvx73PuLwpQ1ECwDcLsqKfVG-MkU0KpuPegaWtqH0oEVrZAMd8dGdtVmIyukmgSzz3F13Mdv03FWFfbDXWl665tssSyMMTYhC_BFIoZoIgauECy194y6gFIAsmqz-fy4I0wU18WI9gtV9ihqibBS1veOVaZx2oalgpB_GEB3LSJ-SsycnxNb7TyJx0o9u5ZaFxM-lGdfT2y4I4y11UAeBtSxCfoqK5BdIUGJUeGrVmVmSatbYLSYaDVSYxR7Kog3xtOAoPjFy2kMIDTPgthTyklxJjJhcjJSmGR7hBzLDwBYY9QZqWakr9IleSJecwuaW8KTypmZIysjFMycg2EzxicoqRhocIc9HtJIdnoCB1dKwJVPUwMCmMLPMWBLC5eLXFeixYKeKlum67JIcgkU1bWRYwaAYiTG3DN_GQmB4JwvmtmWFkeSzQbHPEI1xQarPUE5C-S0mssLujWtimqRgMZJXaEMLghfLuVDamaUgBIdOuSJkZwRrbhXd3YqNapXh8FfMJZSaDWHgiZUGCBfEKQ8DHtjgCiittcNZ1UpamNdIYoeG-W7K1SW85VQ-tQ-CKEM1jdlV_MzIkRt3uFCAvQcgrdp7kVTRca9XPLMdWQnwudsTCeCyqpeSUcesQYWopMk_iZCEKsw28A_fvA1g4d4fgggroBRh8Mhu-BCujoYB2qfsDbNHXweLdK4lKxUUBy9aUxqKKBqcJK2exS2SjmsRmqU8aZD_BaU-QthGIEnuQsuJdGrNcKUyJNAXemoz1UZfsKK8CQUgLkzldfDxxV6F3oaE0BQWIk1OvozV5ULnVKldfoVg4yqWrl0v5KrAGw9-SSRIZiKY7OQxUzK2IoWowdRZirKrEsZNyArKVILfocqMENhS7M0k7swA2F1CFik1KMnkZSu4nySizxYAKFKRVsJVnpjZfy6dZYVWNpmURZ3g3eFtfY_vjiPAO0pKcxOo4pclIyR5WugsuK_NeO1SfvJbPmrDhSZdXpKe3IPdGOt0nILP7JZBXmH-EUrdIRgDmAU4VeSp9eVIjcyENQs--SR5qpozrMY-FmKnvqPrzdmbAF0s6TKDigWaPwcaPNJCcaijgU5tlRdPIUCCbW_-CfP0IljToI1_iWissxZVqesSBJXYoHFujxO_tWlRaquudVAi-gNBEXDyMpNXJiRmYGa_-uzFdARL0d5iYQAD4csp_yso6hS5VtjsKQMVXZWMRklRGqf35qzGTQc_euVH1iVBlG00hWV4XAmNrSzt7rGXJwkmrJPK_K5xsAWxQJ0mnEnPnoTyLOfp_HJKoI9WxhdxNKCZepGfQwBCTkZI4lrwTNbq7ZqXDA5l0VhmTFcFmFhkIdRYejHVTdfDxZK89FDzLcdP5Y0WrVkpqVtGCKsD2IcwQZ6hmENPwEdvpgMl8rGnbeMqqc1B3U-GzlfvDTPt7uWm6g_QsIp2oiHCGS_EuiPAfdsBBohHGN8P8QyZXgXUamgu6hkioUm7eBU2ObEQxx0fZpNu1yMyTY8EZhBH6fCqGYdvxoLcXF9YwKBDSdisLVAOwY-m2J4n6M3fuiKAAYXj6BHRfVSe0NURURNMgaKgnG60HJUkoEMTdLOfQBkqgB5W6Vj1ouClrasFHs8hnR73dcXHpsKYQQBWhmyEoofrHDOwGyIDBFRhEQtouZCdImToQOi4NrLt6gHuPoYumxWAnS85MpkOOQuvumyc2yjm6m_zSSTVxihMvIIE_PESxZEZSCtH4ARaJB8gtUxu2wn9SyNXIdF_YiP31ehtZwS5WcGU9uA9FiEHfy5nGYN3fcsyzdtSAYOkIgdNSqpgVi74VOiIoAgydgAWJPFUWx6AdwWUfVia9K7KJIlk1ckeAJRZjcCf5XNmFgwHJU27zyyTjJzJGDmtYwaPz-Yx3aADnGCHXm8VT9z5TMXANZz0sA",
+  "priv": "vnFDhaJ7PvzFCV1u4wWqBRUmIjBOTQ7rgubH-2L5xA6YXfPw5p0Y48RS7jh0yGTKannB_Z3wngWw-Swk-WNGGg"
+}
+</pre>
+</div>
+<figcaption><a href="#figure-28" class="selfRef">Figure 28</a>:
+<a href="#name-hpke-17-ke-private-jwk" class="selfRef">HPKE-17-KE Private JWK</a>
+          </figcaption></figure>
+<span id="name-hpke-17-ke-flattened-jwe-js"></span><figure id="figure-29">
+          <div class="lang-json sourcecode" id="appendix-A.10-2.1">
+<pre>
+{
+  "protected": "eyJhbGciOiJIUEtFLTE3LUtFIiwia2lkIjoiNEx2bGtSeEpUdDVnWTNwMVpFbW1qSVI2b1dZWV90ZEZfaXJ5cGZuQV9KYyIsImVuYyI6IkEyNTZHQ00iLCJlayI6IjBrT2FKNjg2VUFtSVRmT0dyZjBvWUdVRnZ4cU8weUlVaV90LWxVa3RJcjVFNHFiYm5OM3NtZmQwcFp1Q1FtbVBtT0dYVUxvMVRRX1oyMkVZeTExbFdmM3NPNU9LcTFjdU8yTXpka3lwQjRraTFFLS0xX1hOb1FVQTJjTVRnUU8yUkg0REpFaUVzekVibGpmV05LUEtoTkVLRUhLRDlCUFM4Tko4a2p1ZE5sRjJadFBRbjZteGlfVko0d1pCeGlZYnRGOGlZM2lCdlhrekxlNG00Nk93V24ydlctRUYwRXhCd3ZlMFpoYVVheVRCYUtrSERKMUl2OWIzWmVoVUdLRVZsZjFyNFV0aVBMTVpvR3l3VmVlWGRMdWYxYUpGY1dsaW5OM0ZCYUp3SEJyalduc0dXSDBFeERaYTgyQ1NSeF9JYnJQYkhkaTNpZFdGX1Zrd0RzLXUyc09oYklVSU9rNXhFZ1gwazlDRHZ5ZHdYNWVnRWpySkNhcUxBT1NSRUIwc1RHa1k1M2FvWnhvN1B1dk1xeHk3SkdLQkVFbXRDV2REMUVZR1d4bUVSTVEzejRPZUE2b2N4Q1dRc3YwdzZ2aFdpX3JRWG5kbHJFX2M4WE5FRHI5bUpBWEdVdVprMXlFakEzb01KZDBkbTVRV0VyYnFVdzNFMm0zbTNTazA5Mks1VzZLcmk4WEJ6VDc1YWNqandmMWxuT2tPWjI0djFlbFZrbVU0S3Iydkp6QnBpYTV1NUdJZlRRMExaVFU4OVdJX1RFbk83M2NYYms0UEFYQm1qUE9pc2E4Yll5NG1VWDNyRkN6UFdia29RSUkxTVJFX2l3cld4YUhCWHhpTjVNaWM2cUVvbU85bWNXNmFwZ1BEMGFXeWo3ZjZwcXFUWGgtZ0NNZ2ZYMmNaSktneGRPMHhRcnRiOHA5a1V5a0lFbUJmLTdYVDNNYkx2V0dmNGZrUmp3bjNScWFYaGZ1MEpWeFJ3ei1ubFZkZ29kSURBSVJwT3BHQ3VGMW5XS2NKUjRZREZHbFh2RXB2Ym8zRUxoVXFzV0psVWI1NkY4aWI2SFZhTGkyeVF3UTkwczdTVFlkdFh5dlRBZ2otOGU2MTNiLUFOdEQyOGlZLV90V3FfWnoyU2hvbklQR3hYcjJocFpDWERSX2tULVY3RmcyVDloejhQVUVUZDZRN052bnE4ZzZBTmVyTFpPX1hNSXdrR1o4WTdFYjRSQlBCYnljQmFmOUE0bHlzUktmanphM3NqaUg1NlhLTC14Zy1vN1dEc0ZyTUEybW1pQXY2VkFlV2NvUzhWdW5INWE2MDVCaG1UVm9WMGw0RDZDajFWbFFCX094NGNUNy1JS0o2bFhDb05pay0zaExqbXA4OXVXZmIyYmlBSmx5NF85bi05TkhmSDZYNHQ2dXFQajZRZTBDT1ZpM0UyM0Fya1NNRHgycFdCcVQxQm1CZFA1Z0VEX1Z2YWktQVoxV21SYmwwcHlaRDAxZ25oY0ZuYTBNR3dXTUg3a0tYdzVVTDBQYWxRV0ZDUmE1ZlNuQmVEVHhSWU1aZlpmeGN5eGVsWWVkSXBSY09KVHZFdklJNmtpQ3Y4Z0JjX0lKTEREUC1hblJqTDBEbEtUS0ZMcGhqQVJ4OWtycFVGa3FQMzA1a0xKd2RONlNiX2ZaZGFhSUcxR29wdmFoSUpLNmhBLW9RTTA2c1FUR29ETWhZLUVqdjhIRU9XYVNtZHVYM08tbHB3ZURIMjczTnJfSDJ5UjV3ZTU4V21PQUJZRmNWaEYxTGFlRjZLNktPSS1CWFJWVUZSQUdCVmsxWDUwWG9GczE0UkJqVjA3TV9RSGllUTFaWURRWFJXZVFHdU9PLW9FNkh5cXdfQXhKWk9rNERqOHpzXy1VOVJrbms5WVpEbTNjVWtpRzFEb0lVcGdtWG5pdUY5YkI2QnBRWUV4T2JWd3JSd1pFNVRzUGY3OFR1dDFLNFA4eTdpTHd0bkJ5TDdScm9zUDRLaXE4WEJ1dlVJdW5vYmRRUGJYWklEQk5PUFZhUDBwUUlTX3QzUEQwU3AtSmhMOUFtek1VQXhidS1ZblVyeE0zTFc4aHNJdmpGZTJkT3lyNlhOaFY0U1NtbVRvdFMxbzFCS0QxLXZZb1ZzLTAtVUJWNDJGZ2VlZGJGWWlROVJocVNkLVZzbjktZ1VJYlMxbmhJemk5bENYeFhWTFVfZ3lqVFpmMWMzX1dfVEF6QkVFbUhVODVBeUl4S0VwWWdsMjZaTjl3SEFCMnI5NnhaLTNKTThMdlpmeFhtcmRuRGxoVkNDS3Yzel9zUmhyT041UHZiUldkOFFoSmhyM29JMVBOMVJ2NmFFcll3a2dncG50dklDWS1Qckc5YlZCQ2l2Vm14QnhJYWRCOUFjNG55Ml9lU3pNOFA2WDBTRGhySVNUbUptZWlvQkpjR0FVWHZSSnlMYVZOZXNoSUxBVWFBR2djR29uREcyYW9RX3Y2UXBDNElRYzNPVTZsYlQ5M3dic09TSVNvcGlXdVZ6bGRESFN2WHNHekpTUnlySTQ1OG1fVzcwSGt6bUxCV3paWnhCWDJpWHdMNDZEZmlpdkREdlJTckRPMXlWVEczLWRDTXpyN1R5eEpEOXdia0NhRHJUdS1IYjVrVFIxZmVUN1Z1WUhqeS1FWmtjOHVqNERESzVDVHN2LV9mQnB1bEloSldURnNQaXlhbEZ4cGpWMk1sOHdXdzB2RFlSRmYtM0RVbFBEQXoyRDY4XzAyaFIzVUJ0VG1WN25pbmtxSVBKemloRkdZdGV1VSJ9",
+  "aad": "VGhlIEZlbGxvd3NoaXAgb2YgdGhlIFJpbmc",
+  "iv": "DKEmmdRsxUfnHuz-",
+  "ciphertext": "7WoLnlefEvnJasM_mEfRTIBad8Te29HdWVK7ye6VvFp_hbBy7edLrjQp2gui0Y3q9etAlAr7ctsCDZgOX3c3I4dhqB1_kp3nfYGXZA1-ZsdbMKAJnHYSfGBYAX5sWaojyxRlLSXqayU0x-wfaupYql-Dt-TUtNm-EhVWnJnFQYV-7sj0WaSiYY6_OdAweUWzV68dRwoquccuSBVQgHIiRzxtUdDmiKXcHNge3QIVoL9OaYGZEcoQD0ggOYwvlDOaahtCvuuOCfrIPEgdou2iHCs1usNpXRw9XErOuAA_ZN2HLsN3al5Kz1-ISczLpTQVfQcz_6iVNQin_kXclF-dSZy7bq3AuCMLmUkVyaA1ZQKY",
+  "tag": "pYCcSxWf066sb4E1OAF8Og",
+  "encrypted_key": "0ZKJK4gnuWTk9zkQp7K8KR_j2iXPd65SelQChhw3bgF5HZVulB9w2JXVkAr4RJVn"
+}
+</pre>
+</div>
+<figcaption><a href="#figure-29" class="selfRef">Figure 29</a>:
+<a href="#name-hpke-17-ke-flattened-jwe-js" class="selfRef">HPKE-17-KE Flattened JWE JSON Serialization</a>
+          </figcaption></figure>
+<span id="name-hpke-17-ke-jwe-compact-seri"></span><figure id="figure-30">
+          <div class="alignLeft art-text artwork" id="appendix-A.10-3.1">
+<pre>
+eyJhbGciOiJIUEtFLTE3LUtFIiwia2lkIjoiNEx2bGtSeEpUdDVnWTNwMVpFbW1qSVI2b1dZWV90ZEZfaXJ5cGZuQV9KYyIsImVuYyI6IkEyNTZHQ00iLCJlayI6IkFPVHVmWmxrWEV4TjV6Y0JodGNVNHpETGVnUFNUSHpXUFB2UHoxblFjRWRGS0JMMGVzcm9iWEc4OUVocG5UTlhvQ2FXcm1IaFRLMmNSc3N3LVFRUFRIYWJvMnVmbjhHVWl2QjhpY3dyaklWUnFQTnQ5Q1ctU0pmOGRiSExXaGJzVVRiMnd4NTVRV2pTVFVxNDQ1bFJyQ0xDeWtkbFdvUWdkenVzbmtxRVlrR3RsaE5qdklESDhWazFxYWZiVU9GUkVXbmJySnZySFZnUkVITENBNmt2RTNXc3YyWnRGakdBZ3M3NUxtRnNUb3F6YXNpUzVSdktDSGNHVlpDS2l5bnU1Tk5qRV90ZFBDYjZEQ0hIWTFfODJ3ZU1fQV9IUVlmWjVKNkFleWkzd3FFaFZiS0o0LVFzZHhLQWdyYjY3X1dPQUhNcWxHTTU0VmlJSW9MTW5feVZLSzZmTV9iU0lDN3lrRmVndU5BNGtvX0ZLa01XWk5Dak5jTGk1aEo4el9oOVNoSFhxMzhrbnZqclFrQjE0Zjd0SHJlZnN1bTQwNllLYmJILUNxR1Vkem5lWTdmVjgtdHRJa1Z0WFZ6XzJZM3BPV3RDYUY2S08ydGgtaFFJQzlkVlhydU4xcHpMUktGYnIzYmxSVzBBSXRpdm5tRWE3bFhYM25MZld3bEFJSDM3UmZBRHA2aFo1Q2hWV2hOSy1xS0hSdHluQ1Y1VXNuNXhvZ1lLOWl5ZGtTVERGSW91NFZHc0JyUkk2R2xuOENPM01iTnZlcmlXZXZmVjNfRHZGWGpmVHRiUEFGRUc3TjVOSFR2bGs0d1MyME9sRWFXVjdmZ1F0NUVlOEIwMldzdjk0a0N6UHZLdWlOU1NzYnhCOVFjc2tSUnFaUnpJR3NQdlZYMTVRX2pEU21OazcxYlQwdGczZ29FY1p0c21fdjR1NV9vbENZemdnRVo2RVVUNGJDYjFBZHZiS1otaDB6eHBhY1N4UXhoVWgzLTU5UGYxNjNJV2tBTnRUcHBaY1o4S1dJQWZYdGwxQjB4Q0YyWmFEV1V2VTFmdGpNVnVqN014czg1RlYxOFNtcG1Cc2JvM0lZa0t1SU9mUjh4Q0dSekJ2bzM2LU83WHZtaGdiZXAtYWxkWEM1RTJsdXRia2lsWGhoUHJiZy0xLUNrUGwtSTN4U1BEWUlGeDBKa25ETlJQQTBaQWJNZkNFN2pRbTZaekx2SkstLU0yelUxRlFmdGNSMFM2dlBtbUxNaHpwTU1ZSDRIRVdsVGp5b0U5SG5yWGV3QzMwbmZoR25FZXVqM3VCQVB6cUZhZGJCczdxQTdCdEdVOURuZHljR0JwMHM5Vl8zaDJvbVQxZmN1V0NBUEw2RUZuWXhzNURnWkpTcmxjTUpmamVrWXVDclU4T3B4VGN0T2t6dllwUmtMVFBWZVVPY1lWREEyWVNxb290U2E0ZGNYYjh6QThzVmp4Qjh4R0pLbGNWZ1RVTTFSOVhweVNUZ2xsM0NxbzZLbXMwd2tjYWdOWVdGSkRjeVc2SEw2dHAtUGlyS1h3aE44eVhfb3JrTzY5N2pmVDFyWHhUQTd4Z2hQRnJMdjFEZ1ZqZzdFTnZZY05zekx4MUZNNjlMTmJsYXBhZkpYT1RxcUxLRUVTU3Q5MVBPa2ptNnhZVnUweGx2LUU5U2dJNkZ4Y1ZBUDBfYkUtLTV4M01fWWl0WXJmejJyVVM4eWRlbmxVXzc4VlhSdlBKc2tZVWZyaTN0Qnp4TmtadDU2eWNIQnB5ZGp3RjNwdHNJa0xLQXRSUkV0NHRZcy1tRHpoYzdoM3ZUVXJsTk52TDU4NGhYUjR3aDhUMUlrT25XYUFnX3Ytbko4M0x3UnppeERyUmQwaEtmN2xTN2dGdXZLdUh5VmN4bDFHNzljek1fMzlZOEZVNERHMWpMOURVUWhEV3htVWRYelFyakZxaGpuemVXTXJSWmZ2N0J0ZTUwXzRXWUZkbkNwb1hnX0RKUFBRN1dKbG1PRVhDVE5hekV4bFRiY1FmN1ZJaTZfLU9aYmhFLVJVRVhKckZxdFpTenpBdGtrY1ZaN1p6NHFZTWY4MUdoRE94X2U1V3BHU0FDOVN2Q0dpdDZONUNFUHV0eWdyc1RiSkMyYVlOMm91YlVEX1BCdkJqTE5UUklaSjhzZVNadGVRRmJHR216cW1uOTdSR2xBRHdKYWlXR1Y5UXlTaEpLeElRWlNkNE51ZmtHR0w4cDE1ZDRRVmVoSjdtTGhjY1hnbV9iYnRBSURYNjlzLUhYRjUzNDJjOElZMV9pdVl1emRSWmFiYnlNdEpFT3ZjRkM0M21oZE9PQ1Z2Qzl3STBUS3hPYmhZTVBYenJORktUVXJqRmpHOEZTcHJRSHA1OVNBV0FMdVZRaDhaYmtpdHBaX3YxdFA1X0htczBVUmtYY3ZoeXpvMUdmQXJlNHU4T1FMeGdnMlEtLTBCbXpTQm16TTUydWhqeEpGUGR0VTF4aFdIaHFnUGtvcXlWXzEwX01HSHNERkxyUGJ3ektFV1pXQWNRdkdRcEtFWlNXZmFmX3VUYmwyWEJOZWhteFdSU1BIWVNOS0hLeWd2QmJacTFBRVk2QS1IWjRETDJnNHVIQ0pxeUlHc2R5MTVrQ1oxWG1VaXRsVU91X3p4N2lRYnNWa2RDVWhaT3Jpc0xJNTV6Z3kxTTlHc2dvbXpBWkRlajZhWThFNTlkSkUxUU9PY2s1Vml6OC1BZ3FGbEJWR0E5c0cySklUZzJydmp5UWQ5dkZLWDFDOV9hejRxcENHbURIWSJ9.wY5MqNTDsLKyq7Ku7pjnwe3A9YReEigkjM6PAOGs7d-GhZbGkgzr_FtCW99t9DgB.PhIsZ1Fim_QfNgBp.X6n40e18-5UK_ppiXT-UyzY8GgyapoUhgVODNEoSDHPNook1zkvtjJiEXIlz2DNE7bbr84AIFJTP8TC3C3ipl3gJeC2iM7YUGKLr3XDtm-TnLKVqvU2PciFSemkJJEyyK9wLrp_LXfMikUoBKss21FW7LMhP0Sz84P3y7dJ3iERWJaVGm-2-6IaRYqBJfiBfyZCUvWvnumua_Zw_AXPDp9CxFAW6G1JT5y_PB16A5xtKuPktXL5uY9g0lIzYDj6Qhm-8cleiDqjXMqWl0XZ2_U_1GclRYD-5gkZDust0PgL5VcCppMu4Ui08mbcQ1LSCxPmix2RBoWGtGsNdxDEymGpmUqrP_K3dtODpnGJLihLF.ojqlPCJpK6A1j-SozKzlTA
+</pre>
+</div>
+<figcaption><a href="#figure-30" class="selfRef">Figure 30</a>:
+<a href="#name-hpke-17-ke-jwe-compact-seri" class="selfRef">HPKE-17-KE JWE Compact Serialization</a>
+          </figcaption></figure>
+</section>
+</div>
+</section>
+</div>
+<div id="acknowledgments">
+<section id="appendix-B">
+      <h2 id="name-acknowledgments">
+<a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
+      </h2>
+<p id="appendix-B-1">TODO acknowledge.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="document-history">
+<section id="appendix-C">
+      <h2 id="name-document-history">
+<a href="#name-document-history" class="section-name selfRef">Document History</a>
+      </h2>
+<p id="appendix-C-1">draft-skokan-jose-hpke-pq-pqt-04<a href="#appendix-C-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-C-2.1">
+          <p id="appendix-C-2.1.1">Add Security Strength section to Security Considerations<a href="#appendix-C-2.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-C-2.2">
+          <p id="appendix-C-2.2.1">Removed ChaCha20Poly1305 HPKE AEAD algorithms<a href="#appendix-C-2.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-C-2.3">
+          <p id="appendix-C-2.3.1">Re-numbered the algorithms to leave gaps in place for
+core algorithm name alignment with COSE algorithms<a href="#appendix-C-2.3.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-C-2.4">
+          <p id="appendix-C-2.4.1">Added Hannes and Tiru as authors<a href="#appendix-C-2.4.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="appendix-C-3">draft-skokan-jose-hpke-pq-pqt-03<a href="#appendix-C-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-C-4.1">
+          <p id="appendix-C-4.1.1">Clarified "hybrid" terminology disambiguation in the Introduction<a href="#appendix-C-4.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-C-4.2">
+          <p id="appendix-C-4.2.1">Added descriptive text to Key Encryption algorithm sections<a href="#appendix-C-4.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-C-4.3">
+          <p id="appendix-C-4.3.1">Expanded Security Considerations with ML-KEM-512 omission rationale<a href="#appendix-C-4.3.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="appendix-C-5">draft-skokan-jose-hpke-pq-pqt-02<a href="#appendix-C-5" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-C-6.1">
+          <p id="appendix-C-6.1.1">Added Test Vectors appendix<a href="#appendix-C-6.1.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="appendix-C-7">draft-skokan-jose-hpke-pq-pqt-01<a href="#appendix-C-7" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-C-8.1">
+          <p id="appendix-C-8.1.1">Added example JWK representations<a href="#appendix-C-8.1.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="appendix-C-9">draft-skokan-jose-hpke-pq-pqt-00<a href="#appendix-C-9" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-C-10.1">
+          <p id="appendix-C-10.1.1">Initial draft<a href="#appendix-C-10.1.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+</section>
+</div>
+<div id="authors-addresses">
+<section id="appendix-D">
+      <h2 id="name-authors-addresses">
+<a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
+      </h2>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Filip Skokan</span></div>
+<div dir="auto" class="left"><span class="org">Okta</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:panva.ip@gmail.com" class="email">panva.ip@gmail.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Brian Campbell</span></div>
+<div dir="auto" class="left"><span class="org">Ping Identity</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:bcampbell@pingidentity.com" class="email">bcampbell@pingidentity.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Hannes Tschofenig</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:hannes.tschofenig@gmx.net" class="email">hannes.tschofenig@gmx.net</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Tirumaleswar Reddy</span></div>
+<div dir="auto" class="left"><span class="org">Nokia</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:k.tirumaleswar_reddy@nokia.com" class="email">k.tirumaleswar_reddy@nokia.com</a>
+</div>
+</address>
+</section>
+</div>
+<script>const toc = document.getElementById("toc");
+toc.querySelector("h2").addEventListener("click", e => {
+  toc.classList.toggle("active");
+});
+toc.querySelector("nav").addEventListener("click", e => {
+  toc.classList.remove("active");
+});
+</script>
+</body>
+</html>
