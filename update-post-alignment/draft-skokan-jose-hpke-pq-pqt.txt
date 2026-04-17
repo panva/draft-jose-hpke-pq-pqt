@@ -7,7 +7,7 @@ Internet-Draft                                                      Okta
 Intended status: Standards Track                             B. Campbell
 Expires: 19 October 2026                                   Ping Identity
                                                            H. Tschofenig
-                                                                        
+                                                                UniBw M.
                                                                 T. Reddy
                                                                    Nokia
                                                            17 April 2026
@@ -846,6 +846,7 @@ Authors' Addresses
 
 
    Hannes Tschofenig
+   University of the Bundeswehr Munich
    Email: hannes.tschofenig@gmx.net
 
 
