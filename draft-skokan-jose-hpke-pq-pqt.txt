@@ -5,8 +5,8 @@
 Javascript Object Signing and Encryption                       F. Skokan
 Internet-Draft                                                      Okta
 Intended status: Standards Track                             B. Campbell
-Expires: 2 September 2026                                  Ping Identity
-                                                            1 March 2026
+Expires: 19 October 2026                                   Ping Identity
+                                                           17 April 2026
 
 
               JOSE HPKE PQ & PQ/T Algorithm Registrations
@@ -52,7 +52,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 2 September 2026.
+   This Internet-Draft will expire on 19 October 2026.
 
 Copyright Notice
 
@@ -637,9 +637,9 @@ Table of Contents
    [I-D.ietf-hpke-pq]
               Barnes, R. and D. Connolly, "Post-Quantum and Post-
               Quantum/Traditional Hybrid Algorithms for HPKE", Work in
-              Progress, Internet-Draft, draft-ietf-hpke-pq-03, 6
-              November 2025, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-hpke-pq-03>.
+              Progress, Internet-Draft, draft-ietf-hpke-pq-04, 2 March
+              2026, <https://datatracker.ietf.org/doc/html/draft-ietf-
+              hpke-pq-04>.
 
    [I-D.ietf-jose-hpke-encrypt]
               Reddy.K, T., Tschofenig, H., Banerjee, A., Steele, O., and
