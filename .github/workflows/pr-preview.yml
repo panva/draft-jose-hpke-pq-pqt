@@ -23,7 +23,6 @@ jobs:
       pull-requests: write
     steps:
     - name: "Checkout"
-      if: github.event.action != 'closed'
       uses: actions/checkout@v5
 
     - name: "Build Drafts"
@@ -65,7 +64,7 @@ jobs:
           - [draft-skokan-jose-hpke-pq-pqt.txt](${{ steps.preview.outputs.preview-url }}draft-skokan-jose-hpke-pq-pqt.txt)
           - [Diff vs editor's copy](https://author-tools.ietf.org/api/iddiff?url_1=https://panva.github.io/draft-jose-hpke-pq-pqt/draft-skokan-jose-hpke-pq-pqt.txt&url_2=${{ steps.preview.outputs.preview-url }}draft-skokan-jose-hpke-pq-pqt.txt&difftype=--hwdiff)
 
-          <sub>Updated for ${{ github.event.pull_request.head.sha }}. Preview is removed when this PR is closed.</sub>
+          <sub>Updated for ${{ github.event.pull_request.head.sha }}. Links may 404 or show stale content for a minute or two while GitHub Pages finishes building. Preview is removed when this PR is closed.</sub>
 
     - name: "Comment preview removed"
       if: github.event.action == 'closed'
