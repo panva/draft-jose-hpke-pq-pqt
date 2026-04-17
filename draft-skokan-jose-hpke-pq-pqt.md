@@ -40,6 +40,8 @@ author:
     email: bcampbell@pingidentity.com
  -
     fullname: Hannes Tschofenig
+    organization: University of the Bundeswehr Munich
+    abbrev: UniBw M.
     email: hannes.tschofenig@gmx.net
  -
     fullname: Tirumaleswar Reddy
