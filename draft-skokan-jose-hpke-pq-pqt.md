@@ -53,12 +53,13 @@ normative:
 
 informative:
   RFC7518:
-  NIST-PQC-CFP:
-    title: "Submission Requirements and Evaluation Criteria for the Post-Quantum Cryptography Standardization Process"
+  I-D.ietf-pquip-pqc-engineers:
+  CNSA2.0:
+    title: "Announcing the Commercial National Security Algorithm Suite 2.0"
     author:
-      org: National Institute of Standards and Technology
-    date: 2016-12
-    target: https://csrc.nist.gov/CSRC/media/Projects/Post-Quantum-Cryptography/documents/call-for-proposals-final-dec-2016.pdf
+      org: National Security Agency
+    date: 2025-05
+    target: https://media.defense.gov/2025/May/30/2003728741/-1/-1/0/CSA_CNSA_2.0_ALGORITHMS.PDF
 
 ...
 
@@ -201,6 +202,9 @@ Examples of JWKs for each algorithm are provided in {{test-vectors}}.
 
 The security considerations of {{I-D.ietf-jose-hpke-encrypt}} and
 {{I-D.ietf-hpke-pq}} apply to this document.
+{{I-D.ietf-pquip-pqc-engineers}} provides general background on the
+threat posed by cryptographically relevant quantum computers (CRQCs),
+the properties of KEMs, and considerations for PQ/T hybrid schemes.
 
 This document does not register algorithms using ML-KEM-512. As noted
 in {{Section 3 of I-D.ietf-hpke-pq}}, given the relative novelty of
@@ -208,27 +212,42 @@ ML-KEM, there is concern that new cryptanalysis might reduce the
 security level of ML-KEM-512. Use of ML-KEM-768 or ML-KEM-1024 acts
 as a hedge against such cryptanalysis at a modest performance penalty.
 
+The PQ/T hybrid ciphersuites registered by this document are motivated
+by the PQ/T Hybrid Confidentiality property described in
+{{Section 13.1 of I-D.ietf-pquip-pqc-engineers}}: confidentiality is
+preserved as long as at least one of the component algorithms remains
+secure. The traditional component protects against unforeseen
+cryptanalysis of ML-KEM, while the post-quantum component protects
+against Harvest Now, Decrypt Later (HNDL) attacks
+({{Section 7 of I-D.ietf-pquip-pqc-engineers}}) by a future CRQC.
+
 When the Key Encryption algorithms defined in
 {{pqt-hybrid-key-encryption-table}} or {{pure-pq-key-encryption-table}}
 are used in a General JWE JSON Serialization with multiple recipients,
 all recipients MUST use a quantum-resistant Key Management algorithm.
 Including a recipient that uses a quantum-susceptible algorithm would
-allow an adversary performing a Harvest Now, Decrypt Later (HNDL)
-attack to recover the Content Encryption Key once a cryptographically
-relevant quantum computer becomes available.
+allow an adversary performing an HNDL attack to recover the Content
+Encryption Key once a CRQC becomes available; see
+{{Section 15.4 of I-D.ietf-pquip-pqc-engineers}}.
 
 ## Security Strength
 
 Ciphersuites based on ML-KEM-768 target NIST post-quantum security
-Category 3; those based on ML-KEM-1024 target Category 5 (see Section
-4.A.5 of {{NIST-PQC-CFP}}). In the PQ/T hybrid ciphersuites,
-the traditional component provides an additional classical security floor:
-P-256 and X25519 offer approximately 128-bit classical security, while P-384
-offers approximately 192-bit classical security. The -KE variants share the
-same cryptographic properties as their integrated encryption counterparts.
+level 3; those based on ML-KEM-1024 target security level 5 (see
+{{Section 11 of I-D.ietf-pquip-pqc-engineers}}).
+In the PQ/T hybrid ciphersuites, the traditional component provides an
+additional classical security floor: P-256 and X25519 offer approximately
+128-bit classical security, while P-384 offers approximately 192-bit
+classical security. The -KE variants share the same cryptographic
+properties as their integrated encryption counterparts.
 
-All ciphersuites use SHAKE256 as the KDF, aligning with the hash family used
-internally by ML-KEM, and AES-256-GCM as the AEAD.
+All ciphersuites use SHAKE256 as the KDF, aligning with the hash family
+used internally by ML-KEM, and AES-256-GCM as the AEAD. As discussed in
+{{Section 3.1 of I-D.ietf-pquip-pqc-engineers}}, symmetric primitives are
+only modestly affected by quantum attacks and doubling key sizes is not
+strictly required; AES-256-GCM is nonetheless selected to provide a
+comfortable margin consistent with security level 5 parameter sets and
+with contemporary guidance such as {{CNSA2.0}}.
 
 
 # IANA Considerations
