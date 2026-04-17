@@ -190,12 +190,15 @@ encryption algorithms defined in {{pure-pq-integrated-table}}.
 # JSON Web Key Representation
 
 Keys for the algorithms defined in this document use the "AKP" (Algorithm
-Key Pair) key type defined in {{I-D.ietf-cose-dilithium}}.
+Key Pair) key type defined in {{Section 3 of I-D.ietf-cose-dilithium}}.
+The required "alg" parameter identifies the HPKE ciphersuite as well as
+whether the key is used for Integrated Encryption or Key Encryption.
 
-For the algorithms in this document, the "pub" parameter contains the
-base64url encoding of HPKE's SerializePublicKey() output for the
-corresponding KEM, and the "priv" parameter contains the base64url encoding
-of HPKE's SerializePrivateKey() output.
+The required "pub" parameter contains the SerializePublicKey() output
+for the corresponding KEM, and for private keys the "priv" parameter
+contains the SerializePrivateKey() output, both as defined in
+{{Section 4 of !I-D.ietf-hpke-hpke}}. Both values are base64url-encoded
+({{Section 5 of !RFC4648}}) without padding.
 
 Examples of JWKs for each algorithm are provided in {{test-vectors}}.
 
