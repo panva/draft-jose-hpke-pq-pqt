@@ -229,12 +229,16 @@ Table of Contents
 4.  JSON Web Key Representation
 
    Keys for the algorithms defined in this document use the "AKP"
-   (Algorithm Key Pair) key type defined in [I-D.ietf-cose-dilithium].
+   (Algorithm Key Pair) key type defined in Section 3 of
+   [I-D.ietf-cose-dilithium].  The required "alg" parameter identifies
+   the HPKE ciphersuite as well as whether the key is used for
+   Integrated Encryption or Key Encryption.
 
-   For the algorithms in this document, the "pub" parameter contains the
-   base64url encoding of HPKE's SerializePublicKey() output for the
-   corresponding KEM, and the "priv" parameter contains the base64url
-   encoding of HPKE's SerializePrivateKey() output.
+   The required "pub" parameter contains the SerializePublicKey() output
+   for the corresponding KEM, and for private keys the "priv" parameter
+   contains the SerializePrivateKey() output, both as defined in
+   Section 4 of [I-D.ietf-hpke-hpke].  Both values are base64url-encoded
+   (Section 5 of [RFC4648]) without padding.
 
    Examples of JWKs for each algorithm are provided in Appendix A.
 
@@ -485,6 +489,13 @@ Table of Contents
               <https://datatracker.ietf.org/doc/html/draft-ietf-cose-
               dilithium-11>.
 
+   [I-D.ietf-hpke-hpke]
+              Barnes, R., Bhargavan, K., Lipp, B., and C. A. Wood,
+              "Hybrid Public Key Encryption", Work in Progress,
+              Internet-Draft, draft-ietf-hpke-hpke-03, 2 March 2026,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-hpke-
+              hpke-03>.
+
    [I-D.ietf-hpke-pq]
               Barnes, R. and D. Connolly, "Post-Quantum and Post-
               Quantum/Traditional Hybrid Algorithms for HPKE", Work in
@@ -504,6 +515,10 @@ Table of Contents
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/rfc/rfc2119>.
+
+   [RFC4648]  Josefsson, S., "The Base16, Base32, and Base64 Data
+              Encodings", RFC 4648, DOI 10.17487/RFC4648, October 2006,
+              <https://www.rfc-editor.org/rfc/rfc4648>.
 
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
