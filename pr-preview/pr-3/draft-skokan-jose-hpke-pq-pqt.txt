@@ -5,12 +5,12 @@
 Javascript Object Signing and Encryption                       F. Skokan
 Internet-Draft                                                      Okta
 Intended status: Standards Track                             B. Campbell
-Expires: 19 October 2026                                   Ping Identity
+Expires: 20 October 2026                                   Ping Identity
                                                            H. Tschofenig
                                                                 UniBw M.
                                                                 T. Reddy
                                                                    Nokia
-                                                           17 April 2026
+                                                           18 April 2026
 
 
               JOSE HPKE PQ & PQ/T Algorithm Registrations
@@ -56,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 19 October 2026.
+   This Internet-Draft will expire on 20 October 2026.
 
 Copyright Notice
 
@@ -818,14 +818,20 @@ Document History
 
    draft-skokan-jose-hpke-pq-pqt-04
 
-   *  Add Security Strength section to Security Considerations
+   *  Removed ChaCha20Poly1305 AEAD ciphersuites
 
-   *  Removed ChaCha20Poly1305 HPKE AEAD algorithms
+   *  Renumbered algorithms with intentional gaps to align identifiers
+      with COSE; added an explanatory note in IANA Considerations
 
-   *  Re-numbered the algorithms to leave gaps in place for core
-      algorithm name alignment with COSE algorithms
+   *  Added a Security Strength subsection and HNDL/multi-recipient
+      guidance to Security Considerations
 
-   *  Added Hannes and Tiru as authors
+   *  Refactored the JSON Web Key Representation section
+
+   *  Added informative references to I-D.ietf-pquip-pqc-engineers and
+      CNSA 2.0
+
+   *  Added Hannes Tschofenig and Tirumaleswar Reddy as authors
 
    draft-skokan-jose-hpke-pq-pqt-03
 
