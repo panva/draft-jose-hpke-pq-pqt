@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-04-16T00:28:30.044713+00:00",
+  "timestamp": "2026-04-19T00:25:58.422787+00:00",
   "repo": "panva/draft-jose-hpke-pq-pqt",
   "labels": [
     {
@@ -92,6 +92,95 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 2,
+      "id": "PR_kwDORIZDwc7TCJMC",
+      "title": "post-alignment updates",
+      "url": "https://github.com/panva/draft-jose-hpke-pq-pqt/pull/2",
+      "state": "CLOSED",
+      "author": "panva",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Superceded by https://github.com/panva/draft-jose-hpke-pq-pqt/pull/3",
+      "createdAt": "2026-04-16T16:25:14Z",
+      "updatedAt": "2026-04-17T08:19:02Z",
+      "baseRepository": "panva/draft-jose-hpke-pq-pqt",
+      "baseRefName": "main",
+      "baseRefOid": "c2cbe8a72b4d22da50179e2b05281562b1d3a4db",
+      "headRepository": "panva/draft-jose-hpke-pq-pqt",
+      "headRefName": "update-post-alignment",
+      "headRefOid": "bf706a412964892e566ea5c3abb29ecd8db70032",
+      "closedAt": "2026-04-17T08:17:28Z",
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "github-actions",
+          "authorAssociation": "NONE",
+          "body": ":page_facing_up: Rendered draft preview for this PR:\n\n- [draft-skokan-jose-hpke-pq-pqt.html](https://panva.github.io/draft-jose-hpke-pq-pqt/pr-preview/pr-2/draft-skokan-jose-hpke-pq-pqt.html)\n- [draft-skokan-jose-hpke-pq-pqt.txt](https://panva.github.io/draft-jose-hpke-pq-pqt/pr-preview/pr-2/draft-skokan-jose-hpke-pq-pqt.txt)\n\n<sub>Updated for bf706a412964892e566ea5c3abb29ecd8db70032. Preview is removed when this PR is closed.</sub>\n<!-- Sticky Pull Request Commentpr-preview -->",
+          "createdAt": "2026-04-17T07:52:05Z",
+          "updatedAt": "2026-04-17T07:59:09Z"
+        },
+        {
+          "author": "panva",
+          "authorAssociation": "OWNER",
+          "body": "Superceded by https://github.com/panva/draft-jose-hpke-pq-pqt/pull/3",
+          "createdAt": "2026-04-17T08:18:58Z",
+          "updatedAt": "2026-04-17T08:18:58Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDORIZDwc71uvCr",
+          "commit": {
+            "abbreviatedOid": "c5f4111"
+          },
+          "author": "bc-pi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-04-16T16:36:03Z",
+          "updatedAt": "2026-04-16T16:36:03Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "id": "PR_kwDORIZDwc7TPWj8",
+      "title": "post-alignment updates",
+      "url": "https://github.com/panva/draft-jose-hpke-pq-pqt/pull/3",
+      "state": "OPEN",
+      "author": "panva",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "- **Removed ChaCha20Poly1305 AEAD ciphersuites.** Dropped `HPKE-9`, `HPKE-9-KE`, `HPKE-11`, `HPKE-11-KE`, `HPKE-13`, `HPKE-13-KE`, `HPKE-14`, `HPKE-14-KE`, `HPKE-16`, `HPKE-16-KE`, and the ChaCha20Poly1305 variants of `HPKE-15(-KE)` / `HPKE-17(-KE)`. Remaining registrations all use AES-256-GCM.\r\n- **Intentional gaps in Algorithm Name numbering** so a given identifier (e.g. `HPKE-10`) always denotes the same HPKE KEM/KDF/AEAD combination across JOSE and COSE. Added a note in the IANA Considerations explaining the gaps.\r\n- **New \"Security Strength\" subsection** in Security Considerations covering NIST PQ security levels for ML-KEM-768/1024, classical floor provided by P-256/X25519/P-384 in the PQ/T hybrids, and rationale for SHAKE256 + AES-256-GCM (with reference to CNSA 2.0).\r\n- **Additional security considerations** motivating PQ/T hybrid confidentiality (HNDL) and requiring that in a General JWE JSON Serialization with multiple recipients, all recipients MUST use a quantum-resistant Key Management algorithm.\r\n- **Refactored JSON Web Key Representation section.** Points \"AKP\" key type to Section 3 of `I-D.ietf-cose-dilithium`; clarifies that `alg` is required and identifies both the HPKE ciphersuite and Integrated vs. Key Encryption usage; specifies `pub`/`priv` as base64url-encoded (no padding, per RFC 4648 Section 5) outputs of `SerializePublicKey()`/`SerializePrivateKey()` from Section 4 of `I-D.ietf-hpke-hpke`.\r\n- **New informative references:** `I-D.ietf-pquip-pqc-engineers` and `CNSA2.0`.\r\n- **Authors:** added Hannes Tschofenig (University of the Bundeswehr Munich) and Tirumaleswar Reddy (Nokia); updated Hannes' organization.",
+      "createdAt": "2026-04-17T08:18:41Z",
+      "updatedAt": "2026-04-18T07:57:35Z",
+      "baseRepository": "panva/draft-jose-hpke-pq-pqt",
+      "baseRefName": "main",
+      "baseRefOid": "3930772f95592a1049fcbf9a7bbebe3355b4162c",
+      "headRepository": "panva/draft-jose-hpke-pq-pqt",
+      "headRefName": "update-post-alignment",
+      "headRefOid": "f596a0f406b5ebb98d9d1681c04c390473cff3c9",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "github-actions",
+          "authorAssociation": "NONE",
+          "body": ":page_facing_up: Rendered draft preview for this PR:\n\n- [draft-skokan-jose-hpke-pq-pqt.html](https://panva.github.io/draft-jose-hpke-pq-pqt/pr-preview/pr-3/draft-skokan-jose-hpke-pq-pqt.html)\n- [draft-skokan-jose-hpke-pq-pqt.txt](https://panva.github.io/draft-jose-hpke-pq-pqt/pr-preview/pr-3/draft-skokan-jose-hpke-pq-pqt.txt)\n- [Diff vs editor's copy](https://author-tools.ietf.org/api/iddiff?url_1=https://panva.github.io/draft-jose-hpke-pq-pqt/draft-skokan-jose-hpke-pq-pqt.txt&url_2=https://panva.github.io/draft-jose-hpke-pq-pqt/pr-preview/pr-3/draft-skokan-jose-hpke-pq-pqt.txt&difftype=--hwdiff)\n\n<sub>Updated for f596a0f406b5ebb98d9d1681c04c390473cff3c9. Links may 404 or show stale content for a minute or two while GitHub Pages finishes building. Preview is removed when this PR is closed.</sub>\n<!-- Sticky Pull Request Commentpr-preview -->",
+          "createdAt": "2026-04-17T08:19:05Z",
+          "updatedAt": "2026-04-18T07:57:35Z"
+        }
+      ],
+      "reviews": []
     }
   ]
 }
