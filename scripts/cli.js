@@ -3,7 +3,7 @@
 const mdFile = process.argv.find((a, i) => i > 1 && !a.startsWith("--"));
 
 if (!mdFile) {
-  console.error("Usage: jose-hpke-pq-pqt <draft.md> [--force]");
+  console.error("Usage: draft-jose-hpke-pq-pqt <draft.md> [--force]");
   process.exit(1);
 }
 
