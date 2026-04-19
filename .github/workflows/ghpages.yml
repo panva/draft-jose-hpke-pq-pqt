@@ -14,6 +14,10 @@ on:
     - LICENSE.md
     - .gitignore
 
+concurrency:
+  group: gh-pages-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   build:
     name: "Update Editor's Copy"
