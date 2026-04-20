@@ -128,8 +128,8 @@ Content Encryption Key:
 | "alg" value | HPKE KEM                   | HPKE KDF            | HPKE AEAD              |
 | ----------- | -------------------------- | ------------------- | ---------------------- |
 | HPKE-8      | MLKEM768-P256 (`0x0050`)   | SHAKE256 (`0x0011`) | AES-256-GCM (`0x0002`) |
-| HPKE-10     | MLKEM768-X25519 (`0x647a`) | SHAKE256 (`0x0011`) | AES-256-GCM (`0x0002`) |
-| HPKE-12     | MLKEM1024-P384 (`0x0051`)  | SHAKE256 (`0x0011`) | AES-256-GCM (`0x0002`) |
+| HPKE-9      | MLKEM768-X25519 (`0x647a`) | SHAKE256 (`0x0011`) | AES-256-GCM (`0x0002`) |
+| HPKE-10     | MLKEM1024-P384 (`0x0051`)  | SHAKE256 (`0x0011`) | AES-256-GCM (`0x0002`) |
 {: #pqt-hybrid-integrated-table title="PQ/T Hybrid Integrated Encryption Algorithms" }
 
 <!-- end:table -->
@@ -148,8 +148,8 @@ integrated encryption:
 
 | "alg" value | HPKE KEM               | HPKE KDF            | HPKE AEAD              |
 | ----------- | ---------------------- | ------------------- | ---------------------- |
-| HPKE-15     | ML-KEM-768 (`0x0041`)  | SHAKE256 (`0x0011`) | AES-256-GCM (`0x0002`) |
-| HPKE-17     | ML-KEM-1024 (`0x0042`) | SHAKE256 (`0x0011`) | AES-256-GCM (`0x0002`) |
+| HPKE-12     | ML-KEM-768 (`0x0041`)  | SHAKE256 (`0x0011`) | AES-256-GCM (`0x0002`) |
+| HPKE-13     | ML-KEM-1024 (`0x0042`) | SHAKE256 (`0x0011`) | AES-256-GCM (`0x0002`) |
 {: #pure-pq-integrated-table title="Pure PQ Integrated Encryption Algorithms" }
 
 <!-- end:table -->
@@ -167,8 +167,8 @@ encryption, where HPKE encrypts the Content Encryption Key:
 | "alg" value | HPKE KEM                   | HPKE KDF            | HPKE AEAD              |
 | ----------- | -------------------------- | ------------------- | ---------------------- |
 | HPKE-8-KE   | MLKEM768-P256 (`0x0050`)   | SHAKE256 (`0x0011`) | AES-256-GCM (`0x0002`) |
-| HPKE-10-KE  | MLKEM768-X25519 (`0x647a`) | SHAKE256 (`0x0011`) | AES-256-GCM (`0x0002`) |
-| HPKE-12-KE  | MLKEM1024-P384 (`0x0051`)  | SHAKE256 (`0x0011`) | AES-256-GCM (`0x0002`) |
+| HPKE-9-KE   | MLKEM768-X25519 (`0x647a`) | SHAKE256 (`0x0011`) | AES-256-GCM (`0x0002`) |
+| HPKE-10-KE  | MLKEM1024-P384 (`0x0051`)  | SHAKE256 (`0x0011`) | AES-256-GCM (`0x0002`) |
 {: #pqt-hybrid-key-encryption-table title="PQ/T Hybrid Key Encryption Algorithms" }
 
 <!-- end:table -->
@@ -185,8 +185,8 @@ encryption:
 
 | "alg" value | HPKE KEM               | HPKE KDF            | HPKE AEAD              |
 | ----------- | ---------------------- | ------------------- | ---------------------- |
-| HPKE-15-KE  | ML-KEM-768 (`0x0041`)  | SHAKE256 (`0x0011`) | AES-256-GCM (`0x0002`) |
-| HPKE-17-KE  | ML-KEM-1024 (`0x0042`) | SHAKE256 (`0x0011`) | AES-256-GCM (`0x0002`) |
+| HPKE-12-KE  | ML-KEM-768 (`0x0041`)  | SHAKE256 (`0x0011`) | AES-256-GCM (`0x0002`) |
+| HPKE-13-KE  | ML-KEM-1024 (`0x0042`) | SHAKE256 (`0x0011`) | AES-256-GCM (`0x0002`) |
 {: #pure-pq-key-encryption-table title="Pure PQ Key Encryption Algorithms" }
 
 <!-- end:table -->
@@ -284,11 +284,11 @@ This document requests registration of the following values in the
 IANA "JSON Web Signature and Encryption Algorithms" registry
 established by {{RFC7518}}:
 
-Note: The Algorithm Name numbering has intentional gaps so that a
-given identifier (e.g. HPKE-10) always denotes the same HPKE KEM,
-KDF, and AEAD combination regardless of whether it is used in JOSE
-or COSE. The gaps correspond to algorithms registered only in COSE
-for COSE-specific needs that do not apply to JOSE.
+Note: The Algorithm Name numbering has intentional gaps so that a given
+identifier always denotes the same HPKE KEM, KDF, and AEAD combination
+regardless of whether it is used in JOSE or COSE. The gaps correspond to
+algorithms registered only in COSE for COSE-specific needs that do not
+apply to JOSE.
 
 <!-- begin:iana-registrations ; see README for regeneration instructions, do not edit -->
 
@@ -314,11 +314,33 @@ for COSE-specific needs that do not apply to JOSE.
 - Specification Document(s): {{pqt-hybrid-key-encryption-table}} of this document
 - Algorithm Analysis Document(s): {{I-D.ietf-hpke-pq}}
 
+### HPKE-9
+{: toc="exclude"}
+
+- Algorithm Name: HPKE-9
+- Algorithm Description: Integrated Encryption with HPKE using MLKEM768-X25519 KEM, SHAKE256 KDF, and AES-256-GCM AEAD
+- Algorithm Usage Location(s): "alg"
+- JOSE Implementation Requirements: Optional
+- Change Controller: IETF
+- Specification Document(s): {{pqt-hybrid-integrated-table}} of this document
+- Algorithm Analysis Document(s): {{I-D.ietf-hpke-pq}}
+
+### HPKE-9-KE
+{: toc="exclude"}
+
+- Algorithm Name: HPKE-9-KE
+- Algorithm Description: Key Encryption with HPKE using MLKEM768-X25519 KEM, SHAKE256 KDF, and AES-256-GCM AEAD
+- Algorithm Usage Location(s): "alg"
+- JOSE Implementation Requirements: Optional
+- Change Controller: IETF
+- Specification Document(s): {{pqt-hybrid-key-encryption-table}} of this document
+- Algorithm Analysis Document(s): {{I-D.ietf-hpke-pq}}
+
 ### HPKE-10
 {: toc="exclude"}
 
 - Algorithm Name: HPKE-10
-- Algorithm Description: Integrated Encryption with HPKE using MLKEM768-X25519 KEM, SHAKE256 KDF, and AES-256-GCM AEAD
+- Algorithm Description: Integrated Encryption with HPKE using MLKEM1024-P384 KEM, SHAKE256 KDF, and AES-256-GCM AEAD
 - Algorithm Usage Location(s): "alg"
 - JOSE Implementation Requirements: Optional
 - Change Controller: IETF
@@ -329,7 +351,7 @@ for COSE-specific needs that do not apply to JOSE.
 {: toc="exclude"}
 
 - Algorithm Name: HPKE-10-KE
-- Algorithm Description: Key Encryption with HPKE using MLKEM768-X25519 KEM, SHAKE256 KDF, and AES-256-GCM AEAD
+- Algorithm Description: Key Encryption with HPKE using MLKEM1024-P384 KEM, SHAKE256 KDF, and AES-256-GCM AEAD
 - Algorithm Usage Location(s): "alg"
 - JOSE Implementation Requirements: Optional
 - Change Controller: IETF
@@ -340,28 +362,6 @@ for COSE-specific needs that do not apply to JOSE.
 {: toc="exclude"}
 
 - Algorithm Name: HPKE-12
-- Algorithm Description: Integrated Encryption with HPKE using MLKEM1024-P384 KEM, SHAKE256 KDF, and AES-256-GCM AEAD
-- Algorithm Usage Location(s): "alg"
-- JOSE Implementation Requirements: Optional
-- Change Controller: IETF
-- Specification Document(s): {{pqt-hybrid-integrated-table}} of this document
-- Algorithm Analysis Document(s): {{I-D.ietf-hpke-pq}}
-
-### HPKE-12-KE
-{: toc="exclude"}
-
-- Algorithm Name: HPKE-12-KE
-- Algorithm Description: Key Encryption with HPKE using MLKEM1024-P384 KEM, SHAKE256 KDF, and AES-256-GCM AEAD
-- Algorithm Usage Location(s): "alg"
-- JOSE Implementation Requirements: Optional
-- Change Controller: IETF
-- Specification Document(s): {{pqt-hybrid-key-encryption-table}} of this document
-- Algorithm Analysis Document(s): {{I-D.ietf-hpke-pq}}
-
-### HPKE-15
-{: toc="exclude"}
-
-- Algorithm Name: HPKE-15
 - Algorithm Description: Integrated Encryption with HPKE using ML-KEM-768 KEM, SHAKE256 KDF, and AES-256-GCM AEAD
 - Algorithm Usage Location(s): "alg"
 - JOSE Implementation Requirements: Optional
@@ -369,10 +369,10 @@ for COSE-specific needs that do not apply to JOSE.
 - Specification Document(s): {{pure-pq-integrated-table}} of this document
 - Algorithm Analysis Document(s): {{I-D.ietf-hpke-pq}}
 
-### HPKE-15-KE
+### HPKE-12-KE
 {: toc="exclude"}
 
-- Algorithm Name: HPKE-15-KE
+- Algorithm Name: HPKE-12-KE
 - Algorithm Description: Key Encryption with HPKE using ML-KEM-768 KEM, SHAKE256 KDF, and AES-256-GCM AEAD
 - Algorithm Usage Location(s): "alg"
 - JOSE Implementation Requirements: Optional
@@ -380,10 +380,10 @@ for COSE-specific needs that do not apply to JOSE.
 - Specification Document(s): {{pure-pq-key-encryption-table}} of this document
 - Algorithm Analysis Document(s): {{I-D.ietf-hpke-pq}}
 
-### HPKE-17
+### HPKE-13
 {: toc="exclude"}
 
-- Algorithm Name: HPKE-17
+- Algorithm Name: HPKE-13
 - Algorithm Description: Integrated Encryption with HPKE using ML-KEM-1024 KEM, SHAKE256 KDF, and AES-256-GCM AEAD
 - Algorithm Usage Location(s): "alg"
 - JOSE Implementation Requirements: Optional
@@ -391,10 +391,10 @@ for COSE-specific needs that do not apply to JOSE.
 - Specification Document(s): {{pure-pq-integrated-table}} of this document
 - Algorithm Analysis Document(s): {{I-D.ietf-hpke-pq}}
 
-### HPKE-17-KE
+### HPKE-13-KE
 {: toc="exclude"}
 
-- Algorithm Name: HPKE-17-KE
+- Algorithm Name: HPKE-13-KE
 - Algorithm Description: Key Encryption with HPKE using ML-KEM-1024 KEM, SHAKE256 KDF, and AES-256-GCM AEAD
 - Algorithm Usage Location(s): "alg"
 - JOSE Implementation Requirements: Optional
@@ -449,6 +449,42 @@ Additional Authenticated Data, and a JWE Compact Serialization example are provi
 {::include examples/jwe/HPKE-8-KE-compact.txt}
 ~~~
 {: title="HPKE-8-KE JWE Compact Serialization"}
+
+## HPKE-9
+{: toc="exclude"}
+
+~~~ json
+{::include examples/jwks/HPKE-9.json}
+~~~
+{: title="HPKE-9 Private JWK"}
+
+~~~ json
+{::include examples/jwe/HPKE-9-flattened.json}
+~~~
+{: title="HPKE-9 Flattened JWE JSON Serialization"}
+
+~~~
+{::include examples/jwe/HPKE-9-compact.txt}
+~~~
+{: title="HPKE-9 JWE Compact Serialization"}
+
+## HPKE-9-KE
+{: toc="exclude"}
+
+~~~ json
+{::include examples/jwks/HPKE-9-KE.json}
+~~~
+{: title="HPKE-9-KE Private JWK"}
+
+~~~ json
+{::include examples/jwe/HPKE-9-KE-flattened.json}
+~~~
+{: title="HPKE-9-KE Flattened JWE JSON Serialization"}
+
+~~~
+{::include examples/jwe/HPKE-9-KE-compact.txt}
+~~~
+{: title="HPKE-9-KE JWE Compact Serialization"}
 
 ## HPKE-10
 {: toc="exclude"}
@@ -522,77 +558,41 @@ Additional Authenticated Data, and a JWE Compact Serialization example are provi
 ~~~
 {: title="HPKE-12-KE JWE Compact Serialization"}
 
-## HPKE-15
+## HPKE-13
 {: toc="exclude"}
 
 ~~~ json
-{::include examples/jwks/HPKE-15.json}
+{::include examples/jwks/HPKE-13.json}
 ~~~
-{: title="HPKE-15 Private JWK"}
+{: title="HPKE-13 Private JWK"}
 
 ~~~ json
-{::include examples/jwe/HPKE-15-flattened.json}
+{::include examples/jwe/HPKE-13-flattened.json}
 ~~~
-{: title="HPKE-15 Flattened JWE JSON Serialization"}
+{: title="HPKE-13 Flattened JWE JSON Serialization"}
 
 ~~~
-{::include examples/jwe/HPKE-15-compact.txt}
+{::include examples/jwe/HPKE-13-compact.txt}
 ~~~
-{: title="HPKE-15 JWE Compact Serialization"}
+{: title="HPKE-13 JWE Compact Serialization"}
 
-## HPKE-15-KE
+## HPKE-13-KE
 {: toc="exclude"}
 
 ~~~ json
-{::include examples/jwks/HPKE-15-KE.json}
+{::include examples/jwks/HPKE-13-KE.json}
 ~~~
-{: title="HPKE-15-KE Private JWK"}
+{: title="HPKE-13-KE Private JWK"}
 
 ~~~ json
-{::include examples/jwe/HPKE-15-KE-flattened.json}
+{::include examples/jwe/HPKE-13-KE-flattened.json}
 ~~~
-{: title="HPKE-15-KE Flattened JWE JSON Serialization"}
+{: title="HPKE-13-KE Flattened JWE JSON Serialization"}
 
 ~~~
-{::include examples/jwe/HPKE-15-KE-compact.txt}
+{::include examples/jwe/HPKE-13-KE-compact.txt}
 ~~~
-{: title="HPKE-15-KE JWE Compact Serialization"}
-
-## HPKE-17
-{: toc="exclude"}
-
-~~~ json
-{::include examples/jwks/HPKE-17.json}
-~~~
-{: title="HPKE-17 Private JWK"}
-
-~~~ json
-{::include examples/jwe/HPKE-17-flattened.json}
-~~~
-{: title="HPKE-17 Flattened JWE JSON Serialization"}
-
-~~~
-{::include examples/jwe/HPKE-17-compact.txt}
-~~~
-{: title="HPKE-17 JWE Compact Serialization"}
-
-## HPKE-17-KE
-{: toc="exclude"}
-
-~~~ json
-{::include examples/jwks/HPKE-17-KE.json}
-~~~
-{: title="HPKE-17-KE Private JWK"}
-
-~~~ json
-{::include examples/jwe/HPKE-17-KE-flattened.json}
-~~~
-{: title="HPKE-17-KE Flattened JWE JSON Serialization"}
-
-~~~
-{::include examples/jwe/HPKE-17-KE-compact.txt}
-~~~
-{: title="HPKE-17-KE JWE Compact Serialization"}
+{: title="HPKE-13-KE JWE Compact Serialization"}
 
 <!-- end:test-vectors -->
 
