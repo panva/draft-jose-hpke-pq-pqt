@@ -55,6 +55,7 @@ normative:
 
 informative:
   RFC7518:
+  RFC9794:
   I-D.ietf-pquip-pqc-engineers:
   CNSA2.0:
     title: "Announcing the Commercial National Security Algorithm Suite 2.0"
@@ -94,6 +95,12 @@ encryption.
 
 {::boilerplate bcp14-tagged}
 
+This document uses the terms "Traditional Algorithm", "Post-Quantum Algorithm",
+"PQ/T Hybrid Scheme", and "PQ/T Hybrid KEM" as defined in {{RFC9794}}. The
+term "pure post-quantum" is used in this document to refer to a
+single-algorithm scheme using only a post-quantum algorithm, with no
+traditional component.
+
 
 # Algorithm Identifiers {#algorithm-identifiers}
 
@@ -127,9 +134,10 @@ Content Encryption Key:
 
 <!-- end:table -->
 
-These algorithms combine ML-KEM with a traditional elliptic curve algorithm in a PQ/T
-hybrid KEM construction, with the goal that compromise of either the post-quantum or
-the traditional component alone does not undermine the security of the resulting encryption.
+These algorithms combine ML-KEM with a traditional elliptic curve algorithm in a
+PQ/T hybrid KEM, with the goal that compromise of either the post-quantum or
+the traditional component alone does not undermine the security of the resulting
+encryption.
 
 ## Pure PQ Integrated Encryption Algorithms
 
@@ -218,8 +226,8 @@ security level of ML-KEM-512. Use of ML-KEM-768 or ML-KEM-1024 acts
 as a hedge against such cryptanalysis at a modest performance penalty.
 
 The PQ/T hybrid ciphersuites registered by this document are motivated
-by the PQ/T Hybrid Confidentiality property described in
-{{Section 13.1 of I-D.ietf-pquip-pqc-engineers}}: confidentiality is
+by the PQ/T Hybrid Confidentiality property ({{Section 5 of RFC9794}},
+{{Section 13.1 of I-D.ietf-pquip-pqc-engineers}}): confidentiality is
 preserved as long as at least one of the component algorithms remains
 secure. The traditional component protects against unforeseen
 cryptanalysis of ML-KEM, while the post-quantum component protects
