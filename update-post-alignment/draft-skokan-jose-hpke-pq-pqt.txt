@@ -5,12 +5,12 @@
 Javascript Object Signing and Encryption                       F. Skokan
 Internet-Draft                                                      Okta
 Intended status: Standards Track                             B. Campbell
-Expires: 21 October 2026                                   Ping Identity
+Expires: 22 October 2026                                   Ping Identity
                                                            H. Tschofenig
                                                                 UniBw M.
                                                                 T. Reddy
                                                                    Nokia
-                                                           19 April 2026
+                                                           20 April 2026
 
 
               JOSE HPKE PQ & PQ/T Algorithm Registrations
@@ -56,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 October 2026.
+   This Internet-Draft will expire on 22 October 2026.
 
 Copyright Notice
 
@@ -264,7 +264,16 @@ Table of Contents
    secure.  The traditional component protects against unforeseen
    cryptanalysis of ML-KEM, while the post-quantum component protects
    against Harvest Now, Decrypt Later (HNDL) attacks (Section 7 of
-   [I-D.ietf-pquip-pqc-engineers]) by a future CRQC.
+   [I-D.ietf-pquip-pqc-engineers]) by a future CRQC.  PQ/T hybrid
+   ciphersuites are generally preferred for this reason during the
+   transition to post-quantum cryptography.
+
+   The pure PQ ciphersuites are registered to accommodate deployments
+   with regulatory or compliance mandates that require the exclusive use
+   of post-quantum algorithms, such as those governed by the Commercial
+   National Security Algorithm Suite 2.0 [CNSA2.0], as well as
+   deployments where the size or performance overhead of a traditional
+   component is undesirable.
 
    When the Key Encryption algorithms defined in Table 3 or Table 4 are
    used in a General JWE JSON Serialization with multiple recipients,

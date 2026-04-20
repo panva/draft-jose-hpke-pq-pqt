@@ -1062,7 +1062,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Skokan, et al.</td>
-<td class="center">Expires 21 October 2026</td>
+<td class="center">Expires 22 October 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1075,12 +1075,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-skokan-jose-hpke-pq-pqt-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-04-19" class="published">19 April 2026</time>
+<time datetime="2026-04-20" class="published">20 April 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-10-21">21 October 2026</time></dd>
+<dd class="expires"><time datetime="2026-10-22">22 October 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1144,7 +1144,7 @@ hybrid algorithm identifiers for use with JSON Object Signing and Encryption
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 21 October 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 22 October 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1505,15 +1505,23 @@ preserved as long as at least one of the component algorithms remains
 secure. The traditional component protects against unforeseen
 cryptanalysis of ML-KEM, while the post-quantum component protects
 against Harvest Now, Decrypt Later (HNDL) attacks
-(<span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-pquip-pqc-engineers-14#section-7" class="relref">Section 7</a> of [<a href="#I-D.ietf-pquip-pqc-engineers" class="cite xref">I-D.ietf-pquip-pqc-engineers</a>]</span>) by a future CRQC.<a href="#section-5-3" class="pilcrow">¶</a></p>
-<p id="section-5-4">When the Key Encryption algorithms defined in
+(<span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-pquip-pqc-engineers-14#section-7" class="relref">Section 7</a> of [<a href="#I-D.ietf-pquip-pqc-engineers" class="cite xref">I-D.ietf-pquip-pqc-engineers</a>]</span>) by a future CRQC.
+PQ/T hybrid ciphersuites are generally preferred for this reason during
+the transition to post-quantum cryptography.<a href="#section-5-3" class="pilcrow">¶</a></p>
+<p id="section-5-4">The pure PQ ciphersuites are registered to accommodate deployments with
+regulatory or compliance mandates that require the exclusive use of
+post-quantum algorithms, such as those governed by the Commercial
+National Security Algorithm Suite 2.0 <span>[<a href="#CNSA2.0" class="cite xref">CNSA2.0</a>]</span>, as well as
+deployments where the size or performance overhead of a traditional
+component is undesirable.<a href="#section-5-4" class="pilcrow">¶</a></p>
+<p id="section-5-5">When the Key Encryption algorithms defined in
 <a href="#pqt-hybrid-key-encryption-table" class="auto internal xref">Table 3</a> or <a href="#pure-pq-key-encryption-table" class="auto internal xref">Table 4</a>
 are used in a General JWE JSON Serialization with multiple recipients,
 all recipients <span class="bcp14">MUST</span> use a quantum-resistant Key Management algorithm.
 Including a recipient that uses a quantum-susceptible algorithm would
 allow an adversary performing an HNDL attack to recover the Content
 Encryption Key once a CRQC becomes available; see
-<span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-pquip-pqc-engineers-14#section-15.4" class="relref">Section 15.4</a> of [<a href="#I-D.ietf-pquip-pqc-engineers" class="cite xref">I-D.ietf-pquip-pqc-engineers</a>]</span>.<a href="#section-5-4" class="pilcrow">¶</a></p>
+<span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-pquip-pqc-engineers-14#section-15.4" class="relref">Section 15.4</a> of [<a href="#I-D.ietf-pquip-pqc-engineers" class="cite xref">I-D.ietf-pquip-pqc-engineers</a>]</span>.<a href="#section-5-5" class="pilcrow">¶</a></p>
 <div id="security-strength">
 <section id="section-5.1">
         <h3 id="name-security-strength">
