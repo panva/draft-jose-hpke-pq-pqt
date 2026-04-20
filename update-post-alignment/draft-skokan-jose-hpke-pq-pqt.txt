@@ -121,6 +121,12 @@ Table of Contents
    BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
+   This document uses the terms "Traditional Algorithm", "Post-Quantum
+   Algorithm", "PQ/T Hybrid Scheme", and "PQ/T Hybrid KEM" as defined in
+   [RFC9794].  The term "pure post-quantum" is used in this document to
+   refer to a single-algorithm scheme using only a post-quantum
+   algorithm, with no traditional component.
+
 3.  Algorithm Identifiers
 
    This section defines the algorithm identifiers for PQ and PQ/T HPKE-
@@ -159,9 +165,9 @@ Table of Contents
            Table 1: PQ/T Hybrid Integrated Encryption Algorithms
 
    These algorithms combine ML-KEM with a traditional elliptic curve
-   algorithm in a PQ/T hybrid KEM construction, with the goal that
-   compromise of either the post-quantum or the traditional component
-   alone does not undermine the security of the resulting encryption.
+   algorithm in a PQ/T hybrid KEM, with the goal that compromise of
+   either the post-quantum or the traditional component alone does not
+   undermine the security of the resulting encryption.
 
 3.2.  Pure PQ Integrated Encryption Algorithms
 
@@ -258,15 +264,15 @@ Table of Contents
    penalty.
 
    The PQ/T hybrid ciphersuites registered by this document are
-   motivated by the PQ/T Hybrid Confidentiality property described in
-   Section 13.1 of [I-D.ietf-pquip-pqc-engineers]: confidentiality is
-   preserved as long as at least one of the component algorithms remains
-   secure.  The traditional component protects against unforeseen
-   cryptanalysis of ML-KEM, while the post-quantum component protects
-   against Harvest Now, Decrypt Later (HNDL) attacks (Section 7 of
-   [I-D.ietf-pquip-pqc-engineers]) by a future CRQC.  PQ/T hybrid
-   ciphersuites are generally preferred for this reason during the
-   transition to post-quantum cryptography.
+   motivated by the PQ/T Hybrid Confidentiality property (Section 5 of
+   [RFC9794], Section 13.1 of [I-D.ietf-pquip-pqc-engineers]):
+   confidentiality is preserved as long as at least one of the component
+   algorithms remains secure.  The traditional component protects
+   against unforeseen cryptanalysis of ML-KEM, while the post-quantum
+   component protects against Harvest Now, Decrypt Later (HNDL) attacks
+   (Section 7 of [I-D.ietf-pquip-pqc-engineers]) by a future CRQC.  PQ/T
+   hybrid ciphersuites are generally preferred for this reason during
+   the transition to post-quantum cryptography.
 
    The pure PQ ciphersuites are registered to accommodate deployments
    with regulatory or compliance mandates that require the exclusive use
@@ -551,6 +557,11 @@ Table of Contents
    [RFC7518]  Jones, M., "JSON Web Algorithms (JWA)", RFC 7518,
               DOI 10.17487/RFC7518, May 2015,
               <https://www.rfc-editor.org/rfc/rfc7518>.
+
+   [RFC9794]  Driscoll, F., Parsons, M., and B. Hale, "Terminology for
+              Post-Quantum Traditional Hybrid Schemes", RFC 9794,
+              DOI 10.17487/RFC9794, June 2025,
+              <https://www.rfc-editor.org/rfc/rfc9794>.
 
 Appendix A.  Test Vectors
 
