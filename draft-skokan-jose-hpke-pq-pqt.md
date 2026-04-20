@@ -269,7 +269,11 @@ used internally by ML-KEM, and AES-256-GCM as the AEAD. As discussed in
 only modestly affected by quantum attacks and doubling key sizes is not
 strictly required; AES-256-GCM is nonetheless selected to provide a
 comfortable margin consistent with security level 5 parameter sets and
-with contemporary guidance such as {{CNSA2.0}}.
+with contemporary guidance such as {{CNSA2.0}}. AES-256-GCM is used as
+the sole AEAD to minimize the number of ciphersuites and reduce
+implementation complexity; its widespread hardware acceleration and
+broad deployment make it a reasonable single choice for all ciphersuites
+defined in this document.
 
 
 # IANA Considerations
@@ -607,6 +611,7 @@ draft-skokan-jose-hpke-pq-pqt-04
   COSE; added an explanatory note in IANA Considerations
 - Added a Security Strength subsection and HNDL/multi-recipient
   guidance to Security Considerations
+- Added rationale for selecting AES-256-GCM as the sole AEAD
 - Refactored the JSON Web Key Representation section
 - Added informative references to I-D.ietf-pquip-pqc-engineers,
   RFC 9794, and CNSA 2.0
