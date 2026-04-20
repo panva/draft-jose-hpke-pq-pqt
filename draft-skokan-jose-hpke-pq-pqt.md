@@ -608,8 +608,11 @@ draft-skokan-jose-hpke-pq-pqt-04
 - Added a Security Strength subsection and HNDL/multi-recipient
   guidance to Security Considerations
 - Refactored the JSON Web Key Representation section
-- Added informative references to I-D.ietf-pquip-pqc-engineers and
-  CNSA 2.0
+- Added informative references to I-D.ietf-pquip-pqc-engineers,
+  RFC 9794, and CNSA 2.0
+- Adopted RFC 9794 terminology in Conventions and Definitions
+- Added rationale for registering both PQ/T hybrid and pure PQ
+  ciphersuites in Security Considerations
 - Added Hannes Tschofenig and Tirumaleswar Reddy as authors
 
 draft-skokan-jose-hpke-pq-pqt-03
