@@ -1547,7 +1547,11 @@ used internally by ML-KEM, and AES-256-GCM as the AEAD. As discussed in
 only modestly affected by quantum attacks and doubling key sizes is not
 strictly required; AES-256-GCM is nonetheless selected to provide a
 comfortable margin consistent with security level 5 parameter sets and
-with contemporary guidance such as <span>[<a href="#CNSA2.0" class="cite xref">CNSA2.0</a>]</span>.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
+with contemporary guidance such as <span>[<a href="#CNSA2.0" class="cite xref">CNSA2.0</a>]</span>. AES-256-GCM is used as
+the sole AEAD to minimize the number of ciphersuites and reduce
+implementation complexity; its widespread hardware acceleration and
+broad deployment make it a reasonable single choice for all ciphersuites
+defined in this document.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2440,21 +2444,24 @@ COSE; added an explanatory note in IANA Considerations<a href="#appendix-C-2.2.1
 guidance to Security Considerations<a href="#appendix-C-2.3.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-C-2.4">
-          <p id="appendix-C-2.4.1">Refactored the JSON Web Key Representation section<a href="#appendix-C-2.4.1" class="pilcrow">¶</a></p>
+          <p id="appendix-C-2.4.1">Added rationale for selecting AES-256-GCM as the sole AEAD<a href="#appendix-C-2.4.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-C-2.5">
-          <p id="appendix-C-2.5.1">Added informative references to I-D.ietf-pquip-pqc-engineers,
-RFC 9794, and CNSA 2.0<a href="#appendix-C-2.5.1" class="pilcrow">¶</a></p>
+          <p id="appendix-C-2.5.1">Refactored the JSON Web Key Representation section<a href="#appendix-C-2.5.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-C-2.6">
-          <p id="appendix-C-2.6.1">Adopted RFC 9794 terminology in Conventions and Definitions<a href="#appendix-C-2.6.1" class="pilcrow">¶</a></p>
+          <p id="appendix-C-2.6.1">Added informative references to I-D.ietf-pquip-pqc-engineers,
+RFC 9794, and CNSA 2.0<a href="#appendix-C-2.6.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-C-2.7">
-          <p id="appendix-C-2.7.1">Added rationale for registering both PQ/T hybrid and pure PQ
-ciphersuites in Security Considerations<a href="#appendix-C-2.7.1" class="pilcrow">¶</a></p>
+          <p id="appendix-C-2.7.1">Adopted RFC 9794 terminology in Conventions and Definitions<a href="#appendix-C-2.7.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-C-2.8">
-          <p id="appendix-C-2.8.1">Added Hannes Tschofenig and Tirumaleswar Reddy as authors<a href="#appendix-C-2.8.1" class="pilcrow">¶</a></p>
+          <p id="appendix-C-2.8.1">Added rationale for registering both PQ/T hybrid and pure PQ
+ciphersuites in Security Considerations<a href="#appendix-C-2.8.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-C-2.9">
+          <p id="appendix-C-2.9.1">Added Hannes Tschofenig and Tirumaleswar Reddy as authors<a href="#appendix-C-2.9.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="appendix-C-3">draft-skokan-jose-hpke-pq-pqt-03<a href="#appendix-C-3" class="pilcrow">¶</a></p>

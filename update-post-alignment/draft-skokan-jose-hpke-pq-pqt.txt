@@ -307,7 +307,11 @@ Table of Contents
    key sizes is not strictly required; AES-256-GCM is nonetheless
    selected to provide a comfortable margin consistent with security
    level 5 parameter sets and with contemporary guidance such as
-   [CNSA2.0].
+   [CNSA2.0].  AES-256-GCM is used as the sole AEAD to minimize the
+   number of ciphersuites and reduce implementation complexity; its
+   widespread hardware acceleration and broad deployment make it a
+   reasonable single choice for all ciphersuites defined in this
+   document.
 
 6.  IANA Considerations
 
@@ -845,6 +849,8 @@ Document History
 
    *  Added a Security Strength subsection and HNDL/multi-recipient
       guidance to Security Considerations
+
+   *  Added rationale for selecting AES-256-GCM as the sole AEAD
 
    *  Refactored the JSON Web Key Representation section
 
