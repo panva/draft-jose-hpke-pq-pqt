@@ -225,6 +225,15 @@ secure. The traditional component protects against unforeseen
 cryptanalysis of ML-KEM, while the post-quantum component protects
 against Harvest Now, Decrypt Later (HNDL) attacks
 ({{Section 7 of I-D.ietf-pquip-pqc-engineers}}) by a future CRQC.
+PQ/T hybrid ciphersuites are generally preferred for this reason during
+the transition to post-quantum cryptography.
+
+The pure PQ ciphersuites are registered to accommodate deployments with
+regulatory or compliance mandates that require the exclusive use of
+post-quantum algorithms, such as those governed by the Commercial
+National Security Algorithm Suite 2.0 {{CNSA2.0}}, as well as
+deployments where the size or performance overhead of a traditional
+component is undesirable.
 
 When the Key Encryption algorithms defined in
 {{pqt-hybrid-key-encryption-table}} or {{pure-pq-key-encryption-table}}
