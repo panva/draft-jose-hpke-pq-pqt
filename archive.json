@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-04-19T00:25:58.422787+00:00",
+  "timestamp": "2026-04-21T00:27:18.517182+00:00",
   "repo": "panva/draft-jose-hpke-pq-pqt",
   "labels": [
     {
@@ -158,15 +158,15 @@
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
-      "body": "- **Removed ChaCha20Poly1305 AEAD ciphersuites.** Dropped `HPKE-9`, `HPKE-9-KE`, `HPKE-11`, `HPKE-11-KE`, `HPKE-13`, `HPKE-13-KE`, `HPKE-14`, `HPKE-14-KE`, `HPKE-16`, `HPKE-16-KE`, and the ChaCha20Poly1305 variants of `HPKE-15(-KE)` / `HPKE-17(-KE)`. Remaining registrations all use AES-256-GCM.\r\n- **Intentional gaps in Algorithm Name numbering** so a given identifier (e.g. `HPKE-10`) always denotes the same HPKE KEM/KDF/AEAD combination across JOSE and COSE. Added a note in the IANA Considerations explaining the gaps.\r\n- **New \"Security Strength\" subsection** in Security Considerations covering NIST PQ security levels for ML-KEM-768/1024, classical floor provided by P-256/X25519/P-384 in the PQ/T hybrids, and rationale for SHAKE256 + AES-256-GCM (with reference to CNSA 2.0).\r\n- **Additional security considerations** motivating PQ/T hybrid confidentiality (HNDL) and requiring that in a General JWE JSON Serialization with multiple recipients, all recipients MUST use a quantum-resistant Key Management algorithm.\r\n- **Refactored JSON Web Key Representation section.** Points \"AKP\" key type to Section 3 of `I-D.ietf-cose-dilithium`; clarifies that `alg` is required and identifies both the HPKE ciphersuite and Integrated vs. Key Encryption usage; specifies `pub`/`priv` as base64url-encoded (no padding, per RFC 4648 Section 5) outputs of `SerializePublicKey()`/`SerializePrivateKey()` from Section 4 of `I-D.ietf-hpke-hpke`.\r\n- **New informative references:** `I-D.ietf-pquip-pqc-engineers` and `CNSA2.0`.\r\n- **Authors:** added Hannes Tschofenig (University of the Bundeswehr Munich) and Tirumaleswar Reddy (Nokia); updated Hannes' organization.",
+      "body": "- **Removed ChaCha20Poly1305 AEAD ciphersuites.** Remaining registrations all use AES-256-GCM.\r\n- **Intentional gaps in Algorithm Name numbering** so a given identifier always denotes the same HPKE KEM/KDF/AEAD combination across JOSE and COSE. Added a note in the IANA Considerations explaining the gaps.\r\n- **New \"Security Strength\" subsection** in Security Considerations covering NIST PQ security levels for ML-KEM-768/1024, classical floor provided by P-256/X25519/P-384 in the PQ/T hybrids, and rationale for SHAKE256 + AES-256-GCM (with reference to CNSA 2.0). Also explains why AES-256-GCM was selected as the sole AEAD (minimize ciphersuite count, hardware acceleration, broad deployment).\r\n- **Additional security considerations** motivating PQ/T hybrid confidentiality (HNDL) with reference to RFC 9794 Section 5 and `I-D.ietf-pquip-pqc-engineers` Section 13.1, and requiring that in a General JWE JSON Serialization with multiple recipients, all recipients MUST use a quantum-resistant Key Management algorithm.\r\n- **Rationale for registering both families.** Added text explaining why PQ/T hybrid ciphersuites are generally preferred, and why pure PQ ciphersuites are also registered (regulatory/compliance mandates such as CNSA 2.0, and deployments where the overhead of a traditional component is undesirable).\r\n- **RFC 9794 terminology adopted** in Conventions and Definitions for \"Traditional Algorithm\", \"Post-Quantum Algorithm\", \"PQ/T Hybrid Scheme\", and \"PQ/T Hybrid KEM\"; the local term \"pure post-quantum\" is defined in the same section.\r\n- **Refactored JSON Web Key Representation section.** Points \"AKP\" key type to Section 3 of `I-D.ietf-cose-dilithium`; clarifies that `alg` is required and identifies both the HPKE ciphersuite and Integrated vs. Key Encryption usage; specifies `pub`/`priv` as base64url-encoded (no padding, per RFC 4648 Section 5) outputs of `SerializePublicKey()`/`SerializePrivateKey()` from Section 4 of `I-D.ietf-hpke-hpke`.\r\n- **New informative references:** `I-D.ietf-pquip-pqc-engineers`, `RFC9794`, and `CNSA2.0`.\r\n- **Authors:** added Hannes Tschofenig (University of the Bundeswehr Munich) and Tirumaleswar Reddy (Nokia).",
       "createdAt": "2026-04-17T08:18:41Z",
-      "updatedAt": "2026-04-18T07:57:35Z",
+      "updatedAt": "2026-04-20T16:48:35Z",
       "baseRepository": "panva/draft-jose-hpke-pq-pqt",
       "baseRefName": "main",
       "baseRefOid": "3930772f95592a1049fcbf9a7bbebe3355b4162c",
       "headRepository": "panva/draft-jose-hpke-pq-pqt",
       "headRefName": "update-post-alignment",
-      "headRefOid": "f596a0f406b5ebb98d9d1681c04c390473cff3c9",
+      "headRefOid": "47064b93ee0426650732f5e4e7609fb4aa937d5e",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -175,12 +175,261 @@
         {
           "author": "github-actions",
           "authorAssociation": "NONE",
-          "body": ":page_facing_up: Rendered draft preview for this PR:\n\n- [draft-skokan-jose-hpke-pq-pqt.html](https://panva.github.io/draft-jose-hpke-pq-pqt/pr-preview/pr-3/draft-skokan-jose-hpke-pq-pqt.html)\n- [draft-skokan-jose-hpke-pq-pqt.txt](https://panva.github.io/draft-jose-hpke-pq-pqt/pr-preview/pr-3/draft-skokan-jose-hpke-pq-pqt.txt)\n- [Diff vs editor's copy](https://author-tools.ietf.org/api/iddiff?url_1=https://panva.github.io/draft-jose-hpke-pq-pqt/draft-skokan-jose-hpke-pq-pqt.txt&url_2=https://panva.github.io/draft-jose-hpke-pq-pqt/pr-preview/pr-3/draft-skokan-jose-hpke-pq-pqt.txt&difftype=--hwdiff)\n\n<sub>Updated for f596a0f406b5ebb98d9d1681c04c390473cff3c9. Links may 404 or show stale content for a minute or two while GitHub Pages finishes building. Preview is removed when this PR is closed.</sub>\n<!-- Sticky Pull Request Commentpr-preview -->",
+          "body": ":page_facing_up: Rendered draft preview for this PR:\n\n- [draft-skokan-jose-hpke-pq-pqt.html](https://panva.github.io/draft-jose-hpke-pq-pqt/pr-preview/pr-3/draft-skokan-jose-hpke-pq-pqt.html)\n- [draft-skokan-jose-hpke-pq-pqt.txt](https://panva.github.io/draft-jose-hpke-pq-pqt/pr-preview/pr-3/draft-skokan-jose-hpke-pq-pqt.txt)\n- [Diff vs editor's copy](https://author-tools.ietf.org/api/iddiff?url_1=https://panva.github.io/draft-jose-hpke-pq-pqt/draft-skokan-jose-hpke-pq-pqt.txt&url_2=https://panva.github.io/draft-jose-hpke-pq-pqt/pr-preview/pr-3/draft-skokan-jose-hpke-pq-pqt.txt&difftype=--hwdiff)\n\n<sub>Updated for 47064b93ee0426650732f5e4e7609fb4aa937d5e. Links may 404 or show stale content for a minute or two while GitHub Pages finishes building. Preview is removed when this PR is closed.</sub>\n<!-- Sticky Pull Request Commentpr-preview -->",
           "createdAt": "2026-04-17T08:19:05Z",
-          "updatedAt": "2026-04-18T07:57:35Z"
+          "updatedAt": "2026-04-20T15:45:19Z"
+        },
+        {
+          "author": "panva",
+          "authorAssociation": "OWNER",
+          "body": "> Most of the changes look good, I raised few comments.\r\n\r\nThank you, they're good suggestions. I've actioned all of them (to some extent at least). https://github.com/panva/draft-jose-hpke-pq-pqt/pull/3#issuecomment-4266446595",
+          "createdAt": "2026-04-20T10:36:25Z",
+          "updatedAt": "2026-04-20T15:37:32Z"
+        },
+        {
+          "author": "panva",
+          "authorAssociation": "OWNER",
+          "body": "@tireddy2 for the automation portion, for COSE do you want a ChaCha variant for all algorithms? (incl. ML-KEM-512 and the rest of the Pure PQ ones?) e.g. \r\n\r\n\r\n```\r\nconst suites = [\r\n  // PQ/T Hybrid\r\n  [KEM_MLKEM768_P256,   KDF_SHAKE256, AEAD_AES_256_GCM,      { jose: true,  cose: true }],\r\n  [KEM_MLKEM768_P256,   KDF_SHAKE256, AEAD_ChaCha20Poly1305, { jose: false, cose: true }],\r\n  [KEM_MLKEM768_X25519, KDF_SHAKE256, AEAD_AES_256_GCM,      { jose: true,  cose: true }],\r\n  [KEM_MLKEM768_X25519, KDF_SHAKE256, AEAD_ChaCha20Poly1305, { jose: false, cose: true }],\r\n  [KEM_MLKEM1024_P384,  KDF_SHAKE256, AEAD_AES_256_GCM,      { jose: true,  cose: true }],\r\n  [KEM_MLKEM1024_P384,  KDF_SHAKE256, AEAD_ChaCha20Poly1305, { jose: false, cose: true }],\r\n  // Pure PQ\r\n  [KEM_ML_KEM_512,      KDF_SHAKE256, AEAD_AES_128_GCM,      { jose: false, cose: true }],\r\n  [KEM_ML_KEM_512,      KDF_SHAKE256, AEAD_ChaCha20Poly1305, { jose: false, cose: true }],\r\n  [KEM_ML_KEM_768,      KDF_SHAKE256, AEAD_AES_256_GCM,      { jose: true,  cose: true }],\r\n  [KEM_ML_KEM_768,      KDF_SHAKE256, AEAD_ChaCha20Poly1305, { jose: false, cose: true }],\r\n  [KEM_ML_KEM_1024,     KDF_SHAKE256, AEAD_AES_256_GCM,      { jose: true,  cose: true }],\r\n  [KEM_ML_KEM_1024,     KDF_SHAKE256, AEAD_ChaCha20Poly1305, { jose: false, cose: true }],\r\n];\r\n```\r\n\r\nOr, as-is, without a ChaCha variant for ML-KEM-512, lacking any further guidance I'm going to assume this one:\r\n\r\n```\r\nconst suites = [\r\n  // PQ/T Hybrid\r\n  [KEM_MLKEM768_P256,   KDF_SHAKE256, AEAD_AES_256_GCM,      { jose: true,  cose: true }],\r\n  [KEM_MLKEM768_P256,   KDF_SHAKE256, AEAD_ChaCha20Poly1305, { jose: false, cose: true }],\r\n  [KEM_MLKEM768_X25519, KDF_SHAKE256, AEAD_AES_256_GCM,      { jose: true,  cose: true }],\r\n  [KEM_MLKEM768_X25519, KDF_SHAKE256, AEAD_ChaCha20Poly1305, { jose: false, cose: true }],\r\n  [KEM_MLKEM1024_P384,  KDF_SHAKE256, AEAD_AES_256_GCM,      { jose: true,  cose: true }],\r\n  [KEM_MLKEM1024_P384,  KDF_SHAKE256, AEAD_ChaCha20Poly1305, { jose: false, cose: true }],\r\n  // Pure PQ\r\n  [KEM_ML_KEM_512,      KDF_SHAKE256, AEAD_AES_128_GCM,      { jose: false, cose: true }],\r\n  [KEM_ML_KEM_768,      KDF_SHAKE256, AEAD_AES_256_GCM,      { jose: true,  cose: true }],\r\n  [KEM_ML_KEM_768,      KDF_SHAKE256, AEAD_ChaCha20Poly1305, { jose: false, cose: true }],\r\n  [KEM_ML_KEM_1024,     KDF_SHAKE256, AEAD_AES_256_GCM,      { jose: true,  cose: true }],\r\n  [KEM_ML_KEM_1024,     KDF_SHAKE256, AEAD_ChaCha20Poly1305, { jose: false, cose: true }],\r\n];\r\n```",
+          "createdAt": "2026-04-20T11:07:09Z",
+          "updatedAt": "2026-04-20T15:36:37Z"
+        },
+        {
+          "author": "panva",
+          "authorAssociation": "OWNER",
+          "body": "@tireddy2 as [this](https://github.com/panva/draft-jose-hpke-pq-pqt/pull/3#issuecomment-4280099283) informs the gaps left in the JOSE algorithm series we need to know before proceeding with an updated proposal (in the interest of keeping churn of future revisions to the minimum)",
+          "createdAt": "2026-04-20T11:55:07Z",
+          "updatedAt": "2026-04-20T15:36:43Z"
+        },
+        {
+          "author": "tireddy2",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> @tireddy2 for the automation portion, for COSE do you want a ChaCha variant for all algorithms? (incl. ML-KEM-512 and the rest of the Pure PQ ones?) e.g.\r\n> \r\n> ```\r\n> const suites = [\r\n>   // PQ/T Hybrid\r\n>   [KEM_MLKEM768_P256,   KDF_SHAKE256, AEAD_AES_256_GCM,      { jose: true,  cose: true }],\r\n>   [KEM_MLKEM768_P256,   KDF_SHAKE256, AEAD_ChaCha20Poly1305, { jose: false, cose: true }],\r\n>   [KEM_MLKEM768_X25519, KDF_SHAKE256, AEAD_AES_256_GCM,      { jose: true,  cose: true }],\r\n>   [KEM_MLKEM768_X25519, KDF_SHAKE256, AEAD_ChaCha20Poly1305, { jose: false, cose: true }],\r\n>   [KEM_MLKEM1024_P384,  KDF_SHAKE256, AEAD_AES_256_GCM,      { jose: true,  cose: true }],\r\n>   [KEM_MLKEM1024_P384,  KDF_SHAKE256, AEAD_ChaCha20Poly1305, { jose: false, cose: true }],\r\n>   // Pure PQ\r\n>   [KEM_ML_KEM_512,      KDF_SHAKE256, AEAD_AES_128_GCM,      { jose: false, cose: true }],\r\n>   [KEM_ML_KEM_512,      KDF_SHAKE256, AEAD_ChaCha20Poly1305, { jose: false, cose: true }],\r\n>   [KEM_ML_KEM_768,      KDF_SHAKE256, AEAD_AES_256_GCM,      { jose: true,  cose: true }],\r\n>   [KEM_ML_KEM_768,      KDF_SHAKE256, AEAD_ChaCha20Poly1305, { jose: false, cose: true }],\r\n>   [KEM_ML_KEM_1024,     KDF_SHAKE256, AEAD_AES_256_GCM,      { jose: true,  cose: true }],\r\n>   [KEM_ML_KEM_1024,     KDF_SHAKE256, AEAD_ChaCha20Poly1305, { jose: false, cose: true }],\r\n> ];\r\n> ```\r\n> \r\n> Or, as-is, without a ChaCha variant for ML-KEM-512, lacking any further guidance I'm going to assume this one:\r\n> \r\n> ```\r\n> const suites = [\r\n>   // PQ/T Hybrid\r\n>   [KEM_MLKEM768_P256,   KDF_SHAKE256, AEAD_AES_256_GCM,      { jose: true,  cose: true }],\r\n>   [KEM_MLKEM768_P256,   KDF_SHAKE256, AEAD_ChaCha20Poly1305, { jose: false, cose: true }],\r\n>   [KEM_MLKEM768_X25519, KDF_SHAKE256, AEAD_AES_256_GCM,      { jose: true,  cose: true }],\r\n>   [KEM_MLKEM768_X25519, KDF_SHAKE256, AEAD_ChaCha20Poly1305, { jose: false, cose: true }],\r\n>   [KEM_MLKEM1024_P384,  KDF_SHAKE256, AEAD_AES_256_GCM,      { jose: true,  cose: true }],\r\n>   [KEM_MLKEM1024_P384,  KDF_SHAKE256, AEAD_ChaCha20Poly1305, { jose: false, cose: true }],\r\n>   // Pure PQ\r\n>   [KEM_ML_KEM_512,      KDF_SHAKE256, AEAD_AES_128_GCM,      { jose: false, cose: true }],\r\n>   [KEM_ML_KEM_768,      KDF_SHAKE256, AEAD_AES_256_GCM,      { jose: true,  cose: true }],\r\n>   [KEM_ML_KEM_768,      KDF_SHAKE256, AEAD_ChaCha20Poly1305, { jose: false, cose: true }],\r\n>   [KEM_ML_KEM_1024,     KDF_SHAKE256, AEAD_AES_256_GCM,      { jose: true,  cose: true }],\r\n>   [KEM_ML_KEM_1024,     KDF_SHAKE256, AEAD_ChaCha20Poly1305, { jose: false, cose: true }],\r\n> ];\r\n> ```\r\n\r\nNo, let's not add the ChaCha variant. Hannes will check if constrained devices are planning to deploy ChaCha20-Poly1305 or not. Please modify it to \"false\" for now.",
+          "createdAt": "2026-04-20T15:22:16Z",
+          "updatedAt": "2026-04-20T15:36:46Z"
+        },
+        {
+          "author": "panva",
+          "authorAssociation": "OWNER",
+          "body": "Updated to\r\n\r\n```js\r\nconst suites = [\r\n  // PQ/T Hybrid\r\n  [KEM_MLKEM768_P256,   KDF_SHAKE256, AEAD_AES_256_GCM,      { jose: true,  cose: true }],\r\n  [KEM_MLKEM768_X25519, KDF_SHAKE256, AEAD_AES_256_GCM,      { jose: true,  cose: true }],\r\n  [KEM_MLKEM1024_P384,  KDF_SHAKE256, AEAD_AES_256_GCM,      { jose: true,  cose: true }],\r\n  // Pure PQ\r\n  [KEM_ML_KEM_512,      KDF_SHAKE256, AEAD_AES_128_GCM,      { jose: false, cose: true }],\r\n  [KEM_ML_KEM_768,      KDF_SHAKE256, AEAD_AES_256_GCM,      { jose: true,  cose: true }],\r\n  [KEM_ML_KEM_1024,     KDF_SHAKE256, AEAD_AES_256_GCM,      { jose: true,  cose: true }],\r\n\r\n  // ChaCha-Variants backup\r\n  // PQ/T Hybrid\r\n  [KEM_MLKEM768_P256,   KDF_SHAKE256, AEAD_ChaCha20Poly1305, { jose: false, cose: false }],\r\n  [KEM_MLKEM768_X25519, KDF_SHAKE256, AEAD_ChaCha20Poly1305, { jose: false, cose: false }],\r\n  [KEM_MLKEM1024_P384,  KDF_SHAKE256, AEAD_ChaCha20Poly1305, { jose: false, cose: false }],\r\n  // Pure PQ\r\n  [KEM_ML_KEM_768,      KDF_SHAKE256, AEAD_ChaCha20Poly1305, { jose: false, cose: false }],\r\n  [KEM_ML_KEM_1024,     KDF_SHAKE256, AEAD_ChaCha20Poly1305, { jose: false, cose: false }],\r\n];\r\n```\r\n\r\nSo that if ChaCha was re-added to COSE it wouldn't change the JOSE alg values anymore since they come later in the list.",
+          "createdAt": "2026-04-20T15:35:47Z",
+          "updatedAt": "2026-04-20T15:36:51Z"
+        },
+        {
+          "author": "panva",
+          "authorAssociation": "OWNER",
+          "body": "In that case, I believe [this is ready to go](https://github.com/panva/draft-jose-hpke-pq-pqt/pull/3#issuecomment-4266446595) cc @hannestschofenig @bc-pi ",
+          "createdAt": "2026-04-20T16:16:18Z",
+          "updatedAt": "2026-04-20T16:48:35Z"
         }
       ],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDORIZDwc72teT3",
+          "commit": {
+            "abbreviatedOid": "cecde04"
+          },
+          "author": "tireddy2",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-04-20T10:17:09Z",
+          "updatedAt": "2026-04-20T10:17:09Z",
+          "comments": [
+            {
+              "originalPosition": 33,
+              "body": "I suggest adding text to justify why both pure PQC and PQ/T hybrid are registered ? \n\nI propose to add the following text:\n\nDeployments can choose between two strategies: PQ/T hybrid key exchange, which combines traditional and post-quantum algorithms for defense in depth, or pure PQC key exchange, which uses post-quantum algorithms exclusively. Hybrid key exchange is generally preferred because it ensures continued security even if one of the component algorithms is compromised during the transitional period. However, pure PQC key exchange may be required for specific deployments with regulatory or compliance mandates that necessitate the exclusive use of PQC, such as those governed by the Commercial National Security Algorithm Suite 2.0 (CNSA 2.0) {{CNSA2.0}}.",
+              "createdAt": "2026-04-20T10:17:09Z",
+              "updatedAt": "2026-04-20T10:18:10Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDORIZDwc72tnVr",
+          "commit": {
+            "abbreviatedOid": "cecde04"
+          },
+          "author": "tireddy2",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-04-20T10:22:47Z",
+          "updatedAt": "2026-04-20T10:22:48Z",
+          "comments": [
+            {
+              "originalPosition": 1,
+              "body": "I suggest to add following text: \nThis document uses the terms \"Traditional Algorithm\", \"Post-Quantum Algorithm\", \"PQ/T Hybrid Scheme\", and \"PQ/T Hybrid KEM\" as defined in {{RFC9794}}. The term \"pure post-quantum\" is used in this document to refer to a single-algorithm scheme using only a post-quantum algorithm, with no traditional component.",
+              "createdAt": "2026-04-20T10:22:47Z",
+              "updatedAt": "2026-04-20T10:22:48Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDORIZDwc72tpTv",
+          "commit": {
+            "abbreviatedOid": "ccfda34"
+          },
+          "author": "panva",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-04-20T10:24:22Z",
+          "updatedAt": "2026-04-20T10:24:22Z",
+          "comments": [
+            {
+              "originalPosition": 33,
+              "body": "ccfda34289bb3c823e1b0b213d0912060fa4a24d",
+              "createdAt": "2026-04-20T10:24:22Z",
+              "updatedAt": "2026-04-20T10:24:22Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDORIZDwc72tuRP",
+          "commit": {
+            "abbreviatedOid": "cecde04"
+          },
+          "author": "panva",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-04-20T10:28:10Z",
+          "updatedAt": "2026-04-20T10:28:10Z",
+          "comments": [
+            {
+              "originalPosition": 1,
+              "body": "f63f1f3a8a8cf738392a117a92b5cb4d24778a37",
+              "createdAt": "2026-04-20T10:28:10Z",
+              "updatedAt": "2026-04-20T10:28:10Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDORIZDwc72tzsd",
+          "commit": {
+            "abbreviatedOid": "cecde04"
+          },
+          "author": "tireddy2",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-04-20T10:32:27Z",
+          "updatedAt": "2026-04-20T10:32:27Z",
+          "comments": [
+            {
+              "originalPosition": 166,
+              "body": "I propose to re-use https://github.com/tireddy2/Hybrid-KEM-with-COSE-JOSE/blob/main/draft-reddy-cose-jose-pqc-hybrid-hpke.md#security-strength-analysis-of-registered-hpke-ciphersuites which has a detailed table covering all registered ciphersuites. In the table, ML-KEM-512 and ChaCha20-Poly1305 has to be excluded.\n\nwe may want to add a note that:\nChaCha20-Poly1305 ciphersuites are not defined in this document to minimize the number of ciphersuites and reduce implementation complexity. While both AES-256-GCM and ChaCha20-Poly1305 provide well-understood and robust security, AES-256-GCM is selected as the sole AEAD algorithm due to its widespread hardware acceleration and broad deployment, and because it provides sufficient security strength for all ciphersuites defined in this document.",
+              "createdAt": "2026-04-20T10:32:27Z",
+              "updatedAt": "2026-04-20T10:35:16Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDORIZDwc72t1-N",
+          "commit": {
+            "abbreviatedOid": "cecde04"
+          },
+          "author": "panva",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-04-20T10:33:48Z",
+          "updatedAt": "2026-04-20T10:33:48Z",
+          "comments": [
+            {
+              "originalPosition": 166,
+              "body": "I intentionally didn't want to use that table, the prose is simpler to grok and covers all the table had to say.",
+              "createdAt": "2026-04-20T10:33:48Z",
+              "updatedAt": "2026-04-20T10:33:49Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDORIZDwc72t5Dt",
+          "commit": {
+            "abbreviatedOid": "cecde04"
+          },
+          "author": "tireddy2",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "Most of the changes look good, I raised few comments. ",
+          "createdAt": "2026-04-20T10:35:39Z",
+          "updatedAt": "2026-04-20T10:35:39Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDORIZDwc72t5PR",
+          "commit": {
+            "abbreviatedOid": "cecde04"
+          },
+          "author": "panva",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-04-20T10:35:47Z",
+          "updatedAt": "2026-04-20T10:35:47Z",
+          "comments": [
+            {
+              "originalPosition": 166,
+              "body": "2e71771b320037796c1a6fe73730d21bd98eaba2",
+              "createdAt": "2026-04-20T10:35:47Z",
+              "updatedAt": "2026-04-20T10:35:47Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDORIZDwc72uCXo",
+          "commit": {
+            "abbreviatedOid": "cecde04"
+          },
+          "author": "tireddy2",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-04-20T10:42:59Z",
+          "updatedAt": "2026-04-20T10:42:59Z",
+          "comments": [
+            {
+              "originalPosition": 166,
+              "body": "I see the following points are missing in the section.\r\n\r\n1. ML-KEM-1024 is paired with P-384 rather than P-521. While P-521 offers higher classical security strength, P-384 already provides a strong classical fallback (192-bit security), is widely implemented, and aligns with existing TLS PQ/T hybrid construction.\r\n\r\n2. ChaCha20-Poly1305 ciphersuites are not defined in this document to minimize the number of ciphersuites and reduce implementation complexity. While both AES-256-GCM and ChaCha20-Poly1305 provide well-understood and robust security, AES-256-GCM is selected as the sole AEAD algorithm due to its widespread hardware acceleration and broad deployment, and because it provides sufficient security strength for all ciphersuites defined in this document.\r\n\r\n3. The -KE variants share identical cryptographic properties to their integrated encryption counterparts.",
+              "createdAt": "2026-04-20T10:42:59Z",
+              "updatedAt": "2026-04-20T10:42:59Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDORIZDwc72uHio",
+          "commit": {
+            "abbreviatedOid": "cecde04"
+          },
+          "author": "panva",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-04-20T10:46:55Z",
+          "updatedAt": "2026-04-20T10:46:56Z",
+          "comments": [
+            {
+              "originalPosition": 166,
+              "body": "1) this is completely irrelevant because we're working within the constraints of HPKE algorithms registered by `I-D.ietf-hpke-pq` and MLKEM1024-P521 is not one of them. It is therefore covered by `The security considerations of [I-D.ietf-jose-hpke-encrypt] and [I-D.ietf-hpke-pq] apply to this document.`\r\n2) I deliberately did not mention \"ChaCha20-Poly1305\" by name in the security considerations in 2e71771b320037796c1a6fe73730d21bd98eaba2, the draft never defined those suites in a published version from the registry's perspective, so naming it there creates a phantom. The existing changelog entry \"Removed ChaCha20Poly1305 AEAD ciphersuites\" is the correct place for that historical fact. The security-considerations text instead gives the forward-looking rationale for why AES-256-GCM is the only AEAD.\r\n3) this is verbatim included in [section 5.1](https://panva.github.io/draft-jose-hpke-pq-pqt/pr-preview/pr-3/draft-skokan-jose-hpke-pq-pqt.html#name-security-strength)",
+              "createdAt": "2026-04-20T10:46:55Z",
+              "updatedAt": "2026-04-20T10:53:46Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDORIZDwc72ugXW",
+          "commit": {
+            "abbreviatedOid": "2e71771"
+          },
+          "author": "tireddy2",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-04-20T11:04:52Z",
+          "updatedAt": "2026-04-20T11:04:52Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
