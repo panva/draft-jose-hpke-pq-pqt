@@ -19,7 +19,11 @@
 Gemfile.lock
 archive.json
 draft-skokan-jose-hpke-pq-pqt.xml
+examples/cose
+examples/cose-keys
+examples/cose-vectors.json
 package-lock.json
 report.xml
+scripts/.cose-algorithms-hash
+!examples/**/*.txt
 !requirements.txt
-!examples/jwe/*.txt

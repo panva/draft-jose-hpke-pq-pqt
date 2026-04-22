@@ -58,7 +58,8 @@ This will:
 
 1. Remove existing `examples/jwks/` and `examples/jwe/` directories
 2. Run `scripts/jwks.js` to generate JWK key pairs for each algorithm
-3. Run `scripts/jwe.js` to generate JWE test vectors (flattened JSON and compact)
+3. Run `scripts/jwe.js` to generate JWE test vectors (flattened JSON and
+   compact) and an aggregated `examples/jose-vectors.json`
 4. Update the draft markdown with regenerated algorithm identifier tables,
    IANA registration entries, and test vector sections
 

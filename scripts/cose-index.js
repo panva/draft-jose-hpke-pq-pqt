@@ -1,8 +1,8 @@
 import { CipherSuite } from "hpke";
 import { algorithms } from "./algorithms.js";
-import buildTable from "./table.js";
-import ianaEntry from "./iana-entry.js";
-import testVectorSection from "./test-vector-section.js";
+import buildCoseTable from "./cose-table.js";
+import coseIanaEntry from "./cose-iana-entry.js";
+import coseTestVectorSection from "./cose-test-vector-section.js";
 
 import { readFileSync, writeFileSync, rmSync, existsSync } from "node:fs";
 import { join, dirname } from "node:path";
@@ -11,57 +11,58 @@ import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const draftPath = join(process.cwd(), "draft-skokan-jose-hpke-pq-pqt.md");
+const draftPath = join(
+  process.cwd(),
+  process.env.COSE_DRAFT_MD,
+);
 
 // Hash algorithms.js to detect any change in suite definitions
 const algorithmsPath = join(__dirname, "algorithms.js");
 const algorithmsHash = createHash("sha256")
   .update(readFileSync(algorithmsPath))
   .digest("hex");
-const hashPath = join(__dirname, ".algorithms-hash");
+const hashPath = join(__dirname, ".cose-algorithms-hash");
 const previousHash = existsSync(hashPath)
   ? readFileSync(hashPath, "utf8").trim()
   : null;
 
 const force = process.argv.includes("--force");
 
-const jwksDir = join(process.cwd(), "examples", "jwks");
-const jweDir = join(process.cwd(), "examples", "jwe");
+const coseKeysDir = join(process.cwd(), "examples", "cose-keys");
+const coseDir = join(process.cwd(), "examples", "cose");
 
 if (
   !force &&
   previousHash === algorithmsHash &&
-  existsSync(jwksDir) &&
-  existsSync(jweDir)
+  existsSync(coseKeysDir) &&
+  existsSync(coseDir)
 ) {
-  console.log("Examples up to date, skipping regeneration.");
+  console.log("COSE examples up to date, skipping regeneration.");
 } else {
-  // Clean and regenerate example outputs
-  rmSync(jwksDir, { recursive: true, force: true });
-  rmSync(jweDir, { recursive: true, force: true });
+  // Clean and regenerate COSE example outputs
+  rmSync(coseKeysDir, { recursive: true, force: true });
+  rmSync(coseDir, { recursive: true, force: true });
   execFileSync(
     process.execPath,
-    ["--no-warnings", join(__dirname, "jwks.js")],
-    {
-      stdio: "inherit",
-    },
+    ["--no-warnings", join(__dirname, "cose-keys.js")],
+    { stdio: "inherit" },
   );
-  execFileSync(process.execPath, ["--no-warnings", join(__dirname, "jwe.js")], {
-    stdio: "inherit",
-  });
+  execFileSync(
+    process.execPath,
+    ["--no-warnings", join(__dirname, "cose-encrypt.js")],
+    { stdio: "inherit" },
+  );
   writeFileSync(hashPath, algorithmsHash + "\n");
 }
 
 // Build enriched algorithm entries with CipherSuite metadata
-const entries = algorithms.filter(a => a.jose).map(({ alg, kem, kdf, aead }) => {
+const entries = algorithms.filter(a => a.cose).map(({ alg, kem, kdf, aead, coseValue }) => {
   const suite = new CipherSuite(kem, kdf, aead);
   const isKE = alg.endsWith("-KE");
   const baseAlg = isKE ? alg.slice(0, -3) : alg;
-  // PQ/T hybrid KEMs have a traditional component (contain a hyphen-separated
-  // curve name like P256, X25519, P384). Pure PQ KEMs start with "ML-KEM-".
   const isPQT = !suite.KEM.name.startsWith("ML-KEM-");
-  const tableId = `${isPQT ? "pqt-hybrid" : "pure-pq"}-${isKE ? "key-encryption" : "integrated"}-table`;
-  return { alg, baseAlg, isKE, tableId, suite };
+  const tableId = `cose-${isPQT ? "pqt-hybrid" : "pure-pq"}-${isKE ? "key-encryption" : "integrated"}-table`;
+  return { alg, baseAlg, isKE, tableId, suite, coseValue };
 });
 
 const base = entries.filter((e) => !e.isKE);
@@ -103,7 +104,7 @@ for (const match of draft.matchAll(tableMarkerRe)) {
   for (const entry of rows) {
     entry.specTable = id;
   }
-  const table = buildTable(rows);
+  const table = buildCoseTable(rows);
   const content = `${table}\n{: #${id} title="${title}" }`;
   draft =
     draft.slice(0, beginIdx + beginMarker.length) +
@@ -117,25 +118,25 @@ for (const match of draft.matchAll(tableMarkerRe)) {
 // Interleave: base alg, then its -KE variant (if present)
 const ianaEntries = [];
 for (const b of base) {
-  ianaEntries.push(ianaEntry(b));
+  ianaEntries.push(coseIanaEntry(b));
   const keVariant = ke.find((k) => k.baseAlg === b.baseAlg);
   if (keVariant) {
-    ianaEntries.push(ianaEntry(keVariant));
+    ianaEntries.push(coseIanaEntry(keVariant));
   }
 }
-replaceSection("iana-registrations", ianaEntries.join("\n\n"));
+replaceSection("cose-iana-registrations", ianaEntries.join("\n\n"));
 
 // --- Generate test vectors ---
 // Same interleaved order: base alg, then -KE (if present)
 const testVectorSections = [];
 for (const b of base) {
-  testVectorSections.push(testVectorSection(b));
+  testVectorSections.push(coseTestVectorSection(b));
   const keVariant = ke.find((k) => k.baseAlg === b.baseAlg);
   if (keVariant) {
-    testVectorSections.push(testVectorSection(keVariant));
+    testVectorSections.push(coseTestVectorSection(keVariant));
   }
 }
-replaceSection("test-vectors", testVectorSections.join("\n\n"));
+replaceSection("cose-test-vectors", testVectorSections.join("\n\n"));
 
 writeFileSync(draftPath, draft);
-console.log("Draft updated successfully.");
+console.log("COSE draft updated successfully.");

@@ -1,13 +1,18 @@
 {
+  "name": "draft-jose-hpke-pq-pqt",
   "type": "module",
+  "bin": "scripts/cli.js",
   "engines": {
     "node": ">=24.7.0"
   },
   "dependencies": {
+    "cbor2": "^1.8.0",
     "hpke": "^1.0.4"
   },
   "scripts": {
     "update": "node --no-warnings scripts/index.js",
-    "force-update": "node --no-warnings scripts/index.js --force"
+    "force-update": "node --no-warnings scripts/index.js --force",
+    "cose-update": "COSE_DRAFT_MD=draft-skokan-cose-hpke-pq-pqt.md node --no-warnings scripts/cose-index.js",
+    "cose-force-update": "COSE_DRAFT_MD=draft-skokan-cose-hpke-pq-pqt.md node --no-warnings scripts/cose-index.js --force"
   }
 }

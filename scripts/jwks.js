@@ -3,11 +3,9 @@ import { algorithms } from "./algorithms.js";
 
 import { createHash } from "node:crypto";
 import { writeFileSync, mkdirSync } from "node:fs";
-import { join, dirname } from "node:path";
-import { fileURLToPath } from "node:url";
+import { join } from "node:path";
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const outDir = join(__dirname, "..", "examples", "jwks");
+const outDir = join(process.cwd(), "examples", "jwks");
 mkdirSync(outDir, { recursive: true });
 
 function base64url(buf) {
@@ -21,7 +19,7 @@ function jwkThumbprint(jwk) {
 }
 
 const kty = "AKP";
-for (const { alg, kem, kdf, aead } of algorithms) {
+for (const { alg, kem, kdf, aead } of algorithms.filter(a => a.jose)) {
   const suite = new CipherSuite(kem, kdf, aead);
   const ikm = new Uint8Array(suite.KEM.Nsk);
   const algBytes = new TextEncoder().encode(alg);
