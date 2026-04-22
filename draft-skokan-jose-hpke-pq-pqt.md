@@ -247,8 +247,8 @@ When the Key Encryption algorithms defined in
 {{pqt-hybrid-key-encryption-table}} or {{pure-pq-key-encryption-table}}
 are used in a General JWE JSON Serialization with multiple recipients,
 all recipients MUST use a quantum-resistant Key Management algorithm.
-Including a recipient that uses a quantum-susceptible algorithm would
-allow an adversary performing an HNDL attack to recover the Content
+Including a recipient that uses an algorithm that is not quantum-resistant
+would allow an adversary performing an HNDL attack to recover the Content
 Encryption Key once a CRQC becomes available; see
 {{Section 15.4 of I-D.ietf-pquip-pqc-engineers}}.
 
