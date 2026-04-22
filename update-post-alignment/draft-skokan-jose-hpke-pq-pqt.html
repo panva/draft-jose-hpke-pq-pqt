@@ -1524,8 +1524,8 @@ component is undesirable.<a href="#section-5-4" class="pilcrow">¶</a></p>
 <a href="#pqt-hybrid-key-encryption-table" class="auto internal xref">Table 3</a> or <a href="#pure-pq-key-encryption-table" class="auto internal xref">Table 4</a>
 are used in a General JWE JSON Serialization with multiple recipients,
 all recipients <span class="bcp14">MUST</span> use a quantum-resistant Key Management algorithm.
-Including a recipient that uses a quantum-susceptible algorithm would
-allow an adversary performing an HNDL attack to recover the Content
+Including a recipient that uses an algorithm that is not quantum-resistant
+would allow an adversary performing an HNDL attack to recover the Content
 Encryption Key once a CRQC becomes available; see
 <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-pquip-pqc-engineers-14#section-15.4" class="relref">Section 15.4</a> of [<a href="#I-D.ietf-pquip-pqc-engineers" class="cite xref">I-D.ietf-pquip-pqc-engineers</a>]</span>.<a href="#section-5-5" class="pilcrow">¶</a></p>
 <div id="security-strength">
