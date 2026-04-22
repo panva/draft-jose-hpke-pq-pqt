@@ -5,12 +5,12 @@
 Javascript Object Signing and Encryption                       F. Skokan
 Internet-Draft                                                      Okta
 Intended status: Standards Track                             B. Campbell
-Expires: 22 October 2026                                   Ping Identity
+Expires: 24 October 2026                                   Ping Identity
                                                            H. Tschofenig
                                                                 UniBw M.
                                                                 T. Reddy
                                                                    Nokia
-                                                           20 April 2026
+                                                           22 April 2026
 
 
               JOSE HPKE PQ & PQ/T Algorithm Registrations
@@ -56,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 October 2026.
+   This Internet-Draft will expire on 24 October 2026.
 
 Copyright Notice
 
@@ -301,13 +301,13 @@ Table of Contents
    properties as their integrated encryption counterparts.
 
    All ciphersuites use SHAKE256 as the KDF, aligning with the hash
-   family used internally by ML-KEM, and AES-256-GCM as the AEAD.  As
-   discussed in Section 3.1 of [I-D.ietf-pquip-pqc-engineers], symmetric
-   primitives are only modestly affected by quantum attacks and doubling
-   key sizes is not strictly required; AES-256-GCM is nonetheless
-   selected to provide a comfortable margin consistent with security
-   level 5 parameter sets and with contemporary guidance such as
-   [CNSA2.0].  AES-256-GCM is used as the sole AEAD to minimize the
+   family used internally by ML-KEM.  They also use AES-256-GCM as the
+   AEAD.  As discussed in Section 3.1 of [I-D.ietf-pquip-pqc-engineers],
+   symmetric primitives are only modestly affected by quantum attacks
+   and doubling key sizes is not strictly required; AES-256-GCM is
+   nonetheless selected to provide a comfortable margin consistent with
+   security level 5 parameter sets and with contemporary guidance such
+   as [CNSA2.0].  AES-256-GCM is used as the sole AEAD to minimize the
    number of ciphersuites and reduce implementation complexity; its
    widespread hardware acceleration and broad deployment make it a
    reasonable single choice for all ciphersuites defined in this
