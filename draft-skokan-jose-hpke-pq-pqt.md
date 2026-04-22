@@ -264,8 +264,8 @@ classical security. The -KE variants share the same cryptographic
 properties as their integrated encryption counterparts.
 
 All ciphersuites use SHAKE256 as the KDF, aligning with the hash family
-used internally by ML-KEM, and AES-256-GCM as the AEAD. As discussed in
-{{Section 3.1 of I-D.ietf-pquip-pqc-engineers}}, symmetric primitives are
+used internally by ML-KEM. They also use AES‑256‑GCM as the AEAD. As discussed
+in {{Section 3.1 of I-D.ietf-pquip-pqc-engineers}}, symmetric primitives are
 only modestly affected by quantum attacks and doubling key sizes is not
 strictly required; AES-256-GCM is nonetheless selected to provide a
 comfortable margin consistent with security level 5 parameter sets and
