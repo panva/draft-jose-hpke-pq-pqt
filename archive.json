@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-04-21T00:27:18.517182+00:00",
+  "timestamp": "2026-04-23T00:29:48.805689+00:00",
   "repo": "panva/draft-jose-hpke-pq-pqt",
   "labels": [
     {
@@ -153,31 +153,33 @@
       "id": "PR_kwDORIZDwc7TPWj8",
       "title": "post-alignment updates",
       "url": "https://github.com/panva/draft-jose-hpke-pq-pqt/pull/3",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "panva",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "- **Removed ChaCha20Poly1305 AEAD ciphersuites.** Remaining registrations all use AES-256-GCM.\r\n- **Intentional gaps in Algorithm Name numbering** so a given identifier always denotes the same HPKE KEM/KDF/AEAD combination across JOSE and COSE. Added a note in the IANA Considerations explaining the gaps.\r\n- **New \"Security Strength\" subsection** in Security Considerations covering NIST PQ security levels for ML-KEM-768/1024, classical floor provided by P-256/X25519/P-384 in the PQ/T hybrids, and rationale for SHAKE256 + AES-256-GCM (with reference to CNSA 2.0). Also explains why AES-256-GCM was selected as the sole AEAD (minimize ciphersuite count, hardware acceleration, broad deployment).\r\n- **Additional security considerations** motivating PQ/T hybrid confidentiality (HNDL) with reference to RFC 9794 Section 5 and `I-D.ietf-pquip-pqc-engineers` Section 13.1, and requiring that in a General JWE JSON Serialization with multiple recipients, all recipients MUST use a quantum-resistant Key Management algorithm.\r\n- **Rationale for registering both families.** Added text explaining why PQ/T hybrid ciphersuites are generally preferred, and why pure PQ ciphersuites are also registered (regulatory/compliance mandates such as CNSA 2.0, and deployments where the overhead of a traditional component is undesirable).\r\n- **RFC 9794 terminology adopted** in Conventions and Definitions for \"Traditional Algorithm\", \"Post-Quantum Algorithm\", \"PQ/T Hybrid Scheme\", and \"PQ/T Hybrid KEM\"; the local term \"pure post-quantum\" is defined in the same section.\r\n- **Refactored JSON Web Key Representation section.** Points \"AKP\" key type to Section 3 of `I-D.ietf-cose-dilithium`; clarifies that `alg` is required and identifies both the HPKE ciphersuite and Integrated vs. Key Encryption usage; specifies `pub`/`priv` as base64url-encoded (no padding, per RFC 4648 Section 5) outputs of `SerializePublicKey()`/`SerializePrivateKey()` from Section 4 of `I-D.ietf-hpke-hpke`.\r\n- **New informative references:** `I-D.ietf-pquip-pqc-engineers`, `RFC9794`, and `CNSA2.0`.\r\n- **Authors:** added Hannes Tschofenig (University of the Bundeswehr Munich) and Tirumaleswar Reddy (Nokia).",
       "createdAt": "2026-04-17T08:18:41Z",
-      "updatedAt": "2026-04-20T16:48:35Z",
+      "updatedAt": "2026-04-22T09:59:06Z",
       "baseRepository": "panva/draft-jose-hpke-pq-pqt",
       "baseRefName": "main",
       "baseRefOid": "3930772f95592a1049fcbf9a7bbebe3355b4162c",
       "headRepository": "panva/draft-jose-hpke-pq-pqt",
       "headRefName": "update-post-alignment",
-      "headRefOid": "47064b93ee0426650732f5e4e7609fb4aa937d5e",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "ab1fe15150fded6b3a63cace8a3c82944bcdce19",
+      "closedAt": "2026-04-22T09:58:15Z",
+      "mergedAt": "2026-04-22T09:58:15Z",
+      "mergedBy": "panva",
+      "mergeCommit": {
+        "oid": "546d8416052f0e016d3416c05fdfaa23d40a1de4"
+      },
       "comments": [
         {
           "author": "github-actions",
           "authorAssociation": "NONE",
-          "body": ":page_facing_up: Rendered draft preview for this PR:\n\n- [draft-skokan-jose-hpke-pq-pqt.html](https://panva.github.io/draft-jose-hpke-pq-pqt/pr-preview/pr-3/draft-skokan-jose-hpke-pq-pqt.html)\n- [draft-skokan-jose-hpke-pq-pqt.txt](https://panva.github.io/draft-jose-hpke-pq-pqt/pr-preview/pr-3/draft-skokan-jose-hpke-pq-pqt.txt)\n- [Diff vs editor's copy](https://author-tools.ietf.org/api/iddiff?url_1=https://panva.github.io/draft-jose-hpke-pq-pqt/draft-skokan-jose-hpke-pq-pqt.txt&url_2=https://panva.github.io/draft-jose-hpke-pq-pqt/pr-preview/pr-3/draft-skokan-jose-hpke-pq-pqt.txt&difftype=--hwdiff)\n\n<sub>Updated for 47064b93ee0426650732f5e4e7609fb4aa937d5e. Links may 404 or show stale content for a minute or two while GitHub Pages finishes building. Preview is removed when this PR is closed.</sub>\n<!-- Sticky Pull Request Commentpr-preview -->",
+          "body": ":wastebasket: Preview removed because this PR was closed.\n<!-- Sticky Pull Request Commentpr-preview -->",
           "createdAt": "2026-04-17T08:19:05Z",
-          "updatedAt": "2026-04-20T15:45:19Z"
+          "updatedAt": "2026-04-22T09:59:06Z"
         },
         {
           "author": "panva",
@@ -220,6 +222,13 @@
           "body": "In that case, I believe [this is ready to go](https://github.com/panva/draft-jose-hpke-pq-pqt/pull/3#issuecomment-4266446595) cc @hannestschofenig @bc-pi ",
           "createdAt": "2026-04-20T16:16:18Z",
           "updatedAt": "2026-04-20T16:48:35Z"
+        },
+        {
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Looks good. Really only minor comments\r\n",
+          "createdAt": "2026-04-22T09:10:21Z",
+          "updatedAt": "2026-04-22T09:10:21Z"
         }
       ],
       "reviews": [
@@ -428,6 +437,119 @@
           "createdAt": "2026-04-20T11:04:52Z",
           "updatedAt": "2026-04-20T11:04:52Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDORIZDwc73Z0WT",
+          "commit": {
+            "abbreviatedOid": "47064b9"
+          },
+          "author": "bc-pi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-04-21T20:59:07Z",
+          "updatedAt": "2026-04-21T20:59:07Z",
+          "comments": [
+            {
+              "originalPosition": 230,
+              "body": "I still think the circumstances that led to this are unnecessary and unfortunate.  ",
+              "createdAt": "2026-04-21T20:59:07Z",
+              "updatedAt": "2026-04-21T20:59:07Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDORIZDwc73Z1DH",
+          "commit": {
+            "abbreviatedOid": "47064b9"
+          },
+          "author": "bc-pi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Thank you @panva for all the work on this. ",
+          "createdAt": "2026-04-21T20:59:45Z",
+          "updatedAt": "2026-04-21T20:59:45Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDORIZDwc73Z3YT",
+          "commit": {
+            "abbreviatedOid": "47064b9"
+          },
+          "author": "panva",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-04-21T21:01:53Z",
+          "updatedAt": "2026-04-21T21:01:54Z",
+          "comments": [
+            {
+              "originalPosition": 230,
+              "body": "At this point the gap is just *one* algorithm (the ML-KEM-512 one). We've made it so that ChaCha variants (if there are any in COSE afterall) would come at the end of the series.",
+              "createdAt": "2026-04-21T21:01:54Z",
+              "updatedAt": "2026-04-21T21:02:07Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDORIZDwc73kA7l",
+          "commit": {
+            "abbreviatedOid": "47064b9"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-04-22T09:04:40Z",
+          "updatedAt": "2026-04-22T09:04:40Z",
+          "comments": [
+            {
+              "originalPosition": 195,
+              "body": "Trying to stick with the RFC 9794 terminology here: \n\n```suggestion\nIncluding a recipient that uses a traditional cryptographic algorithm would\n```",
+              "createdAt": "2026-04-22T09:04:40Z",
+              "updatedAt": "2026-04-22T09:04:40Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDORIZDwc73kHeh",
+          "commit": {
+            "abbreviatedOid": "47064b9"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-04-22T09:07:41Z",
+          "updatedAt": "2026-04-22T09:07:41Z",
+          "comments": [
+            {
+              "originalPosition": 212,
+              "body": "```suggestion\nused internally by ML-KEM. They also use AES\u2011256\u2011GCM as the AEAD. As discussed in\n```",
+              "createdAt": "2026-04-22T09:07:41Z",
+              "updatedAt": "2026-04-22T09:07:41Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDORIZDwc73kNsy",
+          "commit": {
+            "abbreviatedOid": "47064b9"
+          },
+          "author": "panva",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-04-22T09:10:42Z",
+          "updatedAt": "2026-04-22T09:10:42Z",
+          "comments": [
+            {
+              "originalPosition": 195,
+              "body": "I have intentionally worded it as such because traditional would mean that it cannot be combined with traditional symmetric key management modes too, which isn't the case, those are not susceptible and can be used in combination with asymmetric pqc key management modes.",
+              "createdAt": "2026-04-22T09:10:42Z",
+              "updatedAt": "2026-04-22T09:10:42Z"
+            }
+          ]
         }
       ]
     }
