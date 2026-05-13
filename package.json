@@ -11,8 +11,6 @@
   },
   "scripts": {
     "update": "node --no-warnings scripts/index.js",
-    "force-update": "node --no-warnings scripts/index.js --force",
-    "cose-update": "COSE_DRAFT_MD=draft-skokan-cose-hpke-pq-pqt.md node --no-warnings scripts/cose-index.js",
-    "cose-force-update": "COSE_DRAFT_MD=draft-skokan-cose-hpke-pq-pqt.md node --no-warnings scripts/cose-index.js --force"
+    "force-update": "node --no-warnings scripts/index.js --force"
   }
 }

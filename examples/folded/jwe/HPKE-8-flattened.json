@@ -1,0 +1,39 @@
+NOTE: '\' line wrapping per RFC 8792
+
+{
+  "protected": "eyJhbGciOiJIUEtFLTgiLCJraWQiOiJEbU9XUWktVndyalpXak82\
+    bVFRV2R2M0NKX3Y5a19QSDN2UzdTMHhvYWg4In0",
+  "aad": "VGhlIEZlbGxvd3NoaXAgb2YgdGhlIFJpbmc",
+  "encrypted_key": "zRayDf-tglGK_UsfOjbbVDf_GPQKpRLNx-pusFTw6REZlhoX\
+    c8INMxK5ETEdsx-0MTVa_8AIou9zUiaHPw-Iv1nk7X0rdIFYjKOTnjRUy_DuRIRa\
+    b_o1qSZ5-x6sBn8McfjuKMvcJbwU2uqW9NJyQtK_2yNmVvrYiPEhnuO73O_BSv_G\
+    SBSoHgFWEpbb5FeH7ujs7Pq0bV_pdI3XnabhvIPVTmnrkzP2J4vcYt00B-wxAxiL\
+    Uc9zaitKnkn_ofTtOp1lUUeuUzKDPYuo4x-GRZsG_gf2Ez8FFE0RIJq6AmYr3DKt\
+    SziHFqeim8uVI8_mtE0wIj6BM6eYYL7c79MNoDlop5P3QI3-PrZ7HrqULs1U6W7U\
+    DScowuP80jJQjawMUd1itDjlB1BkwVH2u0BwoHWzA4NxdgsusIbDDmH1f-k8Y5t4\
+    7tb3B1FeBYK0G5MbXQmc-h53dACqTqd8nJq7jQNfzmELY7aWmT_Z72KGyfwUY731\
+    JCeODbDIW37g0mdOR7ZcFgHm_Usj02Pj2J_Fsw2N3vkb_IEWi8abtP7NTaB6mYmI\
+    -aNGqDEfXRVI5K7ReLaHOqWxtPkkfysYbeUDZncwkt16rFa0FzeL40sfv7yr0J8K\
+    s-HXPItnfmha_FDB4MuSlxmH8fADldjXNozWwB8HWSCEp111sdh_cP44rRNxPZbs\
+    S7UWyTldMixcjKNncA1dNhafJ5qXjq32NUiN8R2BPkWCBzKMfaKN7bujZphGIRZe\
+    kETFSx2Cp9mO6hG-CqV2dsu9I_MDHgiWEV8GwFC4HyILVJRc9qysutXw0b2UupEo\
+    s9BzuUaoYTvGHwpNWzB77-vON3w_FV94KrwQbiki9_vbVtct5ODB9Kf8KCHv5DPw\
+    YGi7e41zKoS1Rm2Nczt56SC_RqKn9nFR8yfH7bEhvnsQHi_qXHWOFWN7f72H9Cb1\
+    ascZo6XTYaVUCi_RiRS8wgLG0LvOyCfpzgVNpbFhPGBbTZceZW6eSGNGK-RQ0zb5\
+    sJFZSuM9P2cK23dnogEGTPRLp9DWs3NUBW0Z1yVQw1v9gukwcM0xYlo-zfQbwWzH\
+    IdzJboQR-DqeOllx_Jjh1tZPC_nRBdu4DPX5KP6JDsIrv7hw6YQ5ocQwQMdcoGcF\
+    WsrKEOk2ei5HBjbfJQngzKT89TpNaBH_wXpZqUL25bltMM48JG6rTiG96eSF24BD\
+    ONDAUDgrzPBoT_ipdN3Tie0hQHxTsT4cZP9o0PeEYgu0CGPUG0wcirNh1hnhf-PT\
+    EAgfCoTyqOJ_iVj_HZO748slRlMJ4P-Ij4qah8aYhAWJYSdzfBCkMPXX-bzw4ovK\
+    uCbFlOwT3I_tj0lggb-vVqSzv5nkHyqjvzGTmEK1Tq_Wy6uxyD4gUBPKkNoPMvA6\
+    SeghLYy3c8XF80XxStZX5OAQV36AavxZrGyX3gMS024KX-wbNytokZbocP4EOLum\
+    sml35g9ePuXmJjEweCm-D5fqMe_uaLaRP9RveNyNsCd3arMLkn5PSpRTuTsMOhLm\
+    45olI85aNT9TrL1oMw",
+  "ciphertext": "Kqt2-MjNX9R4OmghbRcEPdzNJvCyvAUbezJcRvKnbzWqu3JsfGk\
+    O54gurgSvQcQhAnTWLfJbDJvFJWzqCkXoqgYtgsvrnxFNqJ_j7194RxeH39eXb0M\
+    oVkTgPRQO1gmbtr9VPTrkPXlGCWZjrdVGEUZ5qJZvZfHIYyo2_egOP5CuMzbZuNQ\
+    tjxeTdagfBqAymYpk5O8VqubF160UrVDZnDfm3ndEGH4oFZwPVtPH2IaYcubiTm1\
+    00oxPdTTKZX1PeieRG5RodWY6rMsrA0_dMbXrTDg3spqXloEySB5i9w9ChHZ4s1U\
+    HzihtusJvw4qI1kQSZZc6RxELIzED3s5OHhpuzKTrl-3vVwlf9Ily74215pZwdJW\
+    7CVWTL-Xe9fhxEA"
+}

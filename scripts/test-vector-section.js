@@ -4,17 +4,17 @@ export default function testVectorSection(entry) {
 {: toc="exclude"}
 
 ~~~ json
-{::include examples/jwks/${alg}.json}
+{::include examples/folded/jwks/${alg}.json}
 ~~~
 {: title="${alg} Private JWK"}
 
 ~~~ json
-{::include examples/jwe/${alg}-flattened.json}
+{::include examples/folded/jwe/${alg}-flattened.json}
 ~~~
 {: title="${alg} Flattened JWE JSON Serialization"}
 
 ~~~
-{::include examples/jwe/${alg}-compact.txt}
+{::include examples/folded/jwe/${alg}-compact.txt}
 ~~~
 {: title="${alg} JWE Compact Serialization"}`;
 }

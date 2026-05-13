@@ -1,0 +1,34 @@
+NOTE: '\' line wrapping per RFC 8792
+
+{
+  "kty": "AKP",
+  "alg": "HPKE-12-KE",
+  "kid": "ogbSkvF4f3pRb1dWsBe1HpdXtfiRwZsYrhaxzxlWv_Q",
+  "pub": "HzogrJREUPAOuEVqa-DP_tVzOjIvQ3PBDwozMZK-LnQht_mjYEphugmVjF\
+    q2IsGfF9fK2TevQDQvnQKHoERnSFzP47aBxXBjCZAokdV_w6lI_jlrZLNmEncW7K\
+    yQpZVkrrdQArYLiRQxlkozD7FaXlUE6_yUCYFwOFinC0Vbf7tDqZwGordZoCwhXw\
+    dGzUqU5HPHlEdzVTl-NtGQdoY0N7E2ziYKq9C0E9QSstyYCBKqd_qWSDwmTBiJRq\
+    jNhXeTt4e6DEI2OxK25KKxrfYd6kpHYFpZYCwtfGYF6jWWNjpSWVcXuDx0xLco8M\
+    gVk5cN72lvvVlg2fDBOLexGAwHlqenB5WiA8qxHYcJr9xJi8cFjCdpVoqmVbGxOU\
+    R_lAM1s_eoR6ME8-IAGZRluTxQk4bHOISjiCZZu7Se_dNFN4hNCOxcUnBdv3Rb5E\
+    g7CNgYFBZAh_QXVMGLiMGgaQV6Ifk4wCoxl4chmLVnqQsEjlsybTwzqziOLNkCga\
+    JoorRvbpw-jAaUXbCtqwcBU8shpNhQ7liSzXFOdwQaBVsKYwfQCTpskbVLLqOZKS\
+    jFu0PNv3TPYWDP6JUgFdh5T4SKYGILClVa0DpAResKomPG_XxyKWFFqUOhgvxDZx\
+    mResssUORAt_hDsmN0GmRpcfrB8SQvXjmbmEdOVxsDl2PNw5zIovOZQJVtvsC4H_\
+    PI_kJ2hQydxYB28PkYuiMiibpLfux6tZlPB-NWv7ck-GpZnZxrEZYbMeEbSLBmvA\
+    VLYVVVvYx6RcYRBnSRR0AfgJG8IJPKXEmcM8y72TsFF6zDiQGsmfq1aEwUURJ7Pn\
+    l_kgBcZYWgw6Mn1VsC7sAjlvSnSfowW1yZSrCkwkcFzfkq2LGt5PY5xPPKBdwVaG\
+    C9HpOlbzegPdnB4FcQaRPEHlevSsLE8thjHmiRdJsVFzYsoJSCMyBCnkMaLlJ7v8\
+    YyYskgJ7l6oWqCwycFjUN3RWG0btuwnyIbaHJQTcak0IBNABKZKEJTSXURTeGaYV\
+    k8HqdxXWIy0uE4nkoVZ0s1gBd9sGHKPOhEOtdsERxJZPsMhDaiLjGuuFMUEhPE0D\
+    QeKrEomTcSwbWxPXwUJApUKsvEKBNoFcRGV-Y0OGEzJPSM4JtlQ7FBVPi55iZd9b\
+    d34qrCbkpFD-yixzCnnrBRd3gsK0tyXidvjTtSNka48aBnI8lFKcvJzOWLxWNlug\
+    RN-erP-yOTwGoL5uKByHh2R3zKNHbPvRyvTVkDApMxmPOrayeSMphL5-G3P2FSs4\
+    qLCXy5rMsN8KKA91AqMdYwAXqsc3AbGlKE6Ik3M3NYK5BI_CsFSkZgUkw7XKugCo\
+    RtBtN9dVlu0XaLmuIH6oIc__wXyBFMX6E9bNdESTwN6jGBGpyFVHt03QQxCxmWT1\
+    A7bxBeeAd1oHR6gxoqD1geCCAh_RqLBJyuk1YoIsy55EifLwyPLCQwkwSRh3t8qT\
+    WMIAYXL9N3ALuCCKhxfZJsmzW5kmeZcTJrTENiePs3ZBKalINDrKitOBfGolzOwf\
+    luANQurHpgR7OYJfNVNxKrKqtkeiY0kJBpHnMssTekX2TQuKQ",
+  "priv": "r5W6TvhlPnuzH-g2OggdYADlRWW7ccGhUd2MADCdAFxZ1oCX1YANTcjXv\
+    EVSjYQ6cLYhHgkYPmCqLJkv9JuGlQ"
+}

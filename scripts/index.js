@@ -2,9 +2,16 @@ import { CipherSuite } from "hpke";
 import { algorithms } from "./algorithms.js";
 import buildTable from "./table.js";
 import ianaEntry from "./iana-entry.js";
+import { foldRfc8792, unfoldRfc8792 } from "./rfc8792.js";
 import testVectorSection from "./test-vector-section.js";
 
-import { readFileSync, writeFileSync, rmSync, existsSync } from "node:fs";
+import {
+  readFileSync,
+  writeFileSync,
+  rmSync,
+  existsSync,
+  mkdirSync,
+} from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { execFileSync } from "node:child_process";
@@ -27,6 +34,8 @@ const force = process.argv.includes("--force");
 
 const jwksDir = join(process.cwd(), "examples", "jwks");
 const jweDir = join(process.cwd(), "examples", "jwe");
+const foldedDir = join(process.cwd(), "examples", "folded");
+const joseAlgorithms = algorithms.filter((a) => a.jose);
 
 if (
   !force &&
@@ -39,21 +48,47 @@ if (
   // Clean and regenerate example outputs
   rmSync(jwksDir, { recursive: true, force: true });
   rmSync(jweDir, { recursive: true, force: true });
-  execFileSync(
-    process.execPath,
-    ["--no-warnings", join(__dirname, "jwks.js")],
-    {
-      stdio: "inherit",
-    },
-  );
+  execFileSync(process.execPath, ["--no-warnings", join(__dirname, "jwks.js")], {
+    stdio: "inherit",
+  });
   execFileSync(process.execPath, ["--no-warnings", join(__dirname, "jwe.js")], {
     stdio: "inherit",
   });
   writeFileSync(hashPath, algorithmsHash + "\n");
 }
 
+rmSync(join(foldedDir, "jwks"), { recursive: true, force: true });
+rmSync(join(foldedDir, "jwe"), { recursive: true, force: true });
+for (const { alg } of joseAlgorithms) {
+  for (const [source, target, continuationIndent] of [
+    [
+      join(jwksDir, `${alg}.json`),
+      join(foldedDir, "jwks", `${alg}.json`),
+      "  ",
+    ],
+    [
+      join(jweDir, `${alg}-flattened.json`),
+      join(foldedDir, "jwe", `${alg}-flattened.json`),
+      "  ",
+    ],
+    [
+      join(jweDir, `${alg}-compact.txt`),
+      join(foldedDir, "jwe", `${alg}-compact.txt`),
+      "",
+    ],
+  ]) {
+    const original = readFileSync(source, "utf8");
+    const folded = foldRfc8792(original, 69, continuationIndent);
+    if (unfoldRfc8792(folded) !== original) {
+      throw new Error(`RFC 8792 folding failed to round-trip ${source}`);
+    }
+    mkdirSync(dirname(target), { recursive: true });
+    writeFileSync(target, folded);
+  }
+}
+
 // Build enriched algorithm entries with CipherSuite metadata
-const entries = algorithms.filter(a => a.jose).map(({ alg, kem, kdf, aead }) => {
+const entries = joseAlgorithms.map(({ alg, kem, kdf, aead }) => {
   const suite = new CipherSuite(kem, kdf, aead);
   const isKE = alg.endsWith("-KE");
   const baseAlg = isKE ? alg.slice(0, -3) : alg;

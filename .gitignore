@@ -22,6 +22,8 @@ draft-skokan-jose-hpke-pq-pqt.xml
 examples/cose
 examples/cose-keys
 examples/cose-vectors.json
+examples/folded/cose
+examples/folded/cose-keys
 package-lock.json
 report.xml
 scripts/.cose-algorithms-hash
