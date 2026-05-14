@@ -5,22 +5,22 @@ export default function coseTestVectorSection(entry) {
 {: toc="exclude"}
 
 ~~~ cbor-diag
-{::include examples/folded/cose-keys/${alg}-diag.txt}
+{::include-fold69hardleft4dry examples/cose-keys/${alg}-diag.txt}
 ~~~
 {: title="${alg} COSE_Key (Diagnostic Notation)"}
 
 ~~~
-{::include examples/folded/cose-keys/${alg}-hex.txt}
+{::include-fold69hardleftdry examples/cose-keys/${alg}-hex.txt}
 ~~~
 {: title="${alg} COSE_Key (Hex-Encoded CBOR)"}
 
 ~~~ cbor-diag
-{::include examples/folded/cose/${alg}-diag.txt}
+{::include-fold69hardleft4dry examples/cose/${alg}-diag.txt}
 ~~~
 {: title="${alg} ${encryptType} (Diagnostic Notation)"}
 
 ~~~
-{::include examples/folded/cose/${alg}-hex.txt}
+{::include-fold69hardleftdry examples/cose/${alg}-hex.txt}
 ~~~
 {: title="${alg} ${encryptType} (Hex-Encoded CBOR)"}`;
 }

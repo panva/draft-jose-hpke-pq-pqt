@@ -3,14 +3,12 @@ import { algorithms } from "./algorithms.js";
 import buildCoseTable from "./cose-table.js";
 import coseIanaEntry from "./cose-iana-entry.js";
 import coseTestVectorSection from "./cose-test-vector-section.js";
-import { foldRfc8792, unfoldRfc8792 } from "./rfc8792.js";
 
 import {
   readFileSync,
   writeFileSync,
   rmSync,
   existsSync,
-  mkdirSync,
 } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -37,7 +35,6 @@ const force = process.argv.includes("--force");
 
 const coseKeysDir = join(process.cwd(), "examples", "cose-keys");
 const coseDir = join(process.cwd(), "examples", "cose");
-const foldedDir = join(process.cwd(), "examples", "folded");
 const coseAlgorithms = algorithms.filter((a) => a.cose);
 
 if (
@@ -62,41 +59,6 @@ if (
     { stdio: "inherit" },
   );
   writeFileSync(hashPath, algorithmsHash + "\n");
-}
-
-rmSync(join(foldedDir, "cose-keys"), { recursive: true, force: true });
-rmSync(join(foldedDir, "cose"), { recursive: true, force: true });
-for (const { alg } of coseAlgorithms) {
-  for (const [source, target, continuationIndent] of [
-    [
-      join(coseKeysDir, `${alg}-diag.txt`),
-      join(foldedDir, "cose-keys", `${alg}-diag.txt`),
-      "  ",
-    ],
-    [
-      join(coseKeysDir, `${alg}-hex.txt`),
-      join(foldedDir, "cose-keys", `${alg}-hex.txt`),
-      "",
-    ],
-    [
-      join(coseDir, `${alg}-diag.txt`),
-      join(foldedDir, "cose", `${alg}-diag.txt`),
-      "  ",
-    ],
-    [
-      join(coseDir, `${alg}-hex.txt`),
-      join(foldedDir, "cose", `${alg}-hex.txt`),
-      "",
-    ],
-  ]) {
-    const original = readFileSync(source, "utf8");
-    const folded = foldRfc8792(original, 69, continuationIndent);
-    if (unfoldRfc8792(folded) !== original) {
-      throw new Error(`RFC 8792 folding failed to round-trip ${source}`);
-    }
-    mkdirSync(dirname(target), { recursive: true });
-    writeFileSync(target, folded);
-  }
 }
 
 // Build enriched algorithm entries with CipherSuite metadata

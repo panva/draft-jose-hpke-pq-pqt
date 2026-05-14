@@ -425,17 +425,17 @@ document.
 {: toc="exclude"}
 
 ~~~ json
-{::include examples/folded/jwks/HPKE-8.json}
+{::include-fold69hardleft4dry examples/jwks/HPKE-8.json}
 ~~~
 {: title="HPKE-8 Private JWK"}
 
 ~~~ json
-{::include examples/folded/jwe/HPKE-8-flattened.json}
+{::include-fold69hardleft4dry examples/jwe/HPKE-8-flattened.json}
 ~~~
 {: title="HPKE-8 Flattened JWE JSON Serialization"}
 
 ~~~
-{::include examples/folded/jwe/HPKE-8-compact.txt}
+{::include-fold69hardleftdry examples/jwe/HPKE-8-compact.txt}
 ~~~
 {: title="HPKE-8 JWE Compact Serialization"}
 
@@ -443,17 +443,17 @@ document.
 {: toc="exclude"}
 
 ~~~ json
-{::include examples/folded/jwks/HPKE-8-KE.json}
+{::include-fold69hardleft4dry examples/jwks/HPKE-8-KE.json}
 ~~~
 {: title="HPKE-8-KE Private JWK"}
 
 ~~~ json
-{::include examples/folded/jwe/HPKE-8-KE-flattened.json}
+{::include-fold69hardleft4dry examples/jwe/HPKE-8-KE-flattened.json}
 ~~~
 {: title="HPKE-8-KE Flattened JWE JSON Serialization"}
 
 ~~~
-{::include examples/folded/jwe/HPKE-8-KE-compact.txt}
+{::include-fold69hardleftdry examples/jwe/HPKE-8-KE-compact.txt}
 ~~~
 {: title="HPKE-8-KE JWE Compact Serialization"}
 
@@ -461,17 +461,17 @@ document.
 {: toc="exclude"}
 
 ~~~ json
-{::include examples/folded/jwks/HPKE-9.json}
+{::include-fold69hardleft4dry examples/jwks/HPKE-9.json}
 ~~~
 {: title="HPKE-9 Private JWK"}
 
 ~~~ json
-{::include examples/folded/jwe/HPKE-9-flattened.json}
+{::include-fold69hardleft4dry examples/jwe/HPKE-9-flattened.json}
 ~~~
 {: title="HPKE-9 Flattened JWE JSON Serialization"}
 
 ~~~
-{::include examples/folded/jwe/HPKE-9-compact.txt}
+{::include-fold69hardleftdry examples/jwe/HPKE-9-compact.txt}
 ~~~
 {: title="HPKE-9 JWE Compact Serialization"}
 
@@ -479,17 +479,17 @@ document.
 {: toc="exclude"}
 
 ~~~ json
-{::include examples/folded/jwks/HPKE-9-KE.json}
+{::include-fold69hardleft4dry examples/jwks/HPKE-9-KE.json}
 ~~~
 {: title="HPKE-9-KE Private JWK"}
 
 ~~~ json
-{::include examples/folded/jwe/HPKE-9-KE-flattened.json}
+{::include-fold69hardleft4dry examples/jwe/HPKE-9-KE-flattened.json}
 ~~~
 {: title="HPKE-9-KE Flattened JWE JSON Serialization"}
 
 ~~~
-{::include examples/folded/jwe/HPKE-9-KE-compact.txt}
+{::include-fold69hardleftdry examples/jwe/HPKE-9-KE-compact.txt}
 ~~~
 {: title="HPKE-9-KE JWE Compact Serialization"}
 
@@ -497,17 +497,17 @@ document.
 {: toc="exclude"}
 
 ~~~ json
-{::include examples/folded/jwks/HPKE-10.json}
+{::include-fold69hardleft4dry examples/jwks/HPKE-10.json}
 ~~~
 {: title="HPKE-10 Private JWK"}
 
 ~~~ json
-{::include examples/folded/jwe/HPKE-10-flattened.json}
+{::include-fold69hardleft4dry examples/jwe/HPKE-10-flattened.json}
 ~~~
 {: title="HPKE-10 Flattened JWE JSON Serialization"}
 
 ~~~
-{::include examples/folded/jwe/HPKE-10-compact.txt}
+{::include-fold69hardleftdry examples/jwe/HPKE-10-compact.txt}
 ~~~
 {: title="HPKE-10 JWE Compact Serialization"}
 
@@ -515,17 +515,17 @@ document.
 {: toc="exclude"}
 
 ~~~ json
-{::include examples/folded/jwks/HPKE-10-KE.json}
+{::include-fold69hardleft4dry examples/jwks/HPKE-10-KE.json}
 ~~~
 {: title="HPKE-10-KE Private JWK"}
 
 ~~~ json
-{::include examples/folded/jwe/HPKE-10-KE-flattened.json}
+{::include-fold69hardleft4dry examples/jwe/HPKE-10-KE-flattened.json}
 ~~~
 {: title="HPKE-10-KE Flattened JWE JSON Serialization"}
 
 ~~~
-{::include examples/folded/jwe/HPKE-10-KE-compact.txt}
+{::include-fold69hardleftdry examples/jwe/HPKE-10-KE-compact.txt}
 ~~~
 {: title="HPKE-10-KE JWE Compact Serialization"}
 
@@ -533,17 +533,17 @@ document.
 {: toc="exclude"}
 
 ~~~ json
-{::include examples/folded/jwks/HPKE-12.json}
+{::include-fold69hardleft4dry examples/jwks/HPKE-12.json}
 ~~~
 {: title="HPKE-12 Private JWK"}
 
 ~~~ json
-{::include examples/folded/jwe/HPKE-12-flattened.json}
+{::include-fold69hardleft4dry examples/jwe/HPKE-12-flattened.json}
 ~~~
 {: title="HPKE-12 Flattened JWE JSON Serialization"}
 
 ~~~
-{::include examples/folded/jwe/HPKE-12-compact.txt}
+{::include-fold69hardleftdry examples/jwe/HPKE-12-compact.txt}
 ~~~
 {: title="HPKE-12 JWE Compact Serialization"}
 
@@ -551,17 +551,17 @@ document.
 {: toc="exclude"}
 
 ~~~ json
-{::include examples/folded/jwks/HPKE-12-KE.json}
+{::include-fold69hardleft4dry examples/jwks/HPKE-12-KE.json}
 ~~~
 {: title="HPKE-12-KE Private JWK"}
 
 ~~~ json
-{::include examples/folded/jwe/HPKE-12-KE-flattened.json}
+{::include-fold69hardleft4dry examples/jwe/HPKE-12-KE-flattened.json}
 ~~~
 {: title="HPKE-12-KE Flattened JWE JSON Serialization"}
 
 ~~~
-{::include examples/folded/jwe/HPKE-12-KE-compact.txt}
+{::include-fold69hardleftdry examples/jwe/HPKE-12-KE-compact.txt}
 ~~~
 {: title="HPKE-12-KE JWE Compact Serialization"}
 
@@ -569,17 +569,17 @@ document.
 {: toc="exclude"}
 
 ~~~ json
-{::include examples/folded/jwks/HPKE-13.json}
+{::include-fold69hardleft4dry examples/jwks/HPKE-13.json}
 ~~~
 {: title="HPKE-13 Private JWK"}
 
 ~~~ json
-{::include examples/folded/jwe/HPKE-13-flattened.json}
+{::include-fold69hardleft4dry examples/jwe/HPKE-13-flattened.json}
 ~~~
 {: title="HPKE-13 Flattened JWE JSON Serialization"}
 
 ~~~
-{::include examples/folded/jwe/HPKE-13-compact.txt}
+{::include-fold69hardleftdry examples/jwe/HPKE-13-compact.txt}
 ~~~
 {: title="HPKE-13 JWE Compact Serialization"}
 
@@ -587,17 +587,17 @@ document.
 {: toc="exclude"}
 
 ~~~ json
-{::include examples/folded/jwks/HPKE-13-KE.json}
+{::include-fold69hardleft4dry examples/jwks/HPKE-13-KE.json}
 ~~~
 {: title="HPKE-13-KE Private JWK"}
 
 ~~~ json
-{::include examples/folded/jwe/HPKE-13-KE-flattened.json}
+{::include-fold69hardleft4dry examples/jwe/HPKE-13-KE-flattened.json}
 ~~~
 {: title="HPKE-13-KE Flattened JWE JSON Serialization"}
 
 ~~~
-{::include examples/folded/jwe/HPKE-13-KE-compact.txt}
+{::include-fold69hardleftdry examples/jwe/HPKE-13-KE-compact.txt}
 ~~~
 {: title="HPKE-13-KE JWE Compact Serialization"}
 
