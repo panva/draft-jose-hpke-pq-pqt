@@ -49,9 +49,9 @@ author:
     email: k.tirumaleswar_reddy@nokia.com
 
 normative:
+  RFC9964:
   I-D.ietf-jose-hpke-encrypt:
   I-D.ietf-hpke-pq:
-  I-D.ietf-cose-dilithium:
 
 informative:
   RFC8792:
@@ -199,7 +199,7 @@ encryption algorithms defined in {{pure-pq-integrated-table}}.
 # JSON Web Key Representation
 
 Keys for the algorithms defined in this document use the "AKP" (Algorithm
-Key Pair) key type defined in {{Section 3 of I-D.ietf-cose-dilithium}}.
+Key Pair) key type defined in {{Section 3 of RFC9964}}.
 The required "alg" parameter identifies the HPKE ciphersuite as well as
 whether the key is used for Integrated Encryption or Key Encryption.
 
