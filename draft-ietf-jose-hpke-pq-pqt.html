@@ -24,7 +24,7 @@ hybrid algorithm identifiers for use with JSON Object Signing and Encryption
 <meta content="PQ/T" name="keyword">
 <meta content="JWE" name="keyword">
 <meta content="CRQC" name="keyword">
-<meta content="draft-skokan-jose-hpke-pq-pqt-latest" name="ietf.draft">
+<meta content="draft-ietf-jose-hpke-pq-pqt-latest" name="ietf.draft">
 <!-- Generator version information:
   xml2rfc 3.33.0
     Python 3.12.13
@@ -39,7 +39,7 @@ hybrid algorithm identifiers for use with JSON Object Signing and Encryption
     requests 2.33.1
     wcwidth 0.7.0
 -->
-<link href="draft-skokan-jose-hpke-pq-pqt.xml" rel="alternate" type="application/rfc+xml">
+<link href="draft-ietf-jose-hpke-pq-pqt.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
 <style type="text/css">@font-face {
   font-family: 'Lora';
@@ -304,16 +304,19 @@ h1, h2, h3, h4, h5, h6 {
   font-size-adjust: 0.5;
   color: var(--title-color);
 }
-h1#title {
-  font-size: 32px;
-  line-height: 40px;
-  clear: both;
-}
-h1#title, h1#rfcnum {
-  margin: 1.5em 0 0.2em;
-}
-h1#rfcnum + h1#title {
-  margin: 0.2em 0;
+h1 {
+  &#title {
+    font-size: 32px;
+    line-height: 40px;
+    clear: both;
+    margin: 1.5em 0 0.2em;
+  }
+  &#rfcnum {
+    margin: 1.5em 0 0.2em;
+    & + h1#title {
+      margin: 0.2em 0;
+    }
+  }
 }
 
 h1, h2, h3 {
@@ -333,10 +336,10 @@ h4, h5, h6 {
 #abstract+p {
   font-size: 18px;
   line-height: 24px;
-}
-#abstract+p code, #abstract+p samp, #abstract+p tt {
-  font-size: 16px;
-  line-height: 0;
+  & code, & samp, & tt {
+    font-size: 16px;
+    line-height: 0;
+  }
 }
 
 p {
@@ -347,59 +350,59 @@ p {
 div {
   margin: 0;
 }
-.alignRight.art-text {
-  background-color: var(--highlight-color);
-  border: 1px solid var(--line-color);
-  border-radius: 3px;
-  padding: 0.5em 1em 0;
-  margin-bottom: 0.5em;
-}
-.alignRight.art-text pre {
-  padding: 0;
-  width: auto;
-}
 .alignRight {
   margin: 1em 0;
-}
-.alignRight > *:first-child {
-  border: none;
-  margin: 0;
-  float: right;
-  clear: both;
-}
-.alignRight > *:nth-child(2) {
-  clear: both;
-  display: block;
-  border: none;
+  &.art-text {
+    background-color: var(--highlight-color);
+    border: 1px solid var(--line-color);
+    border-radius: 3px;
+    padding: 0.5em 1em 0;
+    margin-bottom: 0.5em;
+    & pre {
+      padding: 0;
+      width: auto;
+    }
+  }
+  & > *:first-child {
+    border: none;
+    margin: 0;
+    float: right;
+    clear: both;
+  }
+  & > *:nth-child(2) {
+    clear: both;
+    display: block;
+    border: none;
+  }
 }
 svg {
   display: block;
-}
-/* font-family isn't space-separated, but =~ will have to do */
-svg[font-family~="monospace" i], svg [font-family~="monospace" i] {
-  font-family: var(--font-mono);
-}
-.alignCenter.art-text {
-  background-color: var(--highlight-color);
-  border: 1px solid var(--line-color);
-  border-radius: 3px;
-  padding: 0.5em 1em 0;
-  margin-bottom: 0.5em;
-}
-.alignCenter.art-text pre {
-  padding: 0;
-  width: auto;
+  /* font-family isn't space-separated, but =~ will have to do */
+  &[font-family~="monospace" i], & [font-family~="monospace" i] {
+    font-family: var(--font-mono);
+  }
 }
 .alignCenter {
   margin: 1em 0;
-}
-.alignCenter > *:first-child {
-  border: none;
-  /* this isn't optimal, but it's an existence proof.  PrinceXML doesn't
-     support flexbox yet.
-  */
-  display: table;
-  margin: 0 auto;
+  &.art-text {
+    background-color: var(--highlight-color);
+    border: 1px solid var(--line-color);
+    border-radius: 3px;
+    padding: 0.5em 1em 0;
+    margin-bottom: 0.5em;
+    & pre {
+      padding: 0;
+      width: auto;
+    }
+  }
+  & > *:first-child {
+    border: none;
+    /* this isn't optimal, but it's an existence proof.  PrinceXML doesn't
+       support flexbox yet.
+    */
+    display: table;
+    margin: 0 auto;
+  }
 }
 
 /* lists */
@@ -437,26 +440,25 @@ dl {
     --indent: 5ch;
     & > dt {
       min-width: calc(var(--indent) - 2ch);
+      float: none;
     }
-  }
-  &.olPercent > dt {
-    float: none;
   }
 
   dl > dd > & {
     margin-top: 0.5em;
     margin-bottom: 0;
   }
-}
-dl:not(.dlNewline) > dt {
-  float: left;
-  margin-right: 2ch;
-  min-width: 8ch;
-}
-dl > dd {
-  margin-bottom: .8em;
-  margin-left: var(--indent) !important; /* stupid element overrides */
-  min-height: 2ex;
+
+  &:not(.dlNewline) > dt {
+    float: left;
+    margin-right: 2ch;
+    min-width: 8ch;
+  }
+  & > dd {
+    margin-bottom: .8em;
+    margin-left: var(--indent) !important; /* stupid element overrides */
+    min-height: 2ex;
+  }
 }
 :is(dl.compact, .dlCompact) > dd {
   margin-bottom: 0;
@@ -472,20 +474,22 @@ dl > dd {
 }
 
 /* links */
-a, a[href].selfRef:hover {
+a {
   text-decoration: none;
+  &[href] {
+    color: var(--link-color);
+    &:hover { text-decoration: underline; }
+    &.selfRef {
+      color: var(--text-color);
+      &:hover {
+        text-decoration: none;
+        background-color: var(--highlight-color);
+      }
+    }
+  }
 }
-a[href] {
-  color: var(--link-color);
-}
-a[href].selfRef, .iref + a[href].internal {
+.iref + a[href].internal {
   color: var(--text-color);
-}
-a[href]:hover {
-  text-decoration: underline;
-}
-a[href].selfRef:hover {
-  background-color: var(--highlight-color);
 }
 a.xref:is(.cite, .auto), :is(#status-of-memo, #copyright) a {
   white-space: nowrap;
@@ -521,9 +525,9 @@ img {
 figure {
   margin: 0.5em 0;
   padding: 0;
-}
-figure blockquote {
-  margin: 0.8em 0.4em 0.4em;
+  & blockquote {
+    margin: 0.8em 0.4em 0.4em;
+  }
 }
 figcaption, caption {
   font-style: italic;
@@ -533,17 +537,19 @@ figcaption, caption {
 }
 @media screen {
   /* Auto-collapse boilerplate. */
-  :is(#status-of-memo, #copyright) p {
-    margin: -2px 0;
-    max-height: 0;
-    transition: max-height 2s ease, margin 0.5s ease 0.5s;
-    overflow: hidden;
-  }
-  :is(#status-of-memo, #copyright):hover p,
-  :is(#status-of-memo, #copyright) h2:target ~ p {
-    margin: 0.5em 0;
-    max-height: 500px;
-    overflow: auto;
+  :is(#status-of-memo, #copyright) {
+    & p {
+      margin: -2px 0;
+      max-height: 0;
+      transition: max-height 2s ease, margin 0.5s ease 0.5s;
+      overflow: hidden;
+    }
+    &:hover p,
+    & h2:target ~ p {
+      margin: 0.5em 0;
+      max-height: 500px;
+      overflow: auto;
+    }
   }
   pre, svg {
     display: inline-block;
@@ -593,25 +599,17 @@ table {
   max-width: 100%;
   margin: 0 0 1em;
   border-collapse: collapse;
-}
-table.right {
-  margin-left: auto;
-}
-table.center {
-  margin-left: auto;
-  margin-right: auto;
-}
-table.left {
-  margin-right: auto;
-}
-table .text-left {
-  text-align: left;
-}
-table .text-center {
-  text-align: center;
-}
-table .text-right {
-  text-align: right;
+  &.right { margin-left: auto; }
+  &.center { margin-left: auto; margin-right: auto; }
+  &.left { margin-right: auto; }
+  & .text-left { text-align: left; }
+  & .text-center { text-align: center; }
+  & .text-right { text-align: right; }
+  & caption {
+    margin: 0;
+    padding: 3px 0 3px 1em;
+  }
+  & p { margin: 0; }
 }
 
 thead, tbody {
@@ -631,13 +629,6 @@ th {
 :is(tr:nth-child(2n+1), thead+tbody > tr:nth-child(2n)) > td {
   background-color: var(--highlight-color);
 }
-table caption {
-  margin: 0;
-  padding: 3px 0 3px 1em;
-}
-table p {
-  margin: 0;
-}
 
 /* pilcrow */
 a.pilcrow {
@@ -648,18 +639,16 @@ a.pilcrow {
     color: var(--pilcrow-weak);
     &:hover { text-decoration: none; }
   }
-}
-@media not print {
-  :hover > a.pilcrow, a.pilcrow:focus {
-    opacity: 1;
+  @media not print {
+    :hover > &, &:focus {
+      opacity: 1;
+    }
+    &[href]:hover {
+      color: var(--pilcrow-strong);
+      background-color: transparent;
+    }
   }
-  a.pilcrow[href]:hover {
-    color: var(--pilcrow-strong);
-    background-color: transparent;
-  }
-}
-@media print {
-  a.pilcrow {
+  @media print {
     display: none;
   }
 }
@@ -718,9 +707,9 @@ sub, sup {
   font-size: 0.9em;
   font-style: italic;
   margin-top: 2em;
-}
-.docInfo .prepared {
-  float: right;
+  & .prepared {
+    float: right;
+  }
 }
 
 /* table of contents */
@@ -810,23 +799,27 @@ hr.addr {
   max-width: calc(100% - 16px);
 }
 @media (min-width: 500px) {
-  #authors-addresses > section {
-    column-count: 2;
-    column-gap: 20px;
-  }
-  #authors-addresses > section > h2 {
-    column-span: all;
-  }
-  /* hack for break-inside: avoid-column */
-  #authors-addresses address {
-    display: inline-block;
-    break-inside: avoid-column;
+  #authors-addresses {
+    & > section {
+      column-count: 2;
+      column-gap: 20px;
+    }
+    & > section > h2 {
+      column-span: all;
+    }
+    /* hack for break-inside: avoid-column */
+    & address {
+      display: inline-block;
+      break-inside: avoid-column;
+    }
   }
 }
 
 /* Comments */
-.rfcEditorRemove p:first-of-type {
-  font-style: italic;
+.rfcEditorRemove {
+  & p:first-of-type {
+    font-style: italic;
+  }
 }
 .cref {
   background-color: rgba(249, 232, 105, 0.3);
@@ -837,19 +830,21 @@ hr.addr {
 }
 
 @media screen {
-  #toc nav {
-    font-family: var(--font-title);
-    font-weight: 360;
-    & > ul { margin-bottom: 2em; }
-    & ul {
-      margin: 0 0 0 4px;
-      & :is(p, li) {
-        margin: 2px 0;
+  #toc {
+    & nav {
+      font-family: var(--font-title);
+      font-weight: 360;
+      & > ul { margin-bottom: 2em; }
+      & ul {
+        margin: 0 0 0 4px;
+        & :is(p, li) {
+          margin: 2px 0;
+        }
       }
     }
-  }
-  #toc a.toplink {
-    float: right;
+    & a.toplink {
+      float: right;
+    }
   }
 }
 @media not screen {
@@ -870,54 +865,54 @@ hr.addr {
     margin: 0;
     border-bottom: 1px solid #ccc;
     opacity: 0.6;
-  }
-  #toc h2 {
-    margin: 0;
-    padding: 2px 0 2px 6px;
-    padding-right: 1em;
-    font-size: 18px;
-    line-height: 24px;
-    min-width: 190px;
-    text-align: right;
-    background-color: #444;
-    color: white;
-    cursor: pointer;
-    &::before { /* css hamburger */
-      float: right;
-      position: relative;
-      width: 1em;
-      height: 1px;
-      left: -164px;
-      margin: 8px 0 0 0;
-      background: white none repeat scroll 0 0;
-      box-shadow: 0 4px 0 0 white, 0 8px 0 0 white;
-      content: "";
+    & h2 {
+      margin: 0;
+      padding: 2px 0 2px 6px;
+      padding-right: 1em;
+      font-size: 18px;
+      line-height: 24px;
+      min-width: 190px;
+      text-align: right;
+      background-color: #444;
+      color: white;
+      cursor: pointer;
+      &::before { /* css hamburger */
+        float: right;
+        position: relative;
+        width: 1em;
+        height: 1px;
+        left: -164px;
+        margin: 8px 0 0 0;
+        background: white none repeat scroll 0 0;
+        box-shadow: 0 4px 0 0 white, 0 8px 0 0 white;
+        content: "";
+      }
     }
-  }
-  #toc nav {
-    display: none;
-    background-color: var(--background-color);
-    padding: 0.5em 1em 1em;
-    overflow: auto;
-    overscroll-behavior: contain;
-    height: calc(100vh - 48px);
-    border-left: 1px solid #ddd;
-  }
-  #toc.active {
-    opacity: 1;
-    & nav { display: block; }
-  }
-  /* Make the collapsed ToC header render white on gray also when it's a link */
-  #toc h2 a,
-  #toc h2 a:is(:link, :focus, :hover),
-  #toc a.toplink,
-  #toc a.toplink:hover {
-    color: white;
-    background-color: #444;
-    text-decoration: none;
-  }
-  #toc a.toplink {
-    margin: 2px 0.5em 0;
+    & nav {
+      display: none;
+      background-color: var(--background-color);
+      padding: 0.5em 1em 1em;
+      overflow: auto;
+      overscroll-behavior: contain;
+      height: calc(100vh - 48px);
+      border-left: 1px solid #ddd;
+    }
+    &.active {
+      opacity: 1;
+      & nav { display: block; }
+    }
+    /* Make the collapsed ToC header render white on gray also when it's a link */
+    & h2 a,
+    & h2 a:is(:link, :focus, :hover),
+    & a.toplink,
+    & a.toplink:hover {
+      color: white;
+      background-color: #444;
+      text-decoration: none;
+    }
+    & a.toplink {
+      margin: 2px 0.5em 0;
+    }
   }
 }
 
@@ -936,26 +931,26 @@ hr.addr {
     margin: 0;
     padding: 0;
     z-index: 1;
-  }
-  #toc h2 {
-    margin: 0;
-    padding: 0.25em 1em 1em 0;
-  }
-  #toc nav {
-    display: block;
-    height: calc(90vh - 84px);
-    bottom: 0;
-    padding: 0.5em 0 2em;
-    overflow: auto;
-    overscroll-behavior: contain;
-    scrollbar-width: thin;
+    & h2 {
+      margin: 0;
+      padding: 0.25em 1em 1em 0;
+    }
+    & nav {
+      display: block;
+      height: calc(90vh - 84px);
+      bottom: 0;
+      padding: 0.5em 0 2em;
+      overflow: auto;
+      overscroll-behavior: contain;
+      scrollbar-width: thin;
+    }
+    & a.toplink {
+      margin: 8px 0.5em 0;
+    }
   }
   img { /* future proofing */
     max-width: 100%;
     height: auto;
-  }
-  #toc a.toplink {
-    margin: 8px 0.5em 0;
   }
 }
 
@@ -971,12 +966,13 @@ hr.addr {
   #n-copyright-notice {
     border-bottom: none;
   }
-  #toc, #n-introduction {
-    page-break-before: always;
-  }
   #toc {
+    page-break-before: always;
     border-top: none;
     padding-top: 0;
+  }
+  #n-introduction {
+    page-break-before: always;
   }
   figure, pre, .vcard {
     page-break-inside: avoid;
@@ -1038,17 +1034,19 @@ hr.addr {
 }
 
 /* SVG Trick: a prefix match works because only black and white are allowed */
-svg :is([stroke="black"], [stroke^="#000"]) {
-  stroke: var(--text-color);
-}
-svg :is([stroke="white"], [stroke^="#fff"]) {
-  stroke: var(--background-color);
-}
-svg :is([fill="black"], [fill^="#000"], :not([fill])) {
-  fill: var(--text-color);
-}
-svg :is([fill="white"], [fill^="#fff"]) {
-  fill: var(--background-color);
+svg {
+  & :is([stroke="black"], [stroke^="#000"]) {
+    stroke: var(--text-color);
+  }
+  & :is([stroke="white"], [stroke^="#fff"]) {
+    stroke: var(--background-color);
+  }
+  & :is([fill="black"], [fill^="#000"], :not([fill])) {
+    fill: var(--text-color);
+  }
+  & :is([fill="white"], [fill^="#fff"]) {
+    fill: var(--background-color);
+  }
 }
 </style>
 
@@ -1058,11 +1056,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">JOSE HPKE PQ</td>
-<td class="right">May 2026</td>
+<td class="right">June 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Skokan, et al.</td>
-<td class="center">Expires 25 November 2026</td>
+<td class="center">Expires 10 December 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1072,15 +1070,15 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dt class="label-workgroup">Workgroup:</dt>
 <dd class="workgroup">Javascript Object Signing and Encryption</dd>
 <dt class="label-internet-draft">Internet-Draft:</dt>
-<dd class="internet-draft">draft-skokan-jose-hpke-pq-pqt-latest</dd>
+<dd class="internet-draft">draft-ietf-jose-hpke-pq-pqt-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-05-24" class="published">24 May 2026</time>
+<time datetime="2026-06-08" class="published">8 June 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-11-25">25 November 2026</time></dd>
+<dd class="expires"><time datetime="2026-12-10">10 December 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1115,8 +1113,8 @@ hybrid algorithm identifiers for use with JSON Object Signing and Encryption
       </h2>
 <p id="section-note.1-1">This note is to be removed before publishing as an RFC.<a href="#section-note.1-1" class="pilcrow">¶</a></p>
 <p id="section-note.1-2">
-        The latest revision of this draft can be found at <span><a href="https://panva.github.io/draft-jose-hpke-pq-pqt/draft-skokan-jose-hpke-pq-pqt.html">https://panva.github.io/draft-jose-hpke-pq-pqt/draft-skokan-jose-hpke-pq-pqt.html</a></span>.
-        Status information for this document may be found at <span><a href="https://datatracker.ietf.org/doc/draft-skokan-jose-hpke-pq-pqt/">https://datatracker.ietf.org/doc/draft-skokan-jose-hpke-pq-pqt/</a></span>.<a href="#section-note.1-2" class="pilcrow">¶</a></p>
+        The latest revision of this draft can be found at <span><a href="https://panva.github.io/draft-jose-hpke-pq-pqt/draft-ietf-jose-hpke-pq-pqt.html">https://panva.github.io/draft-jose-hpke-pq-pqt/draft-ietf-jose-hpke-pq-pqt.html</a></span>.
+        Status information for this document may be found at <span><a href="https://datatracker.ietf.org/doc/draft-ietf-jose-hpke-pq-pqt/">https://datatracker.ietf.org/doc/draft-ietf-jose-hpke-pq-pqt/</a></span>.<a href="#section-note.1-2" class="pilcrow">¶</a></p>
 <p id="section-note.1-3">
         Discussion of this document takes place on the
         Javascript Object Signing and Encryption Working Group mailing list (<span><a href="mailto:jose@ietf.org">mailto:jose@ietf.org</a></span>),
@@ -1144,7 +1142,7 @@ hybrid algorithm identifiers for use with JSON Object Signing and Encryption
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 25 November 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 10 December 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1287,8 +1285,8 @@ a Key Derivation Function (KDF), and an Authenticated Encryption with
 Associated Data (AEAD) algorithm.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <p id="section-3-2">All algorithms defined in this section follow the same operational model as
 those in <span>[<a href="#I-D.ietf-jose-hpke-encrypt" class="cite xref">I-D.ietf-jose-hpke-encrypt</a>]</span>, supporting both integrated encryption
-as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-jose-hpke-encrypt-17#section-5" class="relref">Section 5</a> of [<a href="#I-D.ietf-jose-hpke-encrypt" class="cite xref">I-D.ietf-jose-hpke-encrypt</a>]</span> and key encryption
-as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-jose-hpke-encrypt-17#section-6" class="relref">Section 6</a> of [<a href="#I-D.ietf-jose-hpke-encrypt" class="cite xref">I-D.ietf-jose-hpke-encrypt</a>]</span>.<a href="#section-3-2" class="pilcrow">¶</a></p>
+as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-jose-hpke-encrypt-18#section-5" class="relref">Section 5</a> of [<a href="#I-D.ietf-jose-hpke-encrypt" class="cite xref">I-D.ietf-jose-hpke-encrypt</a>]</span> and key encryption
+as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-jose-hpke-encrypt-18#section-6" class="relref">Section 6</a> of [<a href="#I-D.ietf-jose-hpke-encrypt" class="cite xref">I-D.ietf-jose-hpke-encrypt</a>]</span>.<a href="#section-3-2" class="pilcrow">¶</a></p>
 <p id="section-3-3">Test vectors for all algorithms defined in this section are provided in
 <a href="#test-vectors" class="auto internal xref">Appendix A</a>.<a href="#section-3-3" class="pilcrow">¶</a></p>
 <div id="pqt-hybrid-integrated-encryption-algorithms">
@@ -1899,7 +1897,7 @@ apply to JOSE.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
 <dd class="break"></dd>
 <dt id="I-D.ietf-jose-hpke-encrypt">[I-D.ietf-jose-hpke-encrypt]</dt>
         <dd>
-<span class="refAuthor">Reddy.K, T.</span>, <span class="refAuthor">Tschofenig, H.</span>, <span class="refAuthor">Banerjee, A.</span>, <span class="refAuthor">Steele, O.</span>, and <span class="refAuthor">M. B. Jones</span>, <span class="refTitle">"Use of Hybrid Public Key Encryption (HPKE) with JSON Web Encryption (JWE)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-jose-hpke-encrypt-17</span>, <time datetime="2026-05-11" class="refDate">11 May 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-jose-hpke-encrypt-17">https://datatracker.ietf.org/doc/html/draft-ietf-jose-hpke-encrypt-17</a>&gt;</span>. </dd>
+<span class="refAuthor">Reddy.K, T.</span>, <span class="refAuthor">Tschofenig, H.</span>, <span class="refAuthor">Banerjee, A.</span>, <span class="refAuthor">Steele, O.</span>, and <span class="refAuthor">M. B. Jones</span>, <span class="refTitle">"Use of Hybrid Public Key Encryption (HPKE) with JSON Web Encryption (JWE)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-jose-hpke-encrypt-18</span>, <time datetime="2026-05-24" class="refDate">24 May 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-jose-hpke-encrypt-18">https://datatracker.ietf.org/doc/html/draft-ietf-jose-hpke-encrypt-18</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>
@@ -3524,76 +3522,82 @@ bQ7FdrcrTUXeRj1SCFWDr5g2ZbBW240.JQvmVqR8rT6QqANUI06G8g
       <h2 id="name-document-history">
 <a href="#name-document-history" class="section-name selfRef">Document History</a>
       </h2>
-<p id="appendix-C-1">draft-skokan-jose-hpke-pq-pqt-05<a href="#appendix-C-1" class="pilcrow">¶</a></p>
+<p id="appendix-C-1">draft-ietf-jose-hpke-pq-pqt-00<a href="#appendix-C-1" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-C-2.1">
-          <p id="appendix-C-2.1.1">Folded long test-vector lines using the RFC 8792 single backslash
-strategy and added a pointer to the unfolded vector set in the
-repository<a href="#appendix-C-2.1.1" class="pilcrow">¶</a></p>
+          <p id="appendix-C-2.1.1">Initial WG draft following adoption confirmation<a href="#appendix-C-2.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="appendix-C-3">draft-skokan-jose-hpke-pq-pqt-04<a href="#appendix-C-3" class="pilcrow">¶</a></p>
+<p id="appendix-C-3">draft-skokan-jose-hpke-pq-pqt-05<a href="#appendix-C-3" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-C-4.1">
-          <p id="appendix-C-4.1.1">Removed ChaCha20Poly1305 AEAD ciphersuites<a href="#appendix-C-4.1.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-C-4.2">
-          <p id="appendix-C-4.2.1">Renumbered algorithms with intentional gaps to align identifiers with
-COSE; added an explanatory note in IANA Considerations<a href="#appendix-C-4.2.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-C-4.3">
-          <p id="appendix-C-4.3.1">Added a Security Strength subsection and HNDL/multi-recipient
-guidance to Security Considerations<a href="#appendix-C-4.3.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-C-4.4">
-          <p id="appendix-C-4.4.1">Added rationale for selecting AES-256-GCM as the sole AEAD<a href="#appendix-C-4.4.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-C-4.5">
-          <p id="appendix-C-4.5.1">Refactored the JSON Web Key Representation section<a href="#appendix-C-4.5.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-C-4.6">
-          <p id="appendix-C-4.6.1">Added informative references to I-D.ietf-pquip-pqc-engineers,
-RFC 9794, and CNSA 2.0<a href="#appendix-C-4.6.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-C-4.7">
-          <p id="appendix-C-4.7.1">Adopted RFC 9794 terminology in Conventions and Definitions<a href="#appendix-C-4.7.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-C-4.8">
-          <p id="appendix-C-4.8.1">Added rationale for registering both PQ/T hybrid and pure PQ
-ciphersuites in Security Considerations<a href="#appendix-C-4.8.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="appendix-C-4.9">
-          <p id="appendix-C-4.9.1">Added Hannes Tschofenig and Tirumaleswar Reddy as authors<a href="#appendix-C-4.9.1" class="pilcrow">¶</a></p>
+          <p id="appendix-C-4.1.1">Folded long test-vector lines using the RFC 8792 single backslash
+strategy and added a pointer to the unfolded vector set in the
+repository<a href="#appendix-C-4.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="appendix-C-5">draft-skokan-jose-hpke-pq-pqt-03<a href="#appendix-C-5" class="pilcrow">¶</a></p>
+<p id="appendix-C-5">draft-skokan-jose-hpke-pq-pqt-04<a href="#appendix-C-5" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-C-6.1">
-          <p id="appendix-C-6.1.1">Clarified "hybrid" terminology disambiguation in the Introduction<a href="#appendix-C-6.1.1" class="pilcrow">¶</a></p>
+          <p id="appendix-C-6.1.1">Removed ChaCha20Poly1305 AEAD ciphersuites<a href="#appendix-C-6.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-C-6.2">
-          <p id="appendix-C-6.2.1">Added descriptive text to Key Encryption algorithm sections<a href="#appendix-C-6.2.1" class="pilcrow">¶</a></p>
+          <p id="appendix-C-6.2.1">Renumbered algorithms with intentional gaps to align identifiers with
+COSE; added an explanatory note in IANA Considerations<a href="#appendix-C-6.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="appendix-C-6.3">
-          <p id="appendix-C-6.3.1">Expanded Security Considerations with ML-KEM-512 omission rationale<a href="#appendix-C-6.3.1" class="pilcrow">¶</a></p>
+          <p id="appendix-C-6.3.1">Added a Security Strength subsection and HNDL/multi-recipient
+guidance to Security Considerations<a href="#appendix-C-6.3.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-C-6.4">
+          <p id="appendix-C-6.4.1">Added rationale for selecting AES-256-GCM as the sole AEAD<a href="#appendix-C-6.4.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-C-6.5">
+          <p id="appendix-C-6.5.1">Refactored the JSON Web Key Representation section<a href="#appendix-C-6.5.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-C-6.6">
+          <p id="appendix-C-6.6.1">Added informative references to I-D.ietf-pquip-pqc-engineers,
+RFC 9794, and CNSA 2.0<a href="#appendix-C-6.6.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-C-6.7">
+          <p id="appendix-C-6.7.1">Adopted RFC 9794 terminology in Conventions and Definitions<a href="#appendix-C-6.7.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-C-6.8">
+          <p id="appendix-C-6.8.1">Added rationale for registering both PQ/T hybrid and pure PQ
+ciphersuites in Security Considerations<a href="#appendix-C-6.8.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-C-6.9">
+          <p id="appendix-C-6.9.1">Added Hannes Tschofenig and Tirumaleswar Reddy as authors<a href="#appendix-C-6.9.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="appendix-C-7">draft-skokan-jose-hpke-pq-pqt-02<a href="#appendix-C-7" class="pilcrow">¶</a></p>
+<p id="appendix-C-7">draft-skokan-jose-hpke-pq-pqt-03<a href="#appendix-C-7" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-C-8.1">
-          <p id="appendix-C-8.1.1">Added Test Vectors appendix<a href="#appendix-C-8.1.1" class="pilcrow">¶</a></p>
+          <p id="appendix-C-8.1.1">Clarified "hybrid" terminology disambiguation in the Introduction<a href="#appendix-C-8.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-C-8.2">
+          <p id="appendix-C-8.2.1">Added descriptive text to Key Encryption algorithm sections<a href="#appendix-C-8.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-C-8.3">
+          <p id="appendix-C-8.3.1">Expanded Security Considerations with ML-KEM-512 omission rationale<a href="#appendix-C-8.3.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="appendix-C-9">draft-skokan-jose-hpke-pq-pqt-01<a href="#appendix-C-9" class="pilcrow">¶</a></p>
+<p id="appendix-C-9">draft-skokan-jose-hpke-pq-pqt-02<a href="#appendix-C-9" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-C-10.1">
-          <p id="appendix-C-10.1.1">Added example JWK representations<a href="#appendix-C-10.1.1" class="pilcrow">¶</a></p>
+          <p id="appendix-C-10.1.1">Added Test Vectors appendix<a href="#appendix-C-10.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="appendix-C-11">draft-skokan-jose-hpke-pq-pqt-00<a href="#appendix-C-11" class="pilcrow">¶</a></p>
+<p id="appendix-C-11">draft-skokan-jose-hpke-pq-pqt-01<a href="#appendix-C-11" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="appendix-C-12.1">
-          <p id="appendix-C-12.1.1">Initial draft<a href="#appendix-C-12.1.1" class="pilcrow">¶</a></p>
+          <p id="appendix-C-12.1.1">Added example JWK representations<a href="#appendix-C-12.1.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="appendix-C-13">draft-skokan-jose-hpke-pq-pqt-00<a href="#appendix-C-13" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="appendix-C-14.1">
+          <p id="appendix-C-14.1.1">Initial draft<a href="#appendix-C-14.1.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 </section>
