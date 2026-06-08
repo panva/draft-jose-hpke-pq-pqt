@@ -18,6 +18,7 @@
 /versioned/
 Gemfile.lock
 archive.json
+draft-ietf-jose-hpke-pq-pqt.xml
 draft-skokan-jose-hpke-pq-pqt.xml
 examples/cose
 examples/cose-keys

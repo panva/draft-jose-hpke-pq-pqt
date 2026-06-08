@@ -3,7 +3,7 @@ title: "JOSE HPKE PQ & PQ/T Algorithm Registrations"
 abbrev: "JOSE HPKE PQ"
 category: std
 
-docname: draft-skokan-jose-hpke-pq-pqt-latest
+docname: draft-ietf-jose-hpke-pq-pqt-latest
 submissiontype: IETF
 number:
 date:
@@ -27,7 +27,7 @@ venue:
   mail: "jose@ietf.org"
   arch: "https://mailarchive.ietf.org/arch/browse/jose/"
   github: "panva/draft-jose-hpke-pq-pqt"
-  latest: "https://panva.github.io/draft-jose-hpke-pq-pqt/draft-skokan-jose-hpke-pq-pqt.html"
+  latest: "https://panva.github.io/draft-jose-hpke-pq-pqt/draft-ietf-jose-hpke-pq-pqt.html"
 
 author:
  -
@@ -610,6 +610,10 @@ TODO acknowledge.
 
 # Document History
 {:numbered="false"}
+
+draft-ietf-jose-hpke-pq-pqt-00
+
+- Initial WG draft following adoption confirmation
 
 draft-skokan-jose-hpke-pq-pqt-05
 

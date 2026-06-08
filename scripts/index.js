@@ -16,7 +16,7 @@ import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const draftPath = join(process.cwd(), "draft-skokan-jose-hpke-pq-pqt.md");
+const draftPath = join(process.cwd(), "draft-ietf-jose-hpke-pq-pqt.md");
 
 // Hash algorithms.js to detect any change in suite definitions
 const algorithmsPath = join(__dirname, "algorithms.js");

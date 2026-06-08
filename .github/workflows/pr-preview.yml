@@ -62,9 +62,9 @@ jobs:
         message: |
           :page_facing_up: Rendered draft preview for this PR:
 
-          - [draft-skokan-jose-hpke-pq-pqt.html](${{ steps.preview.outputs.preview-url }}draft-skokan-jose-hpke-pq-pqt.html)
-          - [draft-skokan-jose-hpke-pq-pqt.txt](${{ steps.preview.outputs.preview-url }}draft-skokan-jose-hpke-pq-pqt.txt)
-          - [Diff vs editor's copy](https://author-tools.ietf.org/api/iddiff?url_1=https://panva.github.io/draft-jose-hpke-pq-pqt/draft-skokan-jose-hpke-pq-pqt.txt&url_2=${{ steps.preview.outputs.preview-url }}draft-skokan-jose-hpke-pq-pqt.txt&difftype=--hwdiff)
+          - [draft-ietf-jose-hpke-pq-pqt.html](${{ steps.preview.outputs.preview-url }}draft-ietf-jose-hpke-pq-pqt.html)
+          - [draft-ietf-jose-hpke-pq-pqt.txt](${{ steps.preview.outputs.preview-url }}draft-ietf-jose-hpke-pq-pqt.txt)
+          - [Diff vs editor's copy](https://author-tools.ietf.org/api/iddiff?url_1=https://panva.github.io/draft-jose-hpke-pq-pqt/draft-ietf-jose-hpke-pq-pqt.txt&url_2=${{ steps.preview.outputs.preview-url }}draft-ietf-jose-hpke-pq-pqt.txt&difftype=--hwdiff)
 
           <sub>Updated for ${{ github.event.pull_request.head.sha }}. Links may 404 or show stale content for a minute or two while GitHub Pages finishes building. Preview is removed when this PR is closed.</sub>
 
