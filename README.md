@@ -4,16 +4,16 @@
 
 This is the working area for the IETF [JOSE Working Group](https://datatracker.ietf.org/group/jose/documents/) Internet-Draft, "JOSE HPKE PQ &amp; PQ/T Algorithm Registrations".
 
-* [Editor's Copy](https://panva.github.io/jose-hpke-pq-pqt/#go.draft-ietf-jose-hpke-pq-pqt.html)
-* [Datatracker Page](https://datatracker.ietf.org/doc/draft-ietf-jose-hpke-pq-pqt)
-* [Working Group Draft](https://datatracker.ietf.org/doc/html/draft-ietf-jose-hpke-pq-pqt)
-* [Compare Editor's Copy to Working Group Draft](https://panva.github.io/jose-hpke-pq-pqt/#go.draft-ietf-jose-hpke-pq-pqt.diff)
+* [Editor's Copy](https://panva.github.io/draft-jose-hpke-pq-pqt/draft-ietf-jose-hpke-pq-pqt.html)
+* [Datatracker Page](https://datatracker.ietf.org/doc/draft-ietf-jose-hpke-pq-pqt/)
+* [Working Group Draft](https://datatracker.ietf.org/doc/html/draft-ietf-jose-hpke-pq-pqt-00)
+* [Compare Editor's Copy to Working Group Draft](https://author-tools.ietf.org/api/iddiff?doc_1=draft-ietf-jose-hpke-pq-pqt&url_2=https://panva.github.io/draft-jose-hpke-pq-pqt/draft-ietf-jose-hpke-pq-pqt.txt)
 
 
 ## Contributing
 
 See the
-[guidelines for contributions](https://github.com/panva/jose-hpke-pq-pqt/blob/main/CONTRIBUTING.md).
+[guidelines for contributions](https://github.com/panva/draft-jose-hpke-pq-pqt/blob/main/CONTRIBUTING.md).
 
 The contributing file also has tips on how to make contributions, if you
 don't already know how to do that.
