@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-06-16T00:50:05.038816+00:00",
+  "timestamp": "2026-06-18T00:45:21.999914+00:00",
   "repo": "panva/draft-jose-hpke-pq-pqt",
   "labels": [
     {
@@ -552,6 +552,32 @@
           ]
         }
       ]
+    },
+    {
+      "number": 4,
+      "id": "PR_kwDORIZDwc7nbL3e",
+      "title": "IETF 126 slides",
+      "url": "https://github.com/panva/draft-jose-hpke-pq-pqt/pull/4",
+      "state": "OPEN",
+      "author": "panva",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Rendered from this source like so: [ietf-126-vienna-update.pdf](https://github.com/user-attachments/files/29042862/ietf-126-vienna-update.pdf)\r\n",
+      "createdAt": "2026-06-17T10:25:26Z",
+      "updatedAt": "2026-06-17T10:25:26Z",
+      "baseRepository": "panva/draft-jose-hpke-pq-pqt",
+      "baseRefName": "main",
+      "baseRefOid": "710372a477591fa41f4fd9edb58ac0366b4a180d",
+      "headRepository": "panva/draft-jose-hpke-pq-pqt",
+      "headRefName": "ietf-126-slides",
+      "headRefOid": "dc6ef2f8937097f6be8bca5f276af16c1e54d5db",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
