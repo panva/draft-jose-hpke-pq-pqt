@@ -14,7 +14,7 @@
 hybrid algorithm identifiers for use with JSON Object Signing and Encryption
 (JOSE), building on the Hybrid Public Key Encryption (HPKE) framework. 
     " name="description">
-<meta content="xml2rfc 3.33.0" name="generator">
+<meta content="xml2rfc 3.34.0" name="generator">
 <meta content="JOSE" name="keyword">
 <meta content="HPKE" name="keyword">
 <meta content="post-quantum" name="keyword">
@@ -26,18 +26,19 @@ hybrid algorithm identifiers for use with JSON Object Signing and Encryption
 <meta content="CRQC" name="keyword">
 <meta content="draft-ietf-jose-hpke-pq-pqt-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.33.0
-    Python 3.12.13
-    ConfigArgParse 1.7
+  xml2rfc 3.34.0
+    Python 3.14.5
+    ConfigArgParse 1.7.5
     google-i18n-address 3.1.1
     intervaltree 3.2.1
     Jinja2 3.1.6
-    lxml 6.0.2
-    platformdirs 4.9.6
+    lxml 6.1.1
+    natsort 8.4.0
+    platformdirs 4.10.0
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.33.1
-    wcwidth 0.7.0
+    wcwidth 0.8.1
 -->
 <link href="draft-ietf-jose-hpke-pq-pqt.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1060,7 +1061,7 @@ svg {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Skokan, et al.</td>
-<td class="center">Expires 10 December 2026</td>
+<td class="center">Expires 26 December 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1073,12 +1074,12 @@ svg {
 <dd class="internet-draft">draft-ietf-jose-hpke-pq-pqt-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-06-08" class="published">8 June 2026</time>
+<time datetime="2026-06-24" class="published">24 June 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-12-10">10 December 2026</time></dd>
+<dd class="expires"><time datetime="2026-12-26">26 December 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1142,7 +1143,7 @@ hybrid algorithm identifiers for use with JSON Object Signing and Encryption
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 10 December 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 26 December 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1285,8 +1286,8 @@ a Key Derivation Function (KDF), and an Authenticated Encryption with
 Associated Data (AEAD) algorithm.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <p id="section-3-2">All algorithms defined in this section follow the same operational model as
 those in <span>[<a href="#I-D.ietf-jose-hpke-encrypt" class="cite xref">I-D.ietf-jose-hpke-encrypt</a>]</span>, supporting both integrated encryption
-as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-jose-hpke-encrypt-18#section-5" class="relref">Section 5</a> of [<a href="#I-D.ietf-jose-hpke-encrypt" class="cite xref">I-D.ietf-jose-hpke-encrypt</a>]</span> and key encryption
-as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-jose-hpke-encrypt-18#section-6" class="relref">Section 6</a> of [<a href="#I-D.ietf-jose-hpke-encrypt" class="cite xref">I-D.ietf-jose-hpke-encrypt</a>]</span>.<a href="#section-3-2" class="pilcrow">¶</a></p>
+as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-jose-hpke-encrypt-20#section-5" class="relref">Section 5</a> of [<a href="#I-D.ietf-jose-hpke-encrypt" class="cite xref">I-D.ietf-jose-hpke-encrypt</a>]</span> and key encryption
+as defined in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-jose-hpke-encrypt-20#section-6" class="relref">Section 6</a> of [<a href="#I-D.ietf-jose-hpke-encrypt" class="cite xref">I-D.ietf-jose-hpke-encrypt</a>]</span>.<a href="#section-3-2" class="pilcrow">¶</a></p>
 <p id="section-3-3">Test vectors for all algorithms defined in this section are provided in
 <a href="#test-vectors" class="auto internal xref">Appendix A</a>.<a href="#section-3-3" class="pilcrow">¶</a></p>
 <div id="pqt-hybrid-integrated-encryption-algorithms">
@@ -1494,7 +1495,7 @@ contains the SerializePrivateKey() output, both as defined in
       </h2>
 <p id="section-5-1">The security considerations of <span>[<a href="#I-D.ietf-jose-hpke-encrypt" class="cite xref">I-D.ietf-jose-hpke-encrypt</a>]</span> and
 <span>[<a href="#I-D.ietf-hpke-pq" class="cite xref">I-D.ietf-hpke-pq</a>]</span> apply to this document.
-<span>[<a href="#I-D.ietf-pquip-pqc-engineers" class="cite xref">I-D.ietf-pquip-pqc-engineers</a>]</span> provides general background on the
+<span>[<a href="#RFC9958" class="cite xref">RFC9958</a>]</span> provides general background on the
 threat posed by cryptographically relevant quantum computers (CRQCs),
 the properties of KEMs, and considerations for PQ/T hybrid schemes.<a href="#section-5-1" class="pilcrow">¶</a></p>
 <p id="section-5-2">This document does not register algorithms using ML-KEM-512. As noted
@@ -1504,12 +1505,12 @@ security level of ML-KEM-512. Use of ML-KEM-768 or ML-KEM-1024 acts
 as a hedge against such cryptanalysis at a modest performance penalty.<a href="#section-5-2" class="pilcrow">¶</a></p>
 <p id="section-5-3">The PQ/T hybrid ciphersuites registered by this document are motivated
 by the PQ/T Hybrid Confidentiality property (<span><a href="https://rfc-editor.org/rfc/rfc9794#section-5" class="relref">Section 5</a> of [<a href="#RFC9794" class="cite xref">RFC9794</a>]</span>,
-<span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-pquip-pqc-engineers-14#section-13.1" class="relref">Section 13.1</a> of [<a href="#I-D.ietf-pquip-pqc-engineers" class="cite xref">I-D.ietf-pquip-pqc-engineers</a>]</span>): confidentiality is
+<span><a href="https://rfc-editor.org/rfc/rfc9958#section-13.1" class="relref">Section 13.1</a> of [<a href="#RFC9958" class="cite xref">RFC9958</a>]</span>): confidentiality is
 preserved as long as at least one of the component algorithms remains
 secure. The traditional component protects against unforeseen
 cryptanalysis of ML-KEM, while the post-quantum component protects
 against Harvest Now, Decrypt Later (HNDL) attacks
-(<span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-pquip-pqc-engineers-14#section-7" class="relref">Section 7</a> of [<a href="#I-D.ietf-pquip-pqc-engineers" class="cite xref">I-D.ietf-pquip-pqc-engineers</a>]</span>) by a future CRQC.
+(<span><a href="https://rfc-editor.org/rfc/rfc9958#section-7" class="relref">Section 7</a> of [<a href="#RFC9958" class="cite xref">RFC9958</a>]</span>) by a future CRQC.
 PQ/T hybrid ciphersuites are generally preferred for this reason during
 the transition to post-quantum cryptography.<a href="#section-5-3" class="pilcrow">¶</a></p>
 <p id="section-5-4">The pure PQ ciphersuites are registered to accommodate deployments with
@@ -1525,7 +1526,7 @@ all recipients <span class="bcp14">MUST</span> use a quantum-resistant Key Manag
 Including a recipient that uses an algorithm that is not quantum-resistant
 would allow an adversary performing an HNDL attack to recover the Content
 Encryption Key once a CRQC becomes available; see
-<span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-pquip-pqc-engineers-14#section-15.4" class="relref">Section 15.4</a> of [<a href="#I-D.ietf-pquip-pqc-engineers" class="cite xref">I-D.ietf-pquip-pqc-engineers</a>]</span>.<a href="#section-5-5" class="pilcrow">¶</a></p>
+<span><a href="https://rfc-editor.org/rfc/rfc9958#section-15.4" class="relref">Section 15.4</a> of [<a href="#RFC9958" class="cite xref">RFC9958</a>]</span>.<a href="#section-5-5" class="pilcrow">¶</a></p>
 <div id="security-strength">
 <section id="section-5.1">
         <h3 id="name-security-strength">
@@ -1533,7 +1534,7 @@ Encryption Key once a CRQC becomes available; see
         </h3>
 <p id="section-5.1-1">Ciphersuites based on ML-KEM-768 target NIST post-quantum security
 level 3; those based on ML-KEM-1024 target security level 5 (see
-<span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-pquip-pqc-engineers-14#section-11" class="relref">Section 11</a> of [<a href="#I-D.ietf-pquip-pqc-engineers" class="cite xref">I-D.ietf-pquip-pqc-engineers</a>]</span>).
+<span><a href="https://rfc-editor.org/rfc/rfc9958#section-11" class="relref">Section 11</a> of [<a href="#RFC9958" class="cite xref">RFC9958</a>]</span>).
 In the PQ/T hybrid ciphersuites, the traditional component provides an
 additional classical security floor: P-256 and X25519 offer approximately
 128-bit classical security, while P-384 offers approximately 192-bit
@@ -1541,7 +1542,7 @@ classical security. The -KE variants share the same cryptographic
 properties as their integrated encryption counterparts.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
 <p id="section-5.1-2">All ciphersuites use SHAKE256 as the KDF, aligning with the hash family
 used internally by ML-KEM. They also use AES‑256‑GCM as the AEAD. As discussed
-in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-pquip-pqc-engineers-14#section-3.1" class="relref">Section 3.1</a> of [<a href="#I-D.ietf-pquip-pqc-engineers" class="cite xref">I-D.ietf-pquip-pqc-engineers</a>]</span>, symmetric primitives are
+in <span><a href="https://rfc-editor.org/rfc/rfc9958#section-3.1" class="relref">Section 3.1</a> of [<a href="#RFC9958" class="cite xref">RFC9958</a>]</span>, symmetric primitives are
 only modestly affected by quantum attacks and doubling key sizes is not
 strictly required; AES-256-GCM is nonetheless selected to provide a
 comfortable margin consistent with security level 5 parameter sets and
@@ -1897,7 +1898,7 @@ apply to JOSE.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
 <dd class="break"></dd>
 <dt id="I-D.ietf-jose-hpke-encrypt">[I-D.ietf-jose-hpke-encrypt]</dt>
         <dd>
-<span class="refAuthor">Reddy.K, T.</span>, <span class="refAuthor">Tschofenig, H.</span>, <span class="refAuthor">Banerjee, A.</span>, <span class="refAuthor">Steele, O.</span>, and <span class="refAuthor">M. B. Jones</span>, <span class="refTitle">"Use of Hybrid Public Key Encryption (HPKE) with JSON Web Encryption (JWE)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-jose-hpke-encrypt-18</span>, <time datetime="2026-05-24" class="refDate">24 May 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-jose-hpke-encrypt-18">https://datatracker.ietf.org/doc/html/draft-ietf-jose-hpke-encrypt-18</a>&gt;</span>. </dd>
+<span class="refAuthor">Reddy.K, T.</span>, <span class="refAuthor">Tschofenig, H.</span>, <span class="refAuthor">Banerjee, A.</span>, <span class="refAuthor">Steele, O.</span>, and <span class="refAuthor">M. B. Jones</span>, <span class="refTitle">"Use of Hybrid Public Key Encryption (HPKE) with JSON Web Encryption (JWE)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-jose-hpke-encrypt-20</span>, <time datetime="2026-06-15" class="refDate">15 June 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-jose-hpke-encrypt-20">https://datatracker.ietf.org/doc/html/draft-ietf-jose-hpke-encrypt-20</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>
@@ -1928,10 +1929,6 @@ apply to JOSE.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
         <dd>
 <span class="refAuthor">National Security Agency</span>, <span class="refTitle">"Announcing the Commercial National Security Algorithm Suite 2.0"</span>, <time datetime="2025-05" class="refDate">May 2025</time>, <span>&lt;<a href="https://media.defense.gov/2025/May/30/2003728741/-1/-1/0/CSA_CNSA_2.0_ALGORITHMS.PDF">https://media.defense.gov/2025/May/30/2003728741/-1/-1/0/CSA_CNSA_2.0_ALGORITHMS.PDF</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="I-D.ietf-pquip-pqc-engineers">[I-D.ietf-pquip-pqc-engineers]</dt>
-        <dd>
-<span class="refAuthor">Banerjee, A.</span>, <span class="refAuthor">Reddy.K, T.</span>, <span class="refAuthor">Schoinianakis, D.</span>, <span class="refAuthor">Hollebeek, T.</span>, and <span class="refAuthor">M. Ounsworth</span>, <span class="refTitle">"Post-Quantum Cryptography for Engineers"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-pquip-pqc-engineers-14</span>, <time datetime="2025-08-25" class="refDate">25 August 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-pquip-pqc-engineers-14">https://datatracker.ietf.org/doc/html/draft-ietf-pquip-pqc-engineers-14</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="RFC7518">[RFC7518]</dt>
         <dd>
 <span class="refAuthor">Jones, M.</span>, <span class="refTitle">"JSON Web Algorithms (JWA)"</span>, <span class="seriesInfo">RFC 7518</span>, <span class="seriesInfo">DOI 10.17487/RFC7518</span>, <time datetime="2015-05" class="refDate">May 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7518">https://www.rfc-editor.org/rfc/rfc7518</a>&gt;</span>. </dd>
@@ -1941,8 +1938,12 @@ apply to JOSE.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
 <span class="refAuthor">Watsen, K.</span>, <span class="refAuthor">Auerswald, E.</span>, <span class="refAuthor">Farrel, A.</span>, and <span class="refAuthor">Q. Wu</span>, <span class="refTitle">"Handling Long Lines in Content of Internet-Drafts and RFCs"</span>, <span class="seriesInfo">RFC 8792</span>, <span class="seriesInfo">DOI 10.17487/RFC8792</span>, <time datetime="2020-06" class="refDate">June 2020</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8792">https://www.rfc-editor.org/rfc/rfc8792</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC9794">[RFC9794]</dt>
-      <dd>
+        <dd>
 <span class="refAuthor">Driscoll, F.</span>, <span class="refAuthor">Parsons, M.</span>, and <span class="refAuthor">B. Hale</span>, <span class="refTitle">"Terminology for Post-Quantum Traditional Hybrid Schemes"</span>, <span class="seriesInfo">RFC 9794</span>, <span class="seriesInfo">DOI 10.17487/RFC9794</span>, <time datetime="2025-06" class="refDate">June 2025</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9794">https://www.rfc-editor.org/rfc/rfc9794</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC9958">[RFC9958]</dt>
+      <dd>
+<span class="refAuthor">Banerjee, A.</span>, <span class="refAuthor">Reddy.K, T.</span>, <span class="refAuthor">Schoinianakis, D.</span>, <span class="refAuthor">Hollebeek, T.</span>, and <span class="refAuthor">M. Ounsworth</span>, <span class="refTitle">"Post-Quantum Cryptography for Engineers"</span>, <span class="seriesInfo">RFC 9958</span>, <span class="seriesInfo">DOI 10.17487/RFC9958</span>, <time datetime="2026-06" class="refDate">June 2026</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9958">https://www.rfc-editor.org/rfc/rfc9958</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
