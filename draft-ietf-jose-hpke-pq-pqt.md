@@ -57,7 +57,7 @@ informative:
   RFC8792:
   RFC7518:
   RFC9794:
-  I-D.ietf-pquip-pqc-engineers:
+  RFC9958:
   CNSA2.0:
     title: "Announcing the Commercial National Security Algorithm Suite 2.0"
     author:
@@ -216,7 +216,7 @@ Examples of JWKs for each algorithm are provided in {{test-vectors}}.
 
 The security considerations of {{I-D.ietf-jose-hpke-encrypt}} and
 {{I-D.ietf-hpke-pq}} apply to this document.
-{{I-D.ietf-pquip-pqc-engineers}} provides general background on the
+{{RFC9958}} provides general background on the
 threat posed by cryptographically relevant quantum computers (CRQCs),
 the properties of KEMs, and considerations for PQ/T hybrid schemes.
 
@@ -228,12 +228,12 @@ as a hedge against such cryptanalysis at a modest performance penalty.
 
 The PQ/T hybrid ciphersuites registered by this document are motivated
 by the PQ/T Hybrid Confidentiality property ({{Section 5 of RFC9794}},
-{{Section 13.1 of I-D.ietf-pquip-pqc-engineers}}): confidentiality is
+{{Section 13.1 of RFC9958}}): confidentiality is
 preserved as long as at least one of the component algorithms remains
 secure. The traditional component protects against unforeseen
 cryptanalysis of ML-KEM, while the post-quantum component protects
 against Harvest Now, Decrypt Later (HNDL) attacks
-({{Section 7 of I-D.ietf-pquip-pqc-engineers}}) by a future CRQC.
+({{Section 7 of RFC9958}}) by a future CRQC.
 PQ/T hybrid ciphersuites are generally preferred for this reason during
 the transition to post-quantum cryptography.
 
@@ -251,13 +251,13 @@ all recipients MUST use a quantum-resistant Key Management algorithm.
 Including a recipient that uses an algorithm that is not quantum-resistant
 would allow an adversary performing an HNDL attack to recover the Content
 Encryption Key once a CRQC becomes available; see
-{{Section 15.4 of I-D.ietf-pquip-pqc-engineers}}.
+{{Section 15.4 of RFC9958}}.
 
 ## Security Strength
 
 Ciphersuites based on ML-KEM-768 target NIST post-quantum security
 level 3; those based on ML-KEM-1024 target security level 5 (see
-{{Section 11 of I-D.ietf-pquip-pqc-engineers}}).
+{{Section 11 of RFC9958}}).
 In the PQ/T hybrid ciphersuites, the traditional component provides an
 additional classical security floor: P-256 and X25519 offer approximately
 128-bit classical security, while P-384 offers approximately 192-bit
@@ -266,7 +266,7 @@ properties as their integrated encryption counterparts.
 
 All ciphersuites use SHAKE256 as the KDF, aligning with the hash family
 used internally by ML-KEM. They also use AES‑256‑GCM as the AEAD. As discussed
-in {{Section 3.1 of I-D.ietf-pquip-pqc-engineers}}, symmetric primitives are
+in {{Section 3.1 of RFC9958}}, symmetric primitives are
 only modestly affected by quantum attacks and doubling key sizes is not
 strictly required; AES-256-GCM is nonetheless selected to provide a
 comfortable margin consistent with security level 5 parameter sets and
