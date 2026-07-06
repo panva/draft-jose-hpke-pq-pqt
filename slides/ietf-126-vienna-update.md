@@ -123,6 +123,7 @@ The requested adoption call happened.
 
 - WG consensus to adopt was confirmed on **8 June 2026**
 - `draft-ietf-jose-hpke-pq-pqt-00` is now a JOSE WG draft
+- `draft-ietf-jose-hpke-pq-pqt-01` only updated references
 - The previous overlap with COSE/JOSE hybrid work has been resolved
 - Hannes and Tiru joined as authors
 - The algorithm set was simplified before adoption
@@ -183,7 +184,9 @@ COSE does not need JOSE-style `HPKE-n` names.
 
 - Modern WebCrypto algorithms are being incubated in WICG: https://wicg.github.io/webcrypto-modern-algos/
 - Behind a Chromium flag*: ML-KEM-{768, 1024} and MLKEM768-X25519; ML-KEM-512 and further hybrids will not ship
-- No Chromium commitment yet for SHAKE256, which this draft uses as the HPKE KDF
+- Firefox "don't presently have any of the SHAKE variants and might be inclined to take TurboSHAKE instead"
+- Safari "not opposed to the inclusion of SHAKE256"
+- Chromium negative signal for SHAKE256
 - ChaCha20-Poly1305 is also behind the Chromium flag if needed
 - Browser-native HPKE can be tested at https://panva.github.io/hpke/?native
 - Safari and Firefox have signaled intent to do something, but algorithm choices and timelines are still unknown
