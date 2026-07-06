@@ -611,6 +611,10 @@ TODO acknowledge.
 # Document History
 {:numbered="false"}
 
+draft-ietf-jose-hpke-pq-pqt-01
+
+- Updated references
+
 draft-ietf-jose-hpke-pq-pqt-00
 
 - Initial WG draft following adoption confirmation
