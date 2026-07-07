@@ -125,7 +125,7 @@ The requested adoption call happened.
 - `draft-ietf-jose-hpke-pq-pqt-00` is now a JOSE WG draft
 - `draft-ietf-jose-hpke-pq-pqt-01` only updated references
 - The previous overlap with COSE/JOSE hybrid work has been resolved
-- Hannes and Tiru joined as authors
+- Hannes and Tiru joined as coauthors
 - The algorithm set was simplified before adoption
 
 ---
