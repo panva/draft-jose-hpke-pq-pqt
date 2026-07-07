@@ -183,13 +183,12 @@ COSE does not need JOSE-style `HPKE-n` names.
 # Browser WebCrypto Compatibility
 
 - Modern WebCrypto algorithms are being incubated in WICG: https://wicg.github.io/webcrypto-modern-algos/
-- Behind a Chromium flag*: ML-KEM-{768, 1024} and MLKEM768-X25519; ML-KEM-512 and further hybrids will not ship
+- Behind a Chromium flag* or an Origin Trial: ML-KEM-{768, 1024} and MLKEM768-X25519; ML-KEM-512 and further hybrids will not ship
 - Firefox "don't presently have any of the SHAKE variants and might be inclined to take TurboSHAKE instead"
 - Safari "not opposed to the inclusion of SHAKE256"
 - Chromium negative signal for SHAKE256
 - ChaCha20-Poly1305 is also behind the Chromium flag if needed
 - Browser-native HPKE can be tested at https://panva.github.io/hpke/?native
-- Safari and Firefox have signaled intent to do something, but algorithm choices and timelines are still unknown
 
 <p class="note">* Flag: <a href="chrome://flags/#webcrypto-pqc"><code>chrome://flags/#webcrypto-pqc</code></a></p>
 
@@ -224,7 +223,6 @@ Changing the algorithm set is mechanically cheap; choosing the right set is the 
 Reviews, d'oh.
 
 - Confirm the algorithm set
-- Decide what to do about JOSE's incoherent HPKE ChaCha20Poly1305 AEAD position
-- Validate the JWK/JWE examples and test vectors against implementations
+- Validate the JWK/JWE examples and test vectors against other implementations. If you have an implementation, please let us know
 - Identify security or registry issues for the next revision
-- Start converging toward WGLC
+- Start converging toward WGLC. Plan: WGLC by next IETF meeting
