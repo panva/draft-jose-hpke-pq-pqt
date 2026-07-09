@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-07-07T00:34:28.858109+00:00",
+  "timestamp": "2026-07-09T00:32:12.951118+00:00",
   "repo": "panva/draft-jose-hpke-pq-pqt",
   "labels": [
     {
@@ -563,21 +563,222 @@
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
-      "body": "Rendered from this source like so: [ietf-126-vienna-update.pdf](https://github.com/user-attachments/files/29718330/ietf-126-vienna-update.pdf)",
+      "body": "Rendered from this source like so: [ietf-126-vienna-update.pdf](https://github.com/user-attachments/files/29755353/ietf-126-vienna-update.pdf)\r\n",
       "createdAt": "2026-06-17T10:25:26Z",
-      "updatedAt": "2026-07-06T20:17:01Z",
+      "updatedAt": "2026-07-07T16:52:17Z",
       "baseRepository": "panva/draft-jose-hpke-pq-pqt",
       "baseRefName": "main",
       "baseRefOid": "47a746533ebb94c4193ee6a4e2f76170a6790335",
       "headRepository": "panva/draft-jose-hpke-pq-pqt",
       "headRefName": "ietf-126-slides",
-      "headRefOid": "15121e001b3ce355109463e6b0b94f873c714b1f",
+      "headRefOid": "c9600d8496c2c2e42da3b3187ba280eafd6c5cad",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDORIZDwc8AAAABFMETKg",
+          "commit": {
+            "abbreviatedOid": "15121e0"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-07T08:32:02Z",
+          "updatedAt": "2026-07-07T08:32:02Z",
+          "comments": [
+            {
+              "originalPosition": 167,
+              "body": "```suggestion\n```",
+              "createdAt": "2026-07-07T08:32:02Z",
+              "updatedAt": "2026-07-07T08:32:02Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDORIZDwc8AAAABFMEacg",
+          "commit": {
+            "abbreviatedOid": "15121e0"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-07T08:32:19Z",
+          "updatedAt": "2026-07-07T08:32:19Z",
+          "comments": [
+            {
+              "originalPosition": 167,
+              "body": "In version -22, these ciphersuites have been removed.",
+              "createdAt": "2026-07-07T08:32:19Z",
+              "updatedAt": "2026-07-07T08:32:19Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDORIZDwc8AAAABFMFjhA",
+          "commit": {
+            "abbreviatedOid": "15121e0"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-07T08:35:15Z",
+          "updatedAt": "2026-07-07T08:35:15Z",
+          "comments": [
+            {
+              "originalPosition": 193,
+              "body": "```suggestion\n- Browser ecosystem is changing fast - tomorrow everything might be different.\n```",
+              "createdAt": "2026-07-07T08:35:15Z",
+              "updatedAt": "2026-07-07T08:35:15Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDORIZDwc8AAAABFMF-PA",
+          "commit": {
+            "abbreviatedOid": "15121e0"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-07T08:36:07Z",
+          "updatedAt": "2026-07-07T08:36:07Z",
+          "comments": [
+            {
+              "originalPosition": 227,
+              "body": "```suggestion\n```",
+              "createdAt": "2026-07-07T08:36:07Z",
+              "updatedAt": "2026-07-07T08:36:07Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDORIZDwc8AAAABFMGJFg",
+          "commit": {
+            "abbreviatedOid": "15121e0"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-07T08:36:31Z",
+          "updatedAt": "2026-07-07T08:36:31Z",
+          "comments": [
+            {
+              "originalPosition": 228,
+              "body": "```suggestion\n- Validate the JWK/JWE examples and test vectors against other implementations. If you have an implementation, please let us know.\n```",
+              "createdAt": "2026-07-07T08:36:31Z",
+              "updatedAt": "2026-07-07T08:36:31Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDORIZDwc8AAAABFMGUBg",
+          "commit": {
+            "abbreviatedOid": "15121e0"
+          },
+          "author": "panva",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-07T08:36:54Z",
+          "updatedAt": "2026-07-07T08:36:54Z",
+          "comments": [
+            {
+              "originalPosition": 167,
+              "body": "Not fully. I'm glad the KE variants are gone. Nevertheless we were asked to remove ChaCha here while HPKE-4 and HPKE-6 go on in -22",
+              "createdAt": "2026-07-07T08:36:54Z",
+              "updatedAt": "2026-07-07T08:36:54Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDORIZDwc8AAAABFMGXKA",
+          "commit": {
+            "abbreviatedOid": "15121e0"
+          },
+          "author": "hannestschofenig",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-07T08:36:59Z",
+          "updatedAt": "2026-07-07T08:36:59Z",
+          "comments": [
+            {
+              "originalPosition": 230,
+              "body": "```suggestion\n- Start converging toward WGLC. Plan: WGLC by next IETF meeting\n```",
+              "createdAt": "2026-07-07T08:36:59Z",
+              "updatedAt": "2026-07-07T08:36:59Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDORIZDwc8AAAABFN89hQ",
+          "commit": {
+            "abbreviatedOid": "289767e"
+          },
+          "author": "panva",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-07T12:38:59Z",
+          "updatedAt": "2026-07-07T12:38:59Z",
+          "comments": [
+            {
+              "originalPosition": 193,
+              "body": "It is changing anything but fast. The problem is anticipating what will end up being universally supported by the generally accepted 3 major browser engines. At the moment it seems the only thing we can say is that there will be some Pure KEMs, maybe the X-Wing Hybrid, there is AES-GCM-256, there will likely be ChaCha too, but the only KDFs we can be certain about are the HKDF SHA-2 ones.\r\n\r\nAdding a somewhat performant JS-based SHAKE256 inline implementation is non-trivial, not hard, just not trivial. And has a secondary cost to it - increased bundle size (about ~1KiB), more exploitable surface.\r\n\r\nI don't think this should change our KDF choice but merely want to call it out.",
+              "createdAt": "2026-07-07T12:38:59Z",
+              "updatedAt": "2026-07-07T13:56:31Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDORIZDwc8AAAABFN-gYg",
+          "commit": {
+            "abbreviatedOid": "289767e"
+          },
+          "author": "bc-pi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-07T12:42:39Z",
+          "updatedAt": "2026-07-07T12:42:39Z",
+          "comments": [
+            {
+              "originalPosition": 167,
+              "body": "yes, -22 of jose-hpke-encrypt removed the almost completely senseless KE variants \"at Deb\u2019s direction\" but there remains an overall lack of coherence in the approach to AEADs.",
+              "createdAt": "2026-07-07T12:42:39Z",
+              "updatedAt": "2026-07-07T12:42:39Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDORIZDwc8AAAABFP3YYQ",
+          "commit": {
+            "abbreviatedOid": "289767e"
+          },
+          "author": "bc-pi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-07-07T16:40:22Z",
+          "updatedAt": "2026-07-07T16:40:22Z",
+          "comments": [
+            {
+              "originalPosition": 128,
+              "body": "```suggestion\n- Hannes and Tiru joined as coauthors\n```",
+              "createdAt": "2026-07-07T16:40:22Z",
+              "updatedAt": "2026-07-07T16:40:22Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
