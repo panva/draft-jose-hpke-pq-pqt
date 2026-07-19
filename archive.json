@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-07-16T00:27:03.965041+00:00",
+  "timestamp": "2026-07-19T00:27:50.559773+00:00",
   "repo": "panva/draft-jose-hpke-pq-pqt",
   "labels": [
     {
@@ -565,7 +565,7 @@
       "labels": [],
       "body": "Rendered from this source like so: [ietf-126-vienna-update.pdf](https://github.com/user-attachments/files/29755353/ietf-126-vienna-update.pdf)\r\n",
       "createdAt": "2026-06-17T10:25:26Z",
-      "updatedAt": "2026-07-07T16:52:17Z",
+      "updatedAt": "2026-07-17T11:29:35Z",
       "baseRepository": "panva/draft-jose-hpke-pq-pqt",
       "baseRefName": "main",
       "baseRefOid": "47a746533ebb94c4193ee6a4e2f76170a6790335",
@@ -576,7 +576,15 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "bc-pi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I added some customary visual flair to the slides and proposed them to https://datatracker.ietf.org/doc/slides-126-jose-jose-hpke-pq-pqt-algorithms/ ",
+          "createdAt": "2026-07-17T11:29:35Z",
+          "updatedAt": "2026-07-17T11:29:35Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDORIZDwc8AAAABFMETKg",
