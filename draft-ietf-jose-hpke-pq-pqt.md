@@ -608,7 +608,9 @@ document.
 # Acknowledgments
 {:numbered="false"}
 
-TODO acknowledge.
+The authors thank Deb Cooley, Michael B. Jones, Ilari Liusvaara, Neil Madden,
+John Mattsson, Michael Parsons, Simo Sorce, and Orie Steele for their
+reviews and comments.
 
 # Document History
 {:numbered="false"}
@@ -618,6 +620,7 @@ draft-ietf-jose-hpke-pq-pqt-02
 - Added direct references to the KEM-specific serialization functions
   in I-D.ietf-hpke-pq
 - Removed the general preference for PQ/T hybrid ciphersuites
+- Added acknowledgments
 
 draft-ietf-jose-hpke-pq-pqt-01
 
