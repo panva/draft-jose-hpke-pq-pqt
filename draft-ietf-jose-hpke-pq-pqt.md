@@ -209,6 +209,10 @@ contains the SerializePrivateKey() output, both as defined in
 {{Section 4 of !I-D.ietf-hpke-hpke}}. Both values are base64url-encoded
 ({{Section 5 of !RFC4648}}) without padding.
 
+The KEM-specific serialization functions are specified in
+{{Section 3 of I-D.ietf-hpke-pq}} for pure ML-KEM and
+{{Section 4 of I-D.ietf-hpke-pq}} for PQ/T hybrid KEMs.
+
 Examples of JWKs for each algorithm are provided in {{test-vectors}}.
 
 
@@ -234,8 +238,6 @@ secure. The traditional component protects against unforeseen
 cryptanalysis of ML-KEM, while the post-quantum component protects
 against Harvest Now, Decrypt Later (HNDL) attacks
 ({{Section 7 of RFC9958}}) by a future CRQC.
-PQ/T hybrid ciphersuites are generally preferred for this reason during
-the transition to post-quantum cryptography.
 
 The pure PQ ciphersuites are registered to accommodate deployments with
 regulatory or compliance mandates that require the exclusive use of
@@ -610,6 +612,12 @@ TODO acknowledge.
 
 # Document History
 {:numbered="false"}
+
+draft-ietf-jose-hpke-pq-pqt-02
+
+- Added direct references to the KEM-specific serialization functions
+  in I-D.ietf-hpke-pq
+- Removed the general preference for PQ/T hybrid ciphersuites
 
 draft-ietf-jose-hpke-pq-pqt-01
 
