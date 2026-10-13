@@ -5,12 +5,12 @@
 Javascript Object Signing and Encryption                       F. Skokan
 Internet-Draft                                                      Okta
 Intended status: Standards Track                             B. Campbell
-Expires: 8 January 2027                                    Ping Identity
+Expires: 16 April 2027                                     Ping Identity
                                                            H. Tschofenig
                                                                 UniBw M.
                                                                 T. Reddy
                                                                    Nokia
-                                                             7 July 2026
+                                                         13 October 2026
 
 
               JOSE HPKE PQ & PQ/T Algorithm Registrations
@@ -56,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 January 2027.
+   This Internet-Draft will expire on 16 April 2027.
 
 Copyright Notice
 
@@ -245,6 +245,10 @@ Table of Contents
    Section 4 of [I-D.ietf-hpke-hpke].  Both values are base64url-encoded
    (Section 5 of [RFC4648]) without padding.
 
+   The KEM-specific serialization functions are specified in Section 3
+   of [I-D.ietf-hpke-pq] for pure ML-KEM and Section 4 of
+   [I-D.ietf-hpke-pq] for PQ/T hybrid KEMs.
+
    Examples of JWKs for each algorithm are provided in Appendix A.
 
 5.  Security Considerations
@@ -269,8 +273,7 @@ Table of Contents
    The traditional component protects against unforeseen cryptanalysis
    of ML-KEM, while the post-quantum component protects against Harvest
    Now, Decrypt Later (HNDL) attacks (Section 7 of [RFC9958]) by a
-   future CRQC.  PQ/T hybrid ciphersuites are generally preferred for
-   this reason during the transition to post-quantum cryptography.
+   future CRQC.
 
    The pure PQ ciphersuites are registered to accommodate deployments
    with regulatory or compliance mandates that require the exclusive use
@@ -501,9 +504,9 @@ Table of Contents
    [I-D.ietf-hpke-hpke]
               Barnes, R., Bhargavan, K., Lipp, B., and C. A. Wood,
               "Hybrid Public Key Encryption", Work in Progress,
-              Internet-Draft, draft-ietf-hpke-hpke-04, 6 July 2026,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-hpke-
-              hpke-04>.
+              Internet-Draft, draft-ietf-hpke-hpke-05, 25 September
+              2026, <https://datatracker.ietf.org/doc/html/draft-ietf-
+              hpke-hpke-05>.
 
    [I-D.ietf-hpke-pq]
               Barnes, R. and D. Connolly, "Post-Quantum and Post-
