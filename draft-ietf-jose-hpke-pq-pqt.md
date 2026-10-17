@@ -58,6 +58,7 @@ informative:
   RFC7518:
   RFC9794:
   RFC9958:
+  RFC10024:
   CNSA2.0:
     title: "Announcing the Commercial National Security Algorithm Suite 2.0"
     author:
@@ -245,6 +246,14 @@ post-quantum algorithms, such as those governed by the Commercial
 National Security Algorithm Suite 2.0 {{CNSA2.0}}, as well as
 deployments where the size or performance overhead of a traditional
 component is undesirable.
+
+Among the ciphersuites registered by this document are constructions
+similar to a PQ/T hybrid mechanism recommended for TLS in {{RFC10024}}.
+
+Detailed recommendations for post-quantum cryptography, including
+adjustments to the "JOSE Implementation Requirements" values for existing
+entries in the "JSON Web Signature and Encryption Algorithms" registry,
+will be addressed in future work.
 
 When the Key Encryption algorithms defined in
 {{pqt-hybrid-key-encryption-table}} or {{pure-pq-key-encryption-table}}
@@ -620,6 +629,8 @@ draft-ietf-jose-hpke-pq-pqt-02
 - Added direct references to the KEM-specific serialization functions
   in I-D.ietf-hpke-pq
 - Removed the general preference for PQ/T hybrid ciphersuites
+- Added TLS recommendation context from RFC 10024 and a statement on
+  future JOSE recommendations
 - Added acknowledgments
 
 draft-ietf-jose-hpke-pq-pqt-01
