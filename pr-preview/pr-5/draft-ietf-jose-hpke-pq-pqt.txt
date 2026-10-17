@@ -5,12 +5,12 @@
 Javascript Object Signing and Encryption                       F. Skokan
 Internet-Draft                                                      Okta
 Intended status: Standards Track                             B. Campbell
-Expires: 16 April 2027                                     Ping Identity
+Expires: 20 April 2027                                     Ping Identity
                                                            H. Tschofenig
                                                                 UniBw M.
                                                                 T. Reddy
                                                                    Nokia
-                                                         13 October 2026
+                                                         17 October 2026
 
 
               JOSE HPKE PQ & PQ/T Algorithm Registrations
@@ -56,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 16 April 2027.
+   This Internet-Draft will expire on 20 April 2027.
 
 Copyright Notice
 
@@ -281,6 +281,14 @@ Table of Contents
    National Security Algorithm Suite 2.0 [CNSA2.0], as well as
    deployments where the size or performance overhead of a traditional
    component is undesirable.
+
+   Among the ciphersuites registered by this document are constructions
+   similar to a PQ/T hybrid mechanism recommended for TLS in [RFC10024].
+
+   Detailed recommendations for post-quantum cryptography, including
+   adjustments to the "JOSE Implementation Requirements" values for
+   existing entries in the "JSON Web Signature and Encryption
+   Algorithms" registry, will be addressed in future work.
 
    When the Key Encryption algorithms defined in Table 3 or Table 4 are
    used in a General JWE JSON Serialization with multiple recipients,
@@ -566,6 +574,12 @@ Table of Contents
               T., and M. Ounsworth, "Post-Quantum Cryptography for
               Engineers", RFC 9958, DOI 10.17487/RFC9958, June 2026,
               <https://www.rfc-editor.org/rfc/rfc9958>.
+
+   [RFC10024] Kwiatkowski, K., Kampanakis, P., Westerbaan, B. E., and D.
+              Stebila, "Post-Quantum Traditional (PQ/T) Hybrid Key
+              Agreement Mechanisms for TLS 1.3", RFC 10024,
+              DOI 10.17487/RFC10024, August 2026,
+              <https://www.rfc-editor.org/rfc/rfc10024>.
 
 Appendix A.  Test Vectors
 
@@ -1956,9 +1970,9 @@ A.10.  HPKE-13-KE
 
 Acknowledgments
 
-   The authors thank Deb Cooley, Michael B.  Jones, Ilari Liusvaara,
-   Neil Madden, John Mattsson, Michael Parsons, Simo Sorce, and Orie
-   Steele for their reviews and comments.
+   The authors thank Michael B.  Jones, Ilari Liusvaara, Neil Madden,
+   John Mattsson, Michael Parsons, Simo Sorce, and Orie Steele for their
+   reviews and comments.
 
 Document History
 
@@ -1968,6 +1982,9 @@ Document History
       functions in I-D.ietf-hpke-pq
 
    *  Removed the general preference for PQ/T hybrid ciphersuites
+
+   *  Added TLS recommendation context from RFC 10024 and a statement on
+      future JOSE recommendations
 
    *  Added acknowledgments
 
