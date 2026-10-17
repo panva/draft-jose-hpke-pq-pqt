@@ -1970,9 +1970,9 @@ A.10.  HPKE-13-KE
 
 Acknowledgments
 
-   The authors thank Michael B.  Jones, Ilari Liusvaara, Neil Madden,
-   John Mattsson, Michael Parsons, Simo Sorce, and Orie Steele for their
-   reviews and comments.
+   The authors thank Deb Cooley, Michael B.  Jones, Ilari Liusvaara,
+   Neil Madden, John Mattsson, Michael Parsons, Simo Sorce, and Orie
+   Steele for their reviews and comments.
 
 Document History
 
