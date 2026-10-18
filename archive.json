@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-10-15T02:46:14.879177+00:00",
+  "timestamp": "2026-10-18T02:35:44.075823+00:00",
   "repo": "panva/draft-jose-hpke-pq-pqt",
   "labels": [
     {
@@ -800,13 +800,13 @@
       "labels": [],
       "body": "",
       "createdAt": "2026-10-13T18:24:58Z",
-      "updatedAt": "2026-10-13T19:33:33Z",
+      "updatedAt": "2026-10-17T11:47:06Z",
       "baseRepository": "panva/draft-jose-hpke-pq-pqt",
       "baseRefName": "main",
       "baseRefOid": "47a746533ebb94c4193ee6a4e2f76170a6790335",
       "headRepository": "panva/draft-jose-hpke-pq-pqt",
       "headRefName": "orie-review",
-      "headRefOid": "2d2a737ac395b6534b588291a61ce6bb308e263d",
+      "headRefOid": "50becd3175992bfed237335e2db3cf8c3e2f2ea2",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -815,9 +815,9 @@
         {
           "author": "github-actions",
           "authorAssociation": "NONE",
-          "body": ":page_facing_up: Rendered draft preview for this PR:\n\n- [draft-ietf-jose-hpke-pq-pqt.html](https://panva.github.io/draft-jose-hpke-pq-pqt/pr-preview/pr-5/draft-ietf-jose-hpke-pq-pqt.html)\n- [draft-ietf-jose-hpke-pq-pqt.txt](https://panva.github.io/draft-jose-hpke-pq-pqt/pr-preview/pr-5/draft-ietf-jose-hpke-pq-pqt.txt)\n- [Diff vs editor's copy](https://author-tools.ietf.org/api/iddiff?url_1=https://panva.github.io/draft-jose-hpke-pq-pqt/draft-ietf-jose-hpke-pq-pqt.txt&url_2=https://panva.github.io/draft-jose-hpke-pq-pqt/pr-preview/pr-5/draft-ietf-jose-hpke-pq-pqt.txt&difftype=--hwdiff)\n\n<sub>Updated for 2d2a737ac395b6534b588291a61ce6bb308e263d. Links may 404 or show stale content for a minute or two while GitHub Pages finishes building. Preview is removed when this PR is closed.</sub>\n<!-- Sticky Pull Request Commentpr-preview -->",
+          "body": ":page_facing_up: Rendered draft preview for this PR:\n\n- [draft-ietf-jose-hpke-pq-pqt.html](https://panva.github.io/draft-jose-hpke-pq-pqt/pr-preview/pr-5/draft-ietf-jose-hpke-pq-pqt.html)\n- [draft-ietf-jose-hpke-pq-pqt.txt](https://panva.github.io/draft-jose-hpke-pq-pqt/pr-preview/pr-5/draft-ietf-jose-hpke-pq-pqt.txt)\n- [Diff vs editor's copy](https://author-tools.ietf.org/api/iddiff?url_1=https://panva.github.io/draft-jose-hpke-pq-pqt/draft-ietf-jose-hpke-pq-pqt.txt&url_2=https://panva.github.io/draft-jose-hpke-pq-pqt/pr-preview/pr-5/draft-ietf-jose-hpke-pq-pqt.txt&difftype=--hwdiff)\n\n<sub>Updated for 50becd3175992bfed237335e2db3cf8c3e2f2ea2. Links may 404 or show stale content for a minute or two while GitHub Pages finishes building. Preview is removed when this PR is closed.</sub>\n<!-- Sticky Pull Request Commentpr-preview -->",
           "createdAt": "2026-10-13T18:26:02Z",
-          "updatedAt": "2026-10-13T19:19:28Z"
+          "updatedAt": "2026-10-17T08:11:51Z"
         },
         {
           "author": "panva",
@@ -858,6 +858,26 @@
               "body": "perhaps not direct review or comment but Deb definitely contributed to this document coming to be as a JOSE WG item, I think?   \n```suggestion\nThe authors thank Deb Cooley, Michael B. Jones, Ilari Liusvaara, Neil Madden,\n```",
               "createdAt": "2026-10-13T18:44:34Z",
               "updatedAt": "2026-10-13T18:44:34Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDORIZDwc8AAAABS0Kaag",
+          "commit": {
+            "abbreviatedOid": "50becd3"
+          },
+          "author": "bc-pi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-10-17T11:47:06Z",
+          "updatedAt": "2026-10-17T11:47:06Z",
+          "comments": [
+            {
+              "originalPosition": 39,
+              "body": "don't love this part tbh but won't fight about it ",
+              "createdAt": "2026-10-17T11:47:06Z",
+              "updatedAt": "2026-10-17T11:47:06Z"
             }
           ]
         }
