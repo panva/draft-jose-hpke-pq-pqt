@@ -58,6 +58,7 @@ informative:
   RFC7518:
   RFC9794:
   RFC9958:
+  RFC10024:
   CNSA2.0:
     title: "Announcing the Commercial National Security Algorithm Suite 2.0"
     author:
@@ -209,6 +210,10 @@ contains the SerializePrivateKey() output, both as defined in
 {{Section 4 of !I-D.ietf-hpke-hpke}}. Both values are base64url-encoded
 ({{Section 5 of !RFC4648}}) without padding.
 
+The KEM-specific serialization functions are specified in
+{{Section 3 of I-D.ietf-hpke-pq}} for pure ML-KEM and
+{{Section 4 of I-D.ietf-hpke-pq}} for PQ/T hybrid KEMs.
+
 Examples of JWKs for each algorithm are provided in {{test-vectors}}.
 
 
@@ -234,8 +239,6 @@ secure. The traditional component protects against unforeseen
 cryptanalysis of ML-KEM, while the post-quantum component protects
 against Harvest Now, Decrypt Later (HNDL) attacks
 ({{Section 7 of RFC9958}}) by a future CRQC.
-PQ/T hybrid ciphersuites are generally preferred for this reason during
-the transition to post-quantum cryptography.
 
 The pure PQ ciphersuites are registered to accommodate deployments with
 regulatory or compliance mandates that require the exclusive use of
@@ -243,6 +246,14 @@ post-quantum algorithms, such as those governed by the Commercial
 National Security Algorithm Suite 2.0 {{CNSA2.0}}, as well as
 deployments where the size or performance overhead of a traditional
 component is undesirable.
+
+Among the ciphersuites registered by this document are constructions
+similar to a PQ/T hybrid mechanism recommended for TLS in {{RFC10024}}.
+
+Detailed recommendations for post-quantum cryptography, including
+adjustments to the "JOSE Implementation Requirements" values for existing
+entries in the "JSON Web Signature and Encryption Algorithms" registry,
+will be addressed in future work.
 
 When the Key Encryption algorithms defined in
 {{pqt-hybrid-key-encryption-table}} or {{pure-pq-key-encryption-table}}
@@ -606,10 +617,21 @@ document.
 # Acknowledgments
 {:numbered="false"}
 
-TODO acknowledge.
+The authors thank Deb Cooley, Michael B. Jones, Ilari Liusvaara, Neil Madden,
+John Mattsson, Michael Parsons, Simo Sorce, and Orie Steele for their
+reviews and comments.
 
 # Document History
 {:numbered="false"}
+
+draft-ietf-jose-hpke-pq-pqt-02
+
+- Added direct references to the KEM-specific serialization functions
+  in I-D.ietf-hpke-pq
+- Removed the general preference for PQ/T hybrid ciphersuites
+- Added TLS recommendation context from RFC 10024 and a statement on
+  future JOSE recommendations
+- Added acknowledgments
 
 draft-ietf-jose-hpke-pq-pqt-01
 
