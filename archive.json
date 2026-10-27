@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-10-25T02:45:43.044491+00:00",
+  "timestamp": "2026-10-27T03:18:12.048770+00:00",
   "repo": "panva/draft-jose-hpke-pq-pqt",
   "labels": [
     {
@@ -565,7 +565,7 @@
       "labels": [],
       "body": "Rendered from this source like so: [ietf-126-vienna-update.pdf](https://github.com/user-attachments/files/29755353/ietf-126-vienna-update.pdf)\r\n",
       "createdAt": "2026-06-17T10:25:26Z",
-      "updatedAt": "2026-08-07T12:46:42Z",
+      "updatedAt": "2026-10-25T09:34:05Z",
       "baseRepository": "panva/draft-jose-hpke-pq-pqt",
       "baseRefName": "main",
       "baseRefOid": "47a746533ebb94c4193ee6a4e2f76170a6790335",
@@ -793,31 +793,33 @@
       "id": "PR_kwDORIZDwc8AAAABIPEO9A",
       "title": "link KEM serialization, drop hybrid preference, fill acknowledgements",
       "url": "https://github.com/panva/draft-jose-hpke-pq-pqt/pull/5",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "panva",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2026-10-13T18:24:58Z",
-      "updatedAt": "2026-10-17T11:47:06Z",
+      "updatedAt": "2026-10-25T09:34:41Z",
       "baseRepository": "panva/draft-jose-hpke-pq-pqt",
       "baseRefName": "main",
       "baseRefOid": "47a746533ebb94c4193ee6a4e2f76170a6790335",
       "headRepository": "panva/draft-jose-hpke-pq-pqt",
       "headRefName": "orie-review",
       "headRefOid": "50becd3175992bfed237335e2db3cf8c3e2f2ea2",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-10-25T09:33:45Z",
+      "mergedAt": "2026-10-25T09:33:45Z",
+      "mergedBy": "panva",
+      "mergeCommit": {
+        "oid": "56727aa3c3d2e7dc8c175dd01ea8a9dcf9c12325"
+      },
       "comments": [
         {
           "author": "github-actions",
           "authorAssociation": "NONE",
-          "body": ":page_facing_up: Rendered draft preview for this PR:\n\n- [draft-ietf-jose-hpke-pq-pqt.html](https://panva.github.io/draft-jose-hpke-pq-pqt/pr-preview/pr-5/draft-ietf-jose-hpke-pq-pqt.html)\n- [draft-ietf-jose-hpke-pq-pqt.txt](https://panva.github.io/draft-jose-hpke-pq-pqt/pr-preview/pr-5/draft-ietf-jose-hpke-pq-pqt.txt)\n- [Diff vs editor's copy](https://author-tools.ietf.org/api/iddiff?url_1=https://panva.github.io/draft-jose-hpke-pq-pqt/draft-ietf-jose-hpke-pq-pqt.txt&url_2=https://panva.github.io/draft-jose-hpke-pq-pqt/pr-preview/pr-5/draft-ietf-jose-hpke-pq-pqt.txt&difftype=--hwdiff)\n\n<sub>Updated for 50becd3175992bfed237335e2db3cf8c3e2f2ea2. Links may 404 or show stale content for a minute or two while GitHub Pages finishes building. Preview is removed when this PR is closed.</sub>\n<!-- Sticky Pull Request Commentpr-preview -->",
+          "body": ":wastebasket: Preview removed because this PR was closed.\n<!-- Sticky Pull Request Commentpr-preview -->",
           "createdAt": "2026-10-13T18:26:02Z",
-          "updatedAt": "2026-10-17T08:11:51Z"
+          "updatedAt": "2026-10-25T09:34:41Z"
         },
         {
           "author": "panva",
@@ -880,6 +882,19 @@
               "updatedAt": "2026-10-17T11:47:06Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDORIZDwc8AAAABUExh2g",
+          "commit": {
+            "abbreviatedOid": "50becd3"
+          },
+          "author": "tireddy2",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-10-25T07:55:58Z",
+          "updatedAt": "2026-10-25T07:55:58Z",
+          "comments": []
         }
       ]
     }
